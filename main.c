@@ -52,8 +52,9 @@ void conditioned_jump ( struct klingon_word * start_point,
                                                  : printf ( "not %s ", primary_segment [ i ] . content );
     if ( secondary_segment )
         for ( i = 0; i < secondary_len; i ++ )
-            secondary_segment [ i ] . selected ? printf ( "%s ", secondary_segment [ i ] . content )
-                                               : printf ( "not %s ", secondary_segment [ i ] . content );
+            if ( & secondary_segment [ i ] != start_point )
+                secondary_segment [ i ] . selected ? printf ( "%s ", secondary_segment [ i ] . content )
+                                                   : printf ( "not %s ", secondary_segment [ i ] . content );
 
     printf ( "?\n" );
 }
@@ -76,29 +77,44 @@ int main ( void )
         { 1, "home" }
     };
 
+    struct klingon_word segment_3 [ ] =
+    {
+        { 1, "why" }
+    };
+
     struct klingon_word subject = { 1, "you" };
 
     /* forming sentence 1 */
 
     struct klingon_bind ring_1 = { 0, "do", & subject, & segment_1 [ 0 ] };
 
-    struct klingon_word * start_point = & segment_1 [ 1 ];
+    struct klingon_word * start_point_1 = & segment_1 [ 1 ];
 
     /* forming sentence 2 */
-
+    
     struct klingon_bind ring_2 = { 0, "are", & subject, & segment_2 [ 0 ] };
+    
+    struct klingon_word * start_point_2 = & segment_3 [ 0 ];
+
+    /* forming sentence 3 */
+
+    struct klingon_bind ring_3 = { 1, "are", & subject, & segment_2 [ 0 ] };
 
     /* jump triggered by software with jmp-like instruction */
 
-    conditioned_jump ( start_point,
+    conditioned_jump ( start_point_1,
                        & ring_1,
                        segment_1, sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
                        segment_2, sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ) );
-
-    conditioned_jump ( NULL,
+    
+    conditioned_jump ( start_point_2,
                        & ring_2,
                        segment_2, sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
-                       NULL, 0 );
+                       segment_3, sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ) );
 
+    conditioned_jump ( NULL,
+                       & ring_3,
+                       segment_2, sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+                       NULL, 0 );
     return 0;
 }
