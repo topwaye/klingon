@@ -4,6 +4,8 @@
  * Copyright (C) 2025.3.1 TOP WAYE topwaye@hotmail.com
  * 
  * basic klingon language logic shown by basic CPU framework logic
+ * 
+ * https://github.com/topwaye/klingon
  */
 
 #include <stdio.h>
@@ -26,10 +28,10 @@ struct klingon_bind
 
 /* jump triggered either by sofeware with jmp instruction, or by hardware without jmp instruction */
 
-void conditioned_jump (struct klingon_word * start_point,
-                       struct klingon_bind * ring,
-                       struct klingon_word * primary_segment, int primary_len,
-                       struct klingon_word * secondary_segment, int secondary_len )
+void conditioned_jump ( struct klingon_word * start_point,
+                        struct klingon_bind * ring,
+                        struct klingon_word * primary_segment, int primary_len,
+                        struct klingon_word * secondary_segment, int secondary_len )
 {
     int i;
 
@@ -38,7 +40,7 @@ void conditioned_jump (struct klingon_word * start_point,
 
     if ( ring )
     {
-        ring -> selected ? printf( "%s ", ring -> content ) : printf( "%sn't ", ring -> content );
+        ring -> selected ? printf ( "%s ", ring -> content ) : printf ( "%sn't ", ring -> content );
         printf ( "%s ", ring -> subject -> content );
         printf ( "%s ", ring -> predicate -> content );
     }
@@ -55,6 +57,8 @@ void conditioned_jump (struct klingon_word * start_point,
 
     printf ( "?\n" );
 }
+
+/* sequential execution with CPU head */
 
 int main ( void )
 {
@@ -82,7 +86,7 @@ int main ( void )
 
     /* forming sentence 2 */
 
-    struct klingon_bind ring_2 = { 0, "are", &subject, &segment_2[0] };
+    struct klingon_bind ring_2 = { 0, "are", & subject, & segment_2 [ 0 ] };
 
     /* jump triggered by software with jmp-like instruction */
 
