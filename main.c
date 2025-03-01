@@ -6,7 +6,7 @@
  * basic klingon language logic shown by basic CPU framework logic
  */
 
-#include <iostream>
+#include <stdio>
 
 #define KLINGON_WORD_LENGTH     16
 
