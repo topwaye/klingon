@@ -26,7 +26,7 @@ struct klingon_bind
     struct klingon_word * predicate;
 };
 
-/* jump triggered either by sofeware with jmp instruction, or by hardware without jmp instruction */
+/* jump from main, triggered either by sofeware with jmp instruction, or by hardware without jmp instruction */
 
 void conditioned_jump ( struct klingon_word * start_point,
                         struct klingon_bind * ring,
