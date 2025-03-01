@@ -1,5 +1,5 @@
 /*
- * klingon.c
+ * main.c
  *
  * Copyright (C) 2025.3.1 TOP WAYE topwaye@hotmail.com
  * 
