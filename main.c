@@ -67,13 +67,13 @@ int main ( void )
     struct klingon_word segment_1 [ ] =
     {
         { 1, "play" },
-        { 1, "what" },
+        { 1, "what" }
     };
 
     struct klingon_word segment_2 [ ] =
     {
         { 1, "at" },
-        { 1, "home" },
+        { 1, "home" }
     };
 
     struct klingon_word subject = { 1, "you" };
