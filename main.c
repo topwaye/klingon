@@ -52,7 +52,8 @@ void conditioned_jump ( struct klingon_content * sentence )
 
     if ( sentence -> start_point )
     {
-        printf( "%s ", sentence -> start_point -> content );
+        sentence -> start_point -> selected ? printf( "%s ", sentence -> start_point -> content )
+                                            : printf( "not %s ", sentence -> start_point -> content );
         conditioned_jump ( sentence -> start_point -> kcontent );
     }
 
@@ -66,13 +67,15 @@ void conditioned_jump ( struct klingon_content * sentence )
             conditioned_jump ( sentence -> ring -> kcontent );
             
             if ( * sentence -> ring -> subject -> content != NULL )
-                printf ( "%s ", sentence -> ring -> subject -> content );
+                sentence -> ring -> subject -> selected ? printf ( "%s ", sentence -> ring -> subject -> content )
+                                                        : printf ( "not %s ", sentence -> ring -> subject -> content );
             conditioned_jump ( sentence -> ring -> subject -> kcontent );
         }
         else
         {
             if ( * sentence -> ring -> subject -> content != NULL )
-                printf ( "%s ", sentence -> ring -> subject -> content );
+                sentence -> ring -> subject -> selected ? printf ( "%s ", sentence -> ring -> subject -> content )
+                                                        : printf ( "not %s ", sentence -> ring -> subject -> content );
             conditioned_jump ( sentence -> ring -> subject -> kcontent );
             
             if ( * sentence -> ring -> content != NULL )
