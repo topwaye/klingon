@@ -330,15 +330,15 @@ int main ( void )
 
     /* jump triggered by software with jmp-like instruction */
 
-    conditioned_jump ( & sentence_1 ); printf("\n");
-    conditioned_jump ( & sentence_2 ); printf("\n");
-    conditioned_jump ( & sentence_3 ); printf("\n");
-    conditioned_jump ( & sentence_5 ); printf("\n");
-    conditioned_jump ( & sentence_7 ); printf("\n");
-    conditioned_jump ( & sentence_8 ); printf("\n");
-    conditioned_jump ( & sentence_9 ); printf("\n");
-    conditioned_jump ( & sentence_10 ); printf("\n");
-    conditioned_jump ( & sentence_12 ); printf("\n");
+    conditioned_jump ( & sentence_1 ); printf ( "\n" );
+    conditioned_jump ( & sentence_2 ); printf ( "\n" );
+    conditioned_jump ( & sentence_3 ); printf ( "\n" );
+    conditioned_jump ( & sentence_5 ); printf ( "\n" );
+    conditioned_jump ( & sentence_7 ); printf ( "\n" );
+    conditioned_jump ( & sentence_8 ); printf ( "\n" );
+    conditioned_jump ( & sentence_9 ); printf ( "\n" );
+    conditioned_jump ( & sentence_10 ); printf ( "\n" );
+    conditioned_jump ( & sentence_12 ); printf ( "\n" );
 
     return 0;
 }
