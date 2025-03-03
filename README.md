@@ -12,7 +12,7 @@ cards
 
 **klingon gives you sentences:**
 
-what don't you play at home  
+>what don't you play at home  
 why aren't you at home  
 you are at home  
 what don't you think you play  
