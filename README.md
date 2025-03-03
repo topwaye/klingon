@@ -24,6 +24,6 @@ you play what you didn't play
 cards you play  
 cards that you play  
 
-klingon shows how our brains actually think to form sentences.
+klingon shows how our brains actually think to form sentences
 
 gcc main.c -o main
