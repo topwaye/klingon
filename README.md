@@ -5,7 +5,7 @@ basic klingon language logic shown by basic CPU framework logic
 
 **give some words to klingon:**
 
-play what  
+>play what  
 at home  
 why  
 cards  
