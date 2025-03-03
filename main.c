@@ -41,70 +41,94 @@ struct klingon_content
     int secondary_len;
 };
 
-/* jump from main, triggered either by sofeware with jmp instruction, or by hardware without jmp instruction */
+/* 
+ * jump from main
+ * triggered either by sofeware with jmp instruction, or by hardware without jmp instruction
+ */
 
 void conditioned_jump ( struct klingon_content * sentence )
 {
-    int i; 
-    
+    int i, n;
+    struct klingon_word * p, * q, * t;
+    struct klingon_bind * r;
+
     if ( ! sentence ) /* patch!!! */
         return;
 
-    if ( sentence -> start_point )
-        sentence -> start_point -> selected ? printf( "%s ", sentence -> start_point -> content )
-                                            : printf( "not %s ", sentence -> start_point -> content );
-
-    if ( sentence -> ring )
+    q = sentence -> start_point;
+    if ( q )
+        q -> selected ? printf( "%s ", q -> content )
+                      : printf( "not %s ", q -> content );
+    
+    r = sentence -> ring;
+    if ( r )
     {
-        if ( sentence -> ring -> start_point != sentence -> ring -> subject )
+        p = r -> subject;
+        if ( r -> start_point != r -> subject )
         {
-            if ( * sentence -> ring -> content )
-                sentence -> ring -> selected ? printf ( "%s ", sentence -> ring -> content )
-                                             : printf ( "%sn't ", sentence -> ring -> content );
-            conditioned_jump ( sentence -> ring -> kcontent );
+            if ( * r -> content )
+                r -> selected ? printf ( "%s ", r -> content )
+                              : printf ( "%sn't ", r -> content );
+            conditioned_jump ( r -> kcontent );
             
-            if ( * sentence -> ring -> subject -> content )
-                sentence -> ring -> subject -> selected ? printf ( "%s ", sentence -> ring -> subject -> content )
-                                                        : printf ( "not %s ", sentence -> ring -> subject -> content );
-            conditioned_jump ( sentence -> ring -> subject -> kcontent );
+            
+            if ( * p -> content )
+                p -> selected ? printf ( "%s ", p -> content )
+                              : printf ( "not %s ", p -> content );
+            conditioned_jump ( p -> kcontent );
         }
         else
         {
-            if ( * sentence -> ring -> subject -> content )
-                sentence -> ring -> subject -> selected ? printf ( "%s ", sentence -> ring -> subject -> content )
-                                                        : printf ( "not %s ", sentence -> ring -> subject -> content );
-            conditioned_jump ( sentence -> ring -> subject -> kcontent );
+            if ( * p -> content )
+                p -> selected ? printf ( "%s ", p -> content )
+                              : printf ( "not %s ", p -> content );
+            conditioned_jump ( p -> kcontent );
             
-            if ( * sentence -> ring -> content )
-                sentence -> ring -> selected ? printf ( "%s ", sentence -> ring -> content )
-                                             : printf ( "%sn't ", sentence -> ring -> content );
-            conditioned_jump ( sentence -> ring -> kcontent );
+            if ( * r -> content )
+                r -> selected ? printf ( "%s ", r -> content )
+                              : printf ( "%sn't ", r -> content );
+            conditioned_jump ( r -> kcontent );
         }
-        
-        if ( * sentence -> ring -> predicate -> content )
-            sentence -> ring -> predicate -> selected ? printf ( "%s ", sentence -> ring -> predicate -> content )
-                                                      : printf ( "not %s ", sentence -> ring -> predicate -> content );
+
+        p = r -> predicate;
+        if ( * p -> content )
+            p -> selected ? printf ( "%s ", p -> content )
+                          : printf ( "not %s ", p -> content );
     }
 
-    if ( sentence-> primary_segment )
-        for ( i = 1; i < sentence -> primary_len; i ++ )
-            if ( & sentence -> primary_segment [ i ] != sentence -> start_point )
+    p = sentence -> primary_segment;
+    if ( p )
+    {
+        n = sentence -> primary_len;
+        for ( i = 1; i < n; i ++ ) /* NOT = 0 */
+        {
+            t = p + i;
+            if ( t != q )
             {
-                if ( * sentence -> primary_segment [ i ] . content )
-                    sentence -> primary_segment [ i ] . selected ? printf ( "%s ", sentence -> primary_segment [ i ] . content )
-                                                                 : printf ( "not %s ", sentence -> primary_segment [ i ] . content );
-                conditioned_jump ( sentence -> primary_segment [ i ] . kcontent );
+                if ( * t -> content )
+                    t -> selected ? printf ( "%s ", t -> content )
+                                  : printf ( "not %s ", t -> content );
+                conditioned_jump ( t -> kcontent );
             }
+        }
+    }
 
-    if ( sentence -> secondary_segment )
-        for ( i = 0; i < sentence -> secondary_len; i ++ )
-            if ( & sentence -> secondary_segment [ i ] != sentence -> start_point )
+    p = sentence -> secondary_segment;
+    if ( p )
+    {
+        n = sentence -> secondary_len;
+        for ( i = 0; i < n; i ++ )
+        {
+            t = p + i;
+            if ( t != q )
             {
-                if ( * sentence -> secondary_segment [ i ] . content )
-                    sentence -> secondary_segment [ i ] . selected ? printf ( "%s ", sentence -> secondary_segment [ i ] . content )
-                                                                   : printf ( "not %s ", sentence -> secondary_segment [ i ] . content );
-                conditioned_jump ( sentence -> secondary_segment [ i ] . kcontent );
+                if ( * t -> content )
+                    t -> selected ? printf ( "%s ", t -> content )
+                                  : printf ( "not %s ", t -> content );
+                conditioned_jump ( t -> kcontent );
             }
+        }
+    }
 }
 
 /* sequential execution with CPU head */
