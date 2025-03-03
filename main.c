@@ -70,8 +70,7 @@ void conditioned_jump ( struct klingon_content * sentence )
                 r -> selected ? printf ( "%s ", r -> content )
                               : printf ( "%sn't ", r -> content );
             conditioned_jump ( r -> kcontent );
-            
-            
+
             if ( * p -> content )
                 p -> selected ? printf ( "%s ", p -> content )
                               : printf ( "not %s ", p -> content );
