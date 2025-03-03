@@ -3,14 +3,14 @@ Copyright (C) 2025.3.1 TOP WAYE topwaye@hotmail.com
 
 basic klingon language logic shown by basic CPU framework logic
 
-give some words to klingon:
+**give some words to klingon:**
 
 play what  
 at home  
 why  
 cards  
 
-klingon gives you sentences:
+**klingon gives you sentences:**
 
 what don't you play at home  
 why aren't you at home  
