@@ -23,7 +23,12 @@ you play cards at home
 you play what you didn't play  
 cards you play  
 cards that you play  
-at which place do you play cards school or home  
+at which place do you play cards - school or home  
+at which place are you - school or home  
+which place are you at - school or home  
+what do tom and jerry play at home  
+don't play cards at home  
+would you have played cards if you were at home  
 
 klingon shows how our brains actually think to form sentences
 
