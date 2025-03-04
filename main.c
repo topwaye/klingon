@@ -37,6 +37,7 @@ struct klingon_content
     struct klingon_granularity * ring;
     struct klingon_word * primary_segment;
     struct klingon_word * secondary_segment;
+    int start_len;
     int primary_len;
     int secondary_len;
 };
@@ -48,7 +49,7 @@ struct klingon_content
 
 void conditioned_jump ( struct klingon_content * sentence )
 {
-    int i, n;
+    int i, m, n;
     struct klingon_word * p, * q, * t;
     struct klingon_granularity * r;
 
@@ -57,8 +58,15 @@ void conditioned_jump ( struct klingon_content * sentence )
 
     q = sentence -> start_point;
     if ( q )
-        q -> selected ? printf( "%s ", q -> content )
-                      : printf( "not %s ", q -> content );
+    {
+        m = sentence -> start_len;
+        for ( i = 0; i < m; i ++ )
+        {
+            t = q + i;
+            t -> selected ? printf ( "%s ", t -> content )
+                          : printf ( "not %s ", t -> content );            
+        }
+    }
     
     r = sentence -> ring;
     if ( r )
@@ -99,16 +107,20 @@ void conditioned_jump ( struct klingon_content * sentence )
     if ( p )
     {
         n = sentence -> primary_len;
-        for ( i = 1; i < n; i ++ ) /* NOT = 0 */
+        i = 1; /* NOT = 0 */
+        while ( i < n )
         {
             t = p + i;
-            if ( t != q )
+            if ( t == q )
             {
-                if ( * t -> content )
-                    t -> selected ? printf ( "%s ", t -> content )
-                                  : printf ( "not %s ", t -> content );
-                conditioned_jump ( t -> kcontent );
+                i += m;
+                continue;
             }
+            if ( * t -> content )
+                t -> selected ? printf ( "%s ", t -> content )
+                              : printf ( "not %s ", t -> content );
+            conditioned_jump ( t -> kcontent );
+            i ++;
         }
     }
 
@@ -116,16 +128,20 @@ void conditioned_jump ( struct klingon_content * sentence )
     if ( p )
     {
         n = sentence -> secondary_len;
-        for ( i = 0; i < n; i ++ )
+        i = 0; 
+        while ( i < n )
         {
-            t = p + i;
-            if ( t != q )
+            t = p + i;            
+            if ( t == q )
             {
-                if ( * t -> content )
-                    t -> selected ? printf ( "%s ", t -> content )
-                                  : printf ( "not %s ", t -> content );
-                conditioned_jump ( t -> kcontent );
+                i += m;
+                continue;
             }
+            if ( * t -> content )
+                t -> selected ? printf ( "%s ", t -> content )
+                              : printf ( "not %s ", t -> content );
+            conditioned_jump ( t -> kcontent );
+            i ++;
         }
     }
 }
@@ -175,6 +191,16 @@ int main ( void )
         { 1, "that", NULL }
     };
 
+    struct klingon_word segment_10 [ ] =
+    {
+        { 1, "at", NULL },
+        { 1, "which", NULL },
+        { 1, "place", NULL },
+        { 1, "school", NULL },
+        { 1, "or", NULL },
+        { 1, "home", NULL }
+    };
+
     struct klingon_word subject_1 = { 1, "you", NULL };
 
     /* forming sentence 1 */
@@ -189,6 +215,7 @@ int main ( void )
         & ring_1,
         segment_1,
         segment_2,
+        1,
         sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
         sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] )
     };
@@ -205,6 +232,7 @@ int main ( void )
         & ring_2,
         segment_2,
         segment_3,
+        1,
         sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
         sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] )
     };
@@ -219,6 +247,7 @@ int main ( void )
         & ring_3,
         segment_2,
         NULL,
+        0,
         sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
         0
     };
@@ -233,6 +262,7 @@ int main ( void )
         & ring_4,
         segment_4,
         NULL,
+        0,
         sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
         0
     };
@@ -247,6 +277,7 @@ int main ( void )
         & ring_5,
         segment_1,
         NULL,
+        1,
         sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
         0
     };
@@ -263,6 +294,7 @@ int main ( void )
         & ring_6,
         segment_1,
         NULL,
+        1,
         sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
         0
     };
@@ -277,6 +309,7 @@ int main ( void )
         & ring_7,
         segment_5,
         NULL,
+        0,
         sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
         0
     };
@@ -291,6 +324,7 @@ int main ( void )
         & ring_8,
         segment_6,
         segment_2,
+        0,
         sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
         sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] )
     };
@@ -305,6 +339,7 @@ int main ( void )
         & ring_9,
         segment_6,
         segment_2,
+        0,
         sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
         sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] )
     };
@@ -319,6 +354,7 @@ int main ( void )
         & ring_10,
         segment_6,
         segment_2,
+        0,
         sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
         sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] )
     };
@@ -335,6 +371,7 @@ int main ( void )
         & ring_11,
         segment_1,
         NULL,
+        1,
         sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
         0
     };
@@ -353,6 +390,7 @@ int main ( void )
         & ring_12,
         segment_7,
         NULL,
+        0,
         sizeof ( segment_7 ) / sizeof ( segment_7 [ 0 ] ),
         0
     };
@@ -369,6 +407,7 @@ int main ( void )
         & ring_13,
         segment_6,
         NULL,
+        1,
         sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
         0
     };
@@ -385,6 +424,7 @@ int main ( void )
         & ring_14,
         segment_8,
         NULL,
+        1,
         sizeof ( segment_8 ) / sizeof ( segment_8 [ 0 ] ),
         0
     };
@@ -401,7 +441,25 @@ int main ( void )
         NULL,
         segment_9,
         0,
+        0,
         sizeof ( segment_9 ) / sizeof ( segment_9 [ 0 ] ),
+    };
+
+    /* forming sentence 16 */
+
+    struct klingon_granularity ring_16 = { 1, "do", NULL, NULL, & subject_1, & segment_6 [ 0 ] };
+
+    struct klingon_word * start_point_16 = & segment_10 [ 0 ];
+
+    struct klingon_content sentence_16 =
+    {
+        start_point_16,
+        & ring_16,
+        segment_6,
+        segment_10,
+        3,
+        sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
+        sizeof ( segment_10 ) / sizeof ( segment_10 [ 0 ] )
     };
 
     /* jump triggered by software with jmp-like instruction */
@@ -417,6 +475,7 @@ int main ( void )
     conditioned_jump ( & sentence_12 ); printf ( "\n" );
     conditioned_jump ( & sentence_13 ); printf ( "\n" );
     conditioned_jump ( & sentence_15 ); printf ( "\n" );
+    conditioned_jump ( & sentence_16 ); printf ( "\n" );
 
     return 0;
 }
