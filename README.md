@@ -23,6 +23,7 @@ you play cards at home
 you play what you didn't play  
 cards you play  
 cards that you play  
+at which place do you play cards school or home  
 
 klingon shows how our brains actually think to form sentences
 
