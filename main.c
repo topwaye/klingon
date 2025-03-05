@@ -16,14 +16,14 @@ struct klingon_content;
 
 struct klingon_word
 {
-    int selected;
+    int selected; /* select or unselect this word */
     char content [ KLINGON_WORD_LENGTH ];
     struct klingon_content * kcontent;
 };
 
 struct klingon_granularity
 {
-    int selected;
+    int selected; /* select or unselect this granularity */
     char acontent [ KLINGON_WORD_LENGTH ];
     char bcontent [ KLINGON_WORD_LENGTH ];
     char ccontent [ KLINGON_WORD_LENGTH ];
@@ -32,8 +32,10 @@ struct klingon_granularity
     struct klingon_word * start_point;
     struct klingon_word * subject;
     struct klingon_word * predicate;
+    struct klingon_word * breaker; /* break this granularity */
     int subject_len;
     int predicate_len;
+    int breaker_len;
 };
 
 struct klingon_content
@@ -137,6 +139,24 @@ void conditioned_jump ( struct klingon_content * sentence )
                 printf ( "%s ", r -> ccontent );
             if ( * r -> acontent && * r -> dcontent )
                 printf ( "%s ", r -> dcontent );
+        }
+
+        p = r -> breaker;
+        n = r -> breaker_len;
+        i = 0;
+        while ( i < n )
+        {
+            t = p + i;
+            if ( t == q )
+            {
+                i += m;
+                continue;
+            }
+            if ( * t -> content )
+                t -> selected ? printf ( "%s ", t -> content )
+                              : printf ( "not %s ", t -> content );
+            conditioned_jump ( t -> kcontent );
+            i ++;
         }
 
         p = r -> predicate;
@@ -268,6 +288,14 @@ int main ( void )
         { 1, "if", NULL }
     };
 
+    struct klingon_word segment_13 [ ] =
+    {
+        { 1, "want", NULL },
+        { 1, "to", NULL },
+        { 1, "play", NULL },
+        { 1, "what", NULL }
+    };
+
     struct klingon_word subject_1 [ ] =
     {
         { 1, "you", NULL }
@@ -275,7 +303,7 @@ int main ( void )
 
     /* forming sentence 1 */
 
-    struct klingon_granularity ring_1 = { 0, "do", "", "", "", NULL, NULL, subject_1, segment_1, 1, 1 };
+    struct klingon_granularity ring_1 = { 0, "do", "", "", "", NULL, NULL, subject_1, segment_1, NULL, 1, 1, 0 };
 
     struct klingon_word * start_point_1 = segment_1 + 1;
 
@@ -292,7 +320,7 @@ int main ( void )
 
     /* forming sentence 2 */
     
-    struct klingon_granularity ring_2 = { 0, "are", "", "", "", NULL, NULL, subject_1, segment_2, 1, 1 };
+    struct klingon_granularity ring_2 = { 0, "are", "", "", "", NULL, NULL, subject_1, segment_2, NULL, 1, 1, 0 };
     
     struct klingon_word * start_point_2 = segment_3;
 
@@ -309,7 +337,7 @@ int main ( void )
 
     /* forming sentence 3 */
 
-    struct klingon_granularity ring_3 = { 1, "are", "", "", "", NULL, subject_1, subject_1, segment_2, 1, 1 };
+    struct klingon_granularity ring_3 = { 1, "are", "", "", "", NULL, subject_1, subject_1, segment_2, NULL, 1, 1, 0 };
 
     struct klingon_content sentence_3 =
     {
@@ -324,7 +352,7 @@ int main ( void )
 
     /* forming sentence 5 */
 
-    struct klingon_granularity ring_4 = { 0, "do", "", "", "", NULL, NULL, subject_1, segment_4, 1, 1 };
+    struct klingon_granularity ring_4 = { 0, "do", "", "", "", NULL, NULL, subject_1, segment_4, NULL, 1, 1, 0 };
 
     struct klingon_content sentence_4 =
     {
@@ -337,7 +365,7 @@ int main ( void )
         0
     };
 
-    struct klingon_granularity ring_5 = { 1, "", "", "", "", & sentence_4, NULL, subject_1, segment_1, 1, 1 };
+    struct klingon_granularity ring_5 = { 1, "", "", "", "", & sentence_4, NULL, subject_1, segment_1, NULL, 1, 1, 0 };
 
     struct klingon_word * start_point_5 = segment_1 + 1;
 
@@ -354,7 +382,7 @@ int main ( void )
 
     /* forming sentence 7 */
 
-    struct klingon_granularity ring_6 = { 1, "", "", "", "", NULL, subject_1, subject_1, segment_1, 1, 1 };
+    struct klingon_granularity ring_6 = { 1, "", "", "", "", NULL, subject_1, subject_1, segment_1, NULL, 1, 1, 0 };
 
     struct klingon_word * start_point_6 = segment_1 + 1;
 
@@ -374,7 +402,7 @@ int main ( void )
         { 1, "", & sentence_6 }
     };
 
-    struct klingon_granularity ring_7 = { 1, "is", "", "", "", NULL, subject_7, subject_7, segment_5, 1, 1 };
+    struct klingon_granularity ring_7 = { 1, "is", "", "", "", NULL, subject_7, subject_7, segment_5, NULL, 1, 1, 0 };
  
     struct klingon_content sentence_7 =
     {
@@ -389,7 +417,7 @@ int main ( void )
 
     /* forming sentence 8 */
 
-    struct klingon_granularity ring_8 = { 1, "do", "", "", "", NULL, NULL, subject_1, segment_6, 1, 1 };
+    struct klingon_granularity ring_8 = { 1, "do", "", "", "", NULL, NULL, subject_1, segment_6, NULL, 1, 1, 0 };
 
     struct klingon_content sentence_8 =
     {
@@ -404,7 +432,7 @@ int main ( void )
 
     /* forming sentence 9 */
 
-    struct klingon_granularity ring_9 = { 1, "do", "", "", "", NULL, subject_1, subject_1, segment_6, 1, 1 };
+    struct klingon_granularity ring_9 = { 1, "do", "", "", "", NULL, subject_1, subject_1, segment_6, NULL, 1, 1, 0 };
     
     struct klingon_content sentence_9 =
     {
@@ -419,7 +447,7 @@ int main ( void )
 
     /* forming sentence 10 */
 
-    struct klingon_granularity ring_10 = { 1, "", "", "", "", NULL, subject_1, subject_1, segment_6, 1, 1 };
+    struct klingon_granularity ring_10 = { 1, "", "", "", "", NULL, subject_1, subject_1, segment_6, NULL, 1, 1, 0 };
    
     struct klingon_content sentence_10 =
     {
@@ -434,7 +462,7 @@ int main ( void )
 
     /* forming sentence 12 */
 
-    struct klingon_granularity ring_11 = { 0, "did", "", "", "", NULL, subject_1, subject_1, segment_1, 1, 1 };
+    struct klingon_granularity ring_11 = { 0, "did", "", "", "", NULL, subject_1, subject_1, segment_1, NULL, 1, 1, 0 };
 
     struct klingon_word * start_point_11 = segment_1 + 1;
 
@@ -455,7 +483,7 @@ int main ( void )
         { 1, "", & sentence_11 }
     };
 
-    struct klingon_granularity ring_12 = { 1, "", "", "", "", NULL, subject_1, subject_1, segment_7, 1, 1 };
+    struct klingon_granularity ring_12 = { 1, "", "", "", "", NULL, subject_1, subject_1, segment_7, NULL, 1, 1, 0 };
     
     struct klingon_content sentence_12 =
     {
@@ -470,7 +498,7 @@ int main ( void )
 
     /* forming sentence 13 */
 
-    struct klingon_granularity ring_13 = { 1, "", "", "", "", NULL, subject_1, subject_1, segment_6, 1, 1 };
+    struct klingon_granularity ring_13 = { 1, "", "", "", "", NULL, subject_1, subject_1, segment_6, NULL, 1, 1, 0 };
 
     struct klingon_word * start_point_13 = segment_6 + 1;
 
@@ -487,7 +515,7 @@ int main ( void )
 
     /* forming sentence 15 */
 
-    struct klingon_granularity ring_14 = { 1, "", "", "", "", NULL, subject_1, subject_1, segment_8, 1, 1 };
+    struct klingon_granularity ring_14 = { 1, "", "", "", "", NULL, subject_1, subject_1, segment_8, NULL, 1, 1, 0 };
 
     struct klingon_word * start_point_14 = segment_8 + 1;
 
@@ -520,7 +548,7 @@ int main ( void )
 
     /* forming sentence 16 */
 
-    struct klingon_granularity ring_16 = { 1, "do", "", "", "", NULL, NULL, subject_1, segment_6, 1, 1 };
+    struct klingon_granularity ring_16 = { 1, "do", "", "", "", NULL, NULL, subject_1, segment_6, NULL, 1, 1, 0 };
 
     struct klingon_word * start_point_16 = segment_10;
 
@@ -537,7 +565,7 @@ int main ( void )
 
     /* forming sentence 17 */
 
-    struct klingon_granularity ring_17 = { 1, "are", "", "", "", NULL, NULL, subject_1, segment_10, 1, 3 };
+    struct klingon_granularity ring_17 = { 1, "are", "", "", "", NULL, NULL, subject_1, segment_10, NULL, 1, 3, 0 };
         
     struct klingon_word * start_point_17 = segment_10;
     
@@ -554,7 +582,7 @@ int main ( void )
 
     /* forming sentence 18 */
 
-    struct klingon_granularity ring_18 = { 1, "are", "", "", "", NULL, NULL, subject_1, segment_10, 1, 1 };
+    struct klingon_granularity ring_18 = { 1, "are", "", "", "", NULL, NULL, subject_1, segment_10, NULL, 1, 1, 0 };
         
     struct klingon_word * start_point_18 = segment_10 + 1;
     
@@ -578,7 +606,7 @@ int main ( void )
         { 1, "jerry", NULL }
     };
 
-    struct klingon_granularity ring_19 = { 1, "do", "", "", "", NULL, NULL, subject_19, segment_1, 3, 1 };
+    struct klingon_granularity ring_19 = { 1, "do", "", "", "", NULL, NULL, subject_19, segment_1, NULL, 3, 1, 0 };
 
     struct klingon_word * start_point_19 = segment_1 + 1;
 
@@ -595,7 +623,7 @@ int main ( void )
 
     /* forming sentence 20 */
 
-    struct klingon_granularity ring_20 = { 0, "do", "", "", "", NULL, NULL, NULL, segment_6, 1, 1 };
+    struct klingon_granularity ring_20 = { 0, "do", "", "", "", NULL, NULL, NULL, segment_6, NULL, 1, 1, 0 };
 
     struct klingon_content sentence_20 =
     {
@@ -610,7 +638,7 @@ int main ( void )
 
     /* forming sentence 21 */
 
-    struct klingon_granularity ring_21 = { 1, "would", "have", "", "", NULL, NULL, subject_1, segment_11, 1, 1 };
+    struct klingon_granularity ring_21 = { 1, "would", "have", "", "", NULL, NULL, subject_1, segment_11, NULL, 1, 1, 0 };
 
     struct klingon_content sentence_21 =
     {
@@ -625,7 +653,7 @@ int main ( void )
 
     /* forming sentence 22 */
 
-    struct klingon_granularity ring_22 = { 1, "were", "", "", "", NULL, subject_1, subject_1, segment_2, 1, 1 };
+    struct klingon_granularity ring_22 = { 1, "were", "", "", "", NULL, subject_1, subject_1, segment_2, NULL, 1, 1, 0 };
 
     struct klingon_word * start_point_22 = segment_12;
 
@@ -638,6 +666,40 @@ int main ( void )
         1,
         sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
         sizeof ( segment_12 ) / sizeof ( segment_12 [ 0 ] )
+    };
+
+    /* forming sentence 23 */
+
+    struct klingon_granularity ring_23 = { 0, "do", "", "", "", NULL, NULL, subject_1, segment_1, segment_2, 1, 1, 2 };
+
+    struct klingon_word* start_point_23 = segment_1 + 1;
+
+    struct klingon_content sentence_23 =
+    {
+        start_point_23,
+        & ring_23,
+        segment_1,
+        NULL,
+        1,
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        0
+    };
+
+    /* forming sentence 24 */
+
+    struct klingon_granularity ring_24 = { 0, "do", "", "", "", NULL, NULL, subject_1, segment_13, NULL, 1, 1, 0 };
+
+    struct klingon_word * start_point_24 = segment_13 + 3;
+
+    struct klingon_content sentence_24 =
+    {
+        start_point_24,
+        & ring_24,
+        segment_13,
+        segment_2,
+        1,
+        sizeof ( segment_13 ) / sizeof ( segment_13 [ 0 ] ),
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] )
     };
 
     /* jump triggered by software with jmp-like instruction */
@@ -660,6 +722,8 @@ int main ( void )
     conditioned_jump ( & sentence_20 ); printf ( "\n" );
     conditioned_jump ( & sentence_21 );
     conditioned_jump ( & sentence_22 ); printf ( "\n" );
+    conditioned_jump ( & sentence_23 ); printf ( "\n" );
+    conditioned_jump ( & sentence_24 ); printf ( "\n" );
 
     return 0;
 }
