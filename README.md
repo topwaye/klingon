@@ -29,6 +29,8 @@ which place are you at - school or home
 what do tom and jerry play at home  
 don't play cards at home  
 would you have played cards if you were at home  
+what don't you at home play  
+what don't you want to play at home  
 
 klingon shows how our brains actually think to form sentences
 
