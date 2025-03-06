@@ -63,7 +63,7 @@ static void print_word ( struct klingon_word * t )
         t -> selected ? printf ( "" ) : printf ( "not " );
 }
 
-static void print_granularity_header_1 ( struct klingon_granularity * r )
+static void print_granularity_binder_1 ( struct klingon_granularity * r )
 {
     if ( * r -> acontent )
         r -> selected ? printf ( "%s ", r -> acontent ) : printf ( "%sn't ", r -> acontent );
@@ -71,19 +71,19 @@ static void print_granularity_header_1 ( struct klingon_granularity * r )
         r -> selected ? printf ( "" ) : printf ( "not " );
 }
 
-static void print_granularity_header_2 ( struct klingon_granularity * r )
+static void print_granularity_binder_2 ( struct klingon_granularity * r )
 {
     if ( * r -> bcontent )
         printf ( "%s ", r -> bcontent );
 }
 
-static void print_granularity_header_3 ( struct klingon_granularity * r )
+static void print_granularity_binder_3 ( struct klingon_granularity * r )
 {
     if ( * r -> ccontent )
         printf ( "%s ", r -> ccontent );
 }
 
-static void print_granularity_header_4 ( struct klingon_granularity * r )
+static void print_granularity_binder_4 ( struct klingon_granularity * r )
 {
     if ( * r -> dcontent )
         printf ( "%s ", r -> dcontent );
@@ -122,7 +122,7 @@ void conditioned_jump ( struct klingon_content * sentence )
         n = r -> subject_len;
         if ( r -> start_point != r -> subject )
         {
-            print_granularity_header_1 ( r );
+            print_granularity_binder_1 ( r );
             conditioned_jump ( r -> kcontent );
 
             if ( p )
@@ -137,9 +137,9 @@ void conditioned_jump ( struct klingon_content * sentence )
                 }
             }
 
-            print_granularity_header_2 ( r );
-            print_granularity_header_3 ( r );
-            print_granularity_header_4 ( r );
+            print_granularity_binder_2 ( r );
+            print_granularity_binder_3 ( r );
+            print_granularity_binder_4 ( r );
         }
         else
         {
@@ -155,12 +155,12 @@ void conditioned_jump ( struct klingon_content * sentence )
                 }
             }
 
-            print_granularity_header_1 ( r );
+            print_granularity_binder_1 ( r );
             conditioned_jump ( r -> kcontent );
 
-            print_granularity_header_2 ( r );
-            print_granularity_header_3 ( r );
-            print_granularity_header_4 ( r );
+            print_granularity_binder_2 ( r );
+            print_granularity_binder_3 ( r );
+            print_granularity_binder_4 ( r );
         }
 
         p = r -> breaker;
