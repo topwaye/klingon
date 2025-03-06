@@ -109,12 +109,15 @@ void conditioned_jump ( struct klingon_content * sentence )
                 }
             }
 
-            if ( * r -> acontent && * r -> bcontent )
-                printf ( "%s ", r -> bcontent );
-            if ( * r -> acontent && * r -> ccontent )
-                printf ( "%s ", r -> ccontent );
-            if ( * r -> acontent && * r -> dcontent )
-                printf ( "%s ", r -> dcontent );
+            if ( * r -> bcontent )
+                r -> selected ? printf ( "%s ", r -> bcontent )
+                              : printf ( "not %s ", r -> bcontent );
+            if ( * r -> ccontent )
+                r -> selected ? printf ( "%s ", r -> ccontent )
+                              : printf ( "not %s ", r -> ccontent );
+            if ( * r -> dcontent )
+                r -> selected ? printf ( "%s ", r -> dcontent )
+                              : printf ( "not %s ", r -> dcontent );
         }
         else
         {
@@ -137,12 +140,15 @@ void conditioned_jump ( struct klingon_content * sentence )
                               : printf ( "%sn't ", r -> acontent );
             conditioned_jump ( r -> kcontent );
 
-            if ( * r -> acontent && * r -> bcontent )
-                printf ( "%s ", r -> bcontent );
-            if ( * r -> acontent && * r -> ccontent )
-                printf ( "%s ", r -> ccontent );
-            if ( * r -> acontent && * r -> dcontent )
-                printf ( "%s ", r -> dcontent );
+            if ( * r -> bcontent )
+                r -> selected ? printf ( "%s ", r -> bcontent )
+                              : printf ( "not %s ", r -> bcontent );
+            if ( * r -> ccontent )
+                r -> selected ? printf ( "%s ", r -> ccontent )
+                              : printf ( "not %s ", r -> ccontent );
+            if ( * r -> dcontent )
+                r -> selected ? printf ( "%s ", r -> dcontent )
+                              : printf ( "not %s ", r -> dcontent );
         }
 
         p = r -> breaker;
@@ -743,7 +749,7 @@ int main ( void )
 
     /* forming sentence 30 */
     
-    struct klingon_granularity ring_29 = { 1, "to be", "", "", "", NULL, NULL, NULL, segment_16, NULL, 1, 1, 0 };
+    struct klingon_granularity ring_29 = { 1, "", "to", "be", "", NULL, NULL, NULL, segment_16, NULL, 1, 1, 0 };
 
     struct klingon_word * start_point_29 = segment_16;
 
@@ -783,7 +789,7 @@ int main ( void )
 
     /* forming sentence 32 */
     
-    struct klingon_granularity ring_31 = { 1, "to be", "", "", "", NULL, NULL, NULL, segment_15, NULL, 1, 1, 0 };
+    struct klingon_granularity ring_31 = { 1, "", "to", "be", "", NULL, NULL, NULL, segment_15, NULL, 1, 1, 0 };
 
     struct klingon_content sentence_31 =
     {
@@ -833,6 +839,41 @@ int main ( void )
         0
     };
 
+    /* forming sentence 35 */
+    
+    struct klingon_granularity ring_34 = { 0, "", "being", "", "", NULL, NULL, NULL, segment_15, NULL, 1, 1, 0 };
+
+    struct klingon_content sentence_34 =
+    {
+        0,
+        NULL,
+        & ring_34,
+        segment_15,
+        NULL,
+        0,
+        sizeof ( segment_15 ) / sizeof ( segment_15 [ 0 ] ),
+        0
+    };
+
+    struct klingon_word subject_35 [ ] =
+    {
+        { 1, "not", & sentence_34 }
+    };
+
+    struct klingon_granularity ring_35 = { 1, "is", "", "", "", NULL, subject_35, subject_35, segment_2, NULL, 1, 1, 0 };
+
+    struct klingon_content sentence_35 =
+    {
+        0,
+        NULL,
+        & ring_35,
+        segment_2,
+        NULL,
+        0,
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        0
+    };
+
     /* jump triggered by software with jmp-like instruction */
 
     conditioned_jump ( & sentence_1 ); printf ( "\n" );
@@ -858,6 +899,7 @@ int main ( void )
     conditioned_jump ( & sentence_30 ); printf ( "\n" );
     conditioned_jump ( & sentence_32 ); printf ( "\n" );
     conditioned_jump ( & sentence_33 ); printf ( "\n" );
+    conditioned_jump ( & sentence_35 ); printf ( "\n" );
 
     return 0;
 }
