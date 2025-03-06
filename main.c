@@ -55,6 +55,40 @@ struct klingon_content
  * triggered either by sofeware with jmp instruction, or by hardware without jmp instruction
  */
 
+static void print_word ( struct klingon_word * t )
+{
+    if ( * t -> content )
+        t -> selected ? printf ( "%s ", t -> content ) : printf ( "not %s ", t -> content );
+    else
+        t -> selected ? printf ( "" ) : printf ( "not " );
+}
+
+static void print_granularity_header_1 ( struct klingon_granularity * r )
+{
+    if ( * r -> acontent )
+        r -> selected ? printf ( "%s ", r -> acontent ) : printf ( "%sn't ", r -> acontent );
+    else
+        r -> selected ? printf ( "" ) : printf ( "not " );
+}
+
+static void print_granularity_header_2 ( struct klingon_granularity * r )
+{
+    if ( * r -> bcontent )
+        printf ( "%s ", r -> bcontent );
+}
+
+static void print_granularity_header_3 ( struct klingon_granularity * r )
+{
+    if ( * r -> ccontent )
+        printf ( "%s ", r -> ccontent );
+}
+
+static void print_granularity_header_4 ( struct klingon_granularity * r )
+{
+    if ( * r -> dcontent )
+        printf ( "%s ", r -> dcontent );
+}
+
 void conditioned_jump ( struct klingon_content * sentence )
 {
     int i, m, n;
@@ -74,9 +108,7 @@ void conditioned_jump ( struct klingon_content * sentence )
             while ( i < m )
             {
                 t = q + i;
-                if ( * t -> content )
-                    t -> selected ? printf ( "%s ", t -> content )
-                                  : printf ( "not %s ", t -> content );
+                print_word ( t );
                 conditioned_jump ( t -> kcontent );
                 i ++;
             }
@@ -90,9 +122,7 @@ void conditioned_jump ( struct klingon_content * sentence )
         n = r -> subject_len;
         if ( r -> start_point != r -> subject )
         {
-            if ( * r -> acontent )
-                r -> selected ? printf ( "%s ", r -> acontent )
-                              : printf ( "%sn't ", r -> acontent );
+            print_granularity_header_1 ( r );
             conditioned_jump ( r -> kcontent );
 
             if ( p )
@@ -101,23 +131,15 @@ void conditioned_jump ( struct klingon_content * sentence )
                 while ( i < n )
                 {
                     t = p + i;
-                    if ( * t -> content )
-                        t -> selected ? printf ( "%s ", t -> content )
-                                      : printf ( "not %s ", t -> content );
+                    print_word ( t );
                     conditioned_jump ( t -> kcontent );
                     i ++;
                 }
             }
 
-            if ( * r -> bcontent )
-                r -> selected ? printf ( "%s ", r -> bcontent )
-                              : printf ( "not %s ", r -> bcontent );
-            if ( * r -> ccontent )
-                r -> selected ? printf ( "%s ", r -> ccontent )
-                              : printf ( "not %s ", r -> ccontent );
-            if ( * r -> dcontent )
-                r -> selected ? printf ( "%s ", r -> dcontent )
-                              : printf ( "not %s ", r -> dcontent );
+            print_granularity_header_2 ( r );
+            print_granularity_header_3 ( r );
+            print_granularity_header_4 ( r );
         }
         else
         {
@@ -127,28 +149,18 @@ void conditioned_jump ( struct klingon_content * sentence )
                 while ( i < n )
                 {
                     t = p + i;
-                    if ( * t -> content )
-                        t -> selected ? printf ( "%s ", t -> content )
-                                      : printf ( "not %s ", t -> content );
+                    print_word ( t );
                     conditioned_jump ( t -> kcontent );
                     i ++;
                 }
             }
 
-            if ( * r -> acontent )
-                r -> selected ? printf ( "%s ", r -> acontent )
-                              : printf ( "%sn't ", r -> acontent );
+            print_granularity_header_1 ( r );
             conditioned_jump ( r -> kcontent );
 
-            if ( * r -> bcontent )
-                r -> selected ? printf ( "%s ", r -> bcontent )
-                              : printf ( "not %s ", r -> bcontent );
-            if ( * r -> ccontent )
-                r -> selected ? printf ( "%s ", r -> ccontent )
-                              : printf ( "not %s ", r -> ccontent );
-            if ( * r -> dcontent )
-                r -> selected ? printf ( "%s ", r -> dcontent )
-                              : printf ( "not %s ", r -> dcontent );
+            print_granularity_header_2 ( r );
+            print_granularity_header_3 ( r );
+            print_granularity_header_4 ( r );
         }
 
         p = r -> breaker;
@@ -162,9 +174,7 @@ void conditioned_jump ( struct klingon_content * sentence )
                 i += m;
                 continue;
             }
-            if ( * t -> content )
-                t -> selected ? printf ( "%s ", t -> content )
-                              : printf ( "not %s ", t -> content );
+            print_word ( t );
             conditioned_jump ( t -> kcontent );
             i ++;
         }
@@ -180,9 +190,7 @@ void conditioned_jump ( struct klingon_content * sentence )
                 i += m;
                 continue;
             }
-            if ( * t -> content )
-                t -> selected ? printf ( "%s ", t -> content )
-                              : printf ( "not %s ", t -> content );
+            print_word ( t );
             conditioned_jump ( t -> kcontent );
             i ++;
         }
@@ -202,9 +210,7 @@ void conditioned_jump ( struct klingon_content * sentence )
                 i += m;
                 continue;
             }
-            if ( * t -> content )
-                t -> selected ? printf ( "%s ", t -> content )
-                              : printf ( "not %s ", t -> content );
+            print_word ( t );
             conditioned_jump ( t -> kcontent );
             i ++;
         }
@@ -223,9 +229,7 @@ void conditioned_jump ( struct klingon_content * sentence )
                 i += m;
                 continue;
             }
-            if ( * t -> content )
-                t -> selected ? printf ( "%s ", t -> content )
-                              : printf ( "not %s ", t -> content );
+            print_word ( t );
             conditioned_jump ( t -> kcontent );
             i ++;
         }
@@ -857,7 +861,7 @@ int main ( void )
 
     struct klingon_word subject_35 [ ] =
     {
-        { 1, "not", & sentence_34 }
+        { 0, "", & sentence_34 }
     };
 
     struct klingon_granularity ring_35 = { 1, "is", "", "", "", NULL, subject_35, subject_35, segment_2, NULL, 1, 1, 0 };
