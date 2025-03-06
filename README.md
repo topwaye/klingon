@@ -34,6 +34,7 @@ what don't you want to play at home
 where do you want to be  
 do you want to be home  
 are you going to be home  
+not not being home is at home
 
 klingon shows how our brains actually think to form sentences
 
