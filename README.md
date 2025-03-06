@@ -31,8 +31,9 @@ don't play cards at home
 would you have played cards if you were at home  
 what don't you at home play  
 what don't you want to play at home  
-do you want to be home  
 where do you want to be  
+do you want to be home  
+are you going to be home  
 
 klingon shows how our brains actually think to form sentences
 
