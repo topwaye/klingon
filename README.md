@@ -35,6 +35,9 @@ where do you want to be
 do you want to be home  
 are you going to be home  
 not not being home is at home
+that you play cards at home is fun  
+it is fun that you play cards at home  
+it is fun to play cards at home  
 
 klingon shows how our brains actually think to form sentences
 
