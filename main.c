@@ -321,9 +321,26 @@ int main ( void )
         { 1, "where", NULL }
     };
 
+    struct klingon_word segment_19 [ ] =
+    {
+        { 1, "fun", NULL }
+    };
+
+    struct klingon_word segment_21 [ ] =
+    {
+        { 1, "to", NULL },
+        { 1, "play", NULL },
+        { 1, "cards", NULL }
+    };
+
     struct klingon_word subject_1 [ ] =
     {
         { 1, "you", NULL }
+    };
+
+    struct klingon_word subject_38 [ ] =
+    {
+        { 1, "it", NULL }
     };
 
     /* forming sentence 1 */
@@ -878,6 +895,95 @@ int main ( void )
         0
     };
 
+    /* forming sentence 37 */
+
+    struct klingon_granularity ring_36 = { 1, "", "", "", "", NULL, subject_1, subject_1, segment_6, NULL, 1, 1, 0 };
+
+    struct klingon_content sentence_36 =
+    {
+        0,
+        NULL,
+        & ring_36,
+        segment_6,
+        segment_2,
+        0,
+        sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] )
+    };
+
+    struct klingon_word subject_37 [ ] =
+    {
+        { 1, "that", & sentence_36 }
+    };
+
+    struct klingon_granularity ring_37 = { 1, "is", "", "", "", NULL, subject_37, subject_37, segment_19, NULL, 1, 1, 0 };
+
+    struct klingon_content sentence_37 =
+    {
+        0,
+        NULL,
+        & ring_37,
+        segment_19,
+        NULL,
+        0,
+        sizeof ( segment_19 ) / sizeof ( segment_19 [ 0 ] ),
+        0
+    };
+
+    /* forming sentence 38 */
+    
+    struct klingon_word segment_20 [ ] =
+    {
+        { 1, "that", & sentence_36 }
+    };
+
+    struct klingon_granularity ring_38 = { 1, "is", "", "", "", NULL, subject_38, subject_38, segment_19, NULL, 1, 1, 0 };
+
+    struct klingon_content sentence_38 =
+    {
+        0,
+        NULL,
+        & ring_38,
+        segment_19,
+        segment_20,
+        0,
+        sizeof ( segment_19 ) / sizeof ( segment_19 [ 0 ] ),
+        sizeof ( segment_20 ) / sizeof ( segment_20 [ 0 ] )
+    };
+
+    /* forming sentence 40 */
+
+    struct klingon_content sentence_39 =
+    {
+        0,
+        NULL,
+        NULL,
+        segment_21,
+        segment_2,
+        0,
+        sizeof ( segment_21 ) / sizeof ( segment_21 [ 0 ] ),
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] )
+    };
+
+    struct klingon_word segment_22 [ ] =
+    {
+        { 1, "", & sentence_39 }
+    };
+
+    struct klingon_granularity ring_40 = { 1, "is", "", "", "", NULL, subject_38, subject_38, segment_19, NULL, 1, 1, 0 };
+
+    struct klingon_content sentence_40 =
+    {
+        0,
+        NULL,
+        & ring_40,
+        segment_19,
+        segment_22,
+        0,
+        sizeof ( segment_19 ) / sizeof ( segment_19 [ 0 ] ),
+        sizeof ( segment_22 ) / sizeof ( segment_22 [ 0 ] )
+    };
+
     /* jump triggered by software with jmp-like instruction */
 
     conditioned_jump ( & sentence_1 ); printf ( "\n" );
@@ -904,6 +1010,9 @@ int main ( void )
     conditioned_jump ( & sentence_32 ); printf ( "\n" );
     conditioned_jump ( & sentence_33 ); printf ( "\n" );
     conditioned_jump ( & sentence_35 ); printf ( "\n" );
+    conditioned_jump ( & sentence_37 ); printf ( "\n" );
+    conditioned_jump ( & sentence_38 ); printf ( "\n" );
+    conditioned_jump ( & sentence_40 ); printf ( "\n" );
 
     return 0;
 }
