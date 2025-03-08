@@ -1113,6 +1113,72 @@ int main ( void )
         0
     };
 
+    /* forming sentence 41 */
+
+    struct klingon_word segment_22 [ ] =
+    {
+        { 1, "think", NULL },
+        { 1, "that", & sentence_38 }
+    };
+
+    struct klingon_granularity ring_41 = { 0, "do", "", "", "", NULL, NULL, subject_1, NULL, NULL, NULL, segment_22, NULL, 1, 0, 0, 0, 1, 0 };
+
+    struct klingon_content sentence_41 =
+    {
+        0,
+        NULL,
+        & ring_41,
+        segment_22,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        sizeof ( segment_22 ) / sizeof ( segment_22 [ 0 ] ),
+        0,
+        0,
+        0
+    };
+
+    /* forming sentence 42 */
+
+    struct klingon_granularity ring_42 = { 0, "do", "", "", "", NULL, subject_1, subject_1, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0, 0, 0 };
+
+    struct klingon_content sentence_42 =
+    {
+        0,
+        NULL,
+        & ring_42,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        0,
+        0,
+        0,
+        0
+    };
+
+    /* forming sentence 43 */
+
+    struct klingon_granularity ring_43 = { 1, "do", "", "", "", NULL, NULL, subject_1, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0, 0, 0 };
+
+    struct klingon_content sentence_43 =
+    {
+        0,
+        NULL,
+        & ring_43,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        0,
+        0,
+        0,
+        0
+    };
+
     /* jump triggered by software with jmp-like instruction */
 
     conditioned_jump ( & sentence_1 ); printf ( "\n" );
@@ -1143,6 +1209,9 @@ int main ( void )
     conditioned_jump ( & sentence_38 ); printf ( "\n" );
     conditioned_jump ( & sentence_39 ); printf ( "\n" );
     conditioned_jump ( & sentence_40 ); printf ( "\n" );
+    conditioned_jump ( & sentence_41 ); printf ( "\n" );
+    conditioned_jump ( & sentence_42 ); printf ( "\n" );
+    conditioned_jump ( & sentence_43 ); printf ( "\n" );
 
     return 0;
 }
