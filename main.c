@@ -12,7 +12,6 @@
 
 #define KLINGON_WORD_NUM            16
 #define KLINGON_SEG_NUM              4
-#define KLINGON_SUBJECT_SEG_NUM      4
 #define KLINGON_BINDER_NUM           4
 
 struct klingon_content;
@@ -30,10 +29,10 @@ struct klingon_granularity
     char content [ KLINGON_BINDER_NUM ] [ KLINGON_WORD_NUM ];
     struct klingon_content * kcontent;
     struct klingon_word * start_point;
-    struct klingon_word * subject_segments [ KLINGON_SUBJECT_SEG_NUM ];
+    struct klingon_word * subject_segments [ KLINGON_SEG_NUM ];
     struct klingon_word * predicate;
     struct klingon_word * breaker; /* break this granularity */
-    int subject_segment_lens [ KLINGON_SUBJECT_SEG_NUM ];
+    int subject_segment_lens [ KLINGON_SEG_NUM ];
     int predicate_len;
     int breaker_len;
 };
@@ -112,7 +111,7 @@ void conditioned_jump ( struct klingon_content * sentence )
             print_granularity_binder ( r, 0 );
             conditioned_jump ( r -> kcontent );
             
-            for ( j = 0; j < KLINGON_SUBJECT_SEG_NUM; j ++ )
+            for ( j = 0; j < KLINGON_SEG_NUM; j ++ )
             {
                 p = r -> subject_segments [ j ];
                 if ( p )
@@ -134,7 +133,7 @@ void conditioned_jump ( struct klingon_content * sentence )
         }
         else
         {
-            for ( j = 0; j < KLINGON_SUBJECT_SEG_NUM; j ++ )
+            for ( j = 0; j < KLINGON_SEG_NUM; j ++ )
             {
                 p = r -> subject_segments [ j ];
                 if ( p )
