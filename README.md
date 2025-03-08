@@ -38,6 +38,7 @@ not not being home is at home
 that you play cards at home is fun  
 it is fun that you play cards at home  
 it is fun to play cards at home  
+to play cards at home is fun
 
 klingon shows how our brains actually think to form sentences
 
