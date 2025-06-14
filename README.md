@@ -42,7 +42,8 @@ you don't
 do you  
 where will you be  
 are you going to be home  
-would you have played cards if you were at home  
+would you have played cards if you were at home
+would you have been playing cards if you were at home  
 
 klingon shows how our brains actually think to form sentences
 
