@@ -764,48 +764,6 @@ int main ( void )
         0
     };
 
-    /* forming sentence 21 */
-
-    struct klingon_granularity ring_21 = { 1, "would", "have", "", "", NULL, NULL, subject_1, NULL, NULL, NULL, segment_11, NULL, 1, 0, 0, 0, 1, 0 };
-
-    struct klingon_content sentence_21 =
-    {
-        0,
-        NULL,
-        & ring_21,
-        segment_11,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_11 ) / sizeof ( segment_11 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-
-    /* forming sentence 22 */
-
-    struct klingon_granularity ring_22 = { 1, "were", "", "", "", NULL, subject_1, subject_1, NULL, NULL, NULL, segment_2, NULL, 1, 0, 0, 0, 1, 0 };
-
-    struct klingon_word * start_point_22 = segment_12;
-
-    struct klingon_content sentence_22 =
-    {
-        0,
-        start_point_22,
-        & ring_22,
-        segment_2,
-        segment_12,
-        NULL,
-        NULL,
-        1,
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
-        sizeof ( segment_12 ) / sizeof ( segment_12 [ 0 ] ),
-        0,
-        0
-    };
-
     /* forming sentence 23 */
 
     struct klingon_granularity ring_23 = { 0, "do", "", "", "", NULL, NULL, subject_1, NULL, NULL, NULL, segment_1, segment_2, 1, 0, 0, 0, 1, 2 };
@@ -937,26 +895,6 @@ int main ( void )
         NULL,
         0,
         sizeof ( segment_18 ) / sizeof ( segment_18 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-    
-    /* forming sentence 33 */
-
-    struct klingon_granularity ring_33 = { 1, "are", "going", "to", "be", NULL, NULL, subject_1, NULL, NULL, NULL, segment_15, NULL, 1, 0, 0, 0, 1, 0 };
-
-    struct klingon_content sentence_33 =
-    {
-        0,
-        NULL,
-        & ring_33,
-        segment_15,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_15 ) / sizeof ( segment_15 [ 0 ] ),
         0,
         0,
         0
@@ -1226,6 +1164,114 @@ int main ( void )
         0
     };
 
+    /* forming sentence 47 */
+
+    struct klingon_granularity ring_46 = { 1, "", "going", "to", "be", NULL, NULL, NULL, NULL, NULL, NULL, segment_15, NULL, 1, 0, 0, 0, 1, 0 };
+
+    struct klingon_content sentence_46 =
+    {
+        0,
+        NULL,
+        & ring_46,
+        segment_15,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        sizeof ( segment_15 ) / sizeof ( segment_15 [ 0 ] ),
+        0,
+        0,
+        0
+    };
+
+    struct klingon_word segment_24 [ ] =
+    {
+        { 1, "", & sentence_46 }
+    };
+
+    struct klingon_granularity ring_47 = { 1, "are", "", "", "", NULL, NULL, subject_1, NULL, NULL, NULL, segment_24, NULL, 1, 0, 0, 0, 1, 0 };
+
+    struct klingon_content sentence_47 =
+    {
+        0,
+        NULL,
+        & ring_47,
+        segment_24,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        sizeof ( segment_24 ) / sizeof ( segment_24 [ 0 ] ),
+        0,
+        0,
+        0
+    };
+
+    /* forming sentence 49 */
+
+    struct klingon_granularity ring_48 = { 1, "", "have", "", "", NULL, NULL, NULL, NULL, NULL, NULL, segment_11, NULL, 1, 0, 0, 0, 1, 0 };
+
+    struct klingon_content sentence_48 =
+    {
+        0,
+        NULL,
+        & ring_48,
+        segment_11,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        sizeof ( segment_11 ) / sizeof ( segment_11 [ 0 ] ),
+        0,
+        0,
+        0
+    };
+
+    struct klingon_word segment_25 [ ] =
+    {
+        { 1, "", & sentence_48 }
+    };
+
+    struct klingon_granularity ring_49 = { 1, "would", "", "", "", NULL, NULL, subject_1, NULL, NULL, NULL, segment_25, NULL, 1, 0, 0, 0, 1, 0 };
+
+    struct klingon_content sentence_49 =
+    {
+        0,
+        NULL,
+        & ring_49,
+        segment_25,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        sizeof ( segment_25 ) / sizeof ( segment_25 [ 0 ] ),
+        0,
+        0,
+        0
+    };
+
+    /* forming sentence 50 */
+
+    struct klingon_granularity ring_50 = { 1, "were", "", "", "", NULL, subject_1, subject_1, NULL, NULL, NULL, segment_2, NULL, 1, 0, 0, 0, 1, 0 };
+
+    struct klingon_word * start_point_50 = segment_12;
+
+    struct klingon_content sentence_50 =
+    {
+        0,
+        start_point_50,
+        & ring_50,
+        segment_2,
+        segment_12,
+        NULL,
+        NULL,
+        1,
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        sizeof ( segment_12 ) / sizeof ( segment_12 [ 0 ] ),
+        0,
+        0
+    };
+
     /* jump triggered by software with jmp-like instruction */
 
     conditioned_jump ( & sentence_1 ); printf ( "\n" );
@@ -1244,13 +1290,10 @@ int main ( void )
     conditioned_jump ( & sentence_18 ); printf ( "\n" );
     conditioned_jump ( & sentence_19 ); printf ( "\n" );
     conditioned_jump ( & sentence_20 ); printf ( "\n" );
-    conditioned_jump ( & sentence_21 );
-    conditioned_jump ( & sentence_22 ); printf ( "\n" );
     conditioned_jump ( & sentence_23 ); printf ( "\n" );
     conditioned_jump ( & sentence_24 ); printf ( "\n" );
     conditioned_jump ( & sentence_30 ); printf ( "\n" );
     conditioned_jump ( & sentence_32 ); printf ( "\n" );
-    conditioned_jump ( & sentence_33 ); printf ( "\n" );
     conditioned_jump ( & sentence_35 ); printf ( "\n" );
     conditioned_jump ( & sentence_37 ); printf ( "\n" );
     conditioned_jump ( & sentence_38 ); printf ( "\n" );
@@ -1260,6 +1303,9 @@ int main ( void )
     conditioned_jump ( & sentence_42 ); printf ( "\n" );
     conditioned_jump ( & sentence_43 ); printf ( "\n" );
     conditioned_jump ( & sentence_45 ); printf ( "\n" );
+    conditioned_jump ( & sentence_47 ); printf ( "\n" );
+    conditioned_jump ( & sentence_49 );
+    conditioned_jump ( & sentence_50 ); printf ( "\n" );
 
     return 0;
 }
