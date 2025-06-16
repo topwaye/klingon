@@ -41,8 +41,8 @@ struct klingon_content
 {
     int outer_start;
     struct klingon_word * start_point;
-    /* only if a content is with a ring, can this content be nested in a word as a kcontent */
-    struct klingon_granularity * ring;
+    /* only if a content is with an accented ring, can this content be nested in a word as a kcontent */
+    struct klingon_granularity * accented_ring; /* spoken with particular emphasis */
     struct klingon_word * segments [ KLINGON_SEG_NUM ];
     int start_len;
     int segment_lens [ KLINGON_SEG_NUM ];
@@ -102,8 +102,8 @@ void conditioned_jump ( struct klingon_content * sentence )
             }
         }
     }
-    
-    r = sentence -> ring;
+
+    r = sentence -> accented_ring;
     if ( r )
     {
         if ( r -> start_point != * r -> subject_segments )
