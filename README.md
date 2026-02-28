@@ -46,5 +46,6 @@ would you have played cards if you were at home
 would you have been playing cards if you were at home  
 
 klingon shows how our brains actually think to form sentences
+all thinking in the human brain is a selection of mathematical permutations and combinations
 
 gcc main.c -o main
