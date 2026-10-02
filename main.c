@@ -292,7 +292,8 @@ int main ( void )
     struct klingon_word segment_13 [ ] =
     {
         { 1, "want", NULL },
-        { 1, "to play", NULL },
+        { 1, "to", NULL },
+        { 1, "play", NULL },
         { 1, "what", NULL }
     };
 
@@ -313,13 +314,8 @@ int main ( void )
 
     struct klingon_word segment_21 [ ] =
     {
-        { 1, "to play", NULL },
-        { 1, "cards", NULL }
-    };
-
-    struct klingon_word segment_27 [ ] =
-    {
-        { 1, "playing", NULL },
+        { 1, "to", NULL },
+        { 1, "play", NULL },
         { 1, "cards", NULL }
     };
 
@@ -331,6 +327,12 @@ int main ( void )
     struct klingon_word subject_38 [ ] =
     {
         { 1, "it", NULL }
+    };
+
+    struct klingon_word segment_27 [ ] =
+    {
+        { 1, "playing", NULL },
+        { 1, "cards", NULL }
     };
 
     /* forming sentence 1 */
@@ -837,7 +839,8 @@ int main ( void )
     struct klingon_word segment_17 [ ] =
     {
         { 1, "want", NULL },
-        { 1, "to ", & sentence_29 }
+        { 1, "to", NULL },
+        { 1, "", & sentence_29 }
     };
 
     struct klingon_granularity ring_30 = { 1, "do", "", "", "", NULL, NULL, subject_1, NULL, NULL, NULL, segment_17, NULL, 1, 0, 0, 0, 1, 0 };
@@ -883,7 +886,8 @@ int main ( void )
     struct klingon_word segment_18 [ ] =
     {
         { 1, "want", NULL },
-        { 1, "to ", & sentence_31 }
+        { 1, "to", NULL },
+        { 1, "", & sentence_31 }
     };
 
     struct klingon_granularity ring_32 = { 1, "do", "", "", "", NULL, NULL, subject_1, NULL, NULL, NULL, segment_18, NULL, 1, 0, 0, 0, 1, 0 };
@@ -1191,7 +1195,8 @@ int main ( void )
     struct klingon_word segment_24 [ ] =
     {
         { 1, "going", NULL },
-        { 1, "to ", & sentence_46 }
+        { 1, "to", NULL },
+        { 1, "", & sentence_46 }
     };
 
     struct klingon_granularity ring_47 = { 1, "are", "", "", "", NULL, NULL, subject_1, NULL, NULL, NULL, segment_24, NULL, 1, 0, 0, 0, 1, 0 };
