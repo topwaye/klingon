@@ -1,7 +1,7 @@
 # klingon
 Copyright (C) 1976.12.27 TOP WAYE topwaye@hotmail.com
 
-basic klingon language logic shown by basic CPU framework logic
+basic human brain language logic shown by a recursive algorithm running on a basic CPU architecture
 
 **give some words to klingon:**
 
