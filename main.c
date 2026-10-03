@@ -23,6 +23,8 @@
  * means not choosing him. and 'don't' is overlaid on a subject-predicate unit to express the opposite meaning,
  * that is, not choosing the meaning expressed by the current subject-predicate unit.
  *
+ * all the thinking in our brains is just mathematical permutations and combinations.
+ *
  * https://github.com/topwaye/klingon
  */
 
