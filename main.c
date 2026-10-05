@@ -13,8 +13,8 @@
  *
  * the current algorithm shows how we construct English sentences in our brains.
  * it combines the first and second steps above: the arrangement of meaningful words, overlaid
- * with changing the pronunciation of some of these words. for example, 'play' is changed to 'to play',
- * and 'be' is changed to 'to be', i.e., a weak syllable is inserted to make the target word pronounce more clearly.
+ * with changing the pronunciation of some of these words. for example, 'play' is changed to 'to play', and 'be' is
+ * changed to 'to be', i.e., insert a weak syllable to make the target word sound clearer in a multi-word context.
  *
  * another example: the subject and predicate naturally form a unit, and 'do' is overlaid onto this subject-predicate
  * unit to change the pronunciation, helping to clearly locate the subject-predicate unit in an English sentence.
