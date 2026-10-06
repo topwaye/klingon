@@ -27,8 +27,8 @@
  *
  * the two steps of speaking English mentioned above are processed in our brains as follows:
  *
- * verb -> t'verb	// to verb
- * noun -> d'noun	// do noun
+ * verb -> t'verb	            // to verb
+ * noun+verb -> d'(noun+verb)	// do (noun+verb)
  *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
