@@ -12,9 +12,9 @@
  * step two: add words that don't have meaning to change the pronunciation of certain words.
  *
  * the current algorithm shows how we construct English sentences in our brains. it combines the first and
- * second steps above: the arrangement of meaningful words, overlaid with changing the pronunciation
- * of some of these words. for example, 'play' is changed to 'to play', and 'be' is changed to 'to be', i.e., insert
- * a weak syllable to make the target word sound clearer in a multi-word context.
+ * second steps above: an arrangement of meaningful words, overlaid with meaningless words to change
+ * the pronunciation of certain words. for example, 'play' is changed to 'to play', and 'be' is changed to 'to be',
+ * i.e., insert a weak syllable to make the target word sound clearer in the middle of multiple words.
  *
  * another example: the subject and predicate naturally form a unit, and 'do' is overlaid onto this subject-predicate
  * unit to change the pronunciation, helping to clearly locate the subject-predicate unit in an English sentence.
@@ -25,7 +25,12 @@
  *
  * be careful of how much scope 'do/don't' can cover in a sentence.
  *
- * all the thinking in our brains is just mathematical permutations and combinations.
+ * the two steps of speaking English mentioned above are processed in our brains as follows:
+ *
+ * verb -> t'verb	// to verb
+ * noun -> d'noun	// do noun
+ *
+ * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
  * https://github.com/topwaye/klingon
  */
