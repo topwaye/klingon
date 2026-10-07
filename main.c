@@ -402,8 +402,8 @@ int main ( void )
     printf ( "KLINGON: This is how our brains construct English sentences\n" );
     printf ( "copyright (C) 2026.10.7 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "\n" );
-    printf ( "          O                         O          O\n" );
-    printf ( "\n" );
+    printf ( "                                          O\n" );
+    printf ( "           O                              O\n" );
     printf ( " --------------------        \\                        /        --------------------\n" );
     printf ( " |                            \\                      /         |                  |\n" );
     printf ( " |                             \\                    /          |                  |\n" );
