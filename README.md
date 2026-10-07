@@ -12,13 +12,13 @@ cards
 
 **klingon gives you sentences:**
 
->what don't you play at home
->would you have been playing cards at home
-what do you think you play at home
-do you want not to be loved
-you aren't nice
-aren't you nice
-not bad
+>what don't you play at home  
+would you have been playing cards at home  
+what do you think you play at home  
+do you want not to be loved  
+you aren't nice  
+aren't you nice  
+not bad  
 don't be bad  
 
 klingon shows how our brains actually think to form sentences
