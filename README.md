@@ -13,7 +13,7 @@ cards
 **klingon gives you sentences:**
 
 >what don't you play at home
-would you have been playing cards at home
+>would you have been playing cards at home
 what do you think you play at home
 do you want not to be loved
 you aren't nice
