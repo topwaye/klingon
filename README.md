@@ -12,12 +12,11 @@ cards
 
 **klingon gives you sentences:**
 
->what don't you play at home  
+>what do you play at home  
 would you have been playing cards at home  
 what do you think you play at home  
 do you want not to be loved  
-you aren't nice  
-aren't you nice  
+you aren't at home  
 not bad  
 don't be bad  
 
