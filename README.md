@@ -7,7 +7,7 @@ basic human brain language logic shown by a recursive algorithm running on a bas
 
 >play what  
 at home  
-nice  
+bad  
 cards  
 
 **klingon gives you sentences:**
