@@ -29,11 +29,13 @@
  *
  * verb -> t'verb                                           // to verb
  * noun + verb -> d'( noun + verb ) -> d'noun + d'verb      // do ( noun + verb )
+ * noun + prep -> b'( noun + prep ) -> b'noun + b'prep      // be ( noun + prep )
  * noun + adj -> b'( noun + adj ) -> b'noun + b'adj         // be ( noun + adj )
- * 
+ *
  * the following example sentences represent how our brain thinks:
  * 
  * you play what -> d'you play what                         // what do you play
+ * you in -> b'you in                                       // are you in
  * you nice -> b'you nice                                   // are you nice
  * you nice -> can'you b'nice                               // can you be nice
  * nice -> can'b'nice                                       // can be nice
@@ -42,6 +44,19 @@
  * you want loved -> you want t'b'loved                     // you want to be loved
  * you want him loved -> you want him t'b'loved             // you want him to be loved
  * 
+ * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times.
+ * that's why it was necessary to change the pronunciation of certain words by adding meaningless syllables.
+ *
+ * the language formula for English is as follows:
+ *  .
+ *  V   O                                                   // do ( verb )             noun
+ * ..
+ * SV   O                                                   // do ( noun + verb )      noun
+ * ..
+ * SP   O                                                   // be ( noun + prep )      noun
+ * ..
+ * SA                                                       // be ( noun + adj )
+ *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
  * https://github.com/topwaye/klingon
@@ -163,16 +178,28 @@ int klingon ( void )
 {
     /* forming segments */
 
-    struct klingon_word segment_0 [ ] =
+    struct klingon_word subject_1 [ ] =
     {
-        { 1, 1, 1, "", "", "", "", "you", NULL },
-        { 1, 1, 1, "", "", "", "", "play", NULL },
-        { 1, 1, 1, "", "", "", "", "what", NULL }
+        { 1, 1, 1, "", "", "", "", "you", NULL }
+    };
+
+    struct klingon_word subject_2 [ ] =
+    {
+        { 1, 0, 0, "are", "", "", "", "you", NULL }
+    };
+
+    struct klingon_word subject_3 [ ] =
+    {
+        { 1, 1, 1, "do", "", "", "", "you", NULL }
+    };
+
+    struct klingon_word subject_4 [ ] =
+    {
+        { 1, 1, 1, "would", "", "", "", "you", NULL }
     };
 
     struct klingon_word segment_1 [ ] =
     {
-        { 1, 0, 1, "do", "", "", "", "you", NULL },
         { 1, 1, 1, "", "", "", "", "play", NULL },
         { 1, 1, 1, "", "", "", "", "what", NULL }
     };
@@ -185,129 +212,97 @@ int klingon ( void )
 
     struct klingon_word segment_3 [ ] =
     {
-        { 1, 1, 1, "would", "", "", "", "you", NULL },
         { 1, 1, 1, "", "have", "been", "", "playing", NULL },
         { 1, 1, 1, "", "", "", "", "cards", NULL }
     };
 
     struct klingon_word segment_5 [ ] =
     {
-        { 1, 1, 1, "do", "", "", "", "you", NULL },
         { 1, 1, 1, "", "", "", "", "want", NULL },
         { 1, 0, 1, "", "to", "be", "", "loved", NULL }
     };
-    
+
     struct klingon_word segment_6 [ ] =
-    {
-        { 1, 0, 0, "are", "", "", "", "you", NULL },
-        { 1, 1, 1, "", "", "", "", "nice", NULL }
-    };
-
-    struct klingon_word segment_7 [ ] =
-    {
-        { 1, 0, 1, "are", "", "", "", "you", NULL },
-        { 1, 1, 1, "", "", "", "", "nice", NULL }
-    };
-
-    struct klingon_word segment_8 [ ] =
     {
         { 0, 1, 1, "", "", "", "", "bad", NULL }
     };
 
-    struct klingon_word segment_9 [ ] =
+    struct klingon_word segment_7 [ ] =
     {
         { 1, 0, 1, "do", "", "be", "", "bad", NULL }
     };
 
-    /* forming sentence 0 */
-
-    struct klingon_word * start_point_0 = segment_1 + 2;
-    
-    struct klingon_content sentence_0 =
-    {
-        0,
-        start_point_0,
-        segment_1,
-        segment_2,
-        NULL,
-        NULL,
-        1,
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
-        0,
-        0
-    };
-
     /* forming sentence 1 */
 
+    struct klingon_word * start_point_1 = segment_1 + 1;
+    
     struct klingon_content sentence_1 =
     {
         0,
-        NULL,
-        segment_3,
+        start_point_1,
+        subject_3,
+        segment_1,
         segment_2,
         NULL,
-        NULL,
-        0,
-        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
+        1,
+        sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
         sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
-        0,
         0
     };
 
-    /* forming sentence 3 */
-
-    struct klingon_word * start_point_2 = segment_0 + 2;
+    /* forming sentence 2 */
 
     struct klingon_content sentence_2 =
     {
-        1,
-        start_point_2,
-        segment_0,
+        0,
+        NULL,
+        subject_4,
+        segment_3,
         segment_2,
         NULL,
+        0,
+        sizeof ( subject_4 ) / sizeof ( subject_4 [ 0 ] ),
+        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        0
+    };
+
+    /* forming sentence 4 */
+
+    struct klingon_word * start_point_3 = segment_1 + 1;
+
+    struct klingon_content sentence_3 =
+    {
+        1,
+        start_point_3,
+        subject_1,
+        segment_1,
+        segment_2,
         NULL,
         1,
-        sizeof ( segment_0 ) / sizeof ( segment_0 [ 0 ] ),
+        sizeof ( subject_1 ) / sizeof ( subject_1 [ 0 ] ),
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
         sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
-        0,
         0
     };
 
     struct klingon_word segment_4 [ ] =
     {
-        { 1, 1, 1, "do", "", "", "", "you", NULL },
-        { 1, 1, 1, "", "", "", "", "think", & sentence_2 },
+        { 1, 1, 1, "", "", "", "", "think", & sentence_3 }
     };
 
-    struct klingon_content sentence_3 =
-    {
-        0,
-        start_point_2,
-        segment_4,
-        NULL,
-        NULL,
-        NULL,
-        1,
-        sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-
-    /* forming sentence 4 */
-    
     struct klingon_content sentence_4 =
     {
         0,
+        start_point_3,
+        subject_3,
+        segment_4,
         NULL,
-        segment_5,
         NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
-        0,
+        1,
+        sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
+        sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
         0,
         0
     };
@@ -315,6 +310,40 @@ int klingon ( void )
     /* forming sentence 5 */
     
     struct klingon_content sentence_5 =
+    {
+        0,
+        NULL,
+        subject_3,
+        segment_5,
+        NULL,
+        NULL,
+        0,
+        sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
+        sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
+        0,
+        0
+    };
+
+    /* forming sentence 6 */
+    
+    struct klingon_content sentence_6 =
+    {
+        0,
+        NULL,
+        subject_2,
+        segment_2,
+        NULL,
+        NULL,
+        0,
+        sizeof ( subject_2 ) / sizeof ( subject_2 [ 0 ] ),
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        0,
+        0
+    };
+
+    /* forming sentence 7 */
+    
+    struct klingon_content sentence_7 =
     {
         0,
         NULL,
@@ -329,9 +358,9 @@ int klingon ( void )
         0
     };
 
-    /* forming sentence 6 */
+    /* forming sentence 8 */
     
-    struct klingon_content sentence_6 =
+    struct klingon_content sentence_8 =
     {
         0,
         NULL,
@@ -346,45 +375,10 @@ int klingon ( void )
         0
     };
 
-    /* forming sentence 7 */
-    
-    struct klingon_content sentence_7 =
-    {
-        0,
-        NULL,
-        segment_8,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_8 ) / sizeof ( segment_8 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-
-    /* forming sentence 8 */
-    
-    struct klingon_content sentence_8 =
-    {
-        0,
-        NULL,
-        segment_9,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_9 ) / sizeof ( segment_9 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-
     /* jump triggered by software with jmp-like instruction */
 
-    conditioned_jump ( & sentence_0 ); printf ( "\n" );
     conditioned_jump ( & sentence_1 ); printf ( "\n" );
-    conditioned_jump ( & sentence_3 ); printf ( "\n" );
+    conditioned_jump ( & sentence_2 ); printf ( "\n" );
     conditioned_jump ( & sentence_4 ); printf ( "\n" );
     conditioned_jump ( & sentence_5 ); printf ( "\n" );
     conditioned_jump ( & sentence_6 ); printf ( "\n" );
@@ -402,21 +396,21 @@ int main ( void )
     printf ( "KLINGON: This is how our brains construct English sentences\n" );
     printf ( "copyright (C) 2026.10.7 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "\n" );
-    printf ( "                                          O\n" );
-    printf ( "           O                              O\n" );
-    printf ( " --------------------        \\                        /        --------------------\n" );
-    printf ( " |                            \\                      /         |                  |\n" );
-    printf ( " |                             \\                    /          |                  |\n" );
-    printf ( " |                              \\                  /           |                  |\n" );
-    printf ( " |                               \\                /            |                  |\n" );
-    printf ( " |                                \\              /             |                  |\n" );
-    printf ( " --------------------              \\            /              |                  |\n" );
-    printf ( "                    |               \\          /               |                  |\n" );
-    printf ( "                    |                \\        /                |                  |\n" );
-    printf ( "                    |                 \\      /                 |                  |\n" );
-    printf ( "                    |                  \\    /                  |                  |\n" );
-    printf ( "                    |                   \\  /                   |                  |\n" );
-    printf ( " --------------------                    \\/                    --------------------\n" );
+    printf ( "                                   O\n" );
+    printf ( "           O                       O\n" );
+    printf ( " -------------------- \\                        /               --------------------\n" );
+    printf ( " |                     \\                      /                |                  |\n" );
+    printf ( " |                      \\                    /                 |                  |\n" );
+    printf ( " |                       \\                  /                  |                  |\n" );
+    printf ( " |                        \\                /                   |                  |\n" );
+    printf ( " |                         \\              /                    |                  |\n" );
+    printf ( " --------------------       \\            /                     |                  |\n" );
+    printf ( "                    |        \\          /                      |                  |\n" );
+    printf ( "                    |         \\        /                       |                  |\n" );
+    printf ( "                    |          \\      /                        |                  |\n" );
+    printf ( "                    |           \\    /                         |                  |\n" );
+    printf ( "                    |            \\  /                          |                  |\n" );
+    printf ( " --------------------             \\/                           --------------------\n" );
     printf ( "\n" );
     printf ( "************************************************************************************\n" );
 
