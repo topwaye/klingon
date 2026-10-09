@@ -23,39 +23,30 @@
  * means not choosing him. and 'don't' is overlaid on a subject-predicate unit to express the opposite meaning,
  * that is, not choosing the meaning expressed by the current subject-predicate unit.
  *
- * be careful of how much scope 'do/don't' can cover in a sentence.
+ * be careful of how much scope 'do/don't' can cover in a sentence. furthermore, in our brain, there exists
+ * a mathematical equivalence substitution that helps us understand the meaning of a sentence. a sentence is naturally
+ * like a ping-pong paddle-shaped container, with the subject at the handle and the verb-object at the paddle.
  *
- * the two steps of speaking English mentioned above are processed in our brains as follows:
+ * 'don't' is applied to the whole paddle, which is equivalent to 'don't' being applied to the handle, which is equivalent
+ * to 'don't' being applied to the paddle. it expresses 'not on the paddle side'.
  *
- * verb -> t'verb                                           // to verb
- * noun + verb -> d'( noun + verb ) -> d'noun + d'verb      // do ( noun + verb )
- * noun + prep -> b'( noun + prep ) -> b'noun + b'prep      // be ( noun + prep )
- * noun + adj -> b'( noun + adj ) -> b'noun + b'adj         // be ( noun + adj )
+ * 'not' is applied to a single point on the paddle, expressing 'not at this point'.
  *
- * the following example sentences represent how our brain thinks:
- * 
- * you play what -> d'you play what                         // what do you play
- * you in -> b'you in                                       // are you in
- * you nice -> b'you nice                                   // are you nice
- * you nice -> can'you b'nice                               // can you be nice
- * nice -> can'b'nice                                       // can be nice
- * you work -> would'you have'been'working                  // would you have been working
- * you want love -> you want t'love                         // you want to love
- * you want loved -> you want t'b'loved                     // you want to be loved
- * you want him loved -> you want him t'b'loved             // you want him to be loved
- * 
+ * the main idea for understanding the meaning of a sentence is separating the subject and the predicate.
+ * note: everything other than the subject is called the predicate.
+ *
  * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times.
  * that's why it was necessary to change the pronunciation of certain words by adding meaningless syllables.
  *
  * the language formula for English is as follows:
- *  .
- *  V   O                                                   // do ( verb )             noun
- * ..
- * SV   O                                                   // do ( noun + verb )      noun
- * ..
- * SP   O                                                   // be ( noun + prep )      noun
- * ..
- * SA                                                       // be ( noun + adj )
+ *      .
+ *      VO                                                   //      | verb + noun
+ * .    .
+ * S    VO                                                   // noun | verb + noun
+ * .    .
+ * S    PO                                                   // noun | prep + noun
+ * .    .
+ * S    A                                                    // noun | adj
  *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
@@ -198,56 +189,56 @@ int klingon ( void )
         { 1, 1, 1, "would", "", "", "", "you", NULL }
     };
 
-    struct klingon_word segment_1 [ ] =
+    struct klingon_word predicate_1 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "play", NULL },
         { 1, 1, 1, "", "", "", "", "what", NULL }
     };
 
-    struct klingon_word segment_2 [ ] =
+    struct klingon_word predicate_2 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "at", NULL },
         { 1, 1, 1, "", "", "", "", "home", NULL }
     };
 
-    struct klingon_word segment_3 [ ] =
+    struct klingon_word predicate_3 [ ] =
     {
         { 1, 1, 1, "", "have", "been", "", "playing", NULL },
         { 1, 1, 1, "", "", "", "", "cards", NULL }
     };
 
-    struct klingon_word segment_5 [ ] =
+    struct klingon_word predicate_5 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "want", NULL },
         { 1, 0, 1, "", "to", "be", "", "loved", NULL }
     };
 
-    struct klingon_word segment_6 [ ] =
+    struct klingon_word predicate_6 [ ] =
     {
         { 0, 1, 1, "", "", "", "", "bad", NULL }
     };
 
-    struct klingon_word segment_7 [ ] =
+    struct klingon_word predicate_7 [ ] =
     {
         { 1, 0, 1, "do", "", "be", "", "bad", NULL }
     };
 
     /* forming sentence 1 */
 
-    struct klingon_word * start_point_1 = segment_1 + 1;
+    struct klingon_word * start_point_1 = predicate_1 + 1;
     
     struct klingon_content sentence_1 =
     {
         0,
         start_point_1,
         subject_3,
-        segment_1,
-        segment_2,
+        predicate_1,
+        predicate_2,
         NULL,
         1,
         sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        sizeof ( predicate_1 ) / sizeof ( predicate_1 [ 0 ] ),
+        sizeof ( predicate_2 ) / sizeof ( predicate_2 [ 0 ] ),
         0
     };
 
@@ -258,36 +249,36 @@ int klingon ( void )
         0,
         NULL,
         subject_4,
-        segment_3,
-        segment_2,
+        predicate_3,
+        predicate_2,
         NULL,
         0,
         sizeof ( subject_4 ) / sizeof ( subject_4 [ 0 ] ),
-        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        sizeof ( predicate_3 ) / sizeof ( predicate_3 [ 0 ] ),
+        sizeof ( predicate_2 ) / sizeof ( predicate_2 [ 0 ] ),
         0
     };
 
     /* forming sentence 4 */
 
-    struct klingon_word * start_point_3 = segment_1 + 1;
+    struct klingon_word * start_point_3 = predicate_1 + 1;
 
     struct klingon_content sentence_3 =
     {
         1,
         start_point_3,
         subject_1,
-        segment_1,
-        segment_2,
+        predicate_1,
+        predicate_2,
         NULL,
         1,
         sizeof ( subject_1 ) / sizeof ( subject_1 [ 0 ] ),
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        sizeof ( predicate_1 ) / sizeof ( predicate_1 [ 0 ] ),
+        sizeof ( predicate_2 ) / sizeof ( predicate_2 [ 0 ] ),
         0
     };
 
-    struct klingon_word segment_4 [ ] =
+    struct klingon_word predicate_4 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "think", & sentence_3 }
     };
@@ -297,12 +288,12 @@ int klingon ( void )
         0,
         start_point_3,
         subject_3,
-        segment_4,
+        predicate_4,
         NULL,
         NULL,
         1,
         sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
-        sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
+        sizeof ( predicate_4 ) / sizeof ( predicate_4 [ 0 ] ),
         0,
         0
     };
@@ -314,12 +305,12 @@ int klingon ( void )
         0,
         NULL,
         subject_3,
-        segment_5,
+        predicate_5,
         NULL,
         NULL,
         0,
         sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
-        sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
+        sizeof ( predicate_5 ) / sizeof ( predicate_5 [ 0 ] ),
         0,
         0
     };
@@ -331,12 +322,12 @@ int klingon ( void )
         0,
         NULL,
         subject_2,
-        segment_2,
+        predicate_2,
         NULL,
         NULL,
         0,
         sizeof ( subject_2 ) / sizeof ( subject_2 [ 0 ] ),
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        sizeof ( predicate_2 ) / sizeof ( predicate_2 [ 0 ] ),
         0,
         0
     };
@@ -347,12 +338,12 @@ int klingon ( void )
     {
         0,
         NULL,
-        segment_6,
+        predicate_6,
         NULL,
         NULL,
         NULL,
         0,
-        sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
+        sizeof ( predicate_6 ) / sizeof ( predicate_6 [ 0 ] ),
         0,
         0,
         0
@@ -364,12 +355,12 @@ int klingon ( void )
     {
         0,
         NULL,
-        segment_7,
+        predicate_7,
         NULL,
         NULL,
         NULL,
         0,
-        sizeof ( segment_7 ) / sizeof ( segment_7 [ 0 ] ),
+        sizeof ( predicate_7 ) / sizeof ( predicate_7 [ 0 ] ),
         0,
         0,
         0
@@ -396,21 +387,21 @@ int main ( void )
     printf ( "KLINGON: This is how our brains construct English sentences\n" );
     printf ( "copyright (C) 2026.10.7 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "\n" );
-    printf ( "                                   O\n" );
-    printf ( "           O                       O\n" );
-    printf ( " -------------------- \\                        /               --------------------\n" );
-    printf ( " |                     \\                      /                |                  |\n" );
-    printf ( " |                      \\                    /                 |                  |\n" );
-    printf ( " |                       \\                  /                  |                  |\n" );
-    printf ( " |                        \\                /                   |                  |\n" );
-    printf ( " |                         \\              /                    |                  |\n" );
-    printf ( " --------------------       \\            /                     |                  |\n" );
-    printf ( "                    |        \\          /                      |                  |\n" );
-    printf ( "                    |         \\        /                       |                  |\n" );
-    printf ( "                    |          \\      /                        |                  |\n" );
-    printf ( "                    |           \\    /                         |                  |\n" );
-    printf ( "                    |            \\  /                          |                  |\n" );
-    printf ( " --------------------             \\/                           --------------------\n" );
+    printf ( "                                                 O\n" );
+    printf ( "           O                                     O\n" );
+    printf ( " --------------------               \\                        / --------------------\n" );
+    printf ( " |                                   \\                      /  |                  |\n" );
+    printf ( " |                                    \\                    /   |                  |\n" );
+    printf ( " |                                     \\                  /    |                  |\n" );
+    printf ( " |                                      \\                /     |                  |\n" );
+    printf ( " |                                       \\              /      |                  |\n" );
+    printf ( " --------------------                     \\            /       |                  |\n" );
+    printf ( "                    |                      \\          /        |                  |\n" );
+    printf ( "                    |                       \\        /         |                  |\n" );
+    printf ( "                    |                        \\      /          |                  |\n" );
+    printf ( "                    |                         \\    /           |                  |\n" );
+    printf ( "                    |                          \\  /            |                  |\n" );
+    printf ( " --------------------                           \\/             --------------------\n" );
     printf ( "\n" );
     printf ( "************************************************************************************\n" );
 
