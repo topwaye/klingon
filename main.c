@@ -33,6 +33,7 @@
  * 'not' is applied to a single point on the paddle, expressing 'not at this point'.
  *
  * the main idea for understanding the meaning of a sentence is separating the subject and the predicate.
+ * note: the starting point of thinking is always unconditionally on the subject.
  * note: everything other than the subject is called the predicate.
  *
  * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times.
