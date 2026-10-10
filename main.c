@@ -40,14 +40,29 @@
  * that's why it was necessary to change the pronunciation of certain words by adding meaningless syllables.
  *
  * the language formula for English is as follows:
- *      .
- *      VO                                                   //      | verb + noun
- * .    .
- * S    VO                                                   // noun | verb + noun
- * .    .
- * S    PO                                                   // noun | prep + noun
- * .    .
- * S    A                                                    // noun | adj
+ *
+ * { 'S | 'V O } J
+ *
+ * 'S represents the subject that is overlaid with meaningless syllables.
+ * 'V represents the verb, preposition, or adjective that is overlaid with meaningless syllables.
+ *  O represents an object.
+ *  | represents a separator.
+ * {} represents a container.
+ *  J represents a hook that can take the object out of the container.
+ *
+ * note: rather than thinking of the formula as a ping-pong paddle, think of it as a fish that's being hooked.
+ *
+ * here are example sentences applying the above formula:
+ *
+ * 1. who are you ?
+ *
+ * { 'you |   }
+ *          J
+ *
+ * 2. who do you think you are ?
+ *
+ * { 'you | think { 'you |   } } 
+ *                         J
  *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
@@ -74,10 +89,10 @@ struct klingon_word
 
 struct klingon_content
 {
-    int outer_start;
-    struct klingon_word * start_point;
+    int outer_bait;
+    struct klingon_word * bait;
     struct klingon_word * segments [ KLINGON_SEG_NUM ];
-    int start_len;
+    int bait_len;
     int segment_lens [ KLINGON_SEG_NUM ];
 };
 
@@ -125,11 +140,11 @@ void conditioned_jump ( struct klingon_content * sentence )
     if ( ! sentence ) /* patch!!! */
         return;
 
-    q = sentence -> start_point;
+    q = sentence -> bait;
     if ( q )
     {
-        m = sentence -> start_len;
-        if ( ! sentence -> outer_start )
+        m = sentence -> bait_len;
+        if ( ! sentence -> outer_bait )
         {
             i = 0;
             while ( i < m )
@@ -226,12 +241,12 @@ int klingon ( void )
 
     /* forming sentence 1 */
 
-    struct klingon_word * start_point_1 = predicate_1 + 1;
+    struct klingon_word * bait_1 = predicate_1 + 1;
     
     struct klingon_content sentence_1 =
     {
         0,
-        start_point_1,
+        bait_1,
         subject_3,
         predicate_1,
         predicate_2,
@@ -262,12 +277,12 @@ int klingon ( void )
 
     /* forming sentence 4 */
 
-    struct klingon_word * start_point_3 = predicate_1 + 1;
+    struct klingon_word * bait_3 = predicate_1 + 1;
 
     struct klingon_content sentence_3 =
     {
         1,
-        start_point_3,
+        bait_3,
         subject_1,
         predicate_1,
         predicate_2,
@@ -287,7 +302,7 @@ int klingon ( void )
     struct klingon_content sentence_4 =
     {
         0,
-        start_point_3,
+        bait_3,
         subject_3,
         predicate_4,
         NULL,
@@ -388,21 +403,7 @@ int main ( void )
     printf ( "KLINGON: This is how our brains construct English sentences\n" );
     printf ( "copyright (C) 2026.10.7 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "\n" );
-    printf ( "                                                 O\n" );
-    printf ( "           O                                     O\n" );
-    printf ( " --------------------               \\                        / --------------------\n" );
-    printf ( " |                                   \\                      /  |                  |\n" );
-    printf ( " |                                    \\                    /   |                  |\n" );
-    printf ( " |                                     \\                  /    |                  |\n" );
-    printf ( " |                                      \\                /     |                  |\n" );
-    printf ( " |                                       \\              /      |                  |\n" );
-    printf ( " --------------------                     \\            /       |                  |\n" );
-    printf ( "                    |                      \\          /        |                  |\n" );
-    printf ( "                    |                       \\        /         |                  |\n" );
-    printf ( "                    |                        \\      /          |                  |\n" );
-    printf ( "                    |                         \\    /           |                  |\n" );
-    printf ( "                    |                          \\  /            |                  |\n" );
-    printf ( " --------------------                           \\/             --------------------\n" );
+    printf ( "{ 'S | 'V O } J\n" );
     printf ( "\n" );
     printf ( "************************************************************************************\n" );
 
