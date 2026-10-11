@@ -16,49 +16,37 @@
  * 'play' is changed to 'to play', and 'be' is changed to 'to be', i.e., insert a weak syllable to make the target word sound clearer
  * in the middle of multiple words.
  *
- * as for the word 'not', it represents a choice logic in our brain, meaning: not choosing. for instance, 'not him' means
- * not choosing him.
+ * another example: the subject and predicate naturally form a unit, and 'do' is overlaid onto this subject-predicate unit to change
+ * the pronunciation, helping to clearly locate the subject-predicate unit in an English sentence.
  *
- * be careful of how much scope 'do/don't' can cover in a sentence. furthermore, in our brain, there exists a mathematical equivalence
- * substitution that helps us understand the meaning of a sentence. a sentence is naturally like a ping-pong paddle-shaped container,
- * with the subject at the handle and the verb-object at the paddle.
+ * as for the word 'not', it represents a choice logic in our brain, meaning: not choosing. for instance, 'not him' means not choosing
+ * him. and 'don't' is overlaid on a subject-predicate unit to express the opposite meaning, that is, not choosing the meaning expressed
+ * by the current subject-predicate unit.
  *
- * 'don't' is applied to the paddle, which is equivalent to 'don't' being applied to the handle, expressing 'not on the paddle side'.
- *
- * 'not' is applied to a single point on the paddle, expressing 'not at this point'.
- *
- * the main idea for understanding the meaning of a sentence is separating the subject and the predicate. everything other than the subject
- * is called the predicate.
- *
- * warning: the starting point of thinking is always unconditionally on the predicate.
+ * be careful of how much scope 'do/don't' can cover in a sentence.
  *
  * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's why it was
  * necessary to change the pronunciation of certain words by adding meaningless syllables.
  *
  * the language formula for English is as follows:
  *
- * { 'S | 'V O } J
+ * ( 'N 'U ) ( N 'U ) ( N 'U )
  *
- * 'S represents the subject that is overlaid with meaningless syllables.
- * 'V represents the verb, preposition, or adjective that is overlaid with meaningless syllables.
- *  O represents an object.
- *  | represents a separator.
- * {} represents a container.
- *  J represents a hook that can take the object out of the container.
+ * tip: ( N 'U ) == ( 'N U ) == ( 'N 'U ) == '( N U )
  *
- * note: rather than thinking of the formula as a ping-pong paddle, think of it as a fish that's being hooked.
+ * 'N represents a noun that is overlaid with meaningless syllables.
+ * 'U represents a verb, preposition, adjective, or noun that is overlaid with meaningless syllables.
+ * () represents a unit.
  *
  * here are example sentences applying the above formula:
  *
  * 1. who are you ?
  *
- *   { 'you |   }
- *            J
+ *   ( 'you who )
  *
  * 2. who do you think you are ?
- * 
- *   { 'you | think { 'you |   } }
- *                           J
+ *
+ *   ( 'you think ( 'you who ) )
  *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
@@ -76,7 +64,7 @@ struct klingon_content;
 struct klingon_word
 {
     int c_selected; /* select or unselect the word */
-    int d_selected; /* select or unselect the predicates */
+    int d_selected; /* select or unselect the unit */
     int d_forward; /* where diacritics are */
     char diacritic [ KLINGON_DIACRITIC_NUM ] [ KLINGON_WORD_NUM ]; /* step 2: add words that don't have meaning */
     char content [ KLINGON_WORD_NUM ]; /* step 1: spell out words that have meaning*/
@@ -85,10 +73,10 @@ struct klingon_word
 
 struct klingon_content
 {
-    int outer_bait;
-    struct klingon_word * bait;
+    int outer_object;
+    struct klingon_word * object;
     struct klingon_word * segments [ KLINGON_SEG_NUM ];
-    int bait_len;
+    int object_len;
     int segment_lens [ KLINGON_SEG_NUM ];
 };
 
@@ -136,11 +124,11 @@ void conditioned_jump ( struct klingon_content * sentence )
     if ( ! sentence ) /* patch!!! */
         return;
 
-    q = sentence -> bait;
+    q = sentence -> object;
     if ( q )
     {
-        m = sentence -> bait_len;
-        if ( ! sentence -> outer_bait )
+        m = sentence -> object_len;
+        if ( ! sentence -> outer_object )
         {
             i = 0;
             while ( i < m )
@@ -181,76 +169,76 @@ int klingon ( void )
 {
     /* forming segments */
 
-    struct klingon_word subject_1 [ ] =
+    struct klingon_word noun_1 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "you", NULL }
     };
 
-    struct klingon_word subject_2 [ ] =
+    struct klingon_word noun_2 [ ] =
     {
         { 1, 0, 0, "are", "", "", "", "you", NULL }
     };
 
-    struct klingon_word subject_3 [ ] =
+    struct klingon_word noun_3 [ ] =
     {
         { 1, 1, 1, "do", "", "", "", "you", NULL }
     };
 
-    struct klingon_word subject_4 [ ] =
+    struct klingon_word noun_4 [ ] =
     {
         { 1, 1, 1, "would", "", "", "", "you", NULL }
     };
 
-    struct klingon_word predicate_1 [ ] =
+    struct klingon_word fragment_1 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "play", NULL },
         { 1, 1, 1, "", "", "", "", "what", NULL }
     };
 
-    struct klingon_word predicate_2 [ ] =
+    struct klingon_word fragment_2 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "at", NULL },
         { 1, 1, 1, "", "", "", "", "home", NULL }
     };
 
-    struct klingon_word predicate_3 [ ] =
+    struct klingon_word fragment_3 [ ] =
     {
         { 1, 1, 1, "", "have", "been", "", "playing", NULL },
         { 1, 1, 1, "", "", "", "", "cards", NULL }
     };
 
-    struct klingon_word predicate_5 [ ] =
+    struct klingon_word fragment_5 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "want", NULL },
         { 1, 0, 1, "", "to", "be", "", "loved", NULL }
     };
 
-    struct klingon_word predicate_6 [ ] =
+    struct klingon_word fragment_6 [ ] =
     {
         { 0, 1, 1, "", "", "", "", "bad", NULL }
     };
 
-    struct klingon_word predicate_7 [ ] =
+    struct klingon_word fragment_7 [ ] =
     {
         { 1, 0, 1, "do", "", "be", "", "bad", NULL }
     };
 
     /* forming sentence 1 */
 
-    struct klingon_word * bait_1 = predicate_1 + 1;
+    struct klingon_word * object_1 = fragment_1 + 1;
     
     struct klingon_content sentence_1 =
     {
         0,
-        bait_1,
-        subject_3,
-        predicate_1,
-        predicate_2,
+        object_1,
+        noun_3,
+        fragment_1,
+        fragment_2,
         NULL,
         1,
-        sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
-        sizeof ( predicate_1 ) / sizeof ( predicate_1 [ 0 ] ),
-        sizeof ( predicate_2 ) / sizeof ( predicate_2 [ 0 ] ),
+        sizeof ( noun_3 ) / sizeof ( noun_3 [ 0 ] ),
+        sizeof ( fragment_1 ) / sizeof ( fragment_1 [ 0 ] ),
+        sizeof ( fragment_2 ) / sizeof ( fragment_2 [ 0 ] ),
         0
     };
 
@@ -260,37 +248,37 @@ int klingon ( void )
     {
         0,
         NULL,
-        subject_4,
-        predicate_3,
-        predicate_2,
+        noun_4,
+        fragment_3,
+        fragment_2,
         NULL,
         0,
-        sizeof ( subject_4 ) / sizeof ( subject_4 [ 0 ] ),
-        sizeof ( predicate_3 ) / sizeof ( predicate_3 [ 0 ] ),
-        sizeof ( predicate_2 ) / sizeof ( predicate_2 [ 0 ] ),
+        sizeof ( noun_4 ) / sizeof ( noun_4 [ 0 ] ),
+        sizeof ( fragment_3 ) / sizeof ( fragment_3 [ 0 ] ),
+        sizeof ( fragment_2 ) / sizeof ( fragment_2 [ 0 ] ),
         0
     };
 
     /* forming sentence 4 */
 
-    struct klingon_word * bait_3 = predicate_1 + 1;
+    struct klingon_word * object_3 = fragment_1 + 1;
 
     struct klingon_content sentence_3 =
     {
         1,
-        bait_3,
-        subject_1,
-        predicate_1,
-        predicate_2,
+        object_3,
+        noun_1,
+        fragment_1,
+        fragment_2,
         NULL,
         1,
-        sizeof ( subject_1 ) / sizeof ( subject_1 [ 0 ] ),
-        sizeof ( predicate_1 ) / sizeof ( predicate_1 [ 0 ] ),
-        sizeof ( predicate_2 ) / sizeof ( predicate_2 [ 0 ] ),
+        sizeof ( noun_1 ) / sizeof ( noun_1 [ 0 ] ),
+        sizeof ( fragment_1 ) / sizeof ( fragment_1 [ 0 ] ),
+        sizeof ( fragment_2 ) / sizeof ( fragment_2 [ 0 ] ),
         0
     };
 
-    struct klingon_word predicate_4 [ ] =
+    struct klingon_word fragment_4 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "think", & sentence_3 }
     };
@@ -298,14 +286,14 @@ int klingon ( void )
     struct klingon_content sentence_4 =
     {
         0,
-        bait_3,
-        subject_3,
-        predicate_4,
+        object_3,
+        noun_3,
+        fragment_4,
         NULL,
         NULL,
         1,
-        sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
-        sizeof ( predicate_4 ) / sizeof ( predicate_4 [ 0 ] ),
+        sizeof ( noun_3 ) / sizeof ( noun_3 [ 0 ] ),
+        sizeof ( fragment_4 ) / sizeof ( fragment_4 [ 0 ] ),
         0,
         0
     };
@@ -316,13 +304,13 @@ int klingon ( void )
     {
         0,
         NULL,
-        subject_3,
-        predicate_5,
+        noun_3,
+        fragment_5,
         NULL,
         NULL,
         0,
-        sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
-        sizeof ( predicate_5 ) / sizeof ( predicate_5 [ 0 ] ),
+        sizeof ( noun_3 ) / sizeof ( noun_3 [ 0 ] ),
+        sizeof ( fragment_5 ) / sizeof ( fragment_5 [ 0 ] ),
         0,
         0
     };
@@ -333,13 +321,13 @@ int klingon ( void )
     {
         0,
         NULL,
-        subject_2,
-        predicate_2,
+        noun_2,
+        fragment_2,
         NULL,
         NULL,
         0,
-        sizeof ( subject_2 ) / sizeof ( subject_2 [ 0 ] ),
-        sizeof ( predicate_2 ) / sizeof ( predicate_2 [ 0 ] ),
+        sizeof ( noun_2 ) / sizeof ( noun_2 [ 0 ] ),
+        sizeof ( fragment_2 ) / sizeof ( fragment_2 [ 0 ] ),
         0,
         0
     };
@@ -350,12 +338,12 @@ int klingon ( void )
     {
         0,
         NULL,
-        predicate_6,
+        fragment_6,
         NULL,
         NULL,
         NULL,
         0,
-        sizeof ( predicate_6 ) / sizeof ( predicate_6 [ 0 ] ),
+        sizeof ( fragment_6 ) / sizeof ( fragment_6 [ 0 ] ),
         0,
         0,
         0
@@ -367,12 +355,12 @@ int klingon ( void )
     {
         0,
         NULL,
-        predicate_7,
+        fragment_7,
         NULL,
         NULL,
         NULL,
         0,
-        sizeof ( predicate_7 ) / sizeof ( predicate_7 [ 0 ] ),
+        sizeof ( fragment_7 ) / sizeof ( fragment_7 [ 0 ] ),
         0,
         0,
         0
@@ -395,13 +383,17 @@ int klingon ( void )
 
 int main ( void )
 {
-    printf ( "********************************************************************************************\n" );
+    printf ( "**************************************************************************************************\n" );
     printf ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( "                                         {'S|'VO}J\n" );
+    printf ( "( 'N 'U ) ( N 'U ) ( N 'U )
+    printf ( "tip: ( N 'U ) == ( 'N U ) == ( 'N 'U ) == '( N U )
+    printf ( "'N represents a noun that is overlaid with meaningless syllables.
+    printf ( "'U represents a verb, preposition, adjective, or noun that is overlaid with meaningless syllables.
+    printf ( "() represents a unit.
     printf ( "\n" );
-    printf ( "                    copyright (C) 2026.10.7 TOP WAYE topwaye@hotmail.com\n" );
-    printf ( "********************************************************************************************\n" );
+    printf ( "copyright (C) 2026.10.7 TOP WAYE topwaye@hotmail.com\n" );
+    printf ( "**************************************************************************************************\n" );
 
     return klingon ( );
 }
