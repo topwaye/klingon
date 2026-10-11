@@ -386,13 +386,14 @@ int main ( void )
     printf ( "**************************************************************************************************\n" );
     printf ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( "( 'N 'U ) ( N 'U ) ( N 'U )
-    printf ( "tip: ( N 'U ) == ( 'N U ) == ( 'N 'U ) == '( N U )
-    printf ( "'N represents a noun that is overlaid with meaningless syllables.
-    printf ( "'U represents a verb, preposition, adjective, or noun that is overlaid with meaningless syllables.
-    printf ( "() represents a unit.
+    printf ( "( 'N 'U ) ( N 'U ) ( N 'U )\n" );
     printf ( "\n" );
-    printf ( "copyright (C) 2026.10.7 TOP WAYE topwaye@hotmail.com\n" );
+    printf ( "Tip: ( N 'U ) == ( 'N U ) == ( 'N 'U ) == '( N U )\n" );
+    printf ( "'N represents a noun that is overlaid with meaningless syllables.\n" );
+    printf ( "'U represents a verb, preposition, adjective, or noun that is overlaid with meaningless syllables.\n" );
+    printf ( "() represents a unit.\n" );
+    printf ( "\n" );
+    printf ( "Copyright (C) 2026.10.7 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "**************************************************************************************************\n" );
 
     return klingon ( );
