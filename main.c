@@ -32,7 +32,7 @@
  *
  * ( 'N 'U ) ( N 'U ) ( N 'U )
  *
- * tip: ( N 'U ) == ( 'N U ) == ( 'N 'U ) == '( N U )
+ * the distributive law of syllables: ( N 'U ) == ( 'N U ) == ( 'N 'U ) == '( N U )
  *
  * 'N represents a noun that is overlaid with meaningless syllables.
  * 'U represents a verb, preposition, adjective, or noun that is overlaid with meaningless syllables.
@@ -388,7 +388,7 @@ int main ( void )
     printf ( "\n" );
     printf ( "( 'N 'U ) ( N 'U ) ( N 'U )\n" );
     printf ( "\n" );
-    printf ( "Tip: ( N 'U ) == ( 'N U ) == ( 'N 'U ) == '( N U )\n" );
+    printf ( "the distributive law of syllables: ( N 'U ) == ( 'N U ) == ( 'N 'U ) == '( N U )\n" );
     printf ( "'N represents a noun that is overlaid with meaningless syllables.\n" );
     printf ( "'U represents a verb, preposition, adjective, or noun that is overlaid with meaningless syllables.\n" );
     printf ( "() represents a unit.\n" );
