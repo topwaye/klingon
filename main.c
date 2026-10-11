@@ -23,7 +23,7 @@
  * him. and 'don't' is overlaid on a subject-predicate unit to express the opposite meaning, that is, not choosing the meaning expressed
  * by the current subject-predicate unit.
  *
- * be careful of how much scope 'do/don't' can cover in a sentence.
+ * be careful of how much scope 'do/don't' can cover in a sentence: one unit.
  *
  * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's why it was
  * necessary to change the pronunciation of certain words by adding meaningless syllables.
