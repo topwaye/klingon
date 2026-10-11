@@ -11,33 +11,29 @@
  * step one: spell out words that have meaning.
  * step two: add words that don't have meaning to change the pronunciation of certain words.
  *
- * the current algorithm shows how we construct English sentences in our brains. it combines the first and
- * second steps above: an arrangement of meaningful words, overlaid with meaningless words to change
- * the pronunciation of certain words. for example, 'play' is changed to 'to play', and 'be' is changed to 'to be',
- * i.e., insert a weak syllable to make the target word sound clearer in the middle of multiple words.
+ * the current algorithm shows how we construct English sentences in our brains. it combines the first and second steps above:
+ * an arrangement of meaningful words, overlaid with meaningless words to change the pronunciation of certain words. for example,
+ * 'play' is changed to 'to play', and 'be' is changed to 'to be', i.e., insert a weak syllable to make the target word sound clearer
+ * in the middle of multiple words.
  *
- * another example: the subject and predicate naturally form a unit, and 'do' is overlaid onto this subject-predicate
- * unit to change the pronunciation, helping to clearly locate the subject-predicate unit in an English sentence.
+ * as for the word 'not', it represents a choice logic in our brain, meaning: not choosing. for instance, 'not him' means
+ * not choosing him.
  *
- * as for the word 'not', it represents a choice logic in our brain, meaning: not choosing. for instance, 'not him'
- * means not choosing him. and 'don't' is overlaid on a subject-predicate unit to express the opposite meaning,
- * that is, not choosing the meaning expressed by the current subject-predicate unit.
+ * be careful of how much scope 'do/don't' can cover in a sentence. furthermore, in our brain, there exists a mathematical equivalence
+ * substitution that helps us understand the meaning of a sentence. a sentence is naturally like a ping-pong paddle-shaped container,
+ * with the subject at the handle and the verb-object at the paddle.
  *
- * be careful of how much scope 'do/don't' can cover in a sentence. furthermore, in our brain, there exists
- * a mathematical equivalence substitution that helps us understand the meaning of a sentence. a sentence is naturally
- * like a ping-pong paddle-shaped container, with the subject at the handle and the verb-object at the paddle.
- *
- * 'don't' is applied to the whole paddle, which is equivalent to 'don't' being applied to the handle, which is equivalent
- * to 'don't' being applied to the paddle. it expresses 'not on the paddle side'.
+ * 'don't' is applied to the paddle, which is equivalent to 'don't' being applied to the handle, expressing 'not on the paddle side'.
  *
  * 'not' is applied to a single point on the paddle, expressing 'not at this point'.
  *
- * the main idea for understanding the meaning of a sentence is separating the subject and the predicate.
- * note: the starting point of thinking is always unconditionally on the subject.
- * note: everything other than the subject is called the predicate.
+ * the main idea for understanding the meaning of a sentence is separating the subject and the predicate. everything other than the subject
+ * is called the predicate.
  *
- * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times.
- * that's why it was necessary to change the pronunciation of certain words by adding meaningless syllables.
+ * warning: the starting point of thinking is always unconditionally on the predicate.
+ *
+ * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's why it was
+ * necessary to change the pronunciation of certain words by adding meaningless syllables.
  *
  * the language formula for English is as follows:
  *
@@ -56,13 +52,13 @@
  *
  * 1. who are you ?
  *
- * { 'you |   }
- *          J
+ *   { 'you |   }
+ *            J
  *
  * 2. who do you think you are ?
- *
- * { 'you | think { 'you |   } } 
- *                         J
+ * 
+ *   { 'you | think { 'you |   } }
+ *                           J
  *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
@@ -79,8 +75,8 @@ struct klingon_content;
 
 struct klingon_word
 {
-    int c_selected; /* select or unselect this word */
-    int d_selected; /* select or unselect the granularity */
+    int c_selected; /* select or unselect the word */
+    int d_selected; /* select or unselect the predicates */
     int d_forward; /* where diacritics are */
     char diacritic [ KLINGON_DIACRITIC_NUM ] [ KLINGON_WORD_NUM ]; /* step 2: add words that don't have meaning */
     char content [ KLINGON_WORD_NUM ]; /* step 1: spell out words that have meaning*/
@@ -399,13 +395,13 @@ int klingon ( void )
 
 int main ( void )
 {
-    printf ( "************************************************************************************\n" );
-    printf ( "KLINGON: This is how our brains construct English sentences\n" );
-    printf ( "copyright (C) 2026.10.7 TOP WAYE topwaye@hotmail.com\n" );
+    printf ( "********************************************************************************************\n" );
+    printf ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( "{ 'S | 'V O } J\n" );
+    printf ( "                                         {'S|'VO}J\n" );
     printf ( "\n" );
-    printf ( "************************************************************************************\n" );
+    printf ( "                    copyright (C) 2026.10.7 TOP WAYE topwaye@hotmail.com\n" );
+    printf ( "********************************************************************************************\n" );
 
     return klingon ( );
 }
