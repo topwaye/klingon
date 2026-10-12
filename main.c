@@ -28,25 +28,39 @@
  * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's why it was
  * necessary to change the pronunciation of certain words by adding meaningless syllables.
  *
+ * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need to assign
+ * a subject to these verb-object phrases, that is, bind a subject to the verb to form a subject-verb unit.
+ *
  * the language formula for English is as follows:
  *
- * ( 'N 'U ) ( N 'U ) ( N 'U )
+ * V + O --> '(SV) + O
  *
- * the distributive law of syllables: ( N 'U ) == ( 'N U ) == ( 'N 'U ) == '( N U )
- *
- * 'N represents a noun that is overlaid with meaningless syllables.
- * 'U represents a verb, preposition, adjective, or noun that is overlaid with meaningless syllables.
- * () represents a unit.
+ *  S  represents a subject.
+ * '() represents a unit that is overlaid with meaningless syllables.
+ *  V  represents a verb, preposition, adjective, or noun.
+ *  O  represents an object.
  *
  * here are example sentences applying the above formula:
  *
  * 1. who are you ?
  *
- *   ( 'you who )
+ *    who --> '( you who )
  *
- * 2. who do you think you are ?
+ * 2. what do you think you play ?
  *
- *   ( 'you think ( 'you who ) )
+ *    think; play + what --> '( you think ) '( you play ) + what
+ *
+ * 3. don't you want me to play with him ?
+ *
+ *    want + me; play; with + him --> '( you want ) + me; 'play; with + him
+ *
+ * 4. don't be bad.
+ *
+ *    bad --> ''bad
+ *
+ * 5. my love shall in my verse ever live young.
+ *
+ *    in + my verse; ever live + young; --> '( my love [ in + my verse ] ever live ) + young
  *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
@@ -71,7 +85,7 @@ struct klingon_word
     struct klingon_content * kcontent;
 };
 
-struct klingon_content
+struct klingon_content /* subject binding */
 {
     int outer_object;
     struct klingon_word * object;
@@ -169,76 +183,76 @@ int klingon ( void )
 {
     /* forming segments */
 
-    struct klingon_word noun_1 [ ] =
+    struct klingon_word subject_1 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "you", NULL }
     };
 
-    struct klingon_word noun_2 [ ] =
+    struct klingon_word subject_2 [ ] =
     {
         { 1, 0, 0, "are", "", "", "", "you", NULL }
     };
 
-    struct klingon_word noun_3 [ ] =
+    struct klingon_word subject_3 [ ] =
     {
         { 1, 1, 1, "do", "", "", "", "you", NULL }
     };
 
-    struct klingon_word noun_4 [ ] =
+    struct klingon_word subject_4 [ ] =
     {
         { 1, 1, 1, "would", "", "", "", "you", NULL }
     };
 
-    struct klingon_word fragment_1 [ ] =
+    struct klingon_word segment_1 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "play", NULL },
         { 1, 1, 1, "", "", "", "", "what", NULL }
     };
 
-    struct klingon_word fragment_2 [ ] =
+    struct klingon_word segment_2 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "at", NULL },
         { 1, 1, 1, "", "", "", "", "home", NULL }
     };
 
-    struct klingon_word fragment_3 [ ] =
+    struct klingon_word segment_3 [ ] =
     {
         { 1, 1, 1, "", "have", "been", "", "playing", NULL },
         { 1, 1, 1, "", "", "", "", "cards", NULL }
     };
 
-    struct klingon_word fragment_5 [ ] =
+    struct klingon_word segment_5 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "want", NULL },
         { 1, 0, 1, "", "to", "be", "", "loved", NULL }
     };
 
-    struct klingon_word fragment_6 [ ] =
+    struct klingon_word segment_6 [ ] =
     {
         { 0, 1, 1, "", "", "", "", "bad", NULL }
     };
 
-    struct klingon_word fragment_7 [ ] =
+    struct klingon_word segment_7 [ ] =
     {
         { 1, 0, 1, "do", "", "be", "", "bad", NULL }
     };
 
     /* forming sentence 1 */
 
-    struct klingon_word * object_1 = fragment_1 + 1;
+    struct klingon_word * object_1 = segment_1 + 1;
     
     struct klingon_content sentence_1 =
     {
         0,
         object_1,
-        noun_3,
-        fragment_1,
-        fragment_2,
+        subject_3,
+        segment_1,
+        segment_2,
         NULL,
         1,
-        sizeof ( noun_3 ) / sizeof ( noun_3 [ 0 ] ),
-        sizeof ( fragment_1 ) / sizeof ( fragment_1 [ 0 ] ),
-        sizeof ( fragment_2 ) / sizeof ( fragment_2 [ 0 ] ),
+        sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
         0
     };
 
@@ -248,37 +262,37 @@ int klingon ( void )
     {
         0,
         NULL,
-        noun_4,
-        fragment_3,
-        fragment_2,
+        subject_4,
+        segment_3,
+        segment_2,
         NULL,
         0,
-        sizeof ( noun_4 ) / sizeof ( noun_4 [ 0 ] ),
-        sizeof ( fragment_3 ) / sizeof ( fragment_3 [ 0 ] ),
-        sizeof ( fragment_2 ) / sizeof ( fragment_2 [ 0 ] ),
+        sizeof ( subject_4 ) / sizeof ( subject_4 [ 0 ] ),
+        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
         0
     };
 
     /* forming sentence 4 */
 
-    struct klingon_word * object_3 = fragment_1 + 1;
+    struct klingon_word * object_3 = segment_1 + 1;
 
     struct klingon_content sentence_3 =
     {
         1,
         object_3,
-        noun_1,
-        fragment_1,
-        fragment_2,
+        subject_1,
+        segment_1,
+        segment_2,
         NULL,
         1,
-        sizeof ( noun_1 ) / sizeof ( noun_1 [ 0 ] ),
-        sizeof ( fragment_1 ) / sizeof ( fragment_1 [ 0 ] ),
-        sizeof ( fragment_2 ) / sizeof ( fragment_2 [ 0 ] ),
+        sizeof ( subject_1 ) / sizeof ( subject_1 [ 0 ] ),
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
         0
     };
 
-    struct klingon_word fragment_4 [ ] =
+    struct klingon_word segment_4 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "think", & sentence_3 }
     };
@@ -287,13 +301,13 @@ int klingon ( void )
     {
         0,
         object_3,
-        noun_3,
-        fragment_4,
+        subject_3,
+        segment_4,
         NULL,
         NULL,
         1,
-        sizeof ( noun_3 ) / sizeof ( noun_3 [ 0 ] ),
-        sizeof ( fragment_4 ) / sizeof ( fragment_4 [ 0 ] ),
+        sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
+        sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
         0,
         0
     };
@@ -304,13 +318,13 @@ int klingon ( void )
     {
         0,
         NULL,
-        noun_3,
-        fragment_5,
+        subject_3,
+        segment_5,
         NULL,
         NULL,
         0,
-        sizeof ( noun_3 ) / sizeof ( noun_3 [ 0 ] ),
-        sizeof ( fragment_5 ) / sizeof ( fragment_5 [ 0 ] ),
+        sizeof ( subject_3 ) / sizeof ( subject_3 [ 0 ] ),
+        sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
         0,
         0
     };
@@ -321,13 +335,13 @@ int klingon ( void )
     {
         0,
         NULL,
-        noun_2,
-        fragment_2,
+        subject_2,
+        segment_2,
         NULL,
         NULL,
         0,
-        sizeof ( noun_2 ) / sizeof ( noun_2 [ 0 ] ),
-        sizeof ( fragment_2 ) / sizeof ( fragment_2 [ 0 ] ),
+        sizeof ( subject_2 ) / sizeof ( subject_2 [ 0 ] ),
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
         0,
         0
     };
@@ -338,12 +352,12 @@ int klingon ( void )
     {
         0,
         NULL,
-        fragment_6,
+        segment_6,
         NULL,
         NULL,
         NULL,
         0,
-        sizeof ( fragment_6 ) / sizeof ( fragment_6 [ 0 ] ),
+        sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
         0,
         0,
         0
@@ -355,12 +369,12 @@ int klingon ( void )
     {
         0,
         NULL,
-        fragment_7,
+        segment_7,
         NULL,
         NULL,
         NULL,
         0,
-        sizeof ( fragment_7 ) / sizeof ( fragment_7 [ 0 ] ),
+        sizeof ( segment_7 ) / sizeof ( segment_7 [ 0 ] ),
         0,
         0,
         0
@@ -386,14 +400,14 @@ int main ( void )
     printf ( "**************************************************************************************************\n" );
     printf ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( "( 'N 'U ) ( N 'U ) ( N 'U )\n" );
+    printf ( "V + O --> '(SV) + O\n" );
     printf ( "\n" );
-    printf ( "the distributive law of syllables: ( N 'U ) == ( 'N U ) == ( 'N 'U ) == '( N U )\n" );
-    printf ( "'N represents a noun that is overlaid with meaningless syllables.\n" );
-    printf ( "'U represents a verb, preposition, adjective, or noun that is overlaid with meaningless syllables.\n" );
-    printf ( "() represents a unit.\n" );
+    printf ( " S  represents a subject.\n" );
+    printf ( "'() represents a unit that is overlaid with meaningless syllables.\n" );
+    printf ( " V  represents a verb, preposition, adjective, or noun.\n" );
+    printf ( " O  represents an object.\n" );
     printf ( "\n" );
-    printf ( "Copyright (C) 2026.10.7 TOP WAYE topwaye@hotmail.com\n" );
+    printf ( "Copyright (C) 2026.10.12 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "**************************************************************************************************\n" );
 
     return klingon ( );
