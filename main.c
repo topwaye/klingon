@@ -52,7 +52,7 @@
  *
  * 2. what do you think you play ?
  *
- *    think; play + what --> '( you think ) '( you play ) + what
+ *    think; play + what --> '( you think ); '( you play ) + what
  *
  * 3. don't you want me to play with him ?
  *
@@ -81,15 +81,15 @@ struct klingon_content;
 
 struct klingon_word
 {
-    int c_selected; /* select or unselect the word */
-    int d_selected; /* select or unselect the unit */
-    int d_forward; /* where diacritics are */
-    char diacritic [ KLINGON_DIACRITIC_NUM ] [ KLINGON_WORD_NUM ]; /* step 2: add words that don't have meaning */
-    char content [ KLINGON_WORD_NUM ]; /* step 1: spell out words that have meaning*/
-    struct klingon_content * kcontent;
+    int d_selected;                                                 /* select or unselect the unit */
+    int d_forward;                                                  /* where diacritics are */
+    int c_selected;                                                 /* select or unselect the word */
+    char diacritic [ KLINGON_DIACRITIC_NUM ] [ KLINGON_WORD_NUM ];  /* step 2: add words that don't have meaning */
+    char content [ KLINGON_WORD_NUM ];                              /* step 1: spell out words that have meaning */
+    struct klingon_content * k_content;
 };
 
-struct klingon_content /* subject binding */
+struct klingon_content                                              /* bind a subject using the distributive law of syllables */
 {
     int outer_object;
     struct klingon_word * object;
@@ -105,10 +105,10 @@ static void print_word ( struct klingon_word * t )
     if ( t -> d_forward )
     {
         if ( * t -> diacritic [ 0 ] )
-                t -> d_selected ? printf ( "%s ", t -> diacritic [ 0 ] ) : printf( "%sn't ", t -> diacritic [ 0 ] );
+                t -> d_selected ? printf ( "%s ", t -> diacritic [ 0 ] ) : printf ( "%sn't ", t -> diacritic [ 0 ] );
 
         if ( * t -> diacritic [ 1 ] )
-                t -> d_selected ? printf ( "%s ", t -> diacritic [ 1 ] ) : printf( "not %s ", t -> diacritic [ 1 ] );
+                t -> d_selected ? printf ( "%s ", t -> diacritic [ 1 ] ) : printf ( "not %s ", t -> diacritic [ 1 ] );
 
         for ( i = 2; i < KLINGON_DIACRITIC_NUM; i ++ )
             if ( * t -> diacritic [ i ] )
@@ -123,10 +123,10 @@ static void print_word ( struct klingon_word * t )
     if ( ! t -> d_forward )
     {
         if ( * t -> diacritic [ 0 ] )
-                t -> d_selected ? printf ( "%s ", t -> diacritic [ 0 ] ) : printf( "%sn't ", t -> diacritic [ 0 ] );
+                t -> d_selected ? printf ( "%s ", t -> diacritic [ 0 ] ) : printf ( "%sn't ", t -> diacritic [ 0 ] );
 
         if ( * t -> diacritic [ 1 ] )
-                t -> d_selected ? printf ( "%s ", t -> diacritic [ 1 ] ) : printf( "not %s ", t -> diacritic [ 1 ] );
+                t -> d_selected ? printf ( "%s ", t -> diacritic [ 1 ] ) : printf ( "not %s ", t -> diacritic [ 1 ] );
 
         for ( i = 2; i < KLINGON_DIACRITIC_NUM; i ++ )
             if ( * t -> diacritic [ i ] )
@@ -139,7 +139,7 @@ void conditioned_jump ( struct klingon_content * sentence )
     int i, j, m, n;
     struct klingon_word * p, * q, * t;
 
-    if ( ! sentence ) /* patch!!! */
+    if ( ! sentence )
         return;
 
     q = sentence -> object;
@@ -153,7 +153,7 @@ void conditioned_jump ( struct klingon_content * sentence )
             {
                 t = q + i;
                 print_word ( t );
-                conditioned_jump ( t -> kcontent );
+                conditioned_jump ( t -> k_content );
                 i ++;
             }
         }
@@ -166,7 +166,6 @@ void conditioned_jump ( struct klingon_content * sentence )
         {
             n = sentence -> segment_lens [ j ];
             i = 0;
-
             while ( i < n )
             {
                 t = p + i;
@@ -176,7 +175,7 @@ void conditioned_jump ( struct klingon_content * sentence )
                     continue;
                 }
                 print_word ( t );
-                conditioned_jump ( t -> kcontent );
+                conditioned_jump ( t -> k_content );
                 i ++;
             }
         }
@@ -194,7 +193,7 @@ int klingon ( void )
 
     struct klingon_word subject_2 [ ] =
     {
-        { 1, 0, 0, "are", "", "", "", "you", NULL }
+        { 0, 0, 1, "are", "", "", "", "you", NULL }
     };
 
     struct klingon_word subject_3 [ ] =
@@ -228,17 +227,17 @@ int klingon ( void )
     struct klingon_word segment_5 [ ] =
     {
         { 1, 1, 1, "", "", "", "", "want", NULL },
-        { 1, 0, 1, "", "to", "be", "", "loved", NULL }
+        { 0, 1, 1, "", "to", "be", "", "loved", NULL }
     };
 
     struct klingon_word segment_6 [ ] =
     {
-        { 0, 1, 1, "", "", "", "", "bad", NULL }
+        { 1, 1, 0, "", "", "", "", "bad", NULL }
     };
 
     struct klingon_word segment_7 [ ] =
     {
-        { 1, 0, 1, "do", "", "be", "", "bad", NULL }
+        { 0, 1, 1, "do", "", "be", "", "bad", NULL }
     };
 
     /* forming sentence 1 */
@@ -384,8 +383,6 @@ int klingon ( void )
         0
     };
 
-    /* jump triggered by software with jmp-like instruction */
-
     conditioned_jump ( & sentence_1 ); printf ( "\n" );
     conditioned_jump ( & sentence_2 ); printf ( "\n" );
     conditioned_jump ( & sentence_4 ); printf ( "\n" );
@@ -397,11 +394,9 @@ int klingon ( void )
     return 1;
 }
 
-/* sequential execution with CPU head */
-
 int main ( void )
 {
-    printf ( "**************************************************************************************************\n" );
+    printf ( "********************************************************************************************\n" );
     printf ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
     printf ( "V + O --> '(SV) + O\n" );
@@ -412,7 +407,7 @@ int main ( void )
     printf ( " O  represents an object.\n" );
     printf ( "\n" );
     printf ( "Copyright (C) 2026.10.12 TOP WAYE topwaye@hotmail.com\n" );
-    printf ( "**************************************************************************************************\n" );
+    printf ( "********************************************************************************************\n" );
 
     return klingon ( );
 }
