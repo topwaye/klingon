@@ -40,6 +40,10 @@
  *  V  represents a verb, preposition, adjective, or noun.
  *  O  represents an object.
  *
+ * because the scope of 'do/don't' always covers a subject-verb unit, the distributive law of syllables is as follows:
+ *
+ * (S'V) == ('SV) == ('S'V) == '(S'V) == '(SV)
+ *
  * here are example sentences applying the above formula:
  *
  * 1. who are you ?
