@@ -188,6 +188,8 @@ void klingon_jump ( int depth, struct klingon_content * sentence )
                     t = p + i;
                     if ( t == q )
                     {
+                        assert ( q );
+
                         i += m;
                         continue;
                     }
@@ -412,7 +414,7 @@ int klingon ( void )
     klingon_jump ( 0, & sentence_7 );
     klingon_jump ( 0, & sentence_8 );
 
-    return 1;
+    return 0;
 }
 
 int main ( void )
