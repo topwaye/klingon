@@ -100,14 +100,17 @@ struct klingon_content          /* bind a subject to instantiate a verb, using t
     int segment_lens [ KLINGON_SEG_NUM ];
 };
 
-const char * fmt [ ] = { "\n", "%s ", "%sn't ", "not %s ", "not " };
+const char * FMT_NEWLINE     = "\n";
+const char * FMT_STR_SPACE   = "%s ";                               /* print a word followed by a space */
+const char * FMT_STR_NT      = "%sn't ";                            /* print word + n't + space */
+const char * FMT_NOT_S       = "not %s ";                           /* print 'not ' before word */
+const char * FMT_NOT         = "not ";                              /* literal 'not ' (no format args) */
 
 void klingon_print_diacritics ( struct klingon_word * t )
 {
     int i;
 
     assert ( t );
-
     for ( i = 0; i < KLINGON_DIACRITIC_NUM; i ++ )
     {
         if ( ! * t -> diacritic [ i ] )
@@ -117,11 +120,11 @@ void klingon_print_diacritics ( struct klingon_word * t )
         {
             switch ( i )
             {
-            case 0 : printf ( fmt [ 2 ], t -> diacritic [ i ] ); continue;
-            case 1 : printf ( fmt [ 3 ], t -> diacritic [ i ] ); continue;
+            case 0 : printf ( FMT_STR_NT, t -> diacritic [ i ] ); continue;
+            case 1 : printf ( FMT_NOT_S, t -> diacritic [ i ] ); continue;
             }
         }
-        printf ( fmt [ 1 ], t -> diacritic [ i ] );
+        printf ( FMT_STR_SPACE, t -> diacritic [ i ] );
     }
 }
 
@@ -129,25 +132,25 @@ void klingon_print ( struct klingon_word * t )
 {
     if ( ! t )
     {
-        printf ( fmt [ 0 ] );
+        printf ( FMT_NEWLINE );
         return;
     }
 
     if ( t -> d_in_front )
         klingon_print_diacritics ( t );
 
-    if ( * t -> content )
-    {
-        if ( ! t -> c_selected )
-            printf ( fmt [ 3 ], t -> content );
+        if ( * t -> content )
+        {
+            if ( ! t -> c_selected )
+                printf ( FMT_NOT_S, t -> content );
+            else
+                printf ( FMT_STR_SPACE, t -> content );
+        }
         else
-            printf ( fmt [ 1 ], t -> content );
-    }
-    else
-    {
-        if ( ! t -> c_selected )
-            printf ( fmt [ 4 ] );
-    }
+        {
+            if ( ! t -> c_selected )
+                printf ( FMT_NOT );
+        }
 
     if ( ! t -> d_in_front )
         klingon_print_diacritics ( t );
@@ -164,6 +167,7 @@ void klingon_jump ( int depth, struct klingon_content * sentence )
         if ( q )
         {
             m = sentence -> object_len;
+            assert ( m > 0 );
             if ( ! sentence -> outer_object )
             {
                 i = 0;
@@ -190,7 +194,6 @@ void klingon_jump ( int depth, struct klingon_content * sentence )
                     if ( t == q )
                     {
                         assert ( q );
-
                         i += m;
                         continue;
                     }
