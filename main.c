@@ -80,8 +80,6 @@
 
 struct klingon_content;
 
-int klingon_print ( const char * fmt, ... );
-
 struct klingon_word
 {
     int d_selected;                                                 /* select or unselect the unit */
@@ -100,6 +98,8 @@ struct klingon_content                                              /* bind a su
     int object_len;
     int segment_lens [ KLINGON_SEG_NUM ];
 };
+
+int klingon_print ( const char * fmt, ... );
 
 static void print ( struct klingon_word * t )
 {
@@ -423,15 +423,15 @@ int main ( void )
 int klingon_print ( const char * fmt, ... )
 {
     va_list ap;
+    int n;
     const char * p;
-    int printed;
 
     if ( ! fmt )
         return 0;
 
     va_start ( ap, fmt );
 
-    printed = 0;
+    n = 0;
     p = fmt;
     while ( * p )
     {
@@ -441,7 +441,7 @@ int klingon_print ( const char * fmt, ... )
             if ( * p == '%' )
             {
                 putchar ( '%' );
-                printed ++;
+                n ++;
                 p ++;
             }
             else if ( * p == 's' )
@@ -452,7 +452,7 @@ int klingon_print ( const char * fmt, ... )
                 while ( * s )
                 {
                     putchar ( * s );
-                    printed ++;
+                    n ++;
                     s ++;
                 }
                 p ++;
@@ -461,11 +461,11 @@ int klingon_print ( const char * fmt, ... )
             {
                 /* unsupported specifier: print percent and the specifier literally */
                 putchar ( '%' );
-                printed ++;
+                n ++;
                 if ( * p )
                 {
                     putchar ( * p );
-                    printed ++;
+                    n ++;
                     p ++;
                 }
             }
@@ -473,12 +473,12 @@ int klingon_print ( const char * fmt, ... )
         else
         {
             putchar ( * p );
-            printed ++;
+            n ++;
             p ++;
         }
     }
 
     va_end ( ap );
 
-    return printed;
+    return n;
 }
