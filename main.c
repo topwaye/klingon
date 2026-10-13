@@ -99,45 +99,45 @@ struct klingon_content                                              /* bind a su
     int segment_lens [ KLINGON_SEG_NUM ];
 };
 
-int klingon_print ( const char * fmt, ... );
+int print ( const char * fmt, ... );
 
-static void print ( struct klingon_word * t )
+void klingon_print ( struct klingon_word * t )
 {
     int i;
 
     if ( t -> d_in_front )
     {
         if ( * t -> diacritic [ 0 ] )
-                t -> d_selected ? klingon_print ( "%s ", t -> diacritic [ 0 ] ) : klingon_print ( "%sn't ", t -> diacritic [ 0 ] );
+                t -> d_selected ? print ( "%s ", t -> diacritic [ 0 ] ) : print ( "%sn't ", t -> diacritic [ 0 ] );
 
         if ( * t -> diacritic [ 1 ] )
-                t -> d_selected ? klingon_print ( "%s ", t -> diacritic [ 1 ] ) : klingon_print ( "not %s ", t -> diacritic [ 1 ] );
+                t -> d_selected ? print ( "%s ", t -> diacritic [ 1 ] ) : print ( "not %s ", t -> diacritic [ 1 ] );
 
         for ( i = 2; i < KLINGON_DIACRITIC_NUM; i ++ )
             if ( * t -> diacritic [ i ] )
-                klingon_print ( "%s ", t -> diacritic [ i ] );
+                print ( "%s ", t -> diacritic [ i ] );
     }
 
     if ( * t -> content )
-        t -> c_selected ? klingon_print ( "%s ", t -> content ) : klingon_print ( "not %s ", t -> content );
+        t -> c_selected ? print ( "%s ", t -> content ) : print ( "not %s ", t -> content );
     else
-        t -> c_selected ? klingon_print ( "" ) : klingon_print ( "not " );
+        t -> c_selected ? print ( "" ) : print ( "not " );
 
     if ( ! t -> d_in_front )
     {
         if ( * t -> diacritic [ 0 ] )
-                t -> d_selected ? klingon_print ( "%s ", t -> diacritic [ 0 ] ) : klingon_print ( "%sn't ", t -> diacritic [ 0 ] );
+                t -> d_selected ? print ( "%s ", t -> diacritic [ 0 ] ) : print ( "%sn't ", t -> diacritic [ 0 ] );
 
         if ( * t -> diacritic [ 1 ] )
-                t -> d_selected ? klingon_print ( "%s ", t -> diacritic [ 1 ] ) : klingon_print ( "not %s ", t -> diacritic [ 1 ] );
+                t -> d_selected ? print ( "%s ", t -> diacritic [ 1 ] ) : print ( "not %s ", t -> diacritic [ 1 ] );
 
         for ( i = 2; i < KLINGON_DIACRITIC_NUM; i ++ )
             if ( * t -> diacritic [ i ] )
-                klingon_print ( "%s ", t -> diacritic [ i ] );
+                print ( "%s ", t -> diacritic [ i ] );
     }
 }
 
-static void jump ( struct klingon_content * sentence )
+void klingon_jump ( struct klingon_content * sentence )
 {
     int i, j, m, n;
     struct klingon_word * p, * q, * t;
@@ -155,8 +155,8 @@ static void jump ( struct klingon_content * sentence )
             while ( i < m )
             {
                 t = q + i;
-                print ( t );
-                jump ( t -> k_content );
+                klingon_print ( t );
+                klingon_jump ( t -> k_content );
                 i ++;
             }
         }
@@ -177,8 +177,8 @@ static void jump ( struct klingon_content * sentence )
                     i += m;
                     continue;
                 }
-                print ( t );
-                jump ( t -> k_content );
+                klingon_print ( t );
+                klingon_jump ( t -> k_content );
                 i ++;
             }
         }
@@ -386,41 +386,41 @@ int klingon ( void )
         0
     };
 
-    jump ( & sentence_1 ); klingon_print ( "\n" );
-    jump ( & sentence_2 ); klingon_print ( "\n" );
-    jump ( & sentence_4 ); klingon_print ( "\n" );
-    jump ( & sentence_5 ); klingon_print ( "\n" );
-    jump ( & sentence_6 ); klingon_print ( "\n" );
-    jump ( & sentence_7 ); klingon_print ( "\n" );
-    jump ( & sentence_8 ); klingon_print ( "\n" );
+    klingon_jump ( & sentence_1 ); print ( "\n" );
+    klingon_jump ( & sentence_2 ); print ( "\n" );
+    klingon_jump ( & sentence_4 ); print ( "\n" );
+    klingon_jump ( & sentence_5 ); print ( "\n" );
+    klingon_jump ( & sentence_6 ); print ( "\n" );
+    klingon_jump ( & sentence_7 ); print ( "\n" );
+    klingon_jump ( & sentence_8 ); print ( "\n" );
 
     return 1;
 }
 
 int main ( void )
 {
-    klingon_print ( "********************************************************************************************\n" );
-    klingon_print ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
-    klingon_print ( "\n" );
-    klingon_print ( "V + O --> '(SV) + O\n" );
-    klingon_print ( "\n" );
-    klingon_print ( " S  represents a subject.\n" );
-    klingon_print ( "'() represents a unit that is overlaid with meaningless syllables.\n" );
-    klingon_print ( " V  represents a verb, preposition, adjective, or noun.\n" );
-    klingon_print ( " O  represents an object.\n" );
-    klingon_print ( "\n" );
-    klingon_print ( "Copyright (C) 2026.10.12 TOP WAYE topwaye@hotmail.com\n" );
-    klingon_print ( "********************************************************************************************\n" );
+    print ( "********************************************************************************************\n" );
+    print ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
+    print ( "\n" );
+    print ( "V + O --> '(SV) + O\n" );
+    print ( "\n" );
+    print ( " S  represents a subject.\n" );
+    print ( "'() represents a unit that is overlaid with meaningless syllables.\n" );
+    print ( " V  represents a verb, preposition, adjective, or noun.\n" );
+    print ( " O  represents an object.\n" );
+    print ( "\n" );
+    print ( "Copyright (C) 2026.10.12 TOP WAYE topwaye@hotmail.com\n" );
+    print ( "********************************************************************************************\n" );
 
     return klingon ( );
 }
 
 /*
- * simple replacement for C's klingon_print supporting only %s and %%.
+ * simple replacement for C's print supporting only %s and %%.
  * outputs directly using putchar without building a large intermediate buffer.
  * limitations: only %s (string) and %% (literal percent) are specially handled.
  */
-int klingon_print ( const char * fmt, ... )
+int print ( const char * fmt, ... )
 {
     va_list ap;
     int n;
@@ -459,7 +459,7 @@ int klingon_print ( const char * fmt, ... )
             }
             else
             {
-                /* unsupported specifier: print percent and the specifier literally */
+                /* unsupported specifier: klingon_print percent and the specifier literally */
                 putchar ( '%' );
                 n ++;
                 if ( * p )
