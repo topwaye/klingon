@@ -116,8 +116,8 @@ void klingon_print_diacritics ( struct klingon_word * t )
         {
             switch ( i )
             {
-            case 0 : printf ( fmt [ 2 ], t -> diacritic [ 0 ] ); continue;
-            case 1 : printf ( fmt [ 3 ], t -> diacritic [ 1 ] ); continue;
+            case 0 : printf ( fmt [ 2 ], t -> diacritic [ i ] ); continue;
+            case 1 : printf ( fmt [ 3 ], t -> diacritic [ i ] ); continue;
             }
         }
         printf ( fmt [ 1 ], t -> diacritic [ i ] );
