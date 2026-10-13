@@ -99,6 +99,8 @@ struct klingon_content                                              /* bind a su
     int segment_lens [ KLINGON_SEG_NUM ];
 };
 
+const char * fmt [ ] = { "\n", "%s ", "", "%sn't ", "not %s ", "not " };
+
 int print ( const char * fmt, ... );
 
 void klingon_print ( struct klingon_word * t )
@@ -107,39 +109,39 @@ void klingon_print ( struct klingon_word * t )
 
     if ( ! t )
     {
-        print ( "\n" );
+        print ( fmt [ 0 ] );
         return;
     }
 
     if ( t -> d_in_front )
     {
         if ( * t -> diacritic [ 0 ] )
-                t -> d_selected ? print ( "%s ", t -> diacritic [ 0 ] ) : print ( "%sn't ", t -> diacritic [ 0 ] );
+                t -> d_selected ? print ( fmt [ 1 ], t -> diacritic [ 0 ] ) : print ( fmt [ 3 ], t -> diacritic [ 0 ] );
 
         if ( * t -> diacritic [ 1 ] )
-                t -> d_selected ? print ( "%s ", t -> diacritic [ 1 ] ) : print ( "not %s ", t -> diacritic [ 1 ] );
+                t -> d_selected ? print ( fmt [ 1 ], t -> diacritic [ 1 ] ) : print ( fmt [ 4 ], t -> diacritic [ 1 ] );
 
         for ( i = 2; i < KLINGON_DIACRITIC_NUM; i ++ )
             if ( * t -> diacritic [ i ] )
-                print ( "%s ", t -> diacritic [ i ] );
+                print ( fmt [ 1 ], t -> diacritic [ i ] );
     }
 
     if ( * t -> content )
-        t -> c_selected ? print ( "%s ", t -> content ) : print ( "not %s ", t -> content );
+        t -> c_selected ? print ( fmt [ 1 ], t -> content ) : print ( fmt [ 4 ], t -> content );
     else
-        t -> c_selected ? print ( "" ) : print ( "not " );
+        t -> c_selected ? print ( fmt [ 2 ] ) : print ( fmt [ 5 ] );
 
     if ( ! t -> d_in_front )
     {
         if ( * t -> diacritic [ 0 ] )
-                t -> d_selected ? print ( "%s ", t -> diacritic [ 0 ] ) : print ( "%sn't ", t -> diacritic [ 0 ] );
+                t -> d_selected ? print ( fmt [ 1 ], t -> diacritic [ 0 ] ) : print ( fmt [ 3 ], t -> diacritic [ 0 ] );
 
         if ( * t -> diacritic [ 1 ] )
-                t -> d_selected ? print ( "%s ", t -> diacritic [ 1 ] ) : print ( "not %s ", t -> diacritic [ 1 ] );
+                t -> d_selected ? print ( fmt [ 1 ], t -> diacritic [ 1 ] ) : print ( fmt [ 4 ], t -> diacritic [ 1 ] );
 
         for ( i = 2; i < KLINGON_DIACRITIC_NUM; i ++ )
             if ( * t -> diacritic [ i ] )
-                print ( "%s ", t -> diacritic [ i ] );
+                print ( fmt [ 1 ], t -> diacritic [ i ] );
     }
 }
 
