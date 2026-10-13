@@ -7,7 +7,7 @@
  * give a few words to the algorithm, and it gives you an English sentence. this algorithm is called Klingon.
  *
  * two steps to speak English:
- * 
+ *
  * step one: spell out words that have meaning.
  * step two: add words that don't have meaning to change the pronunciation of certain words.
  *
@@ -72,6 +72,7 @@
  */
 
 #include <stdio.h>
+#include <stdarg.h>
 
 #define KLINGON_WORD_NUM            16
 #define KLINGON_SEG_NUM              4
@@ -79,10 +80,12 @@
 
 struct klingon_content;
 
+int klingon_print ( const char * fmt, ... );
+
 struct klingon_word
 {
     int d_selected;                                                 /* select or unselect the unit */
-    int d_forward;                                                  /* where diacritics are */
+    int d_in_front;                                                 /* where diacritics are */
     int c_selected;                                                 /* select or unselect the word */
     char diacritic [ KLINGON_DIACRITIC_NUM ] [ KLINGON_WORD_NUM ];  /* step 2: add words that don't have meaning */
     char content [ KLINGON_WORD_NUM ];                              /* step 1: spell out words that have meaning */
@@ -98,43 +101,43 @@ struct klingon_content                                              /* bind a su
     int segment_lens [ KLINGON_SEG_NUM ];
 };
 
-static void print_word ( struct klingon_word * t )
+static void print ( struct klingon_word * t )
 {
     int i;
 
-    if ( t -> d_forward )
+    if ( t -> d_in_front )
     {
         if ( * t -> diacritic [ 0 ] )
-                t -> d_selected ? printf ( "%s ", t -> diacritic [ 0 ] ) : printf ( "%sn't ", t -> diacritic [ 0 ] );
+                t -> d_selected ? klingon_print ( "%s ", t -> diacritic [ 0 ] ) : klingon_print ( "%sn't ", t -> diacritic [ 0 ] );
 
         if ( * t -> diacritic [ 1 ] )
-                t -> d_selected ? printf ( "%s ", t -> diacritic [ 1 ] ) : printf ( "not %s ", t -> diacritic [ 1 ] );
+                t -> d_selected ? klingon_print ( "%s ", t -> diacritic [ 1 ] ) : klingon_print ( "not %s ", t -> diacritic [ 1 ] );
 
         for ( i = 2; i < KLINGON_DIACRITIC_NUM; i ++ )
             if ( * t -> diacritic [ i ] )
-                printf ( "%s ", t -> diacritic [ i ] );
+                klingon_print ( "%s ", t -> diacritic [ i ] );
     }
 
     if ( * t -> content )
-        t -> c_selected ? printf ( "%s ", t -> content ) : printf ( "not %s ", t -> content );
+        t -> c_selected ? klingon_print ( "%s ", t -> content ) : klingon_print ( "not %s ", t -> content );
     else
-        t -> c_selected ? printf ( "" ) : printf ( "not " );
+        t -> c_selected ? klingon_print ( "" ) : klingon_print ( "not " );
 
-    if ( ! t -> d_forward )
+    if ( ! t -> d_in_front )
     {
         if ( * t -> diacritic [ 0 ] )
-                t -> d_selected ? printf ( "%s ", t -> diacritic [ 0 ] ) : printf ( "%sn't ", t -> diacritic [ 0 ] );
+                t -> d_selected ? klingon_print ( "%s ", t -> diacritic [ 0 ] ) : klingon_print ( "%sn't ", t -> diacritic [ 0 ] );
 
         if ( * t -> diacritic [ 1 ] )
-                t -> d_selected ? printf ( "%s ", t -> diacritic [ 1 ] ) : printf ( "not %s ", t -> diacritic [ 1 ] );
+                t -> d_selected ? klingon_print ( "%s ", t -> diacritic [ 1 ] ) : klingon_print ( "not %s ", t -> diacritic [ 1 ] );
 
         for ( i = 2; i < KLINGON_DIACRITIC_NUM; i ++ )
             if ( * t -> diacritic [ i ] )
-                printf ( "%s ", t -> diacritic [ i ] );
+                klingon_print ( "%s ", t -> diacritic [ i ] );
     }
 }
 
-void conditioned_jump ( struct klingon_content * sentence )
+static void jump ( struct klingon_content * sentence )
 {
     int i, j, m, n;
     struct klingon_word * p, * q, * t;
@@ -152,8 +155,8 @@ void conditioned_jump ( struct klingon_content * sentence )
             while ( i < m )
             {
                 t = q + i;
-                print_word ( t );
-                conditioned_jump ( t -> k_content );
+                print ( t );
+                jump ( t -> k_content );
                 i ++;
             }
         }
@@ -174,8 +177,8 @@ void conditioned_jump ( struct klingon_content * sentence )
                     i += m;
                     continue;
                 }
-                print_word ( t );
-                conditioned_jump ( t -> k_content );
+                print ( t );
+                jump ( t -> k_content );
                 i ++;
             }
         }
@@ -243,7 +246,7 @@ int klingon ( void )
     /* forming sentence 1 */
 
     struct klingon_word * object_1 = segment_1 + 1;
-    
+
     struct klingon_content sentence_1 =
     {
         0,
@@ -383,31 +386,99 @@ int klingon ( void )
         0
     };
 
-    conditioned_jump ( & sentence_1 ); printf ( "\n" );
-    conditioned_jump ( & sentence_2 ); printf ( "\n" );
-    conditioned_jump ( & sentence_4 ); printf ( "\n" );
-    conditioned_jump ( & sentence_5 ); printf ( "\n" );
-    conditioned_jump ( & sentence_6 ); printf ( "\n" );
-    conditioned_jump ( & sentence_7 ); printf ( "\n" );
-    conditioned_jump ( & sentence_8 ); printf ( "\n" );
+    jump ( & sentence_1 ); klingon_print ( "\n" );
+    jump ( & sentence_2 ); klingon_print ( "\n" );
+    jump ( & sentence_4 ); klingon_print ( "\n" );
+    jump ( & sentence_5 ); klingon_print ( "\n" );
+    jump ( & sentence_6 ); klingon_print ( "\n" );
+    jump ( & sentence_7 ); klingon_print ( "\n" );
+    jump ( & sentence_8 ); klingon_print ( "\n" );
 
     return 1;
 }
 
 int main ( void )
 {
-    printf ( "********************************************************************************************\n" );
-    printf ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
-    printf ( "\n" );
-    printf ( "V + O --> '(SV) + O\n" );
-    printf ( "\n" );
-    printf ( " S  represents a subject.\n" );
-    printf ( "'() represents a unit that is overlaid with meaningless syllables.\n" );
-    printf ( " V  represents a verb, preposition, adjective, or noun.\n" );
-    printf ( " O  represents an object.\n" );
-    printf ( "\n" );
-    printf ( "Copyright (C) 2026.10.12 TOP WAYE topwaye@hotmail.com\n" );
-    printf ( "********************************************************************************************\n" );
+    klingon_print ( "********************************************************************************************\n" );
+    klingon_print ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
+    klingon_print ( "\n" );
+    klingon_print ( "V + O --> '(SV) + O\n" );
+    klingon_print ( "\n" );
+    klingon_print ( " S  represents a subject.\n" );
+    klingon_print ( "'() represents a unit that is overlaid with meaningless syllables.\n" );
+    klingon_print ( " V  represents a verb, preposition, adjective, or noun.\n" );
+    klingon_print ( " O  represents an object.\n" );
+    klingon_print ( "\n" );
+    klingon_print ( "Copyright (C) 2026.10.12 TOP WAYE topwaye@hotmail.com\n" );
+    klingon_print ( "********************************************************************************************\n" );
 
     return klingon ( );
+}
+
+/*
+ * simple replacement for C's klingon_print supporting only %s and %%.
+ * outputs directly using putchar without building a large intermediate buffer.
+ * limitations: only %s (string) and %% (literal percent) are specially handled.
+ */
+int klingon_print ( const char * fmt, ... )
+{
+    va_list ap;
+    const char * p;
+    int printed;
+
+    if ( ! fmt )
+        return 0;
+
+    va_start ( ap, fmt );
+
+    printed = 0;
+    p = fmt;
+    while ( * p )
+    {
+        if ( * p == '%' )
+        {
+            p ++;
+            if ( * p == '%' )
+            {
+                putchar ( '%' );
+                printed ++;
+                p ++;
+            }
+            else if ( * p == 's' )
+            {
+                const char * s = va_arg ( ap, const char * );
+                if ( ! s )
+                    s = "(null)";
+                while ( * s )
+                {
+                    putchar ( * s );
+                    printed ++;
+                    s ++;
+                }
+                p ++;
+            }
+            else
+            {
+                /* unsupported specifier: print percent and the specifier literally */
+                putchar ( '%' );
+                printed ++;
+                if ( * p )
+                {
+                    putchar ( * p );
+                    printed ++;
+                    p ++;
+                }
+            }
+        }
+        else
+        {
+            putchar ( * p );
+            printed ++;
+            p ++;
+        }
+    }
+
+    va_end ( ap );
+
+    return printed;
 }
