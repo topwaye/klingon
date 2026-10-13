@@ -29,7 +29,8 @@
  * necessary to change the pronunciation of certain words by adding meaningless syllables.
  *
  * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need to assign
- * a subject to these verb-object phrases, that is, bind a subject to the verb to form a subject-verb unit.
+ * a subject to these verb-object phrases, that is, bind a subject to the verb to form a subject-verb unit, also known as an instance
+ * of that verb.
  *
  * the language formula for English is as follows:
  *
@@ -90,7 +91,7 @@ struct klingon_word
     struct klingon_content * k_content;
 };
 
-struct klingon_content                                              /* bind a subject using the distributive law of syllables */
+struct klingon_content          /* bind a subject to instantiate a verb, using the distributive law of syllables */
 {
     int outer_object;
     struct klingon_word * object;
@@ -205,9 +206,9 @@ void klingon_jump ( int depth, struct klingon_content * sentence )
     }
 }
 
-int klingon ( void )
+int klingon_instantiate ( void )
 {
-    /* forming segments */
+    /* forming subjects */
 
     struct klingon_word subject_1 [ ] =
     {
@@ -228,6 +229,8 @@ int klingon ( void )
     {
         { 1, 1, 1, "would", "", "", "", "you", NULL }
     };
+
+    /* forming segments */
 
     struct klingon_word segment_1 [ ] =
     {
@@ -406,6 +409,8 @@ int klingon ( void )
         0
     };
 
+    /* outputting sentences */
+
     klingon_jump ( 0, & sentence_1 );
     klingon_jump ( 0, & sentence_2 );
     klingon_jump ( 0, & sentence_4 );
@@ -422,7 +427,8 @@ int main ( void )
     printf ( "********************************************************************************************\n" );
     printf ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( "V + O --> '(SV) + O\n" );
+    printf ( "V + O --> '(SV) + O   # bind a subject to instantiate a verb\n" );
+    printf ( "                      # using the distributive law of syllables\n" );
     printf ( "\n" );
     printf ( " S  represents a subject.\n" );
     printf ( "'() represents a unit that is overlaid with meaningless syllables.\n" );
@@ -432,5 +438,5 @@ int main ( void )
     printf ( "Copyright (C) 2026.10.12 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "********************************************************************************************\n" );
 
-    return klingon ( );
+    return klingon_instantiate ( );
 }
