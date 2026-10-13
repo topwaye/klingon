@@ -105,6 +105,12 @@ void klingon_print ( struct klingon_word * t )
 {
     int i;
 
+    if ( ! t )
+    {
+        print ( "\n" );
+        return;
+    }
+
     if ( t -> d_in_front )
     {
         if ( * t -> diacritic [ 0 ] )
@@ -137,51 +143,54 @@ void klingon_print ( struct klingon_word * t )
     }
 }
 
-void klingon_jump ( struct klingon_content * sentence )
+void klingon_jump ( int depth, struct klingon_content * sentence )
 {
     int i, j, m, n;
     struct klingon_word * p, * q, * t;
 
-    if ( ! sentence )
-        return;
-
-    q = sentence -> object;
-    if ( q )
+    if ( sentence )
     {
-        m = sentence -> object_len;
-        if ( ! sentence -> outer_object )
+        q = sentence -> object;
+        if ( q )
         {
-            i = 0;
-            while ( i < m )
+            m = sentence -> object_len;
+            if ( ! sentence -> outer_object )
             {
-                t = q + i;
-                klingon_print ( t );
-                klingon_jump ( t -> k_content );
-                i ++;
-            }
-        }
-    }
-
-    for ( j = 0; j < KLINGON_SEG_NUM ; j ++ )
-    {
-        p = sentence -> segments [ j ];
-        if ( p )
-        {
-            n = sentence -> segment_lens [ j ];
-            i = 0;
-            while ( i < n )
-            {
-                t = p + i;
-                if ( t == q )
+                i = 0;
+                while ( i < m )
                 {
-                    i += m;
-                    continue;
+                    t = q + i;
+                    klingon_print ( t );
+                    klingon_jump ( depth + 1, t -> k_content );
+                    i ++;
                 }
-                klingon_print ( t );
-                klingon_jump ( t -> k_content );
-                i ++;
             }
         }
+
+        for ( j = 0; j < KLINGON_SEG_NUM ; j ++ )
+        {
+            p = sentence -> segments [ j ];
+            if ( p )
+            {
+                n = sentence -> segment_lens [ j ];
+                i = 0;
+                while ( i < n )
+                {
+                    t = p + i;
+                    if ( t == q )
+                    {
+                        i += m;
+                        continue;
+                    }
+                    klingon_print ( t );
+                    klingon_jump ( depth + 1, t -> k_content );
+                    i ++;
+                }
+            }
+        }
+
+        if ( ! depth )
+            klingon_print ( NULL );
     }
 }
 
@@ -386,13 +395,13 @@ int klingon ( void )
         0
     };
 
-    klingon_jump ( & sentence_1 ); print ( "\n" );
-    klingon_jump ( & sentence_2 ); print ( "\n" );
-    klingon_jump ( & sentence_4 ); print ( "\n" );
-    klingon_jump ( & sentence_5 ); print ( "\n" );
-    klingon_jump ( & sentence_6 ); print ( "\n" );
-    klingon_jump ( & sentence_7 ); print ( "\n" );
-    klingon_jump ( & sentence_8 ); print ( "\n" );
+    klingon_jump ( 0, & sentence_1 );
+    klingon_jump ( 0, & sentence_2 );
+    klingon_jump ( 0, & sentence_4 );
+    klingon_jump ( 0, & sentence_5 );
+    klingon_jump ( 0, & sentence_6 );
+    klingon_jump ( 0, & sentence_7 );
+    klingon_jump ( 0, & sentence_8 );
 
     return 1;
 }
