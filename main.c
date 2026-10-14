@@ -166,8 +166,8 @@ void klingon_jump ( int depth, struct klingon_content * sentence )
         q = sentence -> object;
         if ( q )
         {
+            assert ( sentence -> object_len > 0 );
             m = sentence -> object_len;
-            assert ( m > 0 );
             if ( ! sentence -> outer_object )
             {
                 i = 0;
@@ -186,6 +186,7 @@ void klingon_jump ( int depth, struct klingon_content * sentence )
             p = sentence -> segments [ j ];
             if ( p )
             {
+                assert ( sentence -> segment_lens [ j ] > 0 );
                 n = sentence -> segment_lens [ j ];
                 i = 0;
                 while ( i < n )
@@ -193,7 +194,6 @@ void klingon_jump ( int depth, struct klingon_content * sentence )
                     t = p + i;
                     if ( t == q )
                     {
-                        assert ( q );
                         i += m;
                         continue;
                     }
