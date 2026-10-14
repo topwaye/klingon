@@ -100,13 +100,13 @@ struct klingon_content          /* bind a subject to instantiate a verb, using t
     int segment_lens [ KLINGON_SEG_NUM ];
 };
 
-const char * FMT_NEWLINE     = "\n";
-const char * FMT_STR_SPACE   = "%s ";                               /* print a word followed by a space */
-const char * FMT_STR_NT      = "%sn't ";                            /* print word + n't + space */
-const char * FMT_NOT_S       = "not %s ";                           /* print 'not ' before word */
-const char * FMT_NOT         = "not ";                              /* literal 'not ' (no format args) */
+const char * FMT_NEWLINE    = "\n";
+const char * FMT_STR_SPACE  = "%s ";                                /* print a word followed by a space */
+const char * FMT_STR_NT     = "%sn't ";                             /* print word + n't + space */
+const char * FMT_NOT_S      = "not %s ";                            /* print 'not ' before word */
+const char * FMT_NOT        = "not ";                               /* literal 'not ' (no format args) */
 
-void klingon_print_diacritics ( struct klingon_word * t )
+void __klingon_print ( struct klingon_word * t )
 {
     int i;
 
@@ -137,23 +137,23 @@ void klingon_print ( struct klingon_word * t )
     }
 
     if ( t -> d_in_front )
-        klingon_print_diacritics ( t );
+        __klingon_print ( t );
 
-        if ( * t -> content )
-        {
-            if ( ! t -> c_selected )
-                printf ( FMT_NOT_S, t -> content );
-            else
-                printf ( FMT_STR_SPACE, t -> content );
-        }
+    if ( * t -> content )
+    {
+        if ( ! t -> c_selected )
+            printf ( FMT_NOT_S, t -> content );
         else
-        {
-            if ( ! t -> c_selected )
-                printf ( FMT_NOT );
-        }
+            printf ( FMT_STR_SPACE, t -> content );
+    }
+    else
+    {
+        if ( ! t -> c_selected )
+            printf ( FMT_NOT );
+    }
 
     if ( ! t -> d_in_front )
-        klingon_print_diacritics ( t );
+        __klingon_print ( t );
 }
 
 void klingon_jump ( int depth, struct klingon_content * sentence )
@@ -209,30 +209,8 @@ void klingon_jump ( int depth, struct klingon_content * sentence )
     }
 }
 
-int klingon_instantiate ( void )
+int instantiate_verb_sequence ( void )
 {
-    /* forming subjects */
-
-    struct klingon_word subject_1 [ ] =
-    {
-        { 1, 1, 1, "", "", "", "", "you", NULL }
-    };
-
-    struct klingon_word subject_2 [ ] =
-    {
-        { 0, 0, 1, "are", "", "", "", "you", NULL }
-    };
-
-    struct klingon_word subject_3 [ ] =
-    {
-        { 1, 1, 1, "do", "", "", "", "you", NULL }
-    };
-
-    struct klingon_word subject_4 [ ] =
-    {
-        { 1, 1, 1, "would", "", "", "", "you", NULL }
-    };
-
     /* forming segments */
 
     struct klingon_word segment_1 [ ] =
@@ -267,6 +245,28 @@ int klingon_instantiate ( void )
     struct klingon_word segment_7 [ ] =
     {
         { 0, 1, 1, "do", "", "be", "", "bad", NULL }
+    };
+
+    /* forming subjects */
+
+    struct klingon_word subject_1 [ ] =
+    {
+        { 1, 1, 1, "", "", "", "", "you", NULL }
+    };
+
+    struct klingon_word subject_2 [ ] =
+    {
+        { 0, 0, 1, "are", "", "", "", "you", NULL }
+    };
+
+    struct klingon_word subject_3 [ ] =
+    {
+        { 1, 1, 1, "do", "", "", "", "you", NULL }
+    };
+
+    struct klingon_word subject_4 [ ] =
+    {
+        { 1, 1, 1, "would", "", "", "", "you", NULL }
     };
 
     /* forming sentence 1 */
@@ -441,5 +441,5 @@ int main ( void )
     printf ( "Copyright (C) 2026.10.12 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "********************************************************************************************\n" );
 
-    return klingon_instantiate ( );
+    return instantiate_verb_sequence ( );
 }
