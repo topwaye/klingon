@@ -23,20 +23,20 @@
  * him. and 'don't' is overlaid on a subject-predicate unit to express the opposite meaning, that is, not choosing the meaning expressed
  * by the current subject-predicate unit.
  *
- * be careful of how much scope 'do/don't' can cover in a sentence: one unit.
+ * be careful of how much scope 'do/don't' can cover in a sentence: one unit, or even one sentence, not just one subject alone.
  *
  * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's why it was
- * necessary to change the pronunciation of certain words by adding meaningless syllables.
+ * necessary to change the pronunciation of certain words by adding syllables.
  *
  * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need to assign
- * a subject to these verb-object phrases, i.e., bind a subject to the verb to form a subject-verb unit. a unit is an indivisible atom.
+ * a subject to these verb-object phrases, i.e., bind a subject to the verb to form a subject-verb unit.
  *
  * the language formula for English is as follows:
  *
  * V + O --> '(SV) + O
  *
  *  S  represents a subject.
- * '() represents a unit that is overlaid with meaningless syllables.
+ * '() represents a unit that is overlaid with syllables.
  *  V  represents a verb, preposition, adjective, or noun.
  *  O  represents an object.
  *
@@ -80,18 +80,18 @@
 
 struct klingon_content;
 
-struct klingon_word                                                 /* add meaningless syllables using the distributive law of syllables */
+struct klingon_word
 {
     int d_selected;                                                 /* select or unselect the unit */
     int d_in_front;                                                 /* where diacritics are */
     int c_selected;                                                 /* select or unselect the word */
-    char diacritic [ KLINGON_DIACRITIC_NUM ] [ KLINGON_WORD_NUM ];  /* step 2: add words that don't have meaning */
-    char content [ KLINGON_WORD_NUM ];                              /* step 1: spell out words that have meaning */
+    char diacritic [ KLINGON_DIACRITIC_NUM ] [ KLINGON_WORD_NUM ];
+    char content [ KLINGON_WORD_NUM ];
     struct klingon_content * k_content;
 };
 
-struct klingon_content                                              /* bind a subject to a verb to form an indivisible atom */
-{
+struct klingon_content                                              /* 1. bind a subject to a verb to form a subject-verb unit */
+{                                                                   /* 2. add syllables whose scope always cover a subject-verb unit */
     int outer_object;
     struct klingon_word * object;
     struct klingon_word * segments [ KLINGON_SEG_NUM ];
@@ -99,63 +99,24 @@ struct klingon_content                                              /* bind a su
     int segment_lens [ KLINGON_SEG_NUM ];
 };
 
-const char * FMT_NEWLINE    = "\n";
-const char * FMT_STR_SPACE  = "%s ";                                /* print a word followed by a space */
-const char * FMT_STR_NT     = "%sn't ";                             /* print word + n't + space */
-const char * FMT_NOT_S      = "not %s ";                            /* print 'not ' before word */
-const char * FMT_NOT        = "not ";                               /* literal 'not ' (no format args) */
+void print_diacritic ( int in_front, struct klingon_word * t );
+void print_content ( struct klingon_word * t );
+void print_newline ( struct klingon_word * t );
 
-void __klingon_print ( struct klingon_word * t )
-{
-    int i;
-
-    assert ( t );
-    for ( i = 0; i < KLINGON_DIACRITIC_NUM; i ++ )
-    {
-        if ( ! * t -> diacritic [ i ] )
-            continue;
-
-        if ( ! t -> d_selected )
-        {
-            switch ( i )
-            {
-            case 0 : printf ( FMT_STR_NT, t -> diacritic [ i ] ); continue;
-            case 1 : printf ( FMT_NOT_S, t -> diacritic [ i ] ); continue;
-            }
-        }
-        printf ( FMT_STR_SPACE, t -> diacritic [ i ] );
-    }
-}
-
-void klingon_print ( struct klingon_word * t )
+void print ( struct klingon_word * t )
 {
     if ( ! t )
     {
-        printf ( FMT_NEWLINE );
+        print_newline ( t );
         return;
     }
 
-    if ( t -> d_in_front )
-        __klingon_print ( t );
-
-    if ( * t -> content )
-    {
-        if ( ! t -> c_selected )
-            printf ( FMT_NOT_S, t -> content );
-        else
-            printf ( FMT_STR_SPACE, t -> content );
-    }
-    else
-    {
-        if ( ! t -> c_selected )
-            printf ( FMT_NOT );
-    }
-
-    if ( ! t -> d_in_front )
-        __klingon_print ( t );
+    print_diacritic ( 1, t );
+    print_content ( t );
+    print_diacritic ( 0, t );
 }
 
-void klingon_jump ( int depth, struct klingon_content * sentence )
+void jump ( int depth, struct klingon_content * sentence )
 {
     int i, j, m, n;
     struct klingon_word * p, * q, * t;
@@ -173,8 +134,8 @@ void klingon_jump ( int depth, struct klingon_content * sentence )
                 while ( i < m )
                 {
                     t = q + i;
-                    klingon_print ( t );
-                    klingon_jump ( depth + 1, t -> k_content );
+                    print ( t );
+                    jump ( depth + 1, t -> k_content );
                     i ++;
                 }
             }
@@ -196,19 +157,19 @@ void klingon_jump ( int depth, struct klingon_content * sentence )
                         i += m;
                         continue;
                     }
-                    klingon_print ( t );
-                    klingon_jump ( depth + 1, t -> k_content );
+                    print ( t );
+                    jump ( depth + 1, t -> k_content );
                     i ++;
                 }
             }
         }
 
         if ( ! depth )
-            klingon_print ( NULL );
+            print ( NULL );
     }
 }
 
-int klingon ( void )
+int bind ( void )
 {
     /* forming segments */
 
@@ -413,13 +374,13 @@ int klingon ( void )
 
     /* outputting sentences */
 
-    klingon_jump ( 0, & sentence_1 );
-    klingon_jump ( 0, & sentence_2 );
-    klingon_jump ( 0, & sentence_4 );
-    klingon_jump ( 0, & sentence_5 );
-    klingon_jump ( 0, & sentence_6 );
-    klingon_jump ( 0, & sentence_7 );
-    klingon_jump ( 0, & sentence_8 );
+    jump ( 0, & sentence_1 );
+    jump ( 0, & sentence_2 );
+    jump ( 0, & sentence_4 );
+    jump ( 0, & sentence_5 );
+    jump ( 0, & sentence_6 );
+    jump ( 0, & sentence_7 );
+    jump ( 0, & sentence_8 );
 
     return 0;
 }
@@ -429,16 +390,70 @@ int main ( void )
     printf ( "********************************************************************************************\n" );
     printf ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( "V + O --> '(SV) + O   # bind a subject to a verb to form an indivisible atom\n" );
-    printf ( "                      # add meaningless syllables using the distributive law of syllables\n" );
+    printf ( "V + O --> '(SV) + O   #1 bind a subject to a verb to form a subject-verb unit\n" );
+    printf ( "                      #2 add syllables whose scope always cover a subject-verb unit\n" );
     printf ( "\n" );
     printf ( " S  represents a subject.\n" );
-    printf ( "'() represents a unit that is overlaid with meaningless syllables.\n" );
+    printf ( "'() represents a unit that is overlaid with syllables.\n" );
     printf ( " V  represents a verb, preposition, adjective, or noun.\n" );
     printf ( " O  represents an object.\n" );
     printf ( "\n" );
-    printf ( "Copyright (C) 2026.10.12 TOP WAYE topwaye@hotmail.com\n" );
+    printf ( "Copyright (C) 2026.10.15 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "********************************************************************************************\n" );
 
-    return klingon ( );
+    return bind ( );
+}
+
+const char * FMT_NEWLINE    = "\n";
+const char * FMT_STR_SPACE  = "%s ";                                /* print a word followed by a space */
+const char * FMT_STR_NT     = "%sn't ";                             /* print word + n't + space */
+const char * FMT_NOT_S      = "not %s ";                            /* print 'not ' before word */
+const char * FMT_NOT        = "not ";                               /* literal 'not ' (no format args) */
+
+void print_diacritic ( int in_front, struct klingon_word * t )
+{
+    int i;
+
+    assert ( t );
+    if ( t -> d_in_front != in_front )
+        return;
+
+    for ( i = 0; i < KLINGON_DIACRITIC_NUM; i ++ )
+    {
+        if ( ! * t -> diacritic [ i ] )
+            continue;
+
+        if ( ! t -> d_selected )
+        {
+            switch ( i )
+            {
+            case 0 : printf ( FMT_STR_NT, t -> diacritic [ i ] ); continue;
+            case 1 : printf ( FMT_NOT_S, t -> diacritic [ i ] ); continue;
+            }
+        }
+        printf ( FMT_STR_SPACE, t -> diacritic [ i ] );
+    }
+}
+
+void print_content ( struct klingon_word * t )
+{
+    assert ( t );
+    if ( * t -> content )
+    {
+        if ( ! t -> c_selected )
+            printf ( FMT_NOT_S, t -> content );
+        else
+            printf ( FMT_STR_SPACE, t -> content );
+    }
+    else
+    {
+        if ( ! t -> c_selected )
+            printf ( FMT_NOT );
+    }
+}
+
+void print_newline ( struct klingon_word * t )
+{
+    assert ( ! t );
+    printf ( FMT_NEWLINE );
 }
