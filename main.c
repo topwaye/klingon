@@ -29,8 +29,7 @@
  * necessary to change the pronunciation of certain words by adding meaningless syllables.
  *
  * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need to assign
- * a subject to these verb-object phrases, i.e., bind a subject to the verb to form a subject-verb unit known as an instance of the verb
- * or an executor of the action.
+ * a subject to these verb-object phrases, i.e., bind a subject to the verb to form a subject-verb unit. a unit is an indivisible atom.
  *
  * the language formula for English is as follows:
  *
@@ -81,7 +80,7 @@
 
 struct klingon_content;
 
-struct klingon_word
+struct klingon_word                                                 /* add meaningless syllables using the distributive law of syllables */
 {
     int d_selected;                                                 /* select or unselect the unit */
     int d_in_front;                                                 /* where diacritics are */
@@ -91,7 +90,7 @@ struct klingon_word
     struct klingon_content * k_content;
 };
 
-struct klingon_content          /* bind a subject to instantiate a verb, using the distributive law of syllables */
+struct klingon_content                                              /* bind a subject to a verb to form an indivisible atom */
 {
     int outer_object;
     struct klingon_word * object;
@@ -209,7 +208,7 @@ void klingon_jump ( int depth, struct klingon_content * sentence )
     }
 }
 
-int instantiate_verb_sequence ( void )
+int klingon ( void )
 {
     /* forming segments */
 
@@ -430,8 +429,8 @@ int main ( void )
     printf ( "********************************************************************************************\n" );
     printf ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( "V + O --> '(SV) + O   # bind a subject to instantiate a verb\n" );
-    printf ( "                      # using the distributive law of syllables\n" );
+    printf ( "V + O --> '(SV) + O   # bind a subject to a verb to form an indivisible atom\n" );
+    printf ( "                      # add meaningless syllables using the distributive law of syllables\n" );
     printf ( "\n" );
     printf ( " S  represents a subject.\n" );
     printf ( "'() represents a unit that is overlaid with meaningless syllables.\n" );
@@ -441,5 +440,5 @@ int main ( void )
     printf ( "Copyright (C) 2026.10.12 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "********************************************************************************************\n" );
 
-    return instantiate_verb_sequence ( );
+    return klingon ( );
 }
