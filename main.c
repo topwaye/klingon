@@ -44,6 +44,8 @@
  *
  * (S'V) == ('SV) == ('S'V) == '(S'V) == '(SV)
  *
+ * the distributive law of syllables reveals a truth: always merge a subject and a verb first, then merge syllables.
+ *
  * here are example sentences applying the above formula:
  *
  * 1. who are you ?
