@@ -29,8 +29,8 @@
  * necessary to change the pronunciation of certain words by adding meaningless syllables.
  *
  * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need to assign
- * a subject to these verb-object phrases, that is, bind a subject to the verb to form a subject-verb unit, also known as an instance
- * of that verb.
+ * a subject to these verb-object phrases, i.e., bind a subject to the verb to form a subject-verb unit known as an instance of the verb
+ * or an executor of the action.
  *
  * the language formula for English is as follows:
  *
