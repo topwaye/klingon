@@ -91,7 +91,7 @@ struct klingon_word
 };
 
 struct klingon_content                                              /* 1. bind a subject to a verb to form a subject-verb unit */
-{                                                                   /* 2. add syllables whose scope always cover a subject-verb unit */
+{                                                                   /* 2. add a syllable whose scope always covers a subject-verb unit */
     int outer_object;
     struct klingon_word * object;
     struct klingon_word * segments [ KLINGON_SEG_NUM ];
@@ -391,7 +391,7 @@ int main ( void )
     printf ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
     printf ( "V + O --> '(SV) + O   #1 bind a subject to a verb to form a subject-verb unit\n" );
-    printf ( "                      #2 add syllables whose scope always cover a subject-verb unit\n" );
+    printf ( "                      #2 add a syllable whose scope always covers a subject-verb unit\n" );
     printf ( "\n" );
     printf ( " S  represents a subject.\n" );
     printf ( "'() represents a unit that is overlaid with syllables.\n" );
