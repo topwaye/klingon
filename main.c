@@ -69,6 +69,8 @@
  *
  *    in + my verse; ever live + young; --> '( my love [ in + my verse ] ever live ) + young
  *
+ * know that your point of focus in thinking should always be placed after a break syllable, rather than on the break syllable itself.
+ *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
  * https://github.com/topwaye/klingon
@@ -395,18 +397,20 @@ int bind ( void )
 int main ( void )
 {
     printf ( "********************************************************************************************\n" );
-    printf ( "An English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
+    printf ( "an English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( "V + O --> '(SV) + O   #0 there are no subjects, only verb-object segments\n" );
-    printf ( "                      #1 bind a subject to a verb to form a subject-verb unit\n" );
-    printf ( "                      #2 add a break syllable whose scope always covers a subject-verb unit\n" );
+    printf ( "V + O --> '(SV) + O   #0 there are no subjects, only verb-object segments.\n" );
+    printf ( "                      #1 bind a subject to a verb to form a subject-verb unit.\n" );
+    printf ( "                      #2 add a break syllable whose scope always covers a subject-verb unit.\n" );
     printf ( "\n" );
     printf ( " S  represents a subject.\n" );
     printf ( "'() represents a unit that is overlaid with break syllables.\n" );
     printf ( " V  represents a verb, preposition, adjective, or noun.\n" );
     printf ( " O  represents an object.\n" );
     printf ( "\n" );
-    printf ( "Copyright (C) 2026.10.15 TOP WAYE topwaye@hotmail.com\n" );
+    printf ( "know that your point of focus in thinking should always be placed after a break syllable.\n" );
+    printf ( "\n" );
+    printf ( "copyright (C) 2026.10.16 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "********************************************************************************************\n" );
 
     return bind ( );
