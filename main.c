@@ -70,7 +70,6 @@
  *    in + my verse; ever live + young; --> '( my love [ in + my verse ] ever live ) + young
  *
  * know that your point of focus in thinking should always be placed after a break syllable, rather than on the break syllable itself.
- *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
  * https://github.com/topwaye/klingon
