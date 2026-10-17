@@ -38,7 +38,7 @@
  *  S  represents a subject.
  * '() represents a unit that is overlaid with break syllables.
  *  V  represents a verb, preposition, adjective, or noun.
- *  /  represents a semicolon in mathematics.
+ *  /  represents a division slash in mathematics.
  *  O  represents an object.
  *
  * because the scope of 'do/don't' always covers a subject-verb unit, the distributive law of break syllables is as follows:
@@ -404,7 +404,7 @@ int main ( void )
     printf ( " S  represents a subject.\n" );
     printf ( "'() represents a unit that is overlaid with break syllables.\n" );
     printf ( " V  represents a verb, preposition, adjective, or noun.\n" );
-    printf ( " /  represents a semicolon in mathematics.\n" );
+    printf ( " /  represents a division slash in mathematics.\n" );
     printf ( " O  represents an object.\n" );
     printf ( "\n" );
     printf ( "# no subjects, only verb-object phrases.\n" );
