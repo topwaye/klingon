@@ -33,11 +33,12 @@
  *
  * the language formula for English is as follows:
  *
- * V + O --> '(SV) + O
+ * V / O => '(SV) / O
  *
  *  S  represents a subject.
  * '() represents a unit that is overlaid with break syllables.
  *  V  represents a verb, preposition, adjective, or noun.
+ *  /  represents a semicolon in mathematics.
  *  O  represents an object.
  *
  * because the scope of 'do/don't' always covers a subject-verb unit, the distributive law of break syllables is as follows:
@@ -50,19 +51,19 @@
  * here are example sentences applying the above formula:
  *
  * 1. who are you ?
- *    who --> '( you who )
+ *    who => '( you who )
  *
  * 2. what do you think you play ?
- *    think; play + what --> '( you think ); '( you play ) + what
+ *    think; play / what => '( you think ); '( you play ) / what
  *
  * 3. don't you want me to play with him ?
- *    want + me; play; with + him --> '( you want ) + me; 'play; with + him
+ *    want / me; play; with / him => '( you want ) / me; 'play; with / him
  *
  * 4. don't be bad.
- *    bad --> ''bad
+ *    bad => ''bad
  *
  * 5. my love shall in my verse ever live young.
- *    in + my verse; ever live + young; --> '( my love [ in + my verse ] ever live ) + young
+ *    in / my verse; ever live / young; => '( my love [ in / my verse ] ever live ) / young
  *
  * in summary, how our brains construct English sentences:
  *
@@ -396,14 +397,19 @@ int main ( void )
     printf ( "************************************************************************************************************************\n" );
     printf ( "an English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( "V + O --> '(SV) + O   # no subjects, only verb-object segments.\n" );
-    printf ( "                      # bind a subject to a verb to form a subject-verb unit.\n" );
-    printf ( "                      # add a break syllable whose scope always covers a subject-verb unit.\n" );
+    printf ( " V      '(SV)\n" );
+    printf ( "--- => -------\n" );
+    printf ( " O        O\n" );
     printf ( "\n" );
     printf ( " S  represents a subject.\n" );
     printf ( "'() represents a unit that is overlaid with break syllables.\n" );
     printf ( " V  represents a verb, preposition, adjective, or noun.\n" );
+    printf ( " /  represents a semicolon in mathematics.\n" );
     printf ( " O  represents an object.\n" );
+    printf ( "\n" );
+    printf ( "# no subjects, only verb-object segments.\n" );
+    printf ( "# bind a subject to a verb to form a subject-verb unit.\n" );
+    printf ( "# add a break syllable whose scope always covers a subject-verb unit.\n" );
     printf ( "\n" );
     printf ( "# your thinking should always start with a declarative sentence and end with an interrogative sentence.\n" );
     printf ( "# your thinking should always focus on the subject-verb unit behind a break syllable, not on the break syllable itself.\n" );
