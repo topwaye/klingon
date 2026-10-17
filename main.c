@@ -71,7 +71,7 @@
  * 1. bind a subject to a verb to form a subject-verb unit.
  * 2. add a break syllable whose scope always covers a subject-verb unit.
  *
- * know that your thinking should always start with a declarative sentence and end with an interrogative sentence.
+ * know that your thinking should always start with a declarative sentence and end with a negative interrogative sentence.
  * know that your thinking should always focus on the subject-verb unit behind a break syllable, not on the break syllable itself.
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
@@ -407,11 +407,11 @@ int main ( void )
     printf ( " /  represents a semicolon in mathematics.\n" );
     printf ( " O  represents an object.\n" );
     printf ( "\n" );
-    printf ( "# no subjects, only verb-object segments.\n" );
+    printf ( "# no subjects, only verb-object phrases.\n" );
     printf ( "# bind a subject to a verb to form a subject-verb unit.\n" );
     printf ( "# add a break syllable whose scope always covers a subject-verb unit.\n" );
     printf ( "\n" );
-    printf ( "# your thinking should always start with a declarative sentence and end with an interrogative sentence.\n" );
+    printf ( "# your thinking should always start with a declarative sentence and end with a negative interrogative sentence.\n" );
     printf ( "# your thinking should always focus on the subject-verb unit behind a break syllable, not on the break syllable itself.\n" );
     printf ( "\n" );
     printf ( "copyright (C) 2026.10.16 TOP WAYE topwaye@hotmail.com\n" );
