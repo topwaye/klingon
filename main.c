@@ -69,7 +69,7 @@
  *
  * 0. no subjects, only verb-object phrases.
  * 1. bind a subject to a verb to form a subject-verb unit.
- * 2. add a break syllable whose scope always covers a subject-verb unit.
+ * 2. add a break syllable, like 'do/don't', whose scope always covers a subject-verb unit.
  *
  * know that your thinking should always start with a declarative sentence and end with a negative interrogative sentence.
  * know that your thinking should always focus on the subject-verb unit behind a break syllable, not on the break syllable itself.
@@ -409,7 +409,7 @@ int main ( void )
     printf ( "\n" );
     printf ( "# no subjects, only verb-object phrases.\n" );
     printf ( "# bind a subject to a verb to form a subject-verb unit.\n" );
-    printf ( "# add a break syllable whose scope always covers a subject-verb unit.\n" );
+    printf ( "# add a break syllable, like 'do/don't', whose scope always covers a subject-verb unit.\n" );
     printf ( "\n" );
     printf ( "# your thinking should always start with a declarative sentence and end with a negative interrogative sentence.\n" );
     printf ( "# your thinking should always focus on the subject-verb unit behind a break syllable, not on the break syllable itself.\n" );
