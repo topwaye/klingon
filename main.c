@@ -71,6 +71,7 @@
  * 1. bind a subject to a verb to form a subject-verb unit.
  * 2. add a break syllable, like 'do/don't', whose scope always covers a subject-verb unit.
  *
+ * know that 'not' targets a point, while 'don't' targets a unit.
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
  * https://github.com/topwaye/klingon
@@ -408,6 +409,9 @@ int main ( void )
     printf ( "# no subjects, only verb-object phrases.\n" );
     printf ( "# bind a subject to a verb to form a subject-verb unit.\n" );
     printf ( "# add a break syllable, like 'do/don't', whose scope always covers a subject-verb unit.\n" );
+    printf ( "\n" );
+    printf ( "# know that 'not' targets a point, while 'don't' targets a unit.\n" );
+    printf ( "# know that all the thinking in our brains is just mathematical permutations and combinations.\n" );
     printf ( "\n" );
     printf ( "copyright (C) 2026.10.17 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "************************************************************************************************************************\n" );
