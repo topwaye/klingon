@@ -79,7 +79,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#define EN_WORD_NUM             16
+#define EN_CHAR_NUM             16
 #define EN_SEG_NUM              4
 #define EN_BREAKPOINT_NUM       4
 
@@ -90,8 +90,8 @@ struct en_word
     int b_selected; /* select or unselect the unit */
     int b_in_front; /* where breakpoints are */
     int c_selected; /* select or unselect the word */
-    char breakpoint [ EN_BREAKPOINT_NUM ] [ EN_WORD_NUM ];
-    char content [ EN_WORD_NUM ];
+    char breakpoint [ EN_BREAKPOINT_NUM ] [ EN_CHAR_NUM ];
+    char content [ EN_CHAR_NUM ];
     struct en_content * sen_content;
 };
 
