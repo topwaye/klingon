@@ -41,8 +41,8 @@
  *  /  represents a division slash in mathematics.
  *  O  represents an object.
  *
- * because the scope of 'do/don't' always covers a subject-verb unit, i.e., 'do/don't' always targets a subject-verb unit, the distributive law
- * of break syllables is as follows:
+ * because the scope of 'do/don't' always covers a subject-verb unit, i.e., 'do/don't' always targets a subject-verb unit,
+ * the distributive law of break syllables is as follows:
  *
  * (S'V) == ('SV) == ('S'V) == '(S'V) == '(SV)
  *
