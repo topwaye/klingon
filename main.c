@@ -51,7 +51,8 @@
  * 1. always merge a subject and a verb first, then merge break syllables.
  * 2. always merge a subject and a verb with internal break syllables first, then merge external break syllables.
  *
- * note that the distributive law of break syllables is applicable in cases where a subject is a logical subject.
+ * note that the scope of external break syllables always covers a subject-verb unit, that is, external break syllables always targets
+ * a subject-verb unit.
  *
  * here are example sentences applying the above formula:
  *
@@ -74,9 +75,8 @@
  *
  * 0. no subjects, only verb-object phrases.
  * 1. bind a subject to a verb to form a subject-verb unit.
- * 2. add a break syllable, like 'do/don't', whose scope always covers a subject-verb unit.
+ * 2. add a break syllable, like 'do/don't', which always targets a subject-verb unit.
  *
- * know that 'not' targets a point, while 'don't' targets a unit.
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
  * https://github.com/topwaye/klingon
@@ -413,10 +413,7 @@ int main ( void )
     printf ( "\n" );
     printf ( "# no subjects, only verb-object phrases.\n" );
     printf ( "# bind a subject to a verb to form a subject-verb unit.\n" );
-    printf ( "# add a break syllable, like 'do/don't', whose scope always covers a subject-verb unit.\n" );
-    printf ( "\n" );
-    printf ( "# know that 'not' targets a point, while 'don't' targets a unit.\n" );
-    printf ( "# know that all the thinking in our brains is just mathematical permutations and combinations.\n" );
+    printf ( "# add a break syllable, like 'do/don't', which always targets a subject-verb unit.\n" );
     printf ( "\n" );
     printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "************************************************************************************************************************\n" );
