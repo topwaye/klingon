@@ -51,8 +51,9 @@
  * 1. always merge a subject and a verb first, then merge break syllables.
  * 2. always merge a subject and a verb with internal break syllables first, then merge external break syllables.
  *
- * note that the scope of external break syllables always covers a subject-verb unit, that is, external break syllables always targets
- * a subject-verb unit.
+ * an internal break syllable is inherent to a verb and only applies to that verb. an external break syllable is a break syllable overlaid
+ * onto a subject-predicate unit, like 'do/don't'. a subject-verb unit has only one external break syllable. the scope of an external
+ * break syllable always covers a subject-verb unit, that is, an external break syllable always targets a subject-verb unit.
  *
  * here are example sentences applying the above formula:
  *
