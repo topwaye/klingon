@@ -20,7 +20,7 @@
  * as for the word 'not', it represents a choice logic in our brain, meaning: not choosing. for instance, 'not him' means not choosing
  * him. and 'don't' is overlaid on a subject to express the opposite meaning, that is, not choosing the meaning expressed by the predicate.
  *
- * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need to insert
+ * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need to add
  * a subject to these verb-object phrases.
  *
  * the language formula for English is as follows:
