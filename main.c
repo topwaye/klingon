@@ -6,9 +6,13 @@
  * basic human brain language logic shown by a recursive algorithm running on a basic CPU architecture.
  * give a few words to the algorithm, and it gives you an English sentence. this algorithm is called Klingon.
  *
+ * the fish bubbling language model for English is as follows:
+ *
+ * a verb is a fish blowing bubbles. a bubble is a break syllable. a subject is inserted among bubbles.
+ *
  * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's why
  * it was necessary to change the pronunciation of certain words by adding break syllables. for example, 'play' is changed to 'to play',
- * and 'be' is changed to 'to be', i.e., insert a break syllable as a breakpoint to make the target word sound clearer in the middle
+ * and 'be' is changed to 'to be', that is, insert a break syllable as a breakpoint to make the target word sound clearer in the middle
  * of multiple words.
  *
  * another example: 'do' is overlaid onto a subject to change pronunciation, helping to clearly locate the subject in a sentence.
@@ -44,8 +48,8 @@
  *
  * in summary, how our brains construct English sentences:
  *
- * 1. no subjects, there are only verb-object phrases, where the verb is overlaid with break syllables, like 'do/don't'.
- * 2. insert a subject among the break syllables.
+ * 1. no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.
+ * 2. insert a subject among the break syllables of the verb.
  *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
@@ -142,21 +146,10 @@ int insert ( void )
 {
     /* forming segments */
 
-    struct en_word segment_0 [ ] =
-    {
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "play", NULL },
-        { 1, 0, "what", NULL }
-    };
-
     struct en_word segment_1 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "do", NULL },
+        { 1, 1, "", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -167,18 +160,18 @@ int insert ( void )
     struct en_word segment_2 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
+        { 1, 1, "do", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
-        { 1, 0, "at", NULL },
-        { 1, 0, "home", NULL }
+        { 1, 0, "play", NULL },
+        { 1, 0, "what", NULL }
     };
 
     struct en_word segment_3 [ ] =
     {
         { 1, 0, "", NULL },
-        { 0, 1, "are", NULL },
+        { 1, 1, "", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -189,6 +182,17 @@ int insert ( void )
     struct en_word segment_4 [ ] =
     {
         { 1, 0, "", NULL },
+        { 0, 1, "are", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 0, "at", NULL },
+        { 1, 0, "home", NULL }
+    };
+
+    struct en_word segment_5 [ ] =
+    {
+        { 1, 0, "", NULL },
         { 1, 1, "would", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "have", NULL },
@@ -197,7 +201,7 @@ int insert ( void )
         { 1, 0, "cards", NULL }
     };
 
-    struct en_word segment_6 [ ] =
+    struct en_word segment_7 [ ] =
     {
         { 1, 0, "", NULL },
         { 1, 1, "do", NULL },
@@ -208,7 +212,7 @@ int insert ( void )
         { 1, 0, "", NULL }
     };
 
-    struct en_word segment_7 [ ] =
+    struct en_word segment_8 [ ] =
     {
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
@@ -219,7 +223,7 @@ int insert ( void )
         { 1, 0, "", NULL }
     };
 
-    struct en_word segment_8 [ ] =
+    struct en_word segment_9 [ ] =
     {
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
@@ -230,7 +234,7 @@ int insert ( void )
         { 1, 0, "", NULL }
     };
 
-    struct en_word segment_9 [ ] =
+    struct en_word segment_10 [ ] =
     {
         { 1, 0, "", NULL },
         { 0, 1, "do", NULL },
@@ -241,29 +245,29 @@ int insert ( void )
         { 1, 0, "", NULL }
     };
 
-    /* forming subjects */
+    /* inserting subjects */
 
-    segment_0 [ 0 ] = { 1, 0, "you", NULL };
-    segment_1 [ 2 ] = { 1, 0, "you", NULL };
-    segment_3 [ 0 ] = { 1, 0, "you", NULL };
-    segment_4 [ 2 ] = { 1, 0, "you", NULL };
-    segment_6 [ 2 ] = { 1, 0, "you", NULL };
+    segment_1 [ 0 ] = { 1, 0, "you", NULL };
+    segment_2 [ 2 ] = { 1, 0, "you", NULL };
+    segment_4 [ 0 ] = { 1, 0, "you", NULL };
+    segment_5 [ 2 ] = { 1, 0, "you", NULL };
+    segment_7 [ 2 ] = { 1, 0, "you", NULL };
 
     /* forming sentence 1 */
 
-    struct en_word * object_1 = segment_1 + 6;
+    struct en_word * object_1 = segment_2 + 6;
 
     struct en_content sentence_1 =
     {
         0,
         object_1,
-        segment_1,
         segment_2,
+        segment_3,
         NULL,
         NULL,
         1,
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
         sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
         0,
         0
     };
@@ -274,37 +278,37 @@ int insert ( void )
     {
         0,
         NULL,
-        segment_4,
-        segment_2,
+        segment_5,
+        segment_3,
         NULL,
         NULL,
         0,
-        sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
+        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
         0,
         0
     };
 
     /* forming sentence 4 */
 
-    struct en_word * object_3 = segment_0 + 6;
+    struct en_word * object_3 = segment_1 + 6;
 
     struct en_content sentence_3 =
     {
         1,
         object_3,
-        segment_0,
-        segment_2,
+        segment_1,
+        segment_3,
         NULL,
         NULL,
         1,
-        sizeof ( segment_0 ) / sizeof ( segment_0 [ 0 ] ),
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
         0,
         0
     };
 
-    struct en_word segment_5 [ ] =
+    struct en_word segment_6 [ ] =
     {
         { 1, 0, "", NULL },
         { 1, 1, "do", NULL },
@@ -315,18 +319,18 @@ int insert ( void )
         { 1, 0, "", & sentence_3 }
     };
 
-    segment_5 [ 2 ] = { 1, 0, "you", NULL };
+    segment_6 [ 2 ] = { 1, 0, "you", NULL };
 
     struct en_content sentence_4 =
     {
         0,
         object_3,
-        segment_5,
+        segment_6,
         NULL,
         NULL,
         NULL,
         1,
-        sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
+        sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
         0,
         0,
         0
@@ -338,13 +342,13 @@ int insert ( void )
     {
         0,
         NULL,
-        segment_6,
         segment_7,
+        segment_8,
         NULL,
         NULL,
         0,
-        sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
         sizeof ( segment_7 ) / sizeof ( segment_7 [ 0 ] ),
+        sizeof ( segment_8 ) / sizeof ( segment_8 [ 0 ] ),
         0,
         0
     };
@@ -355,12 +359,12 @@ int insert ( void )
     {
         0,
         NULL,
-        segment_3,
+        segment_4,
         NULL,
         NULL,
         NULL,
         0,
-        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
+        sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
         0,
         0,
         0
@@ -372,12 +376,12 @@ int insert ( void )
     {
         0,
         NULL,
-        segment_8,
+        segment_9,
         NULL,
         NULL,
         NULL,
         0,
-        sizeof ( segment_8 ) / sizeof ( segment_8 [ 0 ] ),
+        sizeof ( segment_9 ) / sizeof ( segment_9 [ 0 ] ),
         0,
         0,
         0
@@ -389,12 +393,12 @@ int insert ( void )
     {
         0,
         NULL,
-        segment_9,
+        segment_10,
         NULL,
         NULL,
         NULL,
         0,
-        sizeof ( segment_9 ) / sizeof ( segment_9 [ 0 ] ),
+        sizeof ( segment_10 ) / sizeof ( segment_10 [ 0 ] ),
         0,
         0,
         0
@@ -427,8 +431,8 @@ int main ( void )
     printf ( " /  represents a division slash in mathematics.\n" );
     printf ( " O  represents an object.\n" );
     printf ( "\n" );
-    printf ( "# no subjects, there are only verb-object phrases, where the verb is overlaid with break syllables, like 'do/don't'.\n" );
-    printf ( "# insert a subject among the break syllables.\n" );
+    printf ( "# no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.\n" );
+    printf ( "# insert a subject among the break syllables of the verb.\n" );
     printf ( "\n" );
     printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "************************************************************************************************************************\n" );
