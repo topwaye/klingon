@@ -75,10 +75,10 @@ struct en_word
 
 struct en_content
 {
-    int outer_object;
-    struct en_word * object;
+    int outer_starting;
+    struct en_word * starting;
     struct en_word * segments [ EN_SEG_NUM ];
-    int object_len;
+    int starting_len;
     int segment_lens [ EN_SEG_NUM ];
 };
 
@@ -97,12 +97,12 @@ void jump ( int depth, struct en_content * sentence )
 
     if ( sentence )
     {
-        q = sentence -> object;
+        q = sentence -> starting;
         if ( q )
         {
-            assert ( sentence -> object_len > 0 );
-            m = sentence -> object_len;
-            if ( ! sentence -> outer_object )
+            assert ( sentence -> starting_len > 0 );
+            m = sentence -> starting_len;
+            if ( ! sentence -> outer_starting )
             {
                 i = 0;
                 while ( i < m )
@@ -143,7 +143,7 @@ void jump ( int depth, struct en_content * sentence )
     }
 }
 
-int insert ( void )
+int insert_1 ( void )
 {
     /* forming segments */
 
@@ -256,12 +256,12 @@ int insert ( void )
 
     /* forming sentence 1 */
 
-    struct en_word * object_1 = segment_2 + 6;
+    struct en_word * starting_1 = segment_2 + 6;
 
     struct en_content sentence_1 =
     {
         0,
-        object_1,
+        starting_1,
         segment_2,
         segment_3,
         NULL,
@@ -292,12 +292,12 @@ int insert ( void )
 
     /* forming sentence 4 */
 
-    struct en_word * object_3 = segment_1 + 6;
+    struct en_word * starting_3 = segment_1 + 6;
 
     struct en_content sentence_3 =
     {
         1,
-        object_3,
+        starting_3,
         segment_1,
         segment_3,
         NULL,
@@ -325,7 +325,7 @@ int insert ( void )
     struct en_content sentence_4 =
     {
         0,
-        object_3,
+        starting_3,
         segment_6,
         NULL,
         NULL,
@@ -418,7 +418,7 @@ int insert ( void )
     return 1;
 }
 
-int insert_ex ( void )
+int insert_2 ( void )
 {
     /* forming segment 1 */
 
@@ -491,9 +491,144 @@ int insert_ex ( void )
     return 1;
 }
 
+int insert_3 ( void )
+{
+    /* forming segments */
+
+    struct en_word segment_1 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 1, "are", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 0, "singing", NULL },
+        { 1, 0, "", NULL }
+    };
+
+    struct en_word segment_2 [ ] =
+    {
+        { 1, 0, "or", NULL }
+    };
+
+    struct en_word segment_3 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 1, "are", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 0, "dancing", NULL },
+        { 1, 0, "", NULL }
+    };
+
+    /* inserting subjects */
+
+    segment_1 [ 2 ] = { 1, 0, "you", NULL };
+    segment_3 [ 2 ] = { 1, 0, "you", NULL };
+
+    /* forming sentence 1 */
+
+    struct en_content sentence_1 =
+    {
+        0,
+        NULL,
+        segment_1,
+        segment_2,
+        segment_3,
+        NULL,
+        0,
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
+        0
+    };
+
+    /* outputting sentence 1 */
+
+    jump ( 0, & sentence_1 );
+
+    return 1;
+}
+
+int insert_4 ( void )
+{
+    /* forming segments */
+
+    struct en_word segment_1 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 1, "is", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 0, "who", NULL },
+        { 1, 0, "", NULL }
+    };
+
+    struct en_word segment_2 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 1, "is", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 0, "bad", NULL },
+        { 1, 0, "", NULL }
+    };
+
+    /* inserting subjects */
+
+    segment_1 [ 2 ] = { 1, 0, "he", NULL };
+    segment_2 [ 0 ] = { 1, 0, "who", NULL };
+
+    /* forming sentence 1 */
+
+    struct en_word * starting_1 = segment_1 + 5;
+
+    struct en_content sentence_1 =
+    {
+        0,
+        starting_1,
+        segment_1,
+        NULL,
+        NULL,
+        NULL,
+        1,
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        0,
+        0,
+        0
+    };
+
+    /* forming sentence 2 */
+
+    struct en_content sentence_2 =
+    {
+        0,
+        NULL,
+        segment_2,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        0,
+        0,
+        0
+    };
+
+    /* outputting sentences */
+
+    jump ( 0, & sentence_1 );
+    jump ( 0, & sentence_2 );
+
+    return 1;
+}
+
 int run ( void )
 {
-    return insert ( ) && insert_ex ( );
+    return insert_1 ( ) && insert_2 ( ) && insert_3 ( ) && insert_4 ( );
 }
 
 int main ( void )
@@ -508,9 +643,9 @@ int main ( void )
     printf ( " S  represents a subject.\n" );
     printf ( " V  represents a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.\n" );
     printf ( " /  represents a division slash in mathematics.\n" );
-    printf ( " O  represents an object.\n" );
+    printf ( " O  represents an starting.\n" );
     printf ( "\n" );
-    printf ( "# no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.\n" );
+    printf ( "# no subjects, there are only verb-starting phrases, where a verb is overlaid with break syllables, like 'do/don't'.\n" );
     printf ( "# insert a subject among the break syllables of the verb.\n" );
     printf ( "\n" );
     printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
