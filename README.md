@@ -18,7 +18,7 @@ what do you think you play at home
 do you want not to be loved  
 you aren't at home  
 not bad  
-don't be bad
+don't be bad  
 my love shall in my verse ever live young  
 
 klingon shows how our brains actually think to form sentences
