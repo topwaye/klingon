@@ -23,6 +23,9 @@ my love shall in my verse ever live young
 are you singing or are you dancing  
 who is he  
 who is bad  
+who do you want to be  
+who do you want to love  
+who do you want to play with  
 
 klingon shows how our brains actually think to form sentences
 
