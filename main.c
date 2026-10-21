@@ -626,7 +626,7 @@ int insert_4 ( void )
     return 1;
 }
 
-int bug ( void )
+int run ( void )
 {
     return insert_1 ( ) && insert_2 ( ) && insert_3 ( ) && insert_4 ( );
 }
@@ -643,15 +643,15 @@ int main ( void )
     printf ( " S  represents a subject.\n" );
     printf ( " V  represents a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.\n" );
     printf ( " /  represents a division slash in mathematics.\n" );
-    printf ( " O  represents an starting.\n" );
+    printf ( " O  represents an object.\n" );
     printf ( "\n" );
-    printf ( "# no subjects, there are only verb-starting phrases, where a verb is overlaid with break syllables, like 'do/don't'.\n" );
+    printf ( "# no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.\n" );
     printf ( "# insert a subject among the break syllables of the verb.\n" );
     printf ( "\n" );
     printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "************************************************************************************************************************\n" );
 
-    return ! bug ( );
+    return run ( );
 }
 
 const char * FMT_NEWLINE    = "\n";
