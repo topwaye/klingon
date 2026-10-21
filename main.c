@@ -626,7 +626,7 @@ int insert_4 ( void )
     return 1;
 }
 
-int run ( void )
+int bug ( void )
 {
     return insert_1 ( ) && insert_2 ( ) && insert_3 ( ) && insert_4 ( );
 }
@@ -651,7 +651,7 @@ int main ( void )
     printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "************************************************************************************************************************\n" );
 
-    return run ( );
+    return ! bug ( );
 }
 
 const char * FMT_NEWLINE    = "\n";
