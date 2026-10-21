@@ -143,14 +143,14 @@ void jump ( int depth, struct en_content * sentence )
     }
 }
 
-int insert_1 ( void )
+void insert_1 ( void )
 {
     /* forming segments */
 
     struct en_word segment_1 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
+        { 1, 2, "", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -161,7 +161,7 @@ int insert_1 ( void )
     struct en_word segment_2 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "do", NULL },
+        { 1, 2, "do", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -172,7 +172,7 @@ int insert_1 ( void )
     struct en_word segment_3 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
+        { 1, 2, "", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -183,7 +183,7 @@ int insert_1 ( void )
     struct en_word segment_4 [ ] =
     {
         { 1, 0, "", NULL },
-        { 0, 1, "are", NULL },
+        { 0, 2, "are", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -194,7 +194,7 @@ int insert_1 ( void )
     struct en_word segment_5 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "would", NULL },
+        { 1, 2, "would", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "have", NULL },
         { 1, 1, "been", NULL },
@@ -205,7 +205,7 @@ int insert_1 ( void )
     struct en_word segment_7 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "do", NULL },
+        { 1, 2, "do", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -216,9 +216,9 @@ int insert_1 ( void )
     struct en_word segment_8 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
+        { 1, 2, "", NULL },
         { 1, 0, "", NULL },
-        { 0, 0, "to", NULL },
+        { 0, 1, "to", NULL },
         { 1, 1, "be", NULL },
         { 1, 0, "loved", NULL },
         { 1, 0, "", NULL }
@@ -227,7 +227,7 @@ int insert_1 ( void )
     struct en_word segment_9 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
+        { 1, 2, "", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -238,7 +238,7 @@ int insert_1 ( void )
     struct en_word segment_10 [ ] =
     {
         { 1, 0, "", NULL },
-        { 0, 1, "do", NULL },
+        { 0, 2, "do", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "be", NULL },
@@ -312,7 +312,7 @@ int insert_1 ( void )
     struct en_word segment_6 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "do", NULL },
+        { 1, 2, "do", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -414,18 +414,16 @@ int insert_1 ( void )
     jump ( 0, & sentence_6 );
     jump ( 0, & sentence_7 );
     jump ( 0, & sentence_8 );
-
-    return 1;
 }
 
-int insert_2 ( void )
+void insert_2 ( void )
 {
     /* forming segment 1 */
 
     struct en_word segment_1 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
+        { 1, 2, "", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -455,7 +453,7 @@ int insert_2 ( void )
     {
         { 1, 0, "", NULL },
         { 1, 0, "", NULL },
-        { 1, 1, "shall", NULL },
+        { 1, 2, "shall", NULL },
         { 1, 0, "", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
@@ -487,18 +485,16 @@ int insert_2 ( void )
     /* outputting sentence 2 */
 
     jump ( 0, & sentence_2 );
-
-    return 1;
 }
 
-int insert_3 ( void )
+void insert_3 ( void )
 {
     /* forming segments */
 
     struct en_word segment_1 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "are", NULL },
+        { 1, 2, "are", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -514,7 +510,7 @@ int insert_3 ( void )
     struct en_word segment_3 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "are", NULL },
+        { 1, 2, "are", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -547,18 +543,16 @@ int insert_3 ( void )
     /* outputting sentence 1 */
 
     jump ( 0, & sentence_1 );
-
-    return 1;
 }
 
-int insert_4 ( void )
+void insert_4 ( void )
 {
     /* forming segments */
 
     struct en_word segment_1 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "is", NULL },
+        { 1, 2, "is", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -569,7 +563,7 @@ int insert_4 ( void )
     struct en_word segment_2 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 1, "is", NULL },
+        { 1, 2, "is", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
         { 1, 1, "", NULL },
@@ -622,13 +616,154 @@ int insert_4 ( void )
 
     jump ( 0, & sentence_1 );
     jump ( 0, & sentence_2 );
-
-    return 1;
 }
 
-int run ( void )
+void insert_5 ( void )
 {
-    return insert_1 ( ) && insert_2 ( ) && insert_3 ( ) && insert_4 ( );
+    /* forming segments */
+
+    struct en_word segment_1 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 2, "do", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 0, "want", NULL },
+        { 1, 0, "", NULL }
+    };
+
+    struct en_word segment_2 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 2, "", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "to", NULL },
+        { 1, 1, "be", NULL },
+        { 1, 0, "who", NULL },
+        { 1, 0, "", NULL }
+    };
+
+    struct en_word segment_3 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 2, "", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 1, "to", NULL },
+        { 1, 0, "love", NULL },
+        { 1, 0, "who", NULL }
+    };
+
+    struct en_word segment_4 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 2, "", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 1, "to", NULL },
+        { 1, 0, "play", NULL },
+        { 1, 0, "", NULL }
+    };
+
+    struct en_word segment_5 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 2, "", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 0, "with", NULL },
+        { 1, 0, "who", NULL }
+    };
+
+    /* inserting subject 1 */
+
+    segment_1 [ 2 ] = { 1, 0, "you", NULL };
+
+    /* forming sentence 1 */
+
+    struct en_word * starting_1 = segment_2 + 5;
+
+    struct en_content sentence_1 =
+    {
+        0,
+        starting_1,
+        segment_1,
+        segment_2,
+        NULL,
+        NULL,
+        1,
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        0,
+        0
+    };
+
+    /* forming sentence 2 */
+
+    struct en_word * starting_2 = segment_3 + 6;
+
+    struct en_content sentence_2 =
+    {
+        0,
+        starting_2,
+        segment_1,
+        segment_3,
+        NULL,
+        NULL,
+        1,
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
+        0,
+        0
+    };
+
+    /* forming sentence 3 */
+
+    struct en_word * starting_3 = segment_5 + 6;
+
+    struct en_content sentence_3 =
+    {
+        0,
+        starting_3,
+        segment_1,
+        segment_4,
+        segment_5,
+        NULL,
+        1,
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
+        sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
+        0
+    };
+
+    /* outputting sentences */
+
+    jump ( 0, & sentence_1 );
+    jump ( 0, & sentence_2 );
+    jump ( 0, & sentence_3 );
+}
+
+typedef void ( * insert_t ) ( void );
+
+void run ( void )
+{
+    int i, n;
+
+    insert_t func [ ] =
+    {
+        insert_1,
+        insert_2,
+        insert_3,
+        insert_4,
+        insert_5
+    };
+
+    n = sizeof ( func ) / sizeof ( func [ 0 ] );
+
+    for ( i = 0; i < n; i ++ )
+        func [ i ] ( );
 }
 
 int main ( void )
@@ -651,7 +786,9 @@ int main ( void )
     printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "************************************************************************************************************************\n" );
 
-    return run ( );
+    run ( );
+
+    return 0;
 }
 
 const char * FMT_NEWLINE    = "\n";
@@ -666,7 +803,7 @@ void print_content ( struct en_word * t )
     if ( * t -> content )
     {
         if ( ! t -> selected )
-            t -> breakpoint ? printf ( FMT_STR_NT, t -> content ) : printf ( FMT_NOT_S, t -> content );
+            t -> breakpoint < 2 ? printf ( FMT_NOT_S, t -> content ) : printf ( FMT_STR_NT, t -> content );
         else
             printf ( FMT_STR_SPACE, t -> content );
     }
