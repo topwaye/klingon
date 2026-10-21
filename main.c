@@ -415,7 +415,85 @@ int insert ( void )
     jump ( 0, & sentence_7 );
     jump ( 0, & sentence_8 );
 
-    return 0;
+    return 1;
+}
+
+int insert_ex ( void )
+{
+    /* forming segment 1 */
+
+    struct en_word segment_1 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 0, "in", NULL },
+        { 1, 0, "my", NULL },
+        { 1, 0, "verse", NULL }
+    };
+
+    /* forming sentence 2 */
+
+    struct en_content sentence_1 =
+    {
+        0,
+        NULL,
+        segment_1,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        0,
+        0,
+        0
+    };
+
+    struct en_word segment_2 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "shall", NULL },
+        { 1, 0, "", NULL },
+        { 1, 0, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 1, "", NULL },
+        { 1, 0, "", & sentence_1 },
+        { 1, 0, "ever", NULL },
+        { 1, 0, "live", NULL },
+        { 1, 0, "young", NULL }
+    };
+
+    segment_2 [ 0 ] = { 1, 0, "my", NULL };
+    segment_2 [ 1 ] = { 1, 0, "love", NULL };
+
+    struct en_content sentence_2 =
+    {
+        0,
+        NULL,
+        segment_2,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
+        0,
+        0,
+        0
+    };
+
+    /* outputting sentence 2 */
+
+    jump ( 0, & sentence_2 );
+
+    return 1;
+}
+
+int run ( void )
+{
+    return insert ( ) && insert_ex ( );
 }
 
 int main ( void )
@@ -438,7 +516,7 @@ int main ( void )
     printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "************************************************************************************************************************\n" );
 
-    return insert ( );
+    return run ( );
 }
 
 const char * FMT_NEWLINE    = "\n";
