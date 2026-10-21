@@ -26,6 +26,7 @@ who is bad
 who do you want to be  
 who do you want to love  
 who do you want to play with  
+with who do you want to play  
 
 klingon shows how our brains actually think to form sentences
 
