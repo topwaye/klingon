@@ -738,11 +738,31 @@ void insert_5 ( void )
         0
     };
 
+    /* forming sentence 4 */
+
+    struct en_word * starting_4 = segment_5 + 5;
+
+    struct en_content sentence_4 =
+    {
+        0,
+        starting_4,
+        segment_1,
+        segment_4,
+        segment_5,
+        NULL,
+        2,
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
+        sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
+        0
+    };
+
     /* outputting sentences */
 
     jump ( 0, & sentence_1 );
     jump ( 0, & sentence_2 );
     jump ( 0, & sentence_3 );
+    jump ( 0, & sentence_4 );
 }
 
 typedef void ( * insert_t ) ( void );
