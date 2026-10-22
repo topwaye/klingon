@@ -205,28 +205,6 @@ void insert_1 ( void )
     struct en_word segment_7 [ ] =
     {
         { 1, 0, "", NULL },
-        { 1, 2, "do", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "want", NULL },
-        { 1, 0, "", NULL }
-    };
-
-    struct en_word segment_8 [ ] =
-    {
-        { 1, 0, "", NULL },
-        { 1, 2, "", NULL },
-        { 1, 0, "", NULL },
-        { 0, 1, "to", NULL },
-        { 1, 1, "be", NULL },
-        { 1, 0, "loved", NULL },
-        { 1, 0, "", NULL }
-    };
-
-    struct en_word segment_9 [ ] =
-    {
-        { 1, 0, "", NULL },
         { 1, 2, "", NULL },
         { 1, 0, "", NULL },
         { 1, 1, "", NULL },
@@ -235,7 +213,7 @@ void insert_1 ( void )
         { 1, 0, "", NULL }
     };
 
-    struct en_word segment_10 [ ] =
+    struct en_word segment_8 [ ] =
     {
         { 1, 0, "", NULL },
         { 0, 2, "do", NULL },
@@ -252,7 +230,6 @@ void insert_1 ( void )
     segment_2 [ 2 ] = { 1, 0, "you", NULL };
     segment_4 [ 0 ] = { 1, 0, "you", NULL };
     segment_5 [ 2 ] = { 1, 0, "you", NULL };
-    segment_7 [ 2 ] = { 1, 0, "you", NULL };
 
     /* forming sentence 1 */
 
@@ -343,23 +320,6 @@ void insert_1 ( void )
     {
         0,
         NULL,
-        segment_7,
-        segment_8,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_7 ) / sizeof ( segment_7 [ 0 ] ),
-        sizeof ( segment_8 ) / sizeof ( segment_8 [ 0 ] ),
-        0,
-        0
-    };
-
-    /* forming sentence 6 */
-    
-    struct en_content sentence_6 =
-    {
-        0,
-        NULL,
         segment_4,
         NULL,
         NULL,
@@ -371,35 +331,35 @@ void insert_1 ( void )
         0
     };
 
+    /* forming sentence 6 */
+    
+    struct en_content sentence_6 =
+    {
+        0,
+        NULL,
+        segment_7,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        sizeof ( segment_7 ) / sizeof ( segment_7 [ 0 ] ),
+        0,
+        0,
+        0
+    };
+
     /* forming sentence 7 */
     
     struct en_content sentence_7 =
     {
         0,
         NULL,
-        segment_9,
+        segment_8,
         NULL,
         NULL,
         NULL,
         0,
-        sizeof ( segment_9 ) / sizeof ( segment_9 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-
-    /* forming sentence 8 */
-    
-    struct en_content sentence_8 =
-    {
-        0,
-        NULL,
-        segment_10,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_10 ) / sizeof ( segment_10 [ 0 ] ),
+        sizeof ( segment_8 ) / sizeof ( segment_8 [ 0 ] ),
         0,
         0,
         0
@@ -413,7 +373,6 @@ void insert_1 ( void )
     jump ( 0, & sentence_5 );
     jump ( 0, & sentence_6 );
     jump ( 0, & sentence_7 );
-    jump ( 0, & sentence_8 );
 }
 
 void insert_2 ( void )
@@ -677,6 +636,17 @@ void insert_5 ( void )
         { 1, 0, "who", NULL }
     };
 
+    struct en_word segment_6 [ ] =
+    {
+        { 1, 0, "", NULL },
+        { 1, 2, "", NULL },
+        { 1, 0, "", NULL },
+        { 0, 1, "to", NULL },
+        { 1, 1, "be", NULL },
+        { 1, 0, "loved", NULL },
+        { 1, 0, "", NULL }
+    };
+
     /* inserting subject 1 */
 
     segment_1 [ 2 ] = { 1, 0, "you", NULL };
@@ -757,12 +727,30 @@ void insert_5 ( void )
         0
     };
 
+    /* forming sentence 5 */
+    
+    struct en_content sentence_5 =
+    {
+        0,
+        NULL,
+        segment_1,
+        segment_6,
+        NULL,
+        NULL,
+        0,
+        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
+        sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
+        0,
+        0
+    };
+
     /* outputting sentences */
 
     jump ( 0, & sentence_1 );
     jump ( 0, & sentence_2 );
     jump ( 0, & sentence_3 );
     jump ( 0, & sentence_4 );
+    jump ( 0, & sentence_5 );
 }
 
 typedef void ( * insert_t ) ( void );
