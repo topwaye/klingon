@@ -763,11 +763,11 @@ void print_content ( struct en_word * t )
         if ( ! t -> selected )
             switch ( t -> breakpoint )
             {
-                case 2: printf ( FMT_STR_NT, t -> content ); break;
-                case 3: printf ( FMT_AI_NT ); break;
-                case 4: printf ( FMT_WO_NT ); break;
-                case 5: printf ( FMT_SHA_NT ); break;
-                default: printf ( FMT_NOT_S, t -> content );
+                case 2 : printf ( FMT_STR_NT, t -> content ); break;
+                case 3 : printf ( FMT_AI_NT ); break;
+                case 4 : printf ( FMT_WO_NT ); break;
+                case 5 : printf ( FMT_SHA_NT ); break;
+                default : printf ( FMT_NOT_S, t -> content );
             }
         else
             printf ( FMT_STR_SPACE, t -> content );
