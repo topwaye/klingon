@@ -18,7 +18,7 @@ what do you think you play at home
 you aren't at home  
 not bad  
 don't be bad  
-my love shall in my verse ever live young  
+my love shan't in my verse ever live young  
 are you singing or are you dancing  
 who is he  
 who is bad  
