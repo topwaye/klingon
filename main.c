@@ -149,79 +149,62 @@ void insert_1 ( void )
 
     struct en_word segment_1 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "play", NULL },
-        { 1, 0, "what", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "play", NULL },     /* verb zone */
+        { 1, 0, "what", NULL }      /* object zone */
     };
 
     struct en_word segment_2 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "do", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "play", NULL },
-        { 1, 0, "what", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 2, "do", NULL },       /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "play", NULL },     /* verb zone */
+        { 1, 0, "what", NULL }      /* object zone */
     };
 
     struct en_word segment_3 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "at", NULL },
-        { 1, 0, "home", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "at", NULL },       /* verb zone */
+        { 1, 0, "home", NULL }      /* object zone */
     };
 
     struct en_word segment_4 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 0, 2, "are", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "at", NULL },
-        { 1, 0, "home", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 0, 2, "are", NULL },      /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "at", NULL },       /* verb zone */
+        { 1, 0, "home", NULL }      /* object zone */
     };
 
     struct en_word segment_5 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "would", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "have", NULL },
-        { 1, 1, "been", NULL },
-        { 1, 0, "playing", NULL },
-        { 1, 0, "cards", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 2, "would", NULL },    /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 1, "have", NULL },     /* break zone */
+        { 1, 1, "been", NULL },     /* break zone */
+        { 1, 0, "playing", NULL },  /* verb zone */
+        { 1, 0, "cards", NULL }     /* object zone */
     };
 
     struct en_word segment_7 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 0, 0, "bad", NULL },
-        { 1, 0, "", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 0, 0, "bad", NULL },      /* verb zone */
+        { 1, 0, "", NULL }          /* object zone */
     };
 
     struct en_word segment_8 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 0, 2, "do", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "be", NULL },
-        { 1, 0, "bad", NULL },
-        { 1, 0, "", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 0, 2, "do", NULL },       /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 1, "be", NULL },       /* break zone */
+        { 1, 0, "bad", NULL },      /* verb zone */
+        { 1, 0, "", NULL }          /* object zone */
     };
 
     /* inserting subjects */
@@ -233,7 +216,7 @@ void insert_1 ( void )
 
     /* forming sentence 1 */
 
-    struct en_word * starting_1 = segment_2 + 6;
+    struct en_word * starting_1 = segment_2 + 4;
 
     struct en_content sentence_1 =
     {
@@ -269,7 +252,7 @@ void insert_1 ( void )
 
     /* forming sentence 4 */
 
-    struct en_word * starting_3 = segment_1 + 6;
+    struct en_word * starting_3 = segment_1 + 2;
 
     struct en_content sentence_3 =
     {
@@ -288,13 +271,11 @@ void insert_1 ( void )
 
     struct en_word segment_6 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "do", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "think", NULL },
-        { 1, 0, "", & sentence_3 }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 2, "do", NULL },       /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "think", NULL },    /* verb zone */
+        { 1, 0, "", & sentence_3 }  /* object zone */
     };
 
     segment_6 [ 2 ] = { 1, 0, "you", NULL };
@@ -381,14 +362,10 @@ void insert_2 ( void )
 
     struct en_word segment_1 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "in", NULL },
-        { 1, 0, "my", NULL },
-        { 1, 0, "verse", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "in", NULL },       /* verb zone */
+        { 1, 0, "my", NULL },       /* object zone */
+        { 1, 0, "verse", NULL }     /* object zone */
     };
 
     /* forming sentence 2 */
@@ -410,17 +387,15 @@ void insert_2 ( void )
 
     struct en_word segment_2 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 0, "", NULL },
-        { 1, 2, "shall", NULL },
-        { 1, 0, "", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "", & sentence_1 },
-        { 1, 0, "ever", NULL },
-        { 1, 0, "live", NULL },
-        { 1, 0, "young", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 0, 5, "shall", NULL },    /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "", & sentence_1 }, /* verb zone */
+        { 1, 0, "ever", NULL },     /* verb zone */
+        { 1, 0, "live", NULL },     /* verb zone */
+        { 1, 0, "young", NULL }     /* object zone */
     };
 
     segment_2 [ 0 ] = { 1, 0, "my", NULL };
@@ -452,29 +427,25 @@ void insert_3 ( void )
 
     struct en_word segment_1 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "are", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "singing", NULL },
-        { 1, 0, "", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 2, "are", NULL },      /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "singing", NULL },  /* verb zone */
+        { 1, 0, "", NULL }          /* object zone */
     };
 
     struct en_word segment_2 [ ] =
     {
-        { 1, 0, "or", NULL }
+        { 1, 0, "or", NULL }        /* conjunction zone */
     };
 
     struct en_word segment_3 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "are", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "dancing", NULL },
-        { 1, 0, "", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 2, "are", NULL },      /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "dancing", NULL },  /* verb zone */
+        { 1, 0, "", NULL }          /* object zone */
     };
 
     /* inserting subjects */
@@ -510,24 +481,20 @@ void insert_4 ( void )
 
     struct en_word segment_1 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "is", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "who", NULL },
-        { 1, 0, "", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 2, "is", NULL },       /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "who", NULL },      /* verb zone */
+        { 1, 0, "", NULL }          /* object zone */
     };
 
     struct en_word segment_2 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "is", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "bad", NULL },
-        { 1, 0, "", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 2, "is", NULL },       /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "bad", NULL },      /* verb zone */
+        { 1, 0, "", NULL }          /* object zone */
     };
 
     /* inserting subjects */
@@ -537,7 +504,7 @@ void insert_4 ( void )
 
     /* forming sentence 1 */
 
-    struct en_word * starting_1 = segment_1 + 5;
+    struct en_word * starting_1 = segment_1 + 3;
 
     struct en_content sentence_1 =
     {
@@ -583,68 +550,48 @@ void insert_5 ( void )
 
     struct en_word segment_1 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "do", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "want", NULL },
-        { 1, 0, "", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 2, "do", NULL },       /* break zone */
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "want", NULL },     /* verb zone */
+        { 1, 0, "", NULL }          /* object zone */
     };
 
     struct en_word segment_2 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "to", NULL },
-        { 1, 1, "be", NULL },
-        { 1, 0, "who", NULL },
-        { 1, 0, "", NULL }
+        { 1, 1, "to", NULL },       /* break zone */
+        { 1, 1, "be", NULL },       /* break zone */
+        { 1, 0, "who", NULL },      /* verb zone */
+        { 1, 0, "", NULL }          /* object zone */
     };
 
     struct en_word segment_3 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "to", NULL },
-        { 1, 0, "love", NULL },
-        { 1, 0, "who", NULL }
+        { 1, 1, "to", NULL },       /* break zone */
+        { 1, 0, "love", NULL },     /* verb zone */
+        { 1, 0, "who", NULL }       /* object zone */
     };
 
     struct en_word segment_4 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "to", NULL },
-        { 1, 0, "play", NULL },
-        { 1, 0, "", NULL }
+        { 1, 1, "to", NULL },       /* break zone */
+        { 1, 0, "play", NULL },     /* verb zone */
+        { 1, 0, "", NULL }          /* object zone */
     };
 
     struct en_word segment_5 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "", NULL },
-        { 1, 0, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 1, "", NULL },
-        { 1, 0, "with", NULL },
-        { 1, 0, "who", NULL }
+        { 1, 1, "", NULL },         /* break zone */
+        { 1, 0, "with", NULL },     /* verb zone */
+        { 1, 0, "who", NULL }       /* object zone */
     };
 
     struct en_word segment_6 [ ] =
     {
-        { 1, 0, "", NULL },
-        { 1, 2, "", NULL },
-        { 1, 0, "", NULL },
-        { 0, 1, "to", NULL },
-        { 1, 1, "be", NULL },
-        { 1, 0, "loved", NULL },
-        { 1, 0, "", NULL }
+        { 0, 1, "to", NULL },       /* break zone */
+        { 1, 1, "be", NULL },       /* break zone */
+        { 1, 0, "loved", NULL },    /* verb zone */
+        { 1, 0, "", NULL }          /* object zone */
     };
 
     /* inserting subject 1 */
@@ -653,7 +600,7 @@ void insert_5 ( void )
 
     /* forming sentence 1 */
 
-    struct en_word * starting_1 = segment_2 + 5;
+    struct en_word * starting_1 = segment_2 + 2;
 
     struct en_content sentence_1 =
     {
@@ -672,7 +619,7 @@ void insert_5 ( void )
 
     /* forming sentence 2 */
 
-    struct en_word * starting_2 = segment_3 + 6;
+    struct en_word * starting_2 = segment_3 + 2;
 
     struct en_content sentence_2 =
     {
@@ -691,7 +638,7 @@ void insert_5 ( void )
 
     /* forming sentence 3 */
 
-    struct en_word * starting_3 = segment_5 + 6;
+    struct en_word * starting_3 = segment_5 + 2;
 
     struct en_content sentence_3 =
     {
@@ -710,7 +657,7 @@ void insert_5 ( void )
 
     /* forming sentence 4 */
 
-    struct en_word * starting_4 = segment_5 + 5;
+    struct en_word * starting_4 = segment_5 + 1;
 
     struct en_content sentence_4 =
     {
@@ -802,6 +749,9 @@ int main ( void )
 const char * FMT_NEWLINE    = "\n";
 const char * FMT_STR_SPACE  = "%s ";
 const char * FMT_STR_NT     = "%sn't ";
+const char * FMT_AI_NT      = "ain't ";
+const char * FMT_WO_NT      = "won't ";
+const char * FMT_SHA_NT     = "shan't ";
 const char * FMT_NOT_S      = "not %s ";
 const char * FMT_NOT        = "not ";
 
@@ -811,7 +761,14 @@ void print_content ( struct en_word * t )
     if ( * t -> content )
     {
         if ( ! t -> selected )
-            t -> breakpoint < 2 ? printf ( FMT_NOT_S, t -> content ) : printf ( FMT_STR_NT, t -> content );
+            switch ( t -> breakpoint )
+            {
+                case 2: printf ( FMT_STR_NT, t -> content ); break;
+                case 3: printf ( FMT_AI_NT ); break;
+                case 4: printf ( FMT_WO_NT ); break;
+                case 5: printf ( FMT_SHA_NT ); break;
+                default: printf ( FMT_NOT_S, t -> content );
+            }
         else
             printf ( FMT_STR_SPACE, t -> content );
     }
