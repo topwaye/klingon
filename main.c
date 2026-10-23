@@ -67,8 +67,8 @@ struct en_content;
 
 struct en_word
 {
-    int selected;   /* select or unselect the word */
-    int breakpoint; /* a breakpoint or not */
+    int selected;                   /* select or unselect the word */
+    int breakpoint;                 /* a breakpoint or not */
     char content [ EN_CHAR_NUM ];
     struct en_content * sen_content;
     struct en_word * prior;
@@ -276,16 +276,16 @@ void insert_1 ( void )
     link_behind
     (
         3,
-        segment_1,      /* break zone */
-        & word_2,       /* verb zone */
-        & word_3        /* object zone */
+        segment_1,                  /* break zone */
+        & word_2,                   /* verb zone */
+        & word_3                    /* object zone */
     );
 
     link_behind
     (
         2,
-        segment_2,      /* verb zone */
-        & word_5        /* object zone */
+        segment_2,                  /* verb zone */
+        & word_5                    /* object zone */
     );
 
     /* inserting a subject */
@@ -321,18 +321,18 @@ void insert_2 ( void )
     link_behind
     (
         5,
-        segment_1,      /* break zone */
-        & word_108,     /* break zone */
-        & word_109,     /* break zone */
-        & word_10,      /* verb zone */
-        & word_11       /* object zone */
+        segment_1,                  /* break zone */
+        & word_108,                 /* break zone */
+        & word_109,                 /* break zone */
+        & word_10,                  /* verb zone */
+        & word_11                   /* object zone */
     );
 
     link_behind
     (
         2,
-        segment_2,      /* verb zone */
-        & word_5        /* object zone */
+        segment_2,                  /* verb zone */
+        & word_5                    /* object zone */
     );
 
     /* inserting a subject */
@@ -367,15 +367,15 @@ void insert_3 ( void )
     link_behind
     (
         2,
-        segment_1,      /* verb zone */
-        & word_3        /* object zone */
+        segment_1,                  /* verb zone */
+        & word_3                    /* object zone */
     );
 
     link_behind
     (
         2,
-        segment_2,      /* verb zone */
-        & word_5        /* object zone */
+        segment_2,                  /* verb zone */
+        & word_5                    /* object zone */
     );
 
     /* inserting subject 1 */
@@ -403,9 +403,9 @@ void insert_3 ( void )
     link_behind
     (
         3,
-        segment_3,      /* break zone */
-        & word_6,       /* verb zone */
-        & word_0        /* object zone */
+        segment_3,                  /* break zone */
+        & word_6,                   /* verb zone */
+        & word_0                    /* object zone */
     );
 
     /* inserting subject 2 */
@@ -438,9 +438,9 @@ void insert_4 ( void )
     link_behind
     (
         3,
-        segment_1,      /* break zone */
-        & word_4,       /* verb zone */
-        & word_5        /* object zone */
+        segment_1,                  /* break zone */
+        & word_4,                   /* verb zone */
+        & word_5                    /* object zone */
     );
 
     /* inserting a subject */
@@ -471,7 +471,7 @@ void insert_5 ( void )
     link_behind
     (
         1,
-        segment_1       /* verb zone */
+        segment_1                   /* verb zone */
     );
 
     /* forming a sentence */
@@ -498,9 +498,9 @@ void insert_6 ( void )
     link_behind
     (
         3,
-        segment_1,      /* break zone */
-        & word_100,     /* break zone */
-        & word_12       /* verb zone */
+        segment_1,                  /* break zone */
+        & word_100,                 /* break zone */
+        & word_12                   /* verb zone */
     );
 
     /* forming a sentence */
@@ -530,9 +530,9 @@ void insert_7 ( void )
     link_behind
     (
         3,
-        segment_1,      /* verb zone */
-        & word_21,      /* object zone */
-        & word_22       /* object zone */
+        segment_1,                  /* verb zone */
+        & word_21,                  /* object zone */
+        & word_22                   /* object zone */
     );
 
     /* forming sentence 1 */
@@ -552,11 +552,11 @@ void insert_7 ( void )
     link_behind
     (
         5,
-        segment_2,      /* break zone */
-        & word_0,       /* verb zone */
-        & word_23,      /* verb zone */
-        & word_24,      /* verb zone */
-        & word_25       /* object zone */
+        segment_2,                  /* break zone */
+        & word_0,                   /* verb zone */
+        & word_23,                  /* verb zone */
+        & word_24,                  /* verb zone */
+        & word_25                   /* object zone */
     );
 
     /* inserting subject 1 */
@@ -592,21 +592,21 @@ void insert_8 ( void )
     link_behind
     (
         2,
-        segment_1,      /* break zone */
-        & word_30       /* verb zone */
+        segment_1,                  /* break zone */
+        & word_30                   /* verb zone */
     );
 
     link_behind
     (
         1,
-        segment_2       /* conjunction zone */
+        segment_2                   /* conjunction zone */
     );
 
     link_behind
     (
         2,
-        segment_3,      /* break zone */
-        & word_32       /* verb zone */
+        segment_3,                  /* break zone */
+        & word_32                   /* verb zone */
     );
 
     /* inserting a subject */
@@ -638,8 +638,8 @@ void insert_9 ( void )
     link_behind
     (
         2,
-        segment_1,      /* break zone */
-        & word_40       /* verb zone */
+        segment_1,                  /* break zone */
+        & word_40                   /* verb zone */
     );
 
     /* inserting a subject */
@@ -671,8 +671,8 @@ void insert_10 ( void )
     link_behind
     (
         2,
-        segment_1,      /* break zone */
-        & word_12       /* verb zone */
+        segment_1,                  /* break zone */
+        & word_12                   /* verb zone */
     );
 
     /* inserting a subject */
@@ -707,16 +707,16 @@ void insert_11 ( void )
     link_behind
     (
         2,
-        segment_1,      /* break zone */
-        & word_50       /* verb zone */
+        segment_1,                  /* break zone */
+        & word_50                   /* verb zone */
     );
 
     link_behind
     (
         3,
-        segment_2,      /* break zone */
-        & word_100,     /* break zone */
-        & word_40       /* verb zone */
+        segment_2,                  /* break zone */
+        & word_100,                 /* break zone */
+        & word_40                   /* verb zone */
     );
 
     /* inserting a subject */
@@ -751,16 +751,16 @@ void insert_12 ( void )
     link_behind
     (
         2,
-        segment_1,      /* break zone */
-        & word_50       /* verb zone */
+        segment_1,                  /* break zone */
+        & word_50                   /* verb zone */
     );
 
     link_behind
     (
         3,
-        segment_2,      /* break zone */
-        & word_52,      /* verb zone */
-        & word_40       /* object zone */
+        segment_2,                  /* break zone */
+        & word_52,                  /* verb zone */
+        & word_40                   /* object zone */
     );
 
     /* inserting a subject */
@@ -796,22 +796,22 @@ void insert_13 ( void )
     link_behind
     (
         2,
-        segment_1,      /* break zone */
-        & word_50       /* verb zone */
+        segment_1,                  /* break zone */
+        & word_50                   /* verb zone */
     );
 
     link_behind
     (
         2,
-        segment_2,      /* break zone */
-        & word_2        /* verb zone */
+        segment_2,                  /* break zone */
+        & word_2                    /* verb zone */
     );
 
     link_behind
     (
         2,
-        segment_3,      /* verb zone */
-        & word_40       /* object zone */
+        segment_3,                  /* verb zone */
+        & word_40                   /* object zone */
     );
 
     /* inserting a subject */
@@ -847,22 +847,22 @@ void insert_14 ( void )
     link_behind
     (
         2,
-        segment_1,      /* break zone */
-        & word_50       /* verb zone */
+        segment_1,                  /* break zone */
+        & word_50                   /* verb zone */
     );
 
     link_behind
     (
         2,
-        segment_2,      /* break zone */
-        & word_2        /* verb zone */
+        segment_2,                  /* break zone */
+        & word_2                    /* verb zone */
     );
 
     link_behind
     (
         2,
-        segment_3,      /* verb zone */
-        & word_40       /* object zone */
+        segment_3,                  /* verb zone */
+        & word_40                   /* object zone */
     );
 
     /* inserting a subject */
@@ -898,16 +898,16 @@ void insert_15 ( void )
     link_behind
     (
         2,
-        segment_1,      /* break zone */
-        & word_50       /* verb zone */
+        segment_1,                  /* break zone */
+        & word_50                   /* verb zone */
     );
 
     link_behind
     (
         3,
-        segment_2,      /* break zone */
-        & word_100,     /* break zone */
-        & word_53       /* verb zone */
+        segment_2,                  /* break zone */
+        & word_100,                 /* break zone */
+        & word_53                   /* verb zone */
     );
 
     /* inserting a subject */
