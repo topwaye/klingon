@@ -58,10 +58,10 @@
  */
 
 #include <stdio.h>
+#include <stdarg.h>
 #include <assert.h>
 
 #define EN_CHAR_NUM             16
-#define EN_SEG_NUM              4
 
 struct en_content;
 
@@ -71,15 +71,17 @@ struct en_word
     int breakpoint; /* a breakpoint or not */
     char content [ EN_CHAR_NUM ];
     struct en_content * sen_content;
+    struct en_word * prior;
+    struct en_word * next;
+    struct en_word * following;
 };
 
 struct en_content
 {
     int outer_starting;
     struct en_word * starting;
-    struct en_word * segments [ EN_SEG_NUM ];
-    int starting_len;
-    int segment_lens [ EN_SEG_NUM ];
+    struct en_word * starting_owner;
+    struct en_word * segments;
 };
 
 void print_content ( struct en_word * t );
@@ -92,50 +94,51 @@ void print ( struct en_word * t )
 
 void jump ( int depth, struct en_content * sentence )
 {
-    int i, j, m, n;
-    struct en_word * p, * q, * t;
+    struct en_word * r, * p, * q, * t;
 
     if ( sentence )
     {
         q = sentence -> starting;
         if ( q )
         {
-            assert ( sentence -> starting_len > 0 );
-            m = sentence -> starting_len;
             if ( ! sentence -> outer_starting )
             {
-                i = 0;
-                while ( i < m )
+                t = q;
+                p = sentence -> starting_owner;
+                do
                 {
-                    t = q + i;
                     print ( t );
                     jump ( depth + 1, t -> sen_content );
-                    i ++;
-                }
+                    t = t -> next;
+                } while ( t != p );
             }
         }
 
-        for ( j = 0; j < EN_SEG_NUM ; j ++ )
+        r = sentence -> segments;
+        if ( r )
         {
-            p = sentence -> segments [ j ];
-            if ( p )
+            p = r;
+            do
             {
-                assert ( sentence -> segment_lens [ j ] > 0 );
-                n = sentence -> segment_lens [ j ];
-                i = 0;
-                while ( i < n )
-                {
-                    t = p + i;
-                    if ( t == q )
+                t = p;
+                if ( p != sentence -> starting_owner )
+                    do
                     {
-                        i += m;
-                        continue;
-                    }
-                    print ( t );
-                    jump ( depth + 1, t -> sen_content );
-                    i ++;
-                }
-            }
+                        print ( t );
+                        jump ( depth + 1, t -> sen_content );
+                        t = t -> next;
+                    } while ( t != p );
+                else
+                    do
+                    {
+                        if ( t == q )
+                            break;
+                        print ( t );
+                        jump ( depth + 1, t -> sen_content );
+                        t = t -> next;
+                    } while ( t != p );
+                p = p -> following;
+            } while ( p != r );
         }
 
         if ( ! depth )
@@ -143,561 +146,783 @@ void jump ( int depth, struct en_content * sentence )
     }
 }
 
+void link_ahead ( int len, struct en_word * list, ... )
+{
+    va_list ap;
+    struct en_word * p, * t;
+
+    va_start ( ap, list );
+
+    assert ( len > 0 );
+    while ( -- len )
+    {
+        p = va_arg ( ap, struct en_word * );
+        assert ( p );
+        assert ( list );
+        t = list -> prior;
+        t -> next = p;
+        list -> prior = p;
+        p -> prior = t;
+        p -> next = list;
+    }
+
+    va_end ( ap );
+}
+
+void link_behind ( int len, struct en_word * list, ... )
+{
+    va_list ap;
+    struct en_word * p, * t;
+
+    va_start ( ap, list );
+
+    assert ( len > 0 );
+    while ( -- len )
+    {
+        p = va_arg ( ap, struct en_word * );
+        assert ( p );
+        assert ( list );
+        t = list -> next;
+        t -> prior = p;
+        list -> next = p;
+        p -> prior = list;
+        p -> next = t;
+        list = p;
+    }
+
+    va_end ( ap );
+}
+
+void link_down ( int len, struct en_word * list, ... )
+{
+    va_list ap;
+    struct en_word * p, * t;
+
+    va_start ( ap, list );
+
+    assert ( len > 0 );
+    while ( -- len )
+    {
+        p = va_arg ( ap, struct en_word * );
+        assert ( p );
+        assert ( list );
+        t = list -> following;
+        list -> following = p;
+        p -> following = t;
+        list = p;
+    }
+
+    va_end ( ap );
+}
+
+struct en_word * new_single_line ( struct en_word * list )
+{
+    assert ( list );
+    list -> prior = list;
+    list -> next = list;
+    return list;
+}
+
+struct en_word * new_multiple_line ( struct en_word * list )
+{
+    assert ( list );
+    list -> following = list;
+    return list;
+}
+
+struct en_word word_2 = { 1, 0, "play", NULL };
+struct en_word word_3 = { 1, 0, "what", NULL };
+
+struct en_word word_4 = { 1, 0, "at", NULL };
+struct en_word word_5 = { 1, 0, "home", NULL };
+
+struct en_word word_6 = { 1, 0, "think", NULL };
+
+struct en_word word_10 = { 1, 0, "playing", NULL };
+struct en_word word_11 = { 1, 0, "cards", NULL };
+
+struct en_word word_12 = { 1, 0, "bad", NULL };
+
+struct en_word word_20 = { 1, 0, "in", NULL };
+struct en_word word_21 = { 1, 0, "my", NULL };
+struct en_word word_22 = { 1, 0, "verse", NULL };
+
+struct en_word word_23 = { 1, 0, "ever", NULL };
+struct en_word word_24 = { 1, 0, "live", NULL };
+struct en_word word_25 = { 1, 0, "young", NULL };
+
+struct en_word word_30 = { 1, 0, "singing", NULL };
+struct en_word word_31 = { 1, 0, "or", NULL };
+struct en_word word_32 = { 1, 0, "dancing", NULL };
+
+struct en_word word_40 = { 1, 0, "who", NULL };
+
+struct en_word word_50 = { 1, 0, "want", NULL };
+struct en_word word_51 = { 1, 0, "with", NULL };
+struct en_word word_52 = { 1, 0, "love", NULL };
+struct en_word word_53 = { 1, 0, "loved", NULL };
+
 void insert_1 ( void )
 {
+    struct en_content sentence = { 0 };
+    struct en_word word_101 = { 1, 2, "do", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
+
     /* forming segments */
 
-    struct en_word segment_1 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "play", NULL },     /* verb zone */
-        { 1, 0, "what", NULL }      /* object zone */
-    };
+    struct en_word * segment_1 = new_single_line ( & word_101 );
+    struct en_word * segment_2 = new_single_line ( & word_4 );
 
-    struct en_word segment_2 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 2, "do", NULL },       /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "play", NULL },     /* verb zone */
-        { 1, 0, "what", NULL }      /* object zone */
-    };
+    link_behind
+    (
+        3,
+        segment_1,      /* break zone */
+        & word_2,       /* verb zone */
+        & word_3        /* object zone */
+    );
 
-    struct en_word segment_3 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "at", NULL },       /* verb zone */
-        { 1, 0, "home", NULL }      /* object zone */
-    };
+    link_behind
+    (
+        2,
+        segment_2,      /* verb zone */
+        & word_5        /* object zone */
+    );
 
-    struct en_word segment_4 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 0, 2, "are", NULL },      /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "at", NULL },       /* verb zone */
-        { 1, 0, "home", NULL }      /* object zone */
-    };
+    /* inserting a subject */
 
-    struct en_word segment_5 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 2, "would", NULL },    /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 1, "have", NULL },     /* break zone */
-        { 1, 1, "been", NULL },     /* break zone */
-        { 1, 0, "playing", NULL },  /* verb zone */
-        { 1, 0, "cards", NULL }     /* object zone */
-    };
+    link_behind ( 2, segment_1, & word_a );
 
-    struct en_word segment_7 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 0, 0, "bad", NULL },      /* verb zone */
-        { 1, 0, "", NULL }          /* object zone */
-    };
+    /* forming a sentence */
 
-    struct en_word segment_8 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 0, 2, "do", NULL },       /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 1, "be", NULL },       /* break zone */
-        { 1, 0, "bad", NULL },      /* verb zone */
-        { 1, 0, "", NULL }          /* object zone */
-    };
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 2, segment_1, segment_2 );
+    sentence . starting = & word_3;
+    sentence . starting_owner = segment_1;
+    sentence . segments = segment_1;
 
-    /* inserting subjects */
+    /* outputting a sentence */
 
-    segment_1 [ 0 ] = { 1, 0, "you", NULL };
-    segment_2 [ 2 ] = { 1, 0, "you", NULL };
-    segment_4 [ 0 ] = { 1, 0, "you", NULL };
-    segment_5 [ 2 ] = { 1, 0, "you", NULL };
-
-    /* forming sentence 1 */
-
-    struct en_word * starting_1 = segment_2 + 4;
-
-    struct en_content sentence_1 =
-    {
-        0,
-        starting_1,
-        segment_2,
-        segment_3,
-        NULL,
-        NULL,
-        1,
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
-        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
-        0,
-        0
-    };
-
-    /* forming sentence 2 */
-
-    struct en_content sentence_2 =
-    {
-        0,
-        NULL,
-        segment_5,
-        segment_3,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
-        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
-        0,
-        0
-    };
-
-    /* forming sentence 4 */
-
-    struct en_word * starting_3 = segment_1 + 2;
-
-    struct en_content sentence_3 =
-    {
-        1,
-        starting_3,
-        segment_1,
-        segment_3,
-        NULL,
-        NULL,
-        1,
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
-        0,
-        0
-    };
-
-    struct en_word segment_6 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 2, "do", NULL },       /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "think", NULL },    /* verb zone */
-        { 1, 0, "", & sentence_3 }  /* object zone */
-    };
-
-    segment_6 [ 2 ] = { 1, 0, "you", NULL };
-
-    struct en_content sentence_4 =
-    {
-        0,
-        starting_3,
-        segment_6,
-        NULL,
-        NULL,
-        NULL,
-        1,
-        sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-
-    /* forming sentence 5 */
-    
-    struct en_content sentence_5 =
-    {
-        0,
-        NULL,
-        segment_4,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-
-    /* forming sentence 6 */
-    
-    struct en_content sentence_6 =
-    {
-        0,
-        NULL,
-        segment_7,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_7 ) / sizeof ( segment_7 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-
-    /* forming sentence 7 */
-    
-    struct en_content sentence_7 =
-    {
-        0,
-        NULL,
-        segment_8,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_8 ) / sizeof ( segment_8 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-
-    /* outputting sentences */
-
-    jump ( 0, & sentence_1 );
-    jump ( 0, & sentence_2 );
-    jump ( 0, & sentence_4 );
-    jump ( 0, & sentence_5 );
-    jump ( 0, & sentence_6 );
-    jump ( 0, & sentence_7 );
+    jump ( 0, & sentence );
 }
 
 void insert_2 ( void )
 {
-    /* forming segment 1 */
+    struct en_content sentence = { 0 };
+    struct en_word word_107 = { 1, 2, "would", NULL };
+    struct en_word word_108 = { 1, 1, "have", NULL };
+    struct en_word word_109 = { 1, 1, "been", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
 
-    struct en_word segment_1 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "in", NULL },       /* verb zone */
-        { 1, 0, "my", NULL },       /* object zone */
-        { 1, 0, "verse", NULL }     /* object zone */
-    };
+    /* forming segments */
+
+    struct en_word * segment_1 = new_single_line ( & word_107 );
+    struct en_word * segment_2 = new_single_line ( & word_4 );
+
+    link_behind
+    (
+        5,
+        segment_1,      /* break zone */
+        & word_108,     /* break zone */
+        & word_109,     /* break zone */
+        & word_10,      /* verb zone */
+        & word_11       /* object zone */
+    );
+
+    link_behind
+    (
+        2,
+        segment_2,      /* verb zone */
+        & word_5        /* object zone */
+    );
+
+    /* inserting a subject */
+
+    link_behind ( 2, segment_1, & word_a );
+
+    /* forming a sentence */
+
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 2, segment_1, segment_2 );
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
+}
+
+void insert_3 ( void )
+{
+    struct en_content sentence_1 = { 0 };
+    struct en_content sentence_2 = { 0 };
+    struct en_word word_101 = { 1, 2, "do", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
+    struct en_word word_b = { 1, 0, "you", NULL };
+    struct en_word word_0 = { 1, 0, "", NULL };
+
+    /* forming segment 1, 2 */
+
+    struct en_word * segment_1 = new_single_line ( & word_2 );
+    struct en_word * segment_2 = new_single_line ( & word_4 );
+
+    link_behind
+    (
+        2,
+        segment_1,      /* verb zone */
+        & word_3        /* object zone */
+    );
+
+    link_behind
+    (
+        2,
+        segment_2,      /* verb zone */
+        & word_5        /* object zone */
+    );
+
+    /* inserting subject 1 */
+
+    link_ahead ( 2, segment_1, & word_a );
+    segment_1 = & word_a;
+
+    /* forming sentence 1 */
+
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 2, segment_1, segment_2 );
+    sentence_1 . outer_starting = 1;
+    sentence_1 . starting = & word_3;
+    sentence_1 . starting_owner = segment_1;
+    sentence_1 . segments = segment_1;
+
+    /* filling word 0 */
+
+    word_0 . sen_content = & sentence_1;
+
+    /* forming segment 3 */
+
+    struct en_word * segment_3 = new_single_line ( & word_101 );
+
+    link_behind
+    (
+        3,
+        segment_3,      /* break zone */
+        & word_6,       /* verb zone */
+        & word_0        /* object zone */
+    );
+
+    /* inserting subject 2 */
+
+    link_behind ( 2, segment_3, & word_b );
 
     /* forming sentence 2 */
 
-    struct en_content sentence_1 =
-    {
-        0,
-        NULL,
-        segment_1,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-
-    struct en_word segment_2 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 0, 5, "shall", NULL },    /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "", & sentence_1 }, /* verb zone */
-        { 1, 0, "ever", NULL },     /* verb zone */
-        { 1, 0, "live", NULL },     /* verb zone */
-        { 1, 0, "young", NULL }     /* object zone */
-    };
-
-    segment_2 [ 0 ] = { 1, 0, "my", NULL };
-    segment_2 [ 1 ] = { 1, 0, "love", NULL };
-
-    struct en_content sentence_2 =
-    {
-        0,
-        NULL,
-        segment_2,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
-        0,
-        0,
-        0
-    };
+    segment_3 = new_multiple_line ( segment_3 );
+    link_down ( 1, segment_3 );
+    sentence_2 . starting = & word_3;
+    sentence_2 . starting_owner = segment_1;
+    sentence_2 . segments = segment_3;
 
     /* outputting sentence 2 */
 
     jump ( 0, & sentence_2 );
 }
 
-void insert_3 ( void )
-{
-    /* forming segments */
-
-    struct en_word segment_1 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 2, "are", NULL },      /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "singing", NULL },  /* verb zone */
-        { 1, 0, "", NULL }          /* object zone */
-    };
-
-    struct en_word segment_2 [ ] =
-    {
-        { 1, 0, "or", NULL }        /* conjunction zone */
-    };
-
-    struct en_word segment_3 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 2, "are", NULL },      /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "dancing", NULL },  /* verb zone */
-        { 1, 0, "", NULL }          /* object zone */
-    };
-
-    /* inserting subjects */
-
-    segment_1 [ 2 ] = { 1, 0, "you", NULL };
-    segment_3 [ 2 ] = { 1, 0, "you", NULL };
-
-    /* forming sentence 1 */
-
-    struct en_content sentence_1 =
-    {
-        0,
-        NULL,
-        segment_1,
-        segment_2,
-        segment_3,
-        NULL,
-        0,
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
-        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
-        0
-    };
-
-    /* outputting sentence 1 */
-
-    jump ( 0, & sentence_1 );
-}
-
 void insert_4 ( void )
 {
-    /* forming segments */
+    struct en_content sentence = { 0 };
+    struct en_word word_100 = { 0, 2, "are", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
 
-    struct en_word segment_1 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 2, "is", NULL },       /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "who", NULL },      /* verb zone */
-        { 1, 0, "", NULL }          /* object zone */
-    };
+    /* forming a segment */
 
-    struct en_word segment_2 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 2, "is", NULL },       /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "bad", NULL },      /* verb zone */
-        { 1, 0, "", NULL }          /* object zone */
-    };
+    struct en_word * segment_1 = new_single_line ( & word_100 );
 
-    /* inserting subjects */
+    link_behind
+    (
+        3,
+        segment_1,      /* break zone */
+        & word_4,       /* verb zone */
+        & word_5        /* object zone */
+    );
 
-    segment_1 [ 2 ] = { 1, 0, "he", NULL };
-    segment_2 [ 0 ] = { 1, 0, "who", NULL };
+    /* inserting a subject */
 
-    /* forming sentence 1 */
+    link_ahead ( 2, segment_1, & word_a );
+    segment_1 = & word_a;
 
-    struct en_word * starting_1 = segment_1 + 3;
+    /* forming a sentence */
 
-    struct en_content sentence_1 =
-    {
-        0,
-        starting_1,
-        segment_1,
-        NULL,
-        NULL,
-        NULL,
-        1,
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        0,
-        0,
-        0
-    };
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 1, segment_1 );
+    sentence . segments = segment_1;
 
-    /* forming sentence 2 */
+    /* outputting a sentence */
 
-    struct en_content sentence_2 =
-    {
-        0,
-        NULL,
-        segment_2,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
-        0,
-        0,
-        0
-    };
-
-    /* outputting sentences */
-
-    jump ( 0, & sentence_1 );
-    jump ( 0, & sentence_2 );
+    jump ( 0, & sentence );
 }
 
 void insert_5 ( void )
 {
+    struct en_content sentence = { 0 };
+    struct en_word word_12 = { 0, 0, "bad", NULL };
+
     /* forming segments */
 
-    struct en_word segment_1 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 2, "do", NULL },       /* break zone */
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "want", NULL },     /* verb zone */
-        { 1, 0, "", NULL }          /* object zone */
-    };
+    struct en_word * segment_1 = new_single_line ( & word_12 );
 
-    struct en_word segment_2 [ ] =
-    {
-        { 1, 1, "to", NULL },       /* break zone */
-        { 1, 1, "be", NULL },       /* break zone */
-        { 1, 0, "who", NULL },      /* verb zone */
-        { 1, 0, "", NULL }          /* object zone */
-    };
+    link_behind
+    (
+        1,
+        segment_1       /* verb zone */
+    );
 
-    struct en_word segment_3 [ ] =
-    {
-        { 1, 1, "to", NULL },       /* break zone */
-        { 1, 0, "love", NULL },     /* verb zone */
-        { 1, 0, "who", NULL }       /* object zone */
-    };
+    /* forming a sentence */
 
-    struct en_word segment_4 [ ] =
-    {
-        { 1, 1, "to", NULL },       /* break zone */
-        { 1, 0, "play", NULL },     /* verb zone */
-        { 1, 0, "", NULL }          /* object zone */
-    };
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 1, segment_1 );
+    sentence . segments = segment_1;
 
-    struct en_word segment_5 [ ] =
-    {
-        { 1, 1, "", NULL },         /* break zone */
-        { 1, 0, "with", NULL },     /* verb zone */
-        { 1, 0, "who", NULL }       /* object zone */
-    };
+    /* outputting a sentence */
 
-    struct en_word segment_6 [ ] =
-    {
-        { 0, 1, "to", NULL },       /* break zone */
-        { 1, 1, "be", NULL },       /* break zone */
-        { 1, 0, "loved", NULL },    /* verb zone */
-        { 1, 0, "", NULL }          /* object zone */
-    };
+    jump ( 0, & sentence );
+}
 
-    /* inserting subject 1 */
+void insert_6 ( void )
+{
+    struct en_content sentence = { 0 };
+    struct en_word word_101 = { 0, 2, "do", NULL };
+    struct en_word word_100 = { 1, 1, "be", NULL };
 
-    segment_1 [ 2 ] = { 1, 0, "you", NULL };
+    /* forming a segment */
+
+    struct en_word * segment_1 = new_single_line ( & word_101 );
+
+    link_behind
+    (
+        3,
+        segment_1,      /* break zone */
+        & word_100,     /* break zone */
+        & word_12       /* verb zone */
+    );
+
+    /* forming a sentence */
+
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 1, segment_1 );
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
+}
+
+void insert_7 ( void )
+{
+    struct en_content sentence_1 = { 0 };
+    struct en_content sentence_2 = { 0 };
+    struct en_word word_110 = { 0, 5, "shall", NULL };
+    struct en_word word_a = { 1, 0, "my", NULL };
+    struct en_word word_b = { 1, 0, "love", NULL };
+    struct en_word word_0 = { 1, 0, "", NULL };
+
+    /* forming segment 1 */
+
+    struct en_word * segment_1 = new_single_line ( & word_20 );
+
+    link_behind
+    (
+        3,
+        segment_1,      /* verb zone */
+        & word_21,      /* object zone */
+        & word_22       /* object zone */
+    );
 
     /* forming sentence 1 */
 
-    struct en_word * starting_1 = segment_2 + 2;
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 1, segment_1 );
+    sentence_1 . segments = segment_1;
 
-    struct en_content sentence_1 =
-    {
-        0,
-        starting_1,
-        segment_1,
-        segment_2,
-        NULL,
-        NULL,
-        1,
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        sizeof ( segment_2 ) / sizeof ( segment_2 [ 0 ] ),
-        0,
-        0
-    };
+    /* filling word 0 */
+
+    word_0 . sen_content = & sentence_1;
+
+    /* forming segment 2 */
+
+    struct en_word * segment_2 = new_single_line ( & word_110 );
+
+    link_behind
+    (
+        5,
+        segment_2,      /* break zone */
+        & word_0,       /* verb zone */
+        & word_23,      /* verb zone */
+        & word_24,      /* verb zone */
+        & word_25       /* object zone */
+    );
+
+    /* inserting subject 1 */
+
+    link_ahead ( 3, segment_2, & word_a, & word_b );
+    segment_2 = & word_a;
 
     /* forming sentence 2 */
 
-    struct en_word * starting_2 = segment_3 + 2;
+    segment_2 = new_multiple_line ( segment_2 );
+    link_down ( 1, segment_2 );
+    sentence_2 . segments = segment_2;
 
-    struct en_content sentence_2 =
-    {
-        0,
-        starting_2,
-        segment_1,
-        segment_3,
-        NULL,
-        NULL,
-        1,
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        sizeof ( segment_3 ) / sizeof ( segment_3 [ 0 ] ),
-        0,
-        0
-    };
+    /* outputting sentence 2 */
 
-    /* forming sentence 3 */
-
-    struct en_word * starting_3 = segment_5 + 2;
-
-    struct en_content sentence_3 =
-    {
-        0,
-        starting_3,
-        segment_1,
-        segment_4,
-        segment_5,
-        NULL,
-        1,
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
-        sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
-        0
-    };
-
-    /* forming sentence 4 */
-
-    struct en_word * starting_4 = segment_5 + 1;
-
-    struct en_content sentence_4 =
-    {
-        0,
-        starting_4,
-        segment_1,
-        segment_4,
-        segment_5,
-        NULL,
-        2,
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        sizeof ( segment_4 ) / sizeof ( segment_4 [ 0 ] ),
-        sizeof ( segment_5 ) / sizeof ( segment_5 [ 0 ] ),
-        0
-    };
-
-    /* forming sentence 5 */
-    
-    struct en_content sentence_5 =
-    {
-        0,
-        NULL,
-        segment_1,
-        segment_6,
-        NULL,
-        NULL,
-        0,
-        sizeof ( segment_1 ) / sizeof ( segment_1 [ 0 ] ),
-        sizeof ( segment_6 ) / sizeof ( segment_6 [ 0 ] ),
-        0,
-        0
-    };
-
-    /* outputting sentences */
-
-    jump ( 0, & sentence_1 );
     jump ( 0, & sentence_2 );
-    jump ( 0, & sentence_3 );
-    jump ( 0, & sentence_4 );
-    jump ( 0, & sentence_5 );
+}
+
+void insert_8 ( void )
+{
+    struct en_content sentence = { 0 };
+    struct en_word word_100 = { 1, 2, "are", NULL };
+    struct en_word word_101 = { 1, 2, "are", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
+    struct en_word word_b = { 1, 0, "you", NULL };
+
+    /* forming segments */
+
+    struct en_word * segment_1 = new_single_line ( & word_100 );
+    struct en_word * segment_2 = new_single_line ( & word_31 );
+    struct en_word * segment_3 = new_single_line ( & word_101 );
+
+    link_behind
+    (
+        2,
+        segment_1,      /* break zone */
+        & word_30       /* verb zone */
+    );
+
+    link_behind
+    (
+        1,
+        segment_2       /* conjunction zone */
+    );
+
+    link_behind
+    (
+        2,
+        segment_3,      /* break zone */
+        & word_32       /* verb zone */
+    );
+
+    /* inserting a subject */
+
+    link_behind ( 2, segment_1, & word_a );
+    link_behind ( 2, segment_3, & word_b );
+
+    /* forming a sentence */
+
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 3, segment_1, segment_2, segment_3 );
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
+}
+
+void insert_9 ( void )
+{
+    struct en_content sentence = { 0 };
+    struct en_word word_100 = { 1, 2, "is", NULL };
+    struct en_word word_a = { 1, 0, "he", NULL };
+
+    /* forming a segment */
+
+    struct en_word * segment_1 = new_single_line ( & word_100 );
+
+    link_behind
+    (
+        2,
+        segment_1,      /* break zone */
+        & word_40       /* verb zone */
+    );
+
+    /* inserting a subject */
+
+    link_behind ( 2, segment_1, & word_a );
+
+    /* forming a sentence */
+
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 1, segment_1 );
+    sentence . starting = & word_40;
+    sentence . starting_owner = segment_1;
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
+}
+
+void insert_10 ( void )
+{
+    struct en_content sentence = { 0 };
+    struct en_word word_100 = { 1, 2, "is", NULL };
+
+    /* forming a segment */
+
+    struct en_word * segment_1 = new_single_line ( & word_100 );
+
+    link_behind
+    (
+        2,
+        segment_1,      /* break zone */
+        & word_12       /* verb zone */
+    );
+
+    /* inserting a subject */
+
+    link_ahead ( 2, segment_1, & word_40 );
+    segment_1 = & word_40;
+
+    /* forming a sentence */
+
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 1, segment_1 );
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
+}
+
+void insert_11 ( void )
+{
+    struct en_content sentence = { 0 };
+    struct en_word word_101 = { 1, 2, "do", NULL };
+    struct en_word word_102 = { 1, 1, "to", NULL };
+    struct en_word word_100 = { 1, 1, "be", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
+
+    /* forming segments */
+
+    struct en_word * segment_1 = new_single_line ( & word_101 );
+    struct en_word * segment_2 = new_single_line ( & word_102 );
+
+    link_behind
+    (
+        2,
+        segment_1,      /* break zone */
+        & word_50       /* verb zone */
+    );
+
+    link_behind
+    (
+        3,
+        segment_2,      /* break zone */
+        & word_100,     /* break zone */
+        & word_40       /* verb zone */
+    );
+
+    /* inserting a subject */
+
+    link_behind ( 2, segment_1, & word_a );
+
+    /* forming a sentence */
+
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 2, segment_1, segment_2 );
+    sentence . starting = & word_40;
+    sentence . starting_owner = segment_2;
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
+}
+
+void insert_12 ( void )
+{
+    struct en_content sentence = { 0 };
+    struct en_word word_101 = { 1, 2, "do", NULL };
+    struct en_word word_102 = { 1, 1, "to", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
+
+    /* forming segments */
+
+    struct en_word * segment_1 = new_single_line ( & word_101 );
+    struct en_word * segment_2 = new_single_line ( & word_102 );
+
+    link_behind
+    (
+        2,
+        segment_1,      /* break zone */
+        & word_50       /* verb zone */
+    );
+
+    link_behind
+    (
+        3,
+        segment_2,      /* break zone */
+        & word_52,      /* verb zone */
+        & word_40       /* object zone */
+    );
+
+    /* inserting a subject */
+
+    link_behind ( 2, segment_1, & word_a );
+
+    /* forming a sentence */
+
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 2, segment_1, segment_2 );
+    sentence . starting = & word_40;
+    sentence . starting_owner = segment_2;
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
+}
+
+void insert_13 ( void )
+{
+    struct en_content sentence = { 0 };
+    struct en_word word_101 = { 1, 2, "do", NULL };
+    struct en_word word_102 = { 1, 1, "to", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
+
+    /* forming segments */
+
+    struct en_word * segment_1 = new_single_line ( & word_101 );
+    struct en_word * segment_2 = new_single_line ( & word_102 );
+    struct en_word * segment_3 = new_single_line ( & word_51 );
+
+    link_behind
+    (
+        2,
+        segment_1,      /* break zone */
+        & word_50       /* verb zone */
+    );
+
+    link_behind
+    (
+        2,
+        segment_2,      /* break zone */
+        & word_2        /* verb zone */
+    );
+
+    link_behind
+    (
+        2,
+        segment_3,      /* verb zone */
+        & word_40       /* object zone */
+    );
+
+    /* inserting a subject */
+
+    link_behind ( 2, segment_1, & word_a );
+
+    /* forming a sentence */
+
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 3, segment_1, segment_2, segment_3 );
+    sentence . starting = & word_40;
+    sentence . starting_owner = segment_3;
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
+}
+
+void insert_14 ( void )
+{
+    struct en_content sentence = { 0 };
+    struct en_word word_101 = { 1, 2, "do", NULL };
+    struct en_word word_102 = { 1, 1, "to", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
+
+    /* forming segments */
+
+    struct en_word * segment_1 = new_single_line ( & word_101 );
+    struct en_word * segment_2 = new_single_line ( & word_102 );
+    struct en_word * segment_3 = new_single_line ( & word_51 );
+
+    link_behind
+    (
+        2,
+        segment_1,      /* break zone */
+        & word_50       /* verb zone */
+    );
+
+    link_behind
+    (
+        2,
+        segment_2,      /* break zone */
+        & word_2        /* verb zone */
+    );
+
+    link_behind
+    (
+        2,
+        segment_3,      /* verb zone */
+        & word_40       /* object zone */
+    );
+
+    /* inserting a subject */
+
+    link_behind ( 2, segment_1, & word_a );
+
+    /* forming a sentence */
+
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 3, segment_1, segment_2, segment_3 );
+    sentence . starting = & word_51;
+    sentence . starting_owner = segment_3;
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
+}
+
+void insert_15 ( void )
+{
+    struct en_content sentence = { 0 };
+    struct en_word word_101 = { 1, 2, "do", NULL };
+    struct en_word word_102 = { 0, 1, "to", NULL };
+    struct en_word word_100 = { 1, 1, "be", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
+
+    /* forming segments */
+
+    struct en_word * segment_1 = new_single_line ( & word_101 );
+    struct en_word * segment_2 = new_single_line ( & word_102 );
+
+    link_behind
+    (
+        2,
+        segment_1,      /* break zone */
+        & word_50       /* verb zone */
+    );
+
+    link_behind
+    (
+        3,
+        segment_2,      /* break zone */
+        & word_100,     /* break zone */
+        & word_53       /* verb zone */
+    );
+
+    /* inserting a subject */
+
+    link_behind ( 2, segment_1, & word_a );
+
+    /* forming a sentence */
+
+    segment_1 = new_multiple_line ( segment_1 );
+    link_down ( 2, segment_1, segment_2 );
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
 }
 
 typedef void ( * insert_t ) ( void );
@@ -712,7 +937,17 @@ void run ( void )
         insert_2,
         insert_3,
         insert_4,
-        insert_5
+        insert_5,
+        insert_6,
+        insert_7,
+        insert_8,
+        insert_9,
+        insert_10,
+        insert_11,
+        insert_12,
+        insert_13,
+        insert_14,
+        insert_15
     };
 
     n = sizeof ( func ) / sizeof ( func [ 0 ] );
