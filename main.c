@@ -101,12 +101,11 @@ void jump ( int depth, struct en_content * sentence )
         r = sentence -> segments;
         if ( r )
         {
+            p = r;
             s = sentence -> starting_line;
             if ( ! s )
             {
                 assert ( ! sentence -> starting_point );
-
-                p = r;
                 do
                 {
                     t = p;
@@ -135,7 +134,6 @@ void jump ( int depth, struct en_content * sentence )
                     } while ( t != s );
                 }
 
-                p = r;
                 do
                 {
                     t = p;
