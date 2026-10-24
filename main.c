@@ -94,49 +94,65 @@ void print ( struct en_word * t )
 
 void jump ( int depth, struct en_content * sentence )
 {
-    struct en_word * r, * p, * q, * t;
+    struct en_word * r, * s, * p, * q, * t;
 
     if ( sentence )
     {
-        q = sentence -> starting_point;
-        if ( q )
+        r = sentence -> segments;
+        if ( r )
         {
-            if ( ! sentence -> outer_starting )
+            s = sentence -> starting_line;
+            if ( s )
             {
-                t = q;
-                p = sentence -> starting_line;
+                q = sentence -> starting_point;
+                if ( q )
+                {
+                    if ( ! sentence -> outer_starting )
+                    {
+                        t = q;
+                        do
+                        {
+                            print ( t );
+                            jump ( depth + 1, t -> sen_content );
+                            t = t -> next;
+                        } while ( t != s );
+                    }
+
+                    p = r;
+                    do
+                    {
+                        t = p;
+                        if ( p != s )
+                            do
+                            {
+                                print ( t );
+                                jump ( depth + 1, t -> sen_content );
+                                t = t -> next;
+                            } while ( t != p );
+                        else
+                            do
+                            {
+                                if ( t == q )
+                                    break;
+                                print ( t );
+                                jump ( depth + 1, t -> sen_content );
+                                t = t -> next;
+                            } while ( t != p );
+                        p = p -> down;
+                    } while ( p != r );
+                }
+            }
+
+            p = r;
+            do
+            {
+                t = p;
                 do
                 {
                     print ( t );
                     jump ( depth + 1, t -> sen_content );
                     t = t -> next;
                 } while ( t != p );
-            }
-        }
-
-        r = sentence -> segments;
-        if ( r )
-        {
-            p = r;
-            do
-            {
-                t = p;
-                if ( p != sentence -> starting_line )
-                    do
-                    {
-                        print ( t );
-                        jump ( depth + 1, t -> sen_content );
-                        t = t -> next;
-                    } while ( t != p );
-                else
-                    do
-                    {
-                        if ( t == q )
-                            break;
-                        print ( t );
-                        jump ( depth + 1, t -> sen_content );
-                        t = t -> next;
-                    } while ( t != p );
                 p = p -> down;
             } while ( p != r );
         }
