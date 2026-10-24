@@ -104,6 +104,8 @@ void jump ( int depth, struct en_content * sentence )
             s = sentence -> starting_line;
             if ( ! s )
             {
+                assert ( ! sentence -> starting_point );
+
                 p = r;
                 do
                 {
@@ -119,49 +121,48 @@ void jump ( int depth, struct en_content * sentence )
             }
             else
             {
+                assert ( sentence -> starting_point );
                 q = sentence -> starting_point;
-                if ( q )
+
+                if ( ! sentence -> outer_starting )
                 {
-                    if ( ! sentence -> outer_starting )
+                    t = q;
+                    do
                     {
-                        t = q;
+                        print ( t );
+                        jump ( depth + 1, t -> sen_content );
+                        t = t -> next;
+                    } while ( t != s );
+                }
+
+                p = r;
+                do
+                {
+                    t = p;
+                    if ( p != s )
                         do
                         {
                             print ( t );
                             jump ( depth + 1, t -> sen_content );
                             t = t -> next;
-                        } while ( t != s );
-                    }
-
-                    p = r;
-                    do
-                    {
-                        t = p;
-                        if ( p != s )
-                            do
-                            {
-                                print ( t );
-                                jump ( depth + 1, t -> sen_content );
-                                t = t -> next;
-                            } while ( t != p );
-                        else
-                            do
-                            {
-                                if ( t == q )
-                                    break;
-                                print ( t );
-                                jump ( depth + 1, t -> sen_content );
-                                t = t -> next;
-                            } while ( t != p );
-                        p = p -> down;
-                    } while ( p != r );
-                }
+                        } while ( t != p );
+                    else
+                        do
+                        {
+                            if ( t == q )
+                                break;
+                            print ( t );
+                            jump ( depth + 1, t -> sen_content );
+                            t = t -> next;
+                        } while ( t != p );
+                    p = p -> down;
+                } while ( p != r );
             }
         }
-
-        if ( ! depth )
-            print ( NULL );
     }
+
+    if ( ! depth )
+        print ( NULL );
 }
 
 void link_words_ahead ( int len, struct en_word * list, ... )
