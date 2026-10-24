@@ -710,7 +710,7 @@ void insert_11 ( void )
     (
         2,
         segment_1,                  /* break zone */
-        & word_7                   /* verb zone */
+        & word_7                    /* verb zone */
     );
 
     link_words
@@ -754,7 +754,7 @@ void insert_12 ( void )
     (
         2,
         segment_1,                  /* break zone */
-        & word_7                   /* verb zone */
+        & word_7                    /* verb zone */
     );
 
     link_words
@@ -799,7 +799,7 @@ void insert_13 ( void )
     (
         2,
         segment_1,                  /* break zone */
-        & word_7                   /* verb zone */
+        & word_7                    /* verb zone */
     );
 
     link_words
@@ -850,7 +850,7 @@ void insert_14 ( void )
     (
         2,
         segment_1,                  /* break zone */
-        & word_7                   /* verb zone */
+        & word_7                    /* verb zone */
     );
 
     link_words
@@ -901,7 +901,7 @@ void insert_15 ( void )
     (
         2,
         segment_1,                  /* break zone */
-        & word_7                   /* verb zone */
+        & word_7                    /* verb zone */
     );
 
     link_words
