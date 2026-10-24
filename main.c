@@ -101,61 +101,39 @@ void jump ( int depth, struct en_content * sentence )
         r = sentence -> segments;
         if ( r )
         {
-            p = r;
-            s = sentence -> starting_line;
-            if ( ! s )
+            q = sentence -> starting_point;
+            if ( q )
             {
-                assert ( ! sentence -> starting_point );
-                do
-                {
-                    t = p;
-                    do
-                    {
-                        print ( t );
-                        jump ( depth + 1, t -> sen_content );
-                        t = t -> next;
-                    } while ( t != p );
-                    p = p -> down;
-                } while ( p != r );
-            }
-            else
-            {
-                assert ( sentence -> starting_point );
-                q = sentence -> starting_point;
-
                 if ( ! sentence -> outer_starting )
                 {
-                    t = q;
-                    do
+                    s = sentence -> starting_line;
+                    if ( s )
                     {
-                        print ( t );
-                        jump ( depth + 1, t -> sen_content );
-                        t = t -> next;
-                    } while ( t != s );
+                        t = q;
+                        do
+                        {
+                            print ( t );
+                            jump ( depth + 1, t -> sen_content );
+                            t = t -> next;
+                        } while ( t != s );
+                    }
                 }
+            }
 
+            p = r;
+            do
+            {
+                t = p;
                 do
                 {
-                    t = p;
-                    if ( p != s )
-                        do
-                        {
-                            print ( t );
-                            jump ( depth + 1, t -> sen_content );
-                            t = t -> next;
-                        } while ( t != p );
-                    else
-                        do
-                        {
-                            if ( t == q )
-                                break;
-                            print ( t );
-                            jump ( depth + 1, t -> sen_content );
-                            t = t -> next;
-                        } while ( t != p );
-                    p = p -> down;
-                } while ( p != r );
-            }
+                    if ( t == q )
+                        break;
+                    print ( t );
+                    jump ( depth + 1, t -> sen_content );
+                    t = t -> next;
+                } while ( t != p );
+                p = p -> down;
+            } while ( p != r );
         }
     }
 
