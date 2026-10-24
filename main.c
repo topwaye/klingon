@@ -777,7 +777,7 @@ void insert_12 ( void )
     jump ( 0, & sentence );
 }
 
-void insert_13 ( void )
+void insert_with_starting_point ( struct en_word * starting_point )
 {
     struct en_content sentence = { 0 };
     struct en_word word_101 = { 1, 2, "do", NULL };
@@ -819,7 +819,7 @@ void insert_13 ( void )
 
     segment_1 = new_multiline ( segment_1 );
     link_lines ( 3, segment_1, segment_2, segment_3 );
-    sentence . starting_point = & word_52;
+    sentence . starting_point = starting_point;
     sentence . starting_line = segment_3;
     sentence . segments = segment_1;
 
@@ -828,55 +828,14 @@ void insert_13 ( void )
     jump ( 0, & sentence );
 }
 
+void insert_13 ( void )
+{
+    insert_with_starting_point ( & word_52 );
+}
+
 void insert_14 ( void )
 {
-    struct en_content sentence = { 0 };
-    struct en_word word_101 = { 1, 2, "do", NULL };
-    struct en_word word_102 = { 1, 1, "to", NULL };
-    struct en_word word_a = { 1, 0, "you", NULL };
-
-    /* forming segments */
-
-    struct en_word * segment_1 = new_line ( & word_101 );
-    struct en_word * segment_2 = new_line ( & word_102 );
-    struct en_word * segment_3 = new_line ( & word_51 );
-
-    link_words
-    (
-        2,
-        segment_1,                  /* break zone */
-        & word_7                    /* verb zone */
-    );
-
-    link_words
-    (
-        2,
-        segment_2,                  /* break zone */
-        & word_2                    /* verb zone */
-    );
-
-    link_words
-    (
-        2,
-        segment_3,                  /* verb zone */
-        & word_52                   /* object zone */
-    );
-
-    /* inserting a subject */
-
-    link_words ( 2, segment_1, & word_a );
-
-    /* forming a sentence */
-
-    segment_1 = new_multiline ( segment_1 );
-    link_lines ( 3, segment_1, segment_2, segment_3 );
-    sentence . starting_point = & word_51;
-    sentence . starting_line = segment_3;
-    sentence . segments = segment_1;
-
-    /* outputting a sentence */
-
-    jump ( 0, & sentence );
+    insert_with_starting_point ( & word_51 );
 }
 
 void insert_15 ( void )
