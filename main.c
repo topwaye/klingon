@@ -80,7 +80,6 @@ struct en_content
 {
     int outer_starting;
     struct en_word * starting_point;
-    struct en_word * starting_line;
     struct en_word * segments;
 };
 
@@ -94,7 +93,7 @@ void print ( struct en_word * t )
 
 void jump ( int depth, struct en_content * sentence )
 {
-    struct en_word * r, * s, * p, * q, * t;
+    struct en_word * r, * p, * q, * t;
 
     if ( sentence )
     {
@@ -106,17 +105,13 @@ void jump ( int depth, struct en_content * sentence )
             {
                 if ( ! sentence -> outer_starting )
                 {
-                    s = sentence -> starting_line;
-                    if ( s )
+                    t = q;
+                    do
                     {
-                        t = q;
-                        do
-                        {
-                            print ( t );
-                            jump ( depth + 1, t -> sen_content );
-                            t = t -> next;
-                        } while ( t != s );
-                    }
+                        print ( t );
+                        jump ( depth + 1, t -> sen_content );
+                        t = t -> next;
+                    } while ( t );
                 }
             }
 
@@ -131,9 +126,9 @@ void jump ( int depth, struct en_content * sentence )
                     print ( t );
                     jump ( depth + 1, t -> sen_content );
                     t = t -> next;
-                } while ( t != p );
+                } while ( t );
                 p = p -> down;
-            } while ( p != r );
+            } while ( p );
         }
     }
 
@@ -155,7 +150,8 @@ void link_words_ahead ( int len, struct en_word * list, ... )
         assert ( p );
         assert ( list );
         t = list -> prior;
-        t -> next = p;
+        if ( t )
+            t -> next = p;
         list -> prior = p;
         p -> prior = t;
         p -> next = list;
@@ -178,7 +174,8 @@ void link_words ( int len, struct en_word * list, ... )
         assert ( p );
         assert ( list );
         t = list -> next;
-        t -> prior = p;
+        if ( t )
+            t -> prior = p;
         list -> next = p;
         p -> prior = list;
         p -> next = t;
@@ -213,15 +210,15 @@ void link_lines ( int len, struct en_word * list, ... )
 struct en_word * new_line ( struct en_word * list )
 {
     assert ( list );
-    list -> prior = list;
-    list -> next = list;
+    list -> prior = NULL;
+    list -> next = NULL;
     return list;
 }
 
 struct en_word * new_multiline ( struct en_word * list )
 {
     assert ( list );
-    list -> down = list;
+    list -> down = NULL;
     return list;
 }
 
@@ -259,6 +256,11 @@ struct en_word word_53 = { 1, 0, "love", NULL };
 
 struct en_word word_54 = { 1, 0, "loved", NULL };
 
+struct en_word word_60 = { 1, 0, "give", NULL };
+struct en_word word_61 = { 1, 0, "him", NULL };
+
+struct en_word word_62 = { 1, 0, "money", NULL };
+
 void insert_1 ( void )
 {
     struct en_content sentence = { 0 };
@@ -294,7 +296,6 @@ void insert_1 ( void )
     segment_1 = new_multiline ( segment_1 );
     link_lines ( 2, segment_1, segment_2 );
     sentence . starting_point = & word_3;
-    sentence . starting_line = segment_1;
     sentence . segments = segment_1;
 
     /* outputting a sentence */
@@ -386,7 +387,6 @@ void insert_3 ( void )
     link_lines ( 2, segment_1, segment_2 );
     sentence_1 . outer_starting = 1;
     sentence_1 . starting_point = & word_3;
-    sentence_1 . starting_line = segment_1;
     sentence_1 . segments = segment_1;
 
     /* filling word 0 */
@@ -414,7 +414,6 @@ void insert_3 ( void )
     segment_3 = new_multiline ( segment_3 );
     link_lines ( 1, segment_3 );
     sentence_2 . starting_point = & word_3;
-    sentence_2 . starting_line = segment_1;
     sentence_2 . segments = segment_3;
 
     /* outputting sentence 2 */
@@ -648,7 +647,6 @@ void insert_9 ( void )
     segment_1 = new_multiline ( segment_1 );
     link_lines ( 1, segment_1 );
     sentence . starting_point = & word_52;
-    sentence . starting_line = segment_1;
     sentence . segments = segment_1;
 
     /* outputting a sentence */
@@ -725,7 +723,6 @@ void insert_11 ( void )
     segment_1 = new_multiline ( segment_1 );
     link_lines ( 2, segment_1, segment_2 );
     sentence . starting_point = & word_52;
-    sentence . starting_line = segment_2;
     sentence . segments = segment_1;
 
     /* outputting a sentence */
@@ -769,7 +766,6 @@ void insert_12 ( void )
     segment_1 = new_multiline ( segment_1 );
     link_lines ( 2, segment_1, segment_2 );
     sentence . starting_point = & word_52;
-    sentence . starting_line = segment_2;
     sentence . segments = segment_1;
 
     /* outputting a sentence */
@@ -820,7 +816,6 @@ void insert_with_starting_point ( struct en_word * starting_point )
     segment_1 = new_multiline ( segment_1 );
     link_lines ( 3, segment_1, segment_2, segment_3 );
     sentence . starting_point = starting_point;
-    sentence . starting_line = segment_3;
     sentence . segments = segment_1;
 
     /* outputting a sentence */
@@ -881,6 +876,90 @@ void insert_15 ( void )
     jump ( 0, & sentence );
 }
 
+void insert_16 ( void )
+{
+    struct en_content sentence = { 0 };
+    struct en_word word_101 = { 1, 2, "do", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
+
+    /* forming segments */
+
+    struct en_word * segment_1 = new_line ( & word_101 );
+    struct en_word * segment_2 = new_line ( & word_3 );
+
+    link_words
+    (
+        3,
+        segment_1,                  /* break zone */
+        & word_60,                  /* verb zone */
+        & word_61                   /* object zone */
+    );
+
+    link_words
+    (
+        1,
+        segment_2                   /* object zone */
+    );
+
+    /* inserting a subject */
+
+    link_words ( 2, segment_1, & word_a );
+
+    /* forming a sentence */
+
+    segment_1 = new_multiline ( segment_1 );
+    link_lines ( 2, segment_1, segment_2 );
+    sentence . starting_point = & word_3;
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
+}
+
+void insert_17 ( void )
+{
+    struct en_content sentence = { 0 };
+    struct en_word word_101 = { 1, 2, "do", NULL };
+    struct en_word word_102 = { 1, 0, "to", NULL };
+    struct en_word word_a = { 1, 0, "you", NULL };
+
+    /* forming segments */
+
+    struct en_word * segment_1 = new_line ( & word_101 );
+    struct en_word * segment_2 = new_line ( & word_102 );
+
+    link_words
+    (
+        3,
+        segment_1,                  /* break zone */
+        & word_60,                  /* verb zone */
+        & word_62                   /* object zone */
+    );
+
+    link_words
+    (
+        1,
+        segment_2,                  /* verb zone */
+        & word_52                   /* object zone */
+    );
+
+    /* inserting a subject */
+
+    link_words ( 2, segment_1, & word_a );
+
+    /* forming a sentence */
+
+    segment_1 = new_multiline ( segment_1 );
+    link_lines ( 2, segment_1, segment_2 );
+    sentence . starting_point = & word_52;
+    sentence . segments = segment_1;
+
+    /* outputting a sentence */
+
+    jump ( 0, & sentence );
+}
+
 typedef void ( * insert_t ) ( void );
 
 void run ( void )
@@ -903,7 +982,9 @@ void run ( void )
         insert_12,
         insert_13,
         insert_14,
-        insert_15
+        insert_15,
+        insert_16,
+        insert_17
     };
 
     n = sizeof ( func ) / sizeof ( func [ 0 ] );
@@ -926,8 +1007,16 @@ int main ( void )
     printf ( " /  represents a division slash in mathematics.\n" );
     printf ( " O  represents an object.\n" );
     printf ( "\n" );
-    printf ( "# no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.\n" );
-    printf ( "# insert a subject among the break syllables of the verb.\n" );
+    printf ( "# no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't';\n" );
+    printf ( "# insert a subject among the break syllables of the verb:\n" );
+    printf ( "# \n" );
+    printf ( "# don't eat    don't you eat\n" );
+    printf ( "# --------- => -------------\n" );
+    printf ( "#   bread          bread\n" );
+    printf ( "#\n" );
+    printf ( "# don't eat    you don't eat\n" );
+    printf ( "# --------- => -------------\n" );
+    printf ( "#   bread          bread\n" );
     printf ( "\n" );
     printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "************************************************************************************************************************\n" );
