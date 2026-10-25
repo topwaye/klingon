@@ -141,12 +141,12 @@ void link_words_ahead ( int len, struct en_word * list, ... )
 
     va_start ( ap, list );
 
-    assert ( list );
     assert ( len > 0 );
     while ( -- len )
     {
         p = va_arg ( ap, struct en_word * );
         assert ( p );
+        assert ( list );
         t = list -> prior;
         if ( t )
             t -> next = p;
