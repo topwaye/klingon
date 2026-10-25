@@ -962,40 +962,40 @@ void insert_17 ( void )
 
 typedef void ( * insert_t ) ( void );
 
+const insert_t insert_func [ ] =
+{
+    insert_1,
+    insert_2,
+    insert_3,
+    insert_4,
+    insert_5,
+    insert_6,
+    insert_7,
+    insert_8,
+    insert_9,
+    insert_10,
+    insert_11,
+    insert_12,
+    insert_13,
+    insert_14,
+    insert_15,
+    insert_16,
+    insert_17
+};
+
+const int insert_count = sizeof ( insert_func ) / sizeof ( insert_func [ 0 ] );
+
 void run ( void )
 {
-    int i, n;
+    int i;
 
-    insert_t func [ ] =
-    {
-        insert_1,
-        insert_2,
-        insert_3,
-        insert_4,
-        insert_5,
-        insert_6,
-        insert_7,
-        insert_8,
-        insert_9,
-        insert_10,
-        insert_11,
-        insert_12,
-        insert_13,
-        insert_14,
-        insert_15,
-        insert_16,
-        insert_17
-    };
-
-    n = sizeof ( func ) / sizeof ( func [ 0 ] );
-
-    for ( i = 0; i < n; i ++ )
-        func [ i ] ( );
+    for ( i = 0; i < insert_count; i ++ )
+        insert_func [ i ] ( );
 }
 
 int main ( void )
 {
-    printf ( "************************************************************************************************************************\n" );
+    printf ( "***********************************************************************************************************************\n" );
     printf ( "an English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
     printf ( " '''V      'S''V\n" );
@@ -1019,7 +1019,7 @@ int main ( void )
     printf ( "#   bread          bread\n" );
     printf ( "\n" );
     printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
-    printf ( "************************************************************************************************************************\n" );
+    printf ( "***********************************************************************************************************************\n" );
 
     run ( );
 
