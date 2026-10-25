@@ -939,7 +939,7 @@ void insert_17 ( void )
 
     link_words
     (
-        1,
+        2,
         segment_2,                  /* verb zone */
         & word_52                   /* object zone */
     );
