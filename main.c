@@ -69,7 +69,7 @@ struct en_content;
 
 struct en_word
 {
-    char content [ EN_CHAR_NUM ];   /* must be the 1st position */
+    char content [ EN_CHAR_NUM ];
     int breakpoint;                 /* a breakpoint or not */
     int selected;                   /* select or unselect the word */
     struct en_content * sen_content;
@@ -80,7 +80,7 @@ struct en_word
 
 struct en_content
 {
-    struct en_word * segments;      /* must be the 1st position */
+    struct en_word * segments;
     struct en_word * starting_point;
     int outer_starting;
 };
@@ -89,19 +89,19 @@ struct en_content
 
 void print ( struct en_word * t );
 
-void jump ( int depth, struct en_content * sentence )
+void jump ( int depth, struct en_content * sen )
 {
     struct en_word * r, * p, * q, * t;
 
-    if ( sentence )
+    if ( sen )
     {
-        r = * ( struct en_word * * ) sentence;
+        r = sen -> segments;
         if ( r )
         {
-            q = sentence -> starting_point;
+            q = sen -> starting_point;
             if ( q )
             {
-                if ( ! sentence -> outer_starting )
+                if ( ! sen -> outer_starting )
                 {
                     t = q;
                     do
@@ -141,12 +141,12 @@ void link_words_ahead ( int len, struct en_word * list, ... )
 
     va_start ( ap, list );
 
+    assert ( list );
     assert ( len > 0 );
     while ( -- len )
     {
         p = va_arg ( ap, struct en_word * );
         assert ( p );
-        assert ( list );
         t = list -> prior;
         if ( t )
             t -> next = p;
@@ -220,37 +220,40 @@ struct en_word * new_multiline ( struct en_word * list )
     return list;
 }
 
-struct en_word * new_word ( struct en_word * t )
+struct en_word * initialize_word ( struct en_word * t, int sel, struct en_content * sen )
 {
     assert ( t );
-    t -> selected = 1;
-    t -> sen_content = NULL;
+    t -> selected = sel;
+    t -> sen_content = sen;
     return t;
+}
+
+struct en_word * new_word ( struct en_word * t )
+{
+    return initialize_word ( t, 1, NULL );
 }
 
 struct en_word * new_word_with_sel ( struct en_word * t, int sel )
 {
-    assert ( t );
-    t -> selected = sel;
-    t -> sen_content = NULL;
-    return t;
+    return initialize_word ( t, sel, NULL );
 }
 
-struct en_word * new_word_with_sen ( struct en_word * t, struct en_content * sentence )
+struct en_word * new_word_with_sen ( struct en_word * t, struct en_content * sen )
 {
-    assert ( t );
-    t -> selected = 1;
-    t -> sen_content = sentence;
-    return t;
+    return initialize_word ( t, 1, sen );
 }
 
-struct en_content * new_content ( struct en_content * sentence )
+typedef void ( * jump_t ) ( int, struct en_content * );
+
+void set_content ( struct en_content * sen, struct en_word * segs, struct en_word * starting, int outer_starting, jump_t jmp_func )
 {
-    assert ( sentence );
-    sentence -> segments = NULL;
-    sentence -> starting_point = NULL;
-    sentence -> outer_starting = 0;
-    return sentence;
+    assert ( sen );
+    sen -> segments = segs;
+    sen -> starting_point = starting;
+    sen -> outer_starting = outer_starting;
+
+    if ( jmp_func )
+        jmp_func ( 0, sen );
 }
 
 /* verb-object phrases */
@@ -357,13 +360,7 @@ void insert_1 ( void )
     new_multiline ( segment_1 );
     link_lines ( 2, segment_1, segment_2 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-    sentence -> starting_point = word_3;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, word_3, 0, jump );
 }
 
 void insert_2 ( void )
@@ -399,12 +396,7 @@ void insert_2 ( void )
     new_multiline ( segment_1 );
     link_lines ( 2, segment_1, segment_2 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_3 ( void )
@@ -438,10 +430,7 @@ void insert_3 ( void )
     new_multiline ( segment_1 );
     link_lines ( 2, segment_1, segment_2 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-    sentence -> starting_point = word_3;
-    sentence -> outer_starting = 1;
+    set_content ( sentence, segment_1, word_3, 1, NULL );
 
     /* filling word 0 */
 
@@ -468,13 +457,7 @@ void insert_3 ( void )
     new_multiline ( segment_3 );
     link_lines ( 1, segment_3 );
 
-    new_content ( sentence + 1 );
-    * ( struct en_word * * ) ( sentence + 1 ) = segment_3;
-    ( sentence + 1 ) -> starting_point = word_3;
-
-    /* outputting sentence 2 */
-
-    jump ( 0, sentence + 1 );
+    set_content ( sentence + 1, segment_3, word_3, 0, jump );
 }
 
 void insert_4 ( void )
@@ -501,12 +484,7 @@ void insert_4 ( void )
     new_multiline ( segment_1 );
     link_lines ( 1, segment_1 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_5 ( void )
@@ -526,12 +504,7 @@ void insert_5 ( void )
     new_multiline ( segment_1 );
     link_lines ( 1, segment_1 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_6 ( void )
@@ -553,12 +526,7 @@ void insert_6 ( void )
     new_multiline ( segment_1 );
     link_lines ( 1, segment_1 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_7 ( void )
@@ -580,8 +548,7 @@ void insert_7 ( void )
     new_multiline ( segment_1 );
     link_lines ( 1, segment_1 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
+    set_content ( sentence, segment_1, NULL, 0, NULL );
 
     /* filling word 0 */
 
@@ -611,12 +578,7 @@ void insert_7 ( void )
     new_multiline ( segment_2 );
     link_lines ( 1, segment_2 );
 
-    new_content ( sentence + 1 );
-    * ( struct en_word * * ) ( sentence + 1 ) = segment_2;
-
-    /* outputting sentence 2 */
-
-    jump ( 0, sentence + 1 );
+    set_content ( sentence + 1, segment_2, NULL, 0, jump );
 }
 
 void insert_8 ( void )
@@ -657,12 +619,7 @@ void insert_8 ( void )
     new_multiline ( segment_1 );
     link_lines ( 3, segment_1, segment_2, segment_3 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_9 ( void )
@@ -687,13 +644,7 @@ void insert_9 ( void )
     new_multiline ( segment_1 );
     link_lines ( 1, segment_1 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-    sentence -> starting_point = word_52;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, word_52, 0, jump );
 }
 
 void insert_10 ( void )
@@ -719,12 +670,7 @@ void insert_10 ( void )
     new_multiline ( segment_1 );
     link_lines ( 1, segment_1 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_11 ( void )
@@ -758,13 +704,7 @@ void insert_11 ( void )
     new_multiline ( segment_1 );
     link_lines ( 2, segment_1, segment_2 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-    sentence -> starting_point = word_52;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, word_52, 0, jump );
 }
 
 void insert_12 ( void )
@@ -798,13 +738,7 @@ void insert_12 ( void )
     new_multiline ( segment_1 );
     link_lines ( 2, segment_1, segment_2 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-    sentence -> starting_point = word_52;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, word_52, 0, jump );
 }
 
 void insert_with_starting_point ( struct en_word * starting_point )
@@ -845,13 +779,7 @@ void insert_with_starting_point ( struct en_word * starting_point )
     new_multiline ( segment_1 );
     link_lines ( 3, segment_1, segment_2, segment_3 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-    sentence -> starting_point = starting_point;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, starting_point, 0, jump );
 }
 
 void insert_13 ( void )
@@ -895,12 +823,7 @@ void insert_15 ( void )
     new_multiline ( segment_1 );
     link_lines ( 2, segment_1, segment_2 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_16 ( void )
@@ -933,13 +856,7 @@ void insert_16 ( void )
     new_multiline ( segment_1 );
     link_lines ( 2, segment_1, segment_2 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-    sentence -> starting_point = word_3;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, word_3, 0, jump );
 }
 
 void insert_17 ( void )
@@ -973,13 +890,7 @@ void insert_17 ( void )
     new_multiline ( segment_1 );
     link_lines ( 2, segment_1, segment_2 );
 
-    new_content ( sentence );
-    * ( struct en_word * * ) sentence = segment_1;
-    sentence -> starting_point = word_52;
-
-    /* outputting a sentence */
-
-    jump ( 0, sentence );
+    set_content ( sentence, segment_1, word_52, 0, jump );
 }
 
 /* interface function area */
@@ -1064,19 +975,19 @@ const char * FMT_NOT        = "not ";
 void print_content ( struct en_word * t )
 {
     assert ( t );
-    if ( * ( char * ) t )
+    if ( t -> content [ 0 ] )
     {
         if ( ! t -> selected )
             switch ( t -> breakpoint )
             {
-                case 2 : printf ( FMT_STR_NT, ( char * ) t ); break;
+                case 2 : printf ( FMT_STR_NT, t -> content ); break;
                 case 3 : printf ( FMT_AI_NT ); break;
                 case 4 : printf ( FMT_WO_NT ); break;
                 case 5 : printf ( FMT_SHA_NT ); break;
-                default : printf ( FMT_NOT_S, ( char * ) t );
+                default : printf ( FMT_NOT_S, t -> content );
             }
         else
-            printf ( FMT_STR_SPACE, ( char * ) t );
+            printf ( FMT_STR_SPACE, t -> content );
     }
     else
     {
