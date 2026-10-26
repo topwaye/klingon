@@ -609,7 +609,7 @@ void insert_8 ( void )
         new_word ( word_32 )        /* verb zone */
     );
 
-    /* inserting a subject */
+    /* inserting subjects */
 
     link_words ( 2, segment_1, new_word ( word_a ) );
     link_words ( 2, segment_3, new_word ( word_a + 1 ) );
