@@ -312,7 +312,7 @@ struct en_word word_110 [ ] = { { "shall", 5 } };
 struct en_word word_a [ ] = { { "you", 0 }, { "you", 0 } };
 struct en_word word_c [ ] = { { "he", 0 } };
 
-/* word 0 */
+/* word_0 */
 
 struct en_word word_0 [ ] = { { "", 0 } };
 
@@ -422,7 +422,7 @@ void insert_3 ( void )
 
     new_sentence ( sentence, segment_1, word_3, 1, NULL );
 
-    /* filling word 0 */
+    /* filling word_0 */
 
     new_word_with_sen ( word_0, sentence );
 
@@ -535,7 +535,7 @@ void insert_7 ( void )
 
     new_sentence ( sentence, segment_1, NULL, 0, NULL );
 
-    /* filling word 0 */
+    /* filling word_0 */
 
     new_word_with_sen ( word_0, sentence );
 
@@ -892,7 +892,7 @@ void insert_18 ( void )
 
     new_sentence ( sentence, segment_1, word_52, 0, NULL );
 
-    /* filling word 0 */
+    /* filling word_0 */
 
     new_word_with_sen ( word_0, sentence );
 
@@ -942,7 +942,7 @@ void insert_19 ( void )
 
     new_sentence ( sentence, segment_1, word_81, 0, NULL );
 
-    /* filling word 54 */
+    /* filling word_54 */
 
     new_word_with_sen ( word_54, sentence );
 
