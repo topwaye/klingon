@@ -942,7 +942,7 @@ void insert_19 ( void )
 
     new_sentence ( sentence, segment_1, word_81, 0, NULL );
 
-    /* filling word 56 */
+    /* filling word 54 */
 
     new_word_with_sen ( word_54, sentence );
 
