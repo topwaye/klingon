@@ -29,6 +29,7 @@ with who do you want to play
 do you want not to be loved  
 what do you give him  
 who do you give money to  
+are you who you are
 
 klingon shows how our brains actually think to form sentences
 
