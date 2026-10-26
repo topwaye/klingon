@@ -233,7 +233,7 @@ struct en_word * new_word_with_sen ( struct en_word * t, struct en_content * sen
 
 typedef void ( * jump_t ) ( int, struct en_content * );
 
-void set_content ( struct en_content * sen, struct en_word * segs, struct en_word * starting, int outer_starting, jump_t jmp_func )
+void new_sentence ( struct en_content * sen, struct en_word * segs, struct en_word * starting, int outer_starting, jump_t jmp_func )
 {
     assert ( sen );
     sen -> segments = segs;
@@ -347,7 +347,7 @@ void insert_1 ( void )
 
     link_lines ( 2, segment_1, segment_2 );
 
-    set_content ( sentence, segment_1, word_3, 0, jump );
+    new_sentence ( sentence, segment_1, word_3, 0, jump );
 }
 
 void insert_2 ( void )
@@ -382,7 +382,7 @@ void insert_2 ( void )
 
     link_lines ( 2, segment_1, segment_2 );
 
-    set_content ( sentence, segment_1, NULL, 0, jump );
+    new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_3 ( void )
@@ -415,7 +415,7 @@ void insert_3 ( void )
 
     link_lines ( 2, segment_1, segment_2 );
 
-    set_content ( sentence, segment_1, word_3, 1, NULL );
+    new_sentence ( sentence, segment_1, word_3, 1, NULL );
 
     /* filling word 0 */
 
@@ -441,7 +441,7 @@ void insert_3 ( void )
 
     link_lines ( 1, segment_3 );
 
-    set_content ( sentence + 1, segment_3, word_3, 0, jump );
+    new_sentence ( sentence + 1, segment_3, word_3, 0, jump );
 }
 
 void insert_4 ( void )
@@ -467,7 +467,7 @@ void insert_4 ( void )
 
     link_lines ( 1, segment_1 );
 
-    set_content ( sentence, segment_1, NULL, 0, jump );
+    new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_5 ( void )
@@ -486,7 +486,7 @@ void insert_5 ( void )
 
     link_lines ( 1, segment_1 );
 
-    set_content ( sentence, segment_1, NULL, 0, jump );
+    new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_6 ( void )
@@ -507,7 +507,7 @@ void insert_6 ( void )
 
     link_lines ( 1, segment_1 );
 
-    set_content ( sentence, segment_1, NULL, 0, jump );
+    new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_7 ( void )
@@ -528,7 +528,7 @@ void insert_7 ( void )
 
     link_lines ( 1, segment_1 );
 
-    set_content ( sentence, segment_1, NULL, 0, NULL );
+    new_sentence ( sentence, segment_1, NULL, 0, NULL );
 
     /* filling word 0 */
 
@@ -557,7 +557,7 @@ void insert_7 ( void )
 
     link_lines ( 1, segment_2 );
 
-    set_content ( sentence + 1, segment_2, NULL, 0, jump );
+    new_sentence ( sentence + 1, segment_2, NULL, 0, jump );
 }
 
 void insert_8 ( void )
@@ -597,7 +597,7 @@ void insert_8 ( void )
 
     link_lines ( 3, segment_1, segment_2, segment_3 );
 
-    set_content ( sentence, segment_1, NULL, 0, jump );
+    new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_9 ( void )
@@ -621,7 +621,7 @@ void insert_9 ( void )
 
     link_lines ( 1, segment_1 );
 
-    set_content ( sentence, segment_1, word_52, 0, jump );
+    new_sentence ( sentence, segment_1, word_52, 0, jump );
 }
 
 void insert_10 ( void )
@@ -646,7 +646,7 @@ void insert_10 ( void )
 
     link_lines ( 1, segment_1 );
 
-    set_content ( sentence, segment_1, NULL, 0, jump );
+    new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_11 ( void )
@@ -679,7 +679,7 @@ void insert_11 ( void )
 
     link_lines ( 2, segment_1, segment_2 );
 
-    set_content ( sentence, segment_1, word_52, 0, jump );
+    new_sentence ( sentence, segment_1, word_52, 0, jump );
 }
 
 void insert_12 ( void )
@@ -712,7 +712,7 @@ void insert_12 ( void )
 
     link_lines ( 2, segment_1, segment_2 );
 
-    set_content ( sentence, segment_1, word_52, 0, jump );
+    new_sentence ( sentence, segment_1, word_52, 0, jump );
 }
 
 void insert_with_starting_point ( struct en_word * starting )
@@ -752,7 +752,7 @@ void insert_with_starting_point ( struct en_word * starting )
 
     link_lines ( 3, segment_1, segment_2, segment_3 );
 
-    set_content ( sentence, segment_1, starting, 0, jump );
+    new_sentence ( sentence, segment_1, starting, 0, jump );
 }
 
 void insert_13 ( void )
@@ -795,7 +795,7 @@ void insert_15 ( void )
 
     link_lines ( 2, segment_1, segment_2 );
 
-    set_content ( sentence, segment_1, NULL, 0, jump );
+    new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_16 ( void )
@@ -827,7 +827,7 @@ void insert_16 ( void )
 
     link_lines ( 2, segment_1, segment_2 );
 
-    set_content ( sentence, segment_1, word_3, 0, jump );
+    new_sentence ( sentence, segment_1, word_3, 0, jump );
 }
 
 void insert_17 ( void )
@@ -860,7 +860,7 @@ void insert_17 ( void )
 
     link_lines ( 2, segment_1, segment_2 );
 
-    set_content ( sentence, segment_1, word_52, 0, jump );
+    new_sentence ( sentence, segment_1, word_52, 0, jump );
 }
 
 /* interface function area */
