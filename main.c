@@ -226,7 +226,7 @@ struct en_word * new_word_with_no_sel ( struct en_word * t )
     return init_word ( t, 1, NULL );
 }
 
-struct en_word * new_word_with_sen ( struct en_word * t, struct en_content * sen )
+struct en_word * new_null_word ( struct en_word * t, struct en_content * sen )
 {
     return init_word ( t, 0, sen );
 }
@@ -291,6 +291,7 @@ struct en_word word_37 [ ] = { { "to", 0 } };
 struct en_word word_38 [ ] = { { "for", 0 } };
 
 struct en_word word_39 [ ] = { { "do", 0 } };
+struct en_word word_40 [ ] = { { "that", 0 } };
 
 /* break syllables */
 
@@ -313,10 +314,9 @@ struct en_word word_109 [ ] = { { "been", 1 } };
 struct en_word word_b [ ] = { { "you", 0 }, { "you", 0 } };
 struct en_word word_c [ ] = { { "he", 0 } };
 
-/* word_null: an entry point where a sentence nests in */
+/* word_null: the only entry point where a sentence is nested */
 
-struct en_word word_0 [ ] = { { "", 0 } };
-struct en_word word_1 [ ] = { { "that", 0 } };
+struct en_word word_null [ ] = { { 0 } };
 
 /* sentences */
 
@@ -424,9 +424,9 @@ void insert_3 ( void )
 
     new_sentence ( sentence, segment_1, word_12, 1, NULL );
 
-    /* filling word_0 */
+    /* filling word_null */
 
-    new_word_with_sen ( word_0, sentence );
+    new_null_word ( word_null, sentence );
 
     /* forming verb-object segment 3 */
 
@@ -437,7 +437,7 @@ void insert_3 ( void )
         3,
         segment_3,                  /* break zone */
         new_word ( word_15 ),       /* verb zone */
-        word_0                      /* object zone */
+        word_null                   /* object zone */
     );
 
     /* inserting subject 2 */
@@ -537,9 +537,9 @@ void insert_7 ( void )
 
     new_sentence ( sentence, segment_1, NULL, 0, NULL );
 
-    /* filling word_0 */
+    /* filling word_null */
 
-    new_word_with_sen ( word_0, sentence );
+    new_null_word ( word_null, sentence );
 
     /* forming verb-object segment 2 */
 
@@ -549,7 +549,7 @@ void insert_7 ( void )
     (
         5,
         segment_2,                  /* break zone */
-        word_0,                     /* verb zone */
+        word_null,                  /* verb zone */
         new_word ( word_23 ),       /* verb zone */
         new_word ( word_24 ),       /* verb zone */
         new_word ( word_25 )        /* object zone */
@@ -894,9 +894,9 @@ void insert_18 ( void )
 
     new_sentence ( sentence, segment_1, word_30, 0, NULL );
 
-    /* filling word_0 */
+    /* filling word_null */
 
-    new_word_with_sen ( word_0, sentence );
+    new_null_word ( word_null, sentence );
 
     /* forming verb-object segment 2 */
 
@@ -906,7 +906,7 @@ void insert_18 ( void )
     (
         2,
         segment_2,                  /* break zone */
-        word_0                      /* verb zone */
+        word_null                   /* verb zone */
     );
 
     /* inserting subject 2 */
@@ -930,7 +930,7 @@ void insert_19 ( void )
     (
         2,
         segment_1,                  /* verb zone */
-        new_word ( word_1 )         /* object zone */
+        new_word ( word_40 )        /* object zone */
     );
 
     /* inserting subject 1 */
@@ -942,17 +942,17 @@ void insert_19 ( void )
 
     link_lines ( 1, segment_1 );
 
-    new_sentence ( sentence, segment_1, word_1, 0, NULL );
+    new_sentence ( sentence, segment_1, word_40, 0, NULL );
 
-    /* filling word_0 */
+    /* filling word_null */
 
-    new_word_with_sen ( word_0, sentence );
+    new_null_word ( word_null, sentence );
 
     /* forming verb-object segment 2 */
 
     struct en_word * segment_2 = new_word ( word_105 );
     struct en_word * segment_3 = new_word ( word_38 );
-    struct en_word * segment_4 = word_0;
+    struct en_word * segment_4 = word_null;
 
     link_words
     (
@@ -996,7 +996,7 @@ void insert_20 ( void )
     (
         2,
         segment_1,                  /* verb zone */
-        new_word ( word_1 )         /* object zone */
+        new_word ( word_40 )        /* object zone */
     );
 
     /* inserting subject 1 */
@@ -1008,11 +1008,11 @@ void insert_20 ( void )
 
     link_lines ( 1, segment_1 );
 
-    new_sentence ( sentence, segment_1, word_1, 0, NULL );
+    new_sentence ( sentence, segment_1, word_40, 0, NULL );
 
-    /* filling word_0 */
+    /* filling word_null */
 
-    new_word_with_sen ( word_0, sentence );
+    new_null_word ( word_null, sentence );
 
     /* forming verb-object segment 2 */
 
@@ -1025,7 +1025,7 @@ void insert_20 ( void )
         segment_2,                  /* break zone */
         new_word ( word_31 ),       /* verb zone */
         new_word ( word_32 ),       /* object zone */
-        word_0                      /* object zone */
+        word_null                   /* object zone */
     );
 
     link_words
@@ -1078,9 +1078,9 @@ void insert_21 ( void )
 
     new_sentence ( sentence, segment_1, NULL, 0, NULL );
 
-    /* filling word_1 */
+    /* filling word_null */
 
-    new_word_with_sen ( word_1, sentence );
+    new_null_word ( word_null, sentence );
 
     /* forming verb-object segment 2 */
 
@@ -1088,10 +1088,11 @@ void insert_21 ( void )
 
     link_words
     (
-        3,
+        4,
         segment_2,                  /* break zone */
         new_word ( word_31 ),       /* verb zone */
-        word_1                      /* object zone */
+        word_40,                    /* object zone */
+        word_null                   /* object zone */
     );
 
     /* inserting subject 2 */
@@ -1137,9 +1138,9 @@ void insert_22 ( void )
 
     new_sentence ( sentence, segment_1, word_12, 0, NULL );
 
-    /* filling word_0 */
+    /* filling word_null */
 
-    new_word_with_sen ( word_0, sentence );
+    new_null_word ( word_null, sentence );
 
     /* forming verb-object segment 2 */
 
@@ -1150,7 +1151,7 @@ void insert_22 ( void )
         3,
         segment_2,                  /* break zone */
         new_word ( word_31 ),       /* verb zone */
-        word_0                      /* object zone */
+        word_null                   /* object zone */
     );
 
     /* inserting subject 2 */
