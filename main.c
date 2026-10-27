@@ -288,6 +288,8 @@ struct en_word word_62 [ ] = { { "money", 0 } };
 
 struct en_word word_70 [ ] = { { "to", 0 } };
 
+struct en_word word_72 [ ] = { { "for", 0 } };
+
 struct en_word word_80 [ ] = { { "do", 0 } };
 struct en_word word_81 [ ] = { { "that", 0 } };
 
@@ -942,9 +944,143 @@ void insert_19 ( void )
 
     new_sentence ( sentence, segment_1, word_81, 0, NULL );
 
-    /* filling word_54 */
+    /* filling word_0 */
 
-    new_word_with_sen ( word_54, sentence );
+    new_word_with_sen ( word_0, sentence );
+
+    /* forming verb-object segment 2 */
+
+    struct en_word * segment_2 = new_word ( word_106 );
+    struct en_word * segment_3 = new_word ( word_72 );
+    struct en_word * segment_4 = word_0;
+
+    link_words
+    (
+        3,
+        segment_2,                  /* break zone */
+        new_word ( word_53 ),       /* verb zone */
+        new_word ( word_54 )        /* object zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_3,                  /* verb zone */
+        new_word ( word_61 )        /* object zone */
+    );
+
+    link_words
+    (
+        1,
+        segment_4                   /* object zone */
+    );
+
+    /* inserting subject 2 */
+
+    link_words ( 2, segment_2, new_word ( word_c ) );
+
+    /* forming sentence 2 */
+
+    link_lines ( 3, segment_2, segment_3, segment_4 );
+
+    new_sentence ( sentence + 1, segment_2, NULL, 0, jump );
+}
+
+void insert_20 ( void )
+{
+    /* forming verb-object segment 1 */
+
+    struct en_word * segment_1 = new_word ( word_80 );
+
+    link_words
+    (
+        2,
+        segment_1,                  /* verb zone */
+        new_word ( word_81 )        /* object zone */
+    );
+
+    /* inserting subject 1 */
+
+    link_words_ahead ( 2, segment_1, new_word ( word_a ) );
+    segment_1 = word_a;
+
+    /* forming sentence 1 */
+
+    link_lines ( 1, segment_1 );
+
+    new_sentence ( sentence, segment_1, word_81, 0, NULL );
+
+    /* filling word_0 */
+
+    new_word_with_sen ( word_0, sentence );
+
+    /* forming verb-object segment 2 */
+
+    struct en_word * segment_2 = new_word ( word_106 );
+    struct en_word * segment_3 = new_word ( word_72 );
+
+    link_words
+    (
+        4,
+        segment_2,                  /* break zone */
+        new_word ( word_53 ),       /* verb zone */
+        new_word ( word_54 ),       /* object zone */
+        word_0                      /* object zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_3,                  /* verb zone */
+        new_word ( word_61 )        /* object zone */
+    );
+
+    /* inserting subject 2 */
+
+    link_words ( 2, segment_2, new_word ( word_c ) );
+
+    /* forming sentence 2 */
+
+    link_lines ( 2, segment_2, segment_3 );
+
+    new_sentence ( sentence + 1, segment_2, NULL, 0, jump );
+}
+
+void insert_21 ( void )
+{
+    /* forming verb-object segment 1 */
+
+    struct en_word * segment_1 = new_word ( word_80 );
+    struct en_word * segment_3 = new_word ( word_72 );
+
+    link_words
+    (
+        2,
+        segment_1,                  /* verb zone */
+        new_word ( word_54 )        /* object zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_3,                  /* verb zone */
+        new_word ( word_61 )        /* object zone */
+    );
+
+    /* inserting subject 1 */
+
+    link_words_ahead ( 2, segment_1, new_word ( word_a ) );
+    segment_1 = word_a;
+
+    /* forming sentence 1 */
+
+    link_lines ( 2, segment_1, segment_3 );
+
+    new_sentence ( sentence, segment_1, NULL, 0, NULL );
+
+    /* filling word_81 */
+
+    new_word_with_sen ( word_81, sentence );
 
     /* forming verb-object segment 2 */
 
@@ -954,8 +1090,67 @@ void insert_19 ( void )
     (
         3,
         segment_2,                  /* break zone */
-        word_53,                    /* verb zone */
-        word_54                     /* object zone */
+        new_word ( word_53 ),       /* verb zone */
+        word_81                     /* object zone */
+    );
+
+    /* inserting subject 2 */
+
+    link_words ( 2, segment_2, new_word ( word_c ) );
+
+    /* forming sentence 2 */
+
+    link_lines ( 1, segment_2 );
+
+    new_sentence ( sentence + 1, segment_2, NULL, 0, jump );
+}
+
+void insert_22 ( void )
+{
+    /* forming verb-object segment 1 */
+
+    struct en_word * segment_1 = new_word ( word_80 );
+    struct en_word * segment_3 = new_word ( word_72 );
+
+    link_words
+    (
+        2,
+        segment_1,                  /* verb zone */
+        new_word ( word_3 )         /* object zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_3,                  /* verb zone */
+        new_word ( word_61 )        /* object zone */
+    );
+
+    /* inserting subject 1 */
+
+    link_words_ahead ( 2, segment_1, new_word ( word_a ) );
+    segment_1 = word_a;
+
+    /* forming sentence 1 */
+
+    link_lines ( 2, segment_1, segment_3 );
+
+    new_sentence ( sentence, segment_1, word_3, 0, NULL );
+
+    /* filling word_0 */
+
+    new_word_with_sen ( word_0, sentence );
+
+    /* forming verb-object segment 2 */
+
+    struct en_word * segment_2 = new_word ( word_106 );
+
+    link_words
+    (
+        3,
+        segment_2,                  /* break zone */
+        new_word ( word_53 ),       /* verb zone */
+        word_0                      /* object zone */
     );
 
     /* inserting subject 2 */
@@ -993,7 +1188,10 @@ const insert_t insert_func [ ] =
     insert_16,
     insert_17,
     insert_18,
-    insert_19
+    insert_19,
+    insert_20,
+    insert_21,
+    insert_22
 };
 
 const int insert_count = sizeof ( insert_func ) / sizeof ( insert_func [ 0 ] );
