@@ -951,7 +951,7 @@ void insert_19 ( void )
 
     new_null_word ( word_null, sentence );
 
-    /* forming verb-object segment 2 */
+    /* forming verb-object segment 2, 3, 4 */
 
     struct en_word * segment_2 = new_word ( word_105 );
     struct en_word * segment_3 = new_word ( word_38 );
@@ -1017,7 +1017,7 @@ void insert_20 ( void )
 
     new_null_word ( word_null, sentence );
 
-    /* forming verb-object segment 2 */
+    /* forming verb-object segment 2, 3 */
 
     struct en_word * segment_2 = new_word ( word_105 );
     struct en_word * segment_3 = new_word ( word_38 );
@@ -1051,7 +1051,7 @@ void insert_20 ( void )
 
 void insert_21 ( void )
 {
-    /* forming verb-object segment 1 */
+    /* forming verb-object segment 1, 3 */
 
     struct en_word * segment_1 = new_word ( word_39 );
     struct en_word * segment_3 = new_word ( word_38 );
@@ -1111,7 +1111,7 @@ void insert_21 ( void )
 
 void insert_22 ( void )
 {
-    /* forming verb-object segment 1 */
+    /* forming verb-object segment 1, 3 */
 
     struct en_word * segment_1 = new_word ( word_39 );
     struct en_word * segment_3 = new_word ( word_38 );
@@ -1170,7 +1170,7 @@ void insert_22 ( void )
 
 void insert_23 ( void )
 {
-    /* forming verb-object segments */
+    /* forming a verb-object segment */
 
     struct en_word * segment_1 = new_word ( word_104 );
 
@@ -1195,7 +1195,7 @@ void insert_23 ( void )
 
 void insert_24 ( void )
 {
-    /* forming verb-object segments */
+    /* forming a verb-object segment */
 
     struct en_word * segment_1 = new_word ( word_100 );
 
