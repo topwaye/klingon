@@ -30,7 +30,10 @@ do you want not to be loved
 what do you give him  
 who do you give money to  
 are you who you are  
-does he love everything that you do  
+does he love everything for him that you do  
+does he love everything that you do for him  
+does he love that you do everything for him  
+does he love what you do for him  
 
 klingon shows how our brains actually think to form sentences
 
