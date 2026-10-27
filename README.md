@@ -34,6 +34,9 @@ does he love everything for him that you do
 does he love everything that you do for him  
 does he love that you do everything for him  
 does he love what you do for him  
+where do you go  
+where are you  
+where do you play cards  
 
 klingon shows how our brains actually think to form sentences
 
