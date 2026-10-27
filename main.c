@@ -1094,7 +1094,7 @@ void insert_21 ( void )
         4,
         segment_2,                  /* break zone */
         new_word ( word_31 ),       /* verb zone */
-        word_40,                    /* object zone */
+        new_word ( word_40 ),       /* object zone */
         word_null                   /* object zone */
     );
 
