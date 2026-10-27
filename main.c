@@ -293,6 +293,9 @@ struct en_word word_38 [ ] = { { "for", 0 } };
 struct en_word word_39 [ ] = { { "do", 0 } };
 struct en_word word_40 [ ] = { { "that", 0 } };
 
+struct en_word word_41 [ ] = { { "go", 0 } };
+struct en_word word_42 [ ] = { { "where", 0 } };
+
 /* break syllables */
 
 struct en_word word_100 [ ] = { { "are", 2 }, { "are", 2 } };
@@ -1165,6 +1168,87 @@ void insert_22 ( void )
     new_sentence ( sentence + 1, segment_2, NULL, 0, jump );
 }
 
+void insert_23 ( void )
+{
+    /* forming verb-object segments */
+
+    struct en_word * segment_1 = new_word ( word_104 );
+
+    link_words
+    (
+        3,
+        segment_1,                  /* break zone */
+        new_word ( word_41 ),       /* verb zone */
+        new_word ( word_42 )        /* object zone */
+    );
+
+    /* inserting a subject */
+
+    link_words ( 2, segment_1, new_word ( word_b ) );
+
+    /* forming a sentence */
+
+    link_lines ( 1, segment_1 );
+
+    new_sentence ( sentence, segment_1, word_42, 0, jump );
+}
+
+void insert_24 ( void )
+{
+    /* forming verb-object segments */
+
+    struct en_word * segment_1 = new_word ( word_100 );
+
+    link_words
+    (
+        2,
+        segment_1,                  /* break zone */
+        new_word ( word_42 )        /* verb zone */
+    );
+
+    /* inserting a subject */
+
+    link_words ( 2, segment_1, new_word ( word_b ) );
+
+    /* forming a sentence */
+
+    link_lines ( 1, segment_1 );
+
+    new_sentence ( sentence, segment_1, word_42, 0, jump );
+}
+
+void insert_25 ( void )
+{
+    /* forming verb-object segments */
+
+    struct en_word * segment_1 = new_word ( word_104 );
+    struct en_word * segment_2 = new_word ( word_42 );
+
+    link_words
+    (
+        3,
+        segment_1,                  /* break zone */
+        new_word ( word_11 ),       /* verb zone */
+        new_word ( word_18 )        /* object zone */
+    );
+
+    link_words
+    (
+        1,
+        segment_2                   /* object zone */
+    );
+
+    /* inserting a subject */
+
+    link_words ( 2, segment_1, new_word ( word_b ) );
+
+    /* forming a sentence */
+
+    link_lines ( 2, segment_1, segment_2 );
+
+    new_sentence ( sentence, segment_1, word_42, 0, jump );
+}
+
 /* interface function area */
 
 typedef void ( * insert_t ) ( void );
@@ -1192,7 +1276,10 @@ const insert_t insert_func [ ] =
     insert_19,
     insert_20,
     insert_21,
-    insert_22
+    insert_22,
+    insert_23,
+    insert_24,
+    insert_25
 };
 
 const int insert_count = sizeof ( insert_func ) / sizeof ( insert_func [ 0 ] );
