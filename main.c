@@ -246,60 +246,63 @@ void new_sentence ( struct en_content * sen, struct en_word * segs, struct en_wo
 
 /* verb-object phrases */
 
-struct en_word word_0 [ ] = { { "...", 0 } };
+struct en_word word_0 [ ] = { { "(...)" }, { "(...)" } };
 
-struct en_word word_11 [ ] = { { "play", 0 } };
-struct en_word word_12 [ ] = { { "what", 0 } };
+struct en_word word_11 [ ] = { { "play" } };
+struct en_word word_12 [ ] = { { "what" } };
 
-struct en_word word_13 [ ] = { { "at", 0 } };
-struct en_word word_14 [ ] = { { "home", 0 } };
+struct en_word word_13 [ ] = { { "at" } };
+struct en_word word_14 [ ] = { { "home" } };
 
-struct en_word word_15 [ ] = { { "think", 0 } };
+struct en_word word_15 [ ] = { { "think" } };
 
-struct en_word word_16 [ ] = { { "want", 0 } };
+struct en_word word_16 [ ] = { { "want" } };
 
-struct en_word word_17 [ ] = { { "playing", 0 } };
-struct en_word word_18 [ ] = { { "cards", 0 } };
+struct en_word word_17 [ ] = { { "playing" } };
+struct en_word word_18 [ ] = { { "cards" } };
 
-struct en_word word_19 [ ] = { { "bad", 0 } };
+struct en_word word_19 [ ] = { { "bad" } };
 
-struct en_word word_20 [ ] = { { "in", 0 } };
-struct en_word word_21 [ ] = { { "my", 0 }, { "my", 0 } };
-struct en_word word_22 [ ] = { { "verse", 0 } };
+struct en_word word_20 [ ] = { { "in" } };
+struct en_word word_21 [ ] = { { "my" }, { "my" } };
+struct en_word word_22 [ ] = { { "verse" } };
 
-struct en_word word_23 [ ] = { { "ever", 0 } };
-struct en_word word_24 [ ] = { { "live", 0 } };
-struct en_word word_25 [ ] = { { "young", 0 } };
+struct en_word word_23 [ ] = { { "ever" } };
+struct en_word word_24 [ ] = { { "live" } };
+struct en_word word_25 [ ] = { { "young" } };
 
-struct en_word word_26 [ ] = { { "singing", 0 } };
-struct en_word word_27 [ ] = { { "or", 0 } };
-struct en_word word_28 [ ] = { { "dancing", 0 } };
+struct en_word word_26 [ ] = { { "singing" } };
+struct en_word word_27 [ ] = { { "or" } };
+struct en_word word_28 [ ] = { { "dancing" } };
 
-struct en_word word_29 [ ] = { { "with", 0 } };
-struct en_word word_30 [ ] = { { "who", 0 } };
+struct en_word word_29 [ ] = { { "with" } };
+struct en_word word_30 [ ] = { { "who" } };
 
-struct en_word word_31 [ ] = { { "love", 0 } };
-struct en_word word_32 [ ] = { { "everything", 0 } };
+struct en_word word_31 [ ] = { { "love" } };
+struct en_word word_32 [ ] = { { "everything" } };
 
-struct en_word word_33 [ ] = { { "loved", 0 } };
+struct en_word word_33 [ ] = { { "loved" } };
 
-struct en_word word_34 [ ] = { { "give", 0 } };
-struct en_word word_35 [ ] = { { "him", 0 } };
+struct en_word word_34 [ ] = { { "give" } };
+struct en_word word_35 [ ] = { { "him" } };
 
-struct en_word word_36 [ ] = { { "money", 0 } };
+struct en_word word_36 [ ] = { { "money" } };
 
-struct en_word word_37 [ ] = { { "to", 0 } };
+struct en_word word_37 [ ] = { { "to" } };
 
-struct en_word word_38 [ ] = { { "for", 0 } };
+struct en_word word_38 [ ] = { { "for" } };
 
-struct en_word word_39 [ ] = { { "do", 0 } };
-struct en_word word_40 [ ] = { { "that", 0 } };
+struct en_word word_39 [ ] = { { "do" } };
+struct en_word word_40 [ ] = { { "that" } };
 
-struct en_word word_41 [ ] = { { "go", 0 } };
-struct en_word word_42 [ ] = { { "where", 0 } };
+struct en_word word_41 [ ] = { { "go" } };
+struct en_word word_42 [ ] = { { "where" } };
 
-struct en_word word_43 [ ] = { { "as", 0 }, { "as", 0 } };
-struct en_word word_44 [ ] = { { "tall", 0 } };
+struct en_word word_43 [ ] = { { "as" }, { "as" } };
+struct en_word word_44 [ ] = { { "tall" } };
+
+struct en_word word_45 [ ] = { { "work" } };
+struct en_word word_46 [ ] = { { "hard" } };
 
 /* break syllables */
 
@@ -317,10 +320,12 @@ struct en_word word_107 [ ] = { { "would", 2 } };
 struct en_word word_108 [ ] = { { "have", 1 } };
 struct en_word word_109 [ ] = { { "been", 1 } };
 
+struct en_word word_110 [ ] = { { "can", 6 } };
+
 /* subjects */
 
-struct en_word word_b [ ] = { { "you", 0 }, { "you", 0 } };
-struct en_word word_c [ ] = { { "he", 0 } };
+struct en_word word_b [ ] = { { "you" }, { "you" } };
+struct en_word word_c [ ] = { { "he" } };
 
 /* word_null: the only entry point where a sentence is nested */
 
@@ -1258,14 +1263,14 @@ void insert_26 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word ( word_100 );
+    struct en_word * segment_1 = new_word_with_no_sel ( word_100 );
     struct en_word * segment_3 = new_word ( word_43 + 1 );
 
     link_words
     (
         3,
         segment_1,                          /* break zone */
-        new_word_with_no_sel ( word_43 ),   /* verb zone */
+        new_word ( word_43 ),               /* verb zone */
         new_word ( word_44 )                /* verb zone */
     );
 
@@ -1291,7 +1296,7 @@ void insert_27 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word ( word_100 );
+    struct en_word * segment_1 = new_word_with_no_sel ( word_100 );
     struct en_word * segment_2 = new_word ( word_43 + 1 );
     struct en_word * segment_3 = new_word ( word_101 );
 
@@ -1299,7 +1304,7 @@ void insert_27 ( void )
     (
         3,
         segment_1,                          /* break zone */
-        new_word_with_no_sel ( word_43 ),   /* verb zone */
+        new_word ( word_43 ),               /* verb zone */
         new_word ( word_44 )                /* verb zone */
     );
 
@@ -1323,6 +1328,53 @@ void insert_27 ( void )
     link_words ( 2, segment_1, new_word ( word_b ) );
     link_words_ahead ( 2, segment_3, new_word ( word_c ) );
     segment_3 = word_c;
+
+    /* forming a sentence */
+
+    link_lines ( 3, segment_1, segment_2, segment_3 );
+
+    new_sentence ( sentence, segment_1, NULL, 0, jump );
+}
+
+void insert_28 ( void )
+{
+    /* forming verb-object segments */
+
+    struct en_word * segment_1 = new_word_with_no_sel ( word_104 );
+    struct en_word * segment_2 = new_word ( word_43 + 1 );
+    struct en_word * segment_3 = new_word ( word_110 );
+
+    link_words
+    (
+        4,
+        segment_1,                          /* break zone */
+        new_word ( word_45 ),               /* verb zone */
+        new_word ( word_43 ),               /* object zone */
+        new_word ( word_46 )                /* object zone */
+    );
+
+    link_words
+    (
+        1,
+        segment_2                           /* conjunction zone */
+    );
+
+    * word_0 = { "(work)" };
+    * ( word_0 + 1 ) = { "(hard)" };
+
+    link_words
+    (
+        3,
+        segment_3,                          /* break zone */
+        word_0,                             /* verb zone */
+        word_0 + 1                          /* object zone */
+    );
+
+    /* inserting subjects */
+
+    link_words ( 2, segment_1, new_word ( word_b ) );
+    link_words_ahead ( 2, segment_3, new_word ( word_b + 1 ) );
+    segment_3 = word_b + 1;
 
     /* forming a sentence */
 
@@ -1363,7 +1415,8 @@ const insert_t insert_func [ ] =
     insert_24,
     insert_25,
     insert_26,
-    insert_27
+    insert_27,
+    insert_28
 };
 
 const int insert_count = sizeof ( insert_func ) / sizeof ( insert_func [ 0 ] );
@@ -1417,6 +1470,7 @@ const char * FMT_STR_NT     = "%sn't ";
 const char * FMT_AI_NT      = "ain't ";
 const char * FMT_WO_NT      = "won't ";
 const char * FMT_SHA_NT     = "shan't ";
+const char * FMT_CA_NT      = "can't ";
 const char * FMT_NOT_S      = "not %s ";
 const char * FMT_NOT        = "not ";
 
@@ -1432,6 +1486,7 @@ void print_content ( struct en_word * t )
                 case 3 : printf ( FMT_AI_NT ); break;
                 case 4 : printf ( FMT_WO_NT ); break;
                 case 5 : printf ( FMT_SHA_NT ); break;
+                case 6 : printf ( FMT_CA_NT ); break;
                 default : printf ( FMT_NOT_S, t -> content );
             }
         else
