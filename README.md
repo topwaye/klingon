@@ -37,8 +37,9 @@ does he love what you do for him
 where do you go  
 where are you  
 where do you play cards  
-are you not as tall as him  
-are you not as tall as he is (tall)  
+aren't you as tall as him  
+aren't you as tall as he is (tall)  
+don't you work as hard as you can (work) (hard)  
 
 klingon shows how our brains actually think to form sentences
 
