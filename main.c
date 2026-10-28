@@ -52,6 +52,14 @@
  * 1. no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.
  * 2. insert a subject among the break syllables of the verb.
  *
+ * a new version of the language model theory that can't be implemented with code, that is, the subject-axis language model for English
+ * is as follows:  
+ *
+ * 1. stress syllables (like 'do' and 'be') mark the subject.  
+ * 2. stress syllables are also the only operating handle.  
+ * 3. English predicates always have positive semantics. the only way to turn positive semantics into negative is by the stress syllable
+ *    acting on the subject, meaning the subject doesn't choose the meaning expressed by the predicate.
+ *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
  * https://github.com/topwaye/klingon
