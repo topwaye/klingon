@@ -10,19 +10,19 @@
  *
  * a verb is a fish blowing bubbles. a bubble is a break syllable. a subject is inserted among bubbles.
  *
- * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times.
- * that's why it was necessary to change the pronunciation of certain words by adding break syllables. for example, 'play' is
- * changed to 'to play', and 'be' is changed to 'to be', that is, insert a break syllable as a breakpoint to make the target word
- * sound clearer in the middle of multiple words.
+ * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's why
+ * it was necessary to change the pronunciation of certain words by adding break syllables. for example, 'play' is changed to 'to play',
+ * and 'be' is changed to 'to be', that is, insert a break syllable as a breakpoint to make the target word sound clearer in the middle
+ * of multiple words.
  *
  * another example: 'do' is overlaid onto a subject to change pronunciation, helping to clearly locate the subject in a sentence.
  *
- * as for the word 'not', it represents the choice logic in our brains, meaning: ruling out an option. for example, 'not him'
- * means ruling him out. and 'don't' is overlaid onto a subject to express the opposite meaning, that is, the subject rules out
- * what the predicate expresses.
+ * as for the word 'not', it represents the choice logic in our brains, meaning: not choosing an option. for instance, 'not him' means
+ * not choosing him. and 'don't' is overlaid onto a subject to express the opposite meaning, that is, the subject does not choose
+ * the meaning expressed by the predicate, where the predicate is just used as a reference option.
  *
- * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need
- * to add a subject to these verb-object phrases.
+ * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need to add
+ * a subject to these verb-object phrases.
  *
  * the language formula for English is as follows:
  *
@@ -71,7 +71,7 @@ struct en_word
 {
     char content [ EN_CHAR_NUM ];
     int breakpoint;                         /* a breakpoint or not */
-    int rule_out;                           /* exclude the word */
+    int no_select;                          /* select or unselect the word */
     struct en_content * sen_content;
     struct en_word * prior;
     struct en_word * next;
@@ -208,7 +208,7 @@ void link_lines ( int len, struct en_word * list, ... )
 struct en_word * init_word ( struct en_word * t, int no_sel, struct en_content * sen )
 {
     assert ( t );
-    t -> rule_out = no_sel;
+    t -> no_select = no_sel;
     t -> sen_content = sen;
     t -> prior = NULL;
     t -> next = NULL;
@@ -221,7 +221,7 @@ struct en_word * new_word ( struct en_word * t )
     return init_word ( t, 0, NULL );
 }
 
-struct en_word * new_word_to_rule_out ( struct en_word * t )
+struct en_word * new_word_with_no_sel ( struct en_word * t )
 {
     return init_word ( t, 1, NULL );
 }
@@ -468,7 +468,7 @@ void insert_4 ( void )
 {
     /* forming a verb-object segment */
 
-    struct en_word * segment_1 = new_word_to_rule_out ( word_100 );
+    struct en_word * segment_1 = new_word_with_no_sel ( word_100 );
 
     link_words
     (
@@ -494,7 +494,7 @@ void insert_5 ( void )
 {
     /* forming a verb-object segment */
 
-    struct en_word * segment_1 = new_word_to_rule_out ( word_19 );
+    struct en_word * segment_1 = new_word_with_no_sel ( word_19 );
 
     link_words
     (
@@ -513,7 +513,7 @@ void insert_6 ( void )
 {
     /* forming a verb-object segment */
 
-    struct en_word * segment_1 = new_word_to_rule_out ( word_104 );
+    struct en_word * segment_1 = new_word_with_no_sel ( word_104 );
 
     link_words
     (
@@ -556,7 +556,7 @@ void insert_7 ( void )
 
     /* forming verb-object segment 2 */
 
-    struct en_word * segment_2 = new_word_to_rule_out ( word_106 );
+    struct en_word * segment_2 = new_word_with_no_sel ( word_106 );
 
     link_words
     (
@@ -790,7 +790,7 @@ void insert_15 ( void )
     /* forming verb-object segments */
 
     struct en_word * segment_1 = new_word ( word_104 );
-    struct en_word * segment_2 = new_word_to_rule_out ( word_102 );
+    struct en_word * segment_2 = new_word_with_no_sel ( word_102 );
 
     link_words
     (
@@ -1263,7 +1263,7 @@ void insert_26 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word_to_rule_out ( word_100 );
+    struct en_word * segment_1 = new_word_with_no_sel ( word_100 );
     struct en_word * segment_3 = new_word ( word_43 + 1 );
 
     link_words
@@ -1296,7 +1296,7 @@ void insert_27 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word_to_rule_out ( word_100 );
+    struct en_word * segment_1 = new_word_with_no_sel ( word_100 );
     struct en_word * segment_2 = new_word ( word_43 + 1 );
     struct en_word * segment_3 = new_word ( word_101 );
 
@@ -1340,7 +1340,7 @@ void insert_28 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word_to_rule_out ( word_104 );
+    struct en_word * segment_1 = new_word_with_no_sel ( word_104 );
     struct en_word * segment_2 = new_word ( word_43 + 1 );
     struct en_word * segment_3 = new_word ( word_110 );
 
@@ -1479,7 +1479,7 @@ void print_content ( struct en_word * t )
     assert ( t );
     if ( * t -> content )
     {
-        if ( t -> rule_out )
+        if ( t -> no_select )
             switch ( t -> breakpoint )
             {
                 case 2 : printf ( FMT_STR_NT, t -> content ); break;
@@ -1494,7 +1494,7 @@ void print_content ( struct en_word * t )
     }
     else
     {
-        if ( t -> rule_out )
+        if ( t -> no_select )
             printf ( FMT_NOT );
     }
 }
