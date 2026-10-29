@@ -6,32 +6,32 @@
  * basic human brain language logic shown by a recursive algorithm running on a basic CPU architecture.
  * give a few words to the algorithm, and it gives you an English sentence. this algorithm is called Klingon.
  *
- * the fish bubbling language model for English is as follows:
- *
- * a verb is a fish blowing bubbles. a bubble is a break syllable. a subject is inserted among bubbles.
- *
- * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's why
- * it was necessary to change the pronunciation of certain words by adding break syllables. for example, 'play' is changed to 'to play',
- * and 'be' is changed to 'to be', that is, insert a break syllable as a breakpoint to make the target word sound clearer in the middle
- * of multiple words.
+ * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's
+ * why it was necessary to change the pronunciation of certain words by adding break syllables. for example, 'play' is changed
+ * to 'to play', and 'be' is changed to 'to be', that is, insert a break syllable as a breakpoint to make the target word sound
+ * clearer in the middle of multiple words.
  *
  * another example: 'do' is overlaid onto a subject to change pronunciation, helping to clearly locate the subject in a sentence.
  *
- * as for the word 'not', it represents a choice logic in our brain, meaning: not choosing. for instance, 'not him' means not choosing
- * him. and 'don't' is overlaid onto a subject to express the opposite meaning, that is, the subject does not choose the meaning
- * expressed by the predicate.
+ * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need
+ * to add a subject to these verb-object phrases.
  *
- * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need to add
- * a subject to these verb-object phrases.
+ * the verb-object axis language model for English is as follows:
+ *
+ * 1. break syllables (like 'do' and 'be') mark the subject.
+ * 2. break syllables are also the only operating handle.
+ * 3. in English, verb-object units always have positive semantics. the only way to turn positive semantics into negative is
+ *    by the break syllable acting on the subject, meaning the subject doesn't choose the meaning expressed by the verb-object.
+ * 4. as for the word 'not', it represents a choice logic in our brain, meaning: not choosing. for instance, 'not him' means
+ *    not choosing him. and 'don't' is overlaid onto a subject to express the opposite meaning, that is, the subject does not
+ *    choose the meaning expressed by the verb-object.
  *
  * the language formula for English is as follows:
  *
- * '''V / O => 'S''V / O
+ * '( V + O ) => 'S ( V + O )
  *
- *  S  represents a subject.
- *  V  represents a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.
- *  /  represents a division slash in mathematics.
- *  O  represents an object.
+ *  ( V + O ) represents a verb-object unit that is overlaid with a break syllable, like 'do/don't'.
+ *      S     represents a subject.
  *
  * here are example sentences applying the above formula:
  *
@@ -39,28 +39,18 @@
  *    'who => 'you who
  *
  * 2. what do you think you play ?
- *    'think; play / what => 'you think; you play / what
+ *    'think; play + what => 'you think; you ( play + what )
  *
  * 3. don't you want me to play with him ?
- *    'want / me; 'play; with / him => 'you want / me; 'play; with / him
+ *    '( want + me ); 'play; with + him => 'you ( want + me ); 'play; with + him
  *
  * 4. my love shall in my verse ever live young.
- *    in / my verse; ever 'live / young; => 'my love [ in / my verse ] ever live / young
+ *    in + my verse; '( ever live + young ); => 'my love ( in + my verse ) ( ever live + young )
  *
  * in summary, how our brains construct English sentences:
  *
- * 1. no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.
- * 2. insert a subject among the break syllables of the verb.
- *
- * a new version of the language model theory that can't be implemented with code, that is, the subject-axis language model for English
- * is as follows:
- *
- * 'S ( V + O )
- *
- * 1. stress syllables (like 'do' and 'be') mark the subject.  
- * 2. stress syllables are also the only operating handle.  
- * 3. in English, verb-object structures always have positive semantics. the only way to turn positive semantics into negative is
- *    by the stress syllable acting on the subject, meaning the subject doesn't choose the meaning expressed by the verb-object.
+ * 1. no subjects, there are only verb-object units, where a verb-object unit is overlaid with a break syllable, like 'do/don't'.
+ * 2. insert a subject between the break syllable and the verb-object unit.
  *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
@@ -572,7 +562,7 @@ void insert_7 ( void )
     (
         5,
         segment_2,                          /* break zone */
-        word_null,                          /* verb zone */
+        word_null,                          /* adverbial zone */
         new_word ( word_23 ),               /* verb zone */
         new_word ( word_24 ),               /* verb zone */
         new_word ( word_25 )                /* object zone */
@@ -1444,27 +1434,15 @@ int main ( void )
     printf ( "***********************************************************************************************************************\n" );
     printf ( "an English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( " '''V      'S''V\n" );
-    printf ( "------ => -------\n" );
-    printf ( "   O         O\n" );
+    printf ( " '( V + O ) => 'S ( V + O )\n" );
     printf ( "\n" );
-    printf ( " S  represents a subject.\n" );
-    printf ( " V  represents a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.\n" );
-    printf ( " /  represents a division slash in mathematics.\n" );
-    printf ( " O  represents an object.\n" );
+    printf ( "  ( V + O ) represents a verb-object unit that is overlaid with a break syllable, like 'do/don't'.\n" );
+    printf ( "      S     represents a subject.\n" );
     printf ( "\n" );
-    printf ( "# no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't';\n" );
-    printf ( "# insert a subject among the break syllables of the verb:\n" );
+    printf ( "# no subjects, there are only verb-object units, where a verb-object unit is overlaid with a break syllable;\n" );
+    printf ( "# insert a subject between the break syllable and the verb-object unit:\n" );
     printf ( "# \n" );
-    printf ( "# don't eat    don't you eat\n" );
-    printf ( "# --------- => -------------\n" );
-    printf ( "#   bread          bread\n" );
-    printf ( "#\n" );
-    printf ( "# don't eat    you don't eat\n" );
-    printf ( "# --------- => -------------\n" );
-    printf ( "#   bread          bread\n" );
-    printf ( "\n" );
-    printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
+    printf ( "copyright (C) 2026.10.29 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "***********************************************************************************************************************\n" );
 
     run ( );
