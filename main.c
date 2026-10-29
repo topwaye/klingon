@@ -6,32 +6,32 @@
  * basic human brain language logic shown by a recursive algorithm running on a basic CPU architecture.
  * give a few words to the algorithm, and it gives you an English sentence. this algorithm is called Klingon.
  *
- * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's
- * why it was necessary to change the pronunciation of certain words by adding break syllables. for example, 'play' is changed
- * to 'to play', and 'be' is changed to 'to be', that is, insert a break syllable as a breakpoint to make the target word sound
- * clearer in the middle of multiple words.
+ * the fish bubbling language model for English is as follows:
+ *
+ * a verb is a fish blowing bubbles. a bubble is a break syllable. a subject is inserted among bubbles.
+ *
+ * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times.
+ * that's why it was necessary to change the pronunciation of certain words by adding break syllables. for example, 'play' is
+ * changed to 'to play', and 'be' is changed to 'to be', that is, insert a break syllable as a breakpoint to make the target word
+ * sound clearer in the middle of multiple words.
  *
  * another example: 'do' is overlaid onto a subject to change pronunciation, helping to clearly locate the subject in a sentence.
+ *
+ * as for the word 'not', it represents the choice logic in our brains, meaning: ruling out an option. for example, 'not him'
+ * means ruling him out. and 'don't' is overlaid onto a subject to express the opposite meaning, that is, the subject rules out
+ * what the predicate expresses.
  *
  * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need
  * to add a subject to these verb-object phrases.
  *
- * the verb-object axis language model for English is as follows:
- *
- * 1. break syllables (like 'do' and 'be') mark the subject.
- * 2. break syllables are also the only operating handle.
- * 3. in English, verb-object units always have positive semantics. the only way to turn positive semantics into negative is
- *    by the break syllable acting on the subject, meaning the subject doesn't choose the meaning expressed by the verb-object.
- * 4. as for the word 'not', it represents a choice logic in our brain, meaning: not choosing. for instance, 'not him' means
- *    not choosing him. and 'don't' is overlaid onto a subject to express the opposite meaning, that is, the subject does not
- *    choose the meaning expressed by the verb-object.
- *
  * the language formula for English is as follows:
  *
- * '( V + O ) => 'S ( V + O )
+ * '''V / O => 'S''V / O
  *
- *  ( V + O ) represents a verb-object unit that is overlaid with a break syllable, like 'do/don't'.
- *      S     represents a subject.
+ *  S  represents a subject.
+ *  V  represents a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.
+ *  /  represents a division slash in mathematics.
+ *  O  represents an object.
  *
  * here are example sentences applying the above formula:
  *
@@ -39,18 +39,18 @@
  *    'who => 'you who
  *
  * 2. what do you think you play ?
- *    'think; play + what => 'you think; you ( play + what )
+ *    'think; play / what => 'you think; you play / what
  *
  * 3. don't you want me to play with him ?
- *    '( want + me ); 'play; with + him => 'you ( want + me ); 'play; with + him
+ *    'want / me; 'play; with / him => 'you want / me; 'play; with / him
  *
  * 4. my love shall in my verse ever live young.
- *    in + my verse; '( ever live + young ); => 'my love ( in + my verse ) ( ever live + young )
+ *    in / my verse; ever 'live / young; => 'my love [ in / my verse ] ever live / young
  *
  * in summary, how our brains construct English sentences:
  *
- * 1. no subjects, there are only verb-object units, where a verb-object unit is overlaid with a break syllable, like 'do/don't'.
- * 2. insert a subject between the break syllable and the verb-object unit.
+ * 1. no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.
+ * 2. insert a subject among the break syllables of the verb.
  *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
@@ -71,7 +71,7 @@ struct en_word
 {
     char content [ EN_CHAR_NUM ];
     int breakpoint;                         /* a breakpoint or not */
-    int no_select;                          /* select or unselect the word */
+    int rule_out;                           /* exclude the word */
     struct en_content * sen_content;
     struct en_word * prior;
     struct en_word * next;
@@ -208,7 +208,7 @@ void link_lines ( int len, struct en_word * list, ... )
 struct en_word * init_word ( struct en_word * t, int no_sel, struct en_content * sen )
 {
     assert ( t );
-    t -> no_select = no_sel;
+    t -> rule_out = no_sel;
     t -> sen_content = sen;
     t -> prior = NULL;
     t -> next = NULL;
@@ -221,7 +221,7 @@ struct en_word * new_word ( struct en_word * t )
     return init_word ( t, 0, NULL );
 }
 
-struct en_word * new_word_with_no_sel ( struct en_word * t )
+struct en_word * new_word_to_rule_out ( struct en_word * t )
 {
     return init_word ( t, 1, NULL );
 }
@@ -468,7 +468,7 @@ void insert_4 ( void )
 {
     /* forming a verb-object segment */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_100 );
+    struct en_word * segment_1 = new_word_to_rule_out ( word_100 );
 
     link_words
     (
@@ -494,7 +494,7 @@ void insert_5 ( void )
 {
     /* forming a verb-object segment */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_19 );
+    struct en_word * segment_1 = new_word_to_rule_out ( word_19 );
 
     link_words
     (
@@ -513,7 +513,7 @@ void insert_6 ( void )
 {
     /* forming a verb-object segment */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_104 );
+    struct en_word * segment_1 = new_word_to_rule_out ( word_104 );
 
     link_words
     (
@@ -556,7 +556,7 @@ void insert_7 ( void )
 
     /* forming verb-object segment 2 */
 
-    struct en_word * segment_2 = new_word_with_no_sel ( word_106 );
+    struct en_word * segment_2 = new_word_to_rule_out ( word_106 );
 
     link_words
     (
@@ -790,7 +790,7 @@ void insert_15 ( void )
     /* forming verb-object segments */
 
     struct en_word * segment_1 = new_word ( word_104 );
-    struct en_word * segment_2 = new_word_with_no_sel ( word_102 );
+    struct en_word * segment_2 = new_word_to_rule_out ( word_102 );
 
     link_words
     (
@@ -1263,7 +1263,7 @@ void insert_26 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_100 );
+    struct en_word * segment_1 = new_word_to_rule_out ( word_100 );
     struct en_word * segment_3 = new_word ( word_43 + 1 );
 
     link_words
@@ -1296,7 +1296,7 @@ void insert_27 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_100 );
+    struct en_word * segment_1 = new_word_to_rule_out ( word_100 );
     struct en_word * segment_2 = new_word ( word_43 + 1 );
     struct en_word * segment_3 = new_word ( word_101 );
 
@@ -1340,7 +1340,7 @@ void insert_28 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_104 );
+    struct en_word * segment_1 = new_word_to_rule_out ( word_104 );
     struct en_word * segment_2 = new_word ( word_43 + 1 );
     struct en_word * segment_3 = new_word ( word_110 );
 
@@ -1434,15 +1434,27 @@ int main ( void )
     printf ( "***********************************************************************************************************************\n" );
     printf ( "an English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( " '( V + O ) => 'S ( V + O )\n" );
+    printf ( " '''V      'S''V\n" );
+    printf ( "------ => -------\n" );
+    printf ( "   O         O\n" );
     printf ( "\n" );
-    printf ( "  ( V + O ) represents a verb-object unit that is overlaid with a break syllable, like 'do/don't'.\n" );
-    printf ( "      S     represents a subject.\n" );
+    printf ( " S  represents a subject.\n" );
+    printf ( " V  represents a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.\n" );
+    printf ( " /  represents a division slash in mathematics.\n" );
+    printf ( " O  represents an object.\n" );
     printf ( "\n" );
-    printf ( "# no subjects, there are only verb-object units, where a verb-object unit is overlaid with a break syllable;\n" );
-    printf ( "# insert a subject between the break syllable and the verb-object unit:\n" );
+    printf ( "# no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't';\n" );
+    printf ( "# insert a subject among the break syllables of the verb:\n" );
     printf ( "# \n" );
-    printf ( "copyright (C) 2026.10.29 TOP WAYE topwaye@hotmail.com\n" );
+    printf ( "# don't eat    don't you eat\n" );
+    printf ( "# --------- => -------------\n" );
+    printf ( "#   bread          bread\n" );
+    printf ( "#\n" );
+    printf ( "# don't eat    you don't eat\n" );
+    printf ( "# --------- => -------------\n" );
+    printf ( "#   bread          bread\n" );
+    printf ( "\n" );
+    printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "***********************************************************************************************************************\n" );
 
     run ( );
@@ -1467,7 +1479,7 @@ void print_content ( struct en_word * t )
     assert ( t );
     if ( * t -> content )
     {
-        if ( t -> no_select )
+        if ( t -> rule_out )
             switch ( t -> breakpoint )
             {
                 case 2 : printf ( FMT_STR_NT, t -> content ); break;
@@ -1482,7 +1494,7 @@ void print_content ( struct en_word * t )
     }
     else
     {
-        if ( t -> no_select )
+        if ( t -> rule_out )
             printf ( FMT_NOT );
     }
 }
