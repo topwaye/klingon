@@ -17,9 +17,10 @@
  *
  * another example: 'do' is overlaid onto a subject to change pronunciation, helping to clearly locate the subject in a sentence.
  *
- * as for the word 'not', it represents the choice logic in our brains, meaning: not choosing an option. for instance, 'not him' means
- * not choosing him. and 'don't' is overlaid onto a subject to express the opposite meaning, that is, the subject does not choose
- * the meaning expressed by the predicate, where the predicate is just used as a reference option.
+ * 'not' is a judgment concept in logic. it's a matter of 'true' or 'false'. for example, 'not him' means he is false, that is, he is negated.
+ * ( placed in a context of choice, it means a negative choice against him. ) 'don't' is overlaid onto a subject to express negation, that is,
+ * the meaning expressed by the subject-predicate unit is false; the opposite meaning is true. note that a subject-predicate unit is an atomic,
+ * indivisible unit. so you can't just negate a predicate alone. essentially, this is a matter of granularity.
  *
  * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need to add
  * a subject to these verb-object phrases.
@@ -71,7 +72,7 @@ struct en_word
 {
     char content [ EN_CHAR_NUM ];
     int breakpoint;                         /* a breakpoint or not */
-    int no_select;                          /* select or unselect the word */
+    int negative;                           /* negate a granularity */
     struct en_content * sen_content;
     struct en_word * prior;
     struct en_word * next;
@@ -208,7 +209,7 @@ void link_lines ( int len, struct en_word * list, ... )
 struct en_word * init_word ( struct en_word * t, int no_sel, struct en_content * sen )
 {
     assert ( t );
-    t -> no_select = no_sel;
+    t -> negative = no_sel;
     t -> sen_content = sen;
     t -> prior = NULL;
     t -> next = NULL;
@@ -221,7 +222,7 @@ struct en_word * new_word ( struct en_word * t )
     return init_word ( t, 0, NULL );
 }
 
-struct en_word * new_word_with_no_sel ( struct en_word * t )
+struct en_word * new_word_with_negation ( struct en_word * t )
 {
     return init_word ( t, 1, NULL );
 }
@@ -468,7 +469,7 @@ void insert_4 ( void )
 {
     /* forming a verb-object segment */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_100 );
+    struct en_word * segment_1 = new_word_with_negation ( word_100 );
 
     link_words
     (
@@ -494,7 +495,7 @@ void insert_5 ( void )
 {
     /* forming a verb-object segment */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_19 );
+    struct en_word * segment_1 = new_word_with_negation ( word_19 );
 
     link_words
     (
@@ -513,7 +514,7 @@ void insert_6 ( void )
 {
     /* forming a verb-object segment */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_104 );
+    struct en_word * segment_1 = new_word_with_negation ( word_104 );
 
     link_words
     (
@@ -556,7 +557,7 @@ void insert_7 ( void )
 
     /* forming verb-object segment 2 */
 
-    struct en_word * segment_2 = new_word_with_no_sel ( word_106 );
+    struct en_word * segment_2 = new_word_with_negation ( word_106 );
 
     link_words
     (
@@ -790,7 +791,7 @@ void insert_15 ( void )
     /* forming verb-object segments */
 
     struct en_word * segment_1 = new_word ( word_104 );
-    struct en_word * segment_2 = new_word_with_no_sel ( word_102 );
+    struct en_word * segment_2 = new_word_with_negation ( word_102 );
 
     link_words
     (
@@ -1263,7 +1264,7 @@ void insert_26 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_100 );
+    struct en_word * segment_1 = new_word_with_negation ( word_100 );
     struct en_word * segment_3 = new_word ( word_43 + 1 );
 
     link_words
@@ -1296,7 +1297,7 @@ void insert_27 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_100 );
+    struct en_word * segment_1 = new_word_with_negation ( word_100 );
     struct en_word * segment_2 = new_word ( word_43 + 1 );
     struct en_word * segment_3 = new_word ( word_101 );
 
@@ -1340,7 +1341,7 @@ void insert_28 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word_with_no_sel ( word_104 );
+    struct en_word * segment_1 = new_word_with_negation ( word_104 );
     struct en_word * segment_2 = new_word ( word_43 + 1 );
     struct en_word * segment_3 = new_word ( word_110 );
 
@@ -1454,7 +1455,7 @@ int main ( void )
     printf ( "# --------- => -------------\n" );
     printf ( "#   bread          bread\n" );
     printf ( "\n" );
-    printf ( "copyright (C) 2026.10.19 TOP WAYE topwaye@hotmail.com\n" );
+    printf ( "copyright (C) 2026.10.30 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "***********************************************************************************************************************\n" );
 
     run ( );
@@ -1479,7 +1480,7 @@ void print_content ( struct en_word * t )
     assert ( t );
     if ( * t -> content )
     {
-        if ( t -> no_select )
+        if ( t -> negative )
             switch ( t -> breakpoint )
             {
                 case 2 : printf ( FMT_STR_NT, t -> content ); break;
@@ -1494,7 +1495,7 @@ void print_content ( struct en_word * t )
     }
     else
     {
-        if ( t -> no_select )
+        if ( t -> negative )
             printf ( FMT_NOT );
     }
 }
