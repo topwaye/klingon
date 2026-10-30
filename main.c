@@ -1593,7 +1593,7 @@ int print ( const char * fmt, ... )
             }
             else
             {
-                /* unsupported specifier: klingon_print percent and the specifier literally */
+                /* unsupported specifier: print percent and the specifier literally */
                 print_buffer_putchar ( '%' );
                 n ++;
                 if ( * p )
