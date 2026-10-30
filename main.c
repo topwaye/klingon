@@ -67,7 +67,6 @@
 
 /* data structure area */
 
-
 #define PRINT_STRING_LENGTH     31
 #define EN_CHAR_NUM             16
 
