@@ -67,6 +67,8 @@
 
 /* data structure area */
 
+
+#define PRINT_STRING_LENGTH     31
 #define EN_CHAR_NUM             16
 
 struct en_content;
@@ -1516,6 +1518,105 @@ int main ( void )
 
 /* I/O function area */
 
+char print_buffer [ PRINT_STRING_LENGTH + 1 ] = { 0 };
+
+int print_position = 0;
+
+int grow_print_string ( char c )
+{
+    if ( print_position < PRINT_STRING_LENGTH )
+    {
+        print_buffer [ print_position ++ ] = c;
+        return 1;
+    }
+    return 0;
+}
+
+void print_buffer_flush ( void )
+{
+    print_buffer [ print_position ] = '\0';
+    print_position = 0;
+
+    printf ( "%s", print_buffer );
+}
+
+void print_buffer_putchar ( char c )
+{
+    if ( ! grow_print_string ( c ) )
+    {
+        print_buffer_flush ( );
+        grow_print_string ( c );
+    }
+}
+
+/*
+ * simple replacement for C's print supporting only %s and %%.
+ * outputs directly using putchar without building a large intermediate buffer.
+ * limitations: only %s (string) and %% (literal percent) are specially handled.
+ */
+int print ( const char * fmt, ... )
+{
+    va_list ap;
+    int n;
+    const char * p;
+
+    if ( ! fmt )
+        return 0;
+
+    va_start ( ap, fmt );
+
+    n = 0;
+    p = fmt;
+    while ( * p )
+    {
+        if ( * p == '%' )
+        {
+            p ++;
+            if ( * p == '%' )
+            {
+                print_buffer_putchar ( '%' );
+                n ++;
+                p ++;
+            }
+            else if ( * p == 's' )
+            {
+                const char * s = va_arg ( ap, const char * );
+                if ( ! s )
+                    s = "(null)";
+                while ( * s )
+                {
+                    print_buffer_putchar ( * s );
+                    n ++;
+                    s ++;
+                }
+                p ++;
+            }
+            else
+            {
+                /* unsupported specifier: klingon_print percent and the specifier literally */
+                print_buffer_putchar ( '%' );
+                n ++;
+                if ( * p )
+                {
+                    print_buffer_putchar ( * p );
+                    n ++;
+                    p ++;
+                }
+            }
+        }
+        else
+        {
+            print_buffer_putchar ( * p );
+            n ++;
+            p ++;
+        }
+    }
+
+    va_end ( ap );
+
+    return n;
+}
+
 const char * FMT_NEWLINE    = "\n";
 const char * FMT_STR_SPACE  = "%s ";
 const char * FMT_STR_NT     = "%sn't ";
@@ -1534,27 +1635,29 @@ void print_content ( struct en_word * t )
         if ( t -> negative )
             switch ( t -> breakpoint )
             {
-                case 2 : printf ( FMT_STR_NT, t -> content ); break;
-                case 3 : printf ( FMT_AI_NT ); break;
-                case 4 : printf ( FMT_WO_NT ); break;
-                case 5 : printf ( FMT_SHA_NT ); break;
-                case 6 : printf ( FMT_CA_NT ); break;
-                default : printf ( FMT_NOT_S, t -> content );
+                case 2 : print ( FMT_STR_NT, t -> content ); break;
+                case 3 : print ( FMT_AI_NT ); break;
+                case 4 : print ( FMT_WO_NT ); break;
+                case 5 : print ( FMT_SHA_NT ); break;
+                case 6 : print ( FMT_CA_NT ); break;
+                default : print ( FMT_NOT_S, t -> content );
             }
         else
-            printf ( FMT_STR_SPACE, t -> content );
+            print ( FMT_STR_SPACE, t -> content );
     }
     else
     {
         if ( t -> negative )
-            printf ( FMT_NOT );
+            print ( FMT_NOT );
     }
 }
 
 void print_newline ( struct en_word * t )
 {
     assert ( ! t );
-    printf ( FMT_NEWLINE );
+    print ( FMT_NEWLINE );
+
+    print_buffer_flush ( );
 }
 
 void print ( struct en_word * t )
