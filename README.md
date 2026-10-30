@@ -12,7 +12,8 @@ playing cards
 
 **klingon gives you sentences:**
 
->what do you play at home  
+>what don't you play at home  
+what don't you at home play  
 would you have been playing cards at home  
 what do you think you play at home  
 you aren't at home  
