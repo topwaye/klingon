@@ -345,7 +345,7 @@ void insert_1 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word ( word_104 );
+    struct en_word * segment_1 = new_word_with_negation ( word_104 );
     struct en_word * segment_2 = new_word ( word_13 );
 
     link_words
@@ -375,6 +375,53 @@ void insert_1 ( void )
 }
 
 void insert_2 ( void )
+{
+    /* forming verb-object segment 1 */
+
+    struct en_word * segment_1 = new_word ( word_13 );
+
+    link_words
+    (
+        2,
+        segment_1,                          /* verb zone */
+        new_word ( word_14 )                /* object zone */
+    );
+
+    /* forming sentence 1 */
+
+    link_lines ( 1, segment_1 );
+
+    new_sentence ( sentence, segment_1, NULL, 0, NULL );
+
+    /* filling word_null */
+
+    new_null_word ( word_null, sentence );
+
+    /* forming verb-object segment 2 */
+
+    struct en_word * segment_2 = new_word_with_negation ( word_104 );
+
+    link_words
+    (
+        4,
+        segment_2,                          /* break zone */
+        word_null,                          /* adverbial zone */
+        new_word ( word_11 ),               /* verb zone */
+        new_word ( word_12 )                /* object zone */
+    );
+
+    /* inserting subject 1 */
+
+    link_words ( 2, segment_2, new_word ( word_b ) );
+
+    /* forming sentence 2 */
+
+    link_lines ( 1, segment_2 );
+
+    new_sentence ( sentence + 1, segment_2, word_12, 0, jump );
+}
+
+void insert_3 ( void )
 {
     /* forming verb-object segments */
 
@@ -409,7 +456,7 @@ void insert_2 ( void )
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
-void insert_3 ( void )
+void insert_4 ( void )
 {
     /* forming verb-object segment 1, 2 */
 
@@ -468,7 +515,7 @@ void insert_3 ( void )
     new_sentence ( sentence + 1, segment_3, word_12, 0, jump );
 }
 
-void insert_4 ( void )
+void insert_5 ( void )
 {
     /* forming a verb-object segment */
 
@@ -494,7 +541,7 @@ void insert_4 ( void )
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
-void insert_5 ( void )
+void insert_6 ( void )
 {
     /* forming a verb-object segment */
 
@@ -513,7 +560,7 @@ void insert_5 ( void )
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
-void insert_6 ( void )
+void insert_7 ( void )
 {
     /* forming a verb-object segment */
 
@@ -534,7 +581,7 @@ void insert_6 ( void )
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
-void insert_7 ( void )
+void insert_8 ( void )
 {
     /* forming verb-object segment 1 */
 
@@ -584,7 +631,7 @@ void insert_7 ( void )
     new_sentence ( sentence + 1, segment_2, NULL, 0, jump );
 }
 
-void insert_8 ( void )
+void insert_9 ( void )
 {
     /* forming verb-object segments */
 
@@ -624,7 +671,7 @@ void insert_8 ( void )
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
-void insert_9 ( void )
+void insert_10 ( void )
 {
     /* forming a verb-object segment */
 
@@ -648,7 +695,7 @@ void insert_9 ( void )
     new_sentence ( sentence, segment_1, word_30, 0, jump );
 }
 
-void insert_10 ( void )
+void insert_11 ( void )
 {
     /* forming a verb-object segment */
 
@@ -673,7 +720,7 @@ void insert_10 ( void )
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
-void insert_11 ( void )
+void insert_12 ( void )
 {
     /* forming verb-object segments */
 
@@ -706,7 +753,7 @@ void insert_11 ( void )
     new_sentence ( sentence, segment_1, word_30, 0, jump );
 }
 
-void insert_12 ( void )
+void insert_13 ( void )
 {
     /* forming verb-object segments */
 
@@ -779,17 +826,17 @@ void insert_with_starting_point ( struct en_word * starting )
     new_sentence ( sentence, segment_1, starting, 0, jump );
 }
 
-void insert_13 ( void )
+void insert_14 ( void )
 {
     insert_with_starting_point ( word_30 );
 }
 
-void insert_14 ( void )
+void insert_15 ( void )
 {
     insert_with_starting_point ( word_29 );
 }
 
-void insert_15 ( void )
+void insert_16 ( void )
 {
     /* forming verb-object segments */
 
@@ -822,7 +869,7 @@ void insert_15 ( void )
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
-void insert_16 ( void )
+void insert_17 ( void )
 {
     /* forming verb-object segments */
 
@@ -854,7 +901,7 @@ void insert_16 ( void )
     new_sentence ( sentence, segment_1, word_12, 0, jump );
 }
 
-void insert_17 ( void )
+void insert_18 ( void )
 {
     /* forming verb-object segments */
 
@@ -887,7 +934,7 @@ void insert_17 ( void )
     new_sentence ( sentence, segment_1, word_30, 0, jump );
 }
 
-void insert_18 ( void )
+void insert_19 ( void )
 {
     /* forming verb-object segment 1 */
 
@@ -937,7 +984,7 @@ void insert_18 ( void )
     new_sentence ( sentence + 1, segment_2, NULL, 0, jump );
 }
 
-void insert_19 ( void )
+void insert_20 ( void )
 {
     /* forming verb-object segment 1 */
 
@@ -1003,7 +1050,7 @@ void insert_19 ( void )
     new_sentence ( sentence + 1, segment_2, NULL, 0, jump );
 }
 
-void insert_20 ( void )
+void insert_21 ( void )
 {
     /* forming verb-object segment 1 */
 
@@ -1063,7 +1110,7 @@ void insert_20 ( void )
     new_sentence ( sentence + 1, segment_2, NULL, 0, jump );
 }
 
-void insert_21 ( void )
+void insert_22 ( void )
 {
     /* forming verb-object segment 1, 3 */
 
@@ -1123,7 +1170,7 @@ void insert_21 ( void )
     new_sentence ( sentence + 1, segment_2, NULL, 0, jump );
 }
 
-void insert_22 ( void )
+void insert_23 ( void )
 {
     /* forming verb-object segment 1, 3 */
 
@@ -1182,7 +1229,7 @@ void insert_22 ( void )
     new_sentence ( sentence + 1, segment_2, NULL, 0, jump );
 }
 
-void insert_23 ( void )
+void insert_24 ( void )
 {
     /* forming a verb-object segment */
 
@@ -1207,7 +1254,7 @@ void insert_23 ( void )
     new_sentence ( sentence, segment_1, word_42, 0, jump );
 }
 
-void insert_24 ( void )
+void insert_25 ( void )
 {
     /* forming a verb-object segment */
 
@@ -1231,7 +1278,7 @@ void insert_24 ( void )
     new_sentence ( sentence, segment_1, word_42, 0, jump );
 }
 
-void insert_25 ( void )
+void insert_26 ( void )
 {
     /* forming verb-object segments */
 
@@ -1263,7 +1310,7 @@ void insert_25 ( void )
     new_sentence ( sentence, segment_1, word_42, 0, jump );
 }
 
-void insert_26 ( void )
+void insert_27 ( void )
 {
     /* forming verb-object segments */
 
@@ -1296,7 +1343,7 @@ void insert_26 ( void )
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
-void insert_27 ( void )
+void insert_28 ( void )
 {
     /* forming verb-object segments */
 
@@ -1340,7 +1387,7 @@ void insert_27 ( void )
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
-void insert_28 ( void )
+void insert_29 ( void )
 {
     /* forming verb-object segments */
 
@@ -1420,7 +1467,8 @@ const insert_t insert_func [ ] =
     insert_25,
     insert_26,
     insert_27,
-    insert_28
+    insert_28,
+    insert_29
 };
 
 const int insert_count = sizeof ( insert_func ) / sizeof ( insert_func [ 0 ] );
