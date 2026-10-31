@@ -67,7 +67,7 @@
 
 /* data structure area */
 
-#define PRINT_STRING_LENGTH     31
+#define PRINT_BUFFER_SIZE       32
 #define EN_CHAR_NUM             16
 
 struct en_content;
@@ -92,7 +92,7 @@ struct en_content
 
 /* kernel function area */
 
-void print ( struct en_word * t );
+void render ( struct en_word * t );
 
 void jump ( int depth, struct en_content * sen )
 {
@@ -111,7 +111,7 @@ void jump ( int depth, struct en_content * sen )
                     t = q;
                     do
                     {
-                        print ( t );
+                        render ( t );
                         jump ( depth + 1, t -> sen_content );
                         t = t -> next;
                     } while ( t );
@@ -126,7 +126,7 @@ void jump ( int depth, struct en_content * sen )
                 {
                     if ( t == q )
                         break;
-                    print ( t );
+                    render ( t );
                     jump ( depth + 1, t -> sen_content );
                     t = t -> next;
                 } while ( t );
@@ -136,7 +136,7 @@ void jump ( int depth, struct en_content * sen )
     }
 
     if ( ! depth )
-        print ( NULL );
+        render ( NULL );
 }
 
 void link_words_ahead ( int len, struct en_word * list, ... )
@@ -1517,19 +1517,9 @@ int main ( void )
 
 /* I/O function area */
 
-char print_buffer [ PRINT_STRING_LENGTH + 1 ] = { 0 };
+char print_buffer [ PRINT_BUFFER_SIZE ] = { 0 };
 
 int print_position = 0;
-
-int grow_print_string ( char c )
-{
-    if ( print_position < PRINT_STRING_LENGTH )
-    {
-        print_buffer [ print_position ++ ] = c;
-        return 1;
-    }
-    return 0;
-}
 
 void print_buffer_flush ( void )
 {
@@ -1541,18 +1531,14 @@ void print_buffer_flush ( void )
 
 void print_buffer_putchar ( char c )
 {
-    if ( ! grow_print_string ( c ) )
-    {
+    if ( print_position + 1 >= PRINT_BUFFER_SIZE )
         print_buffer_flush ( );
-        grow_print_string ( c );
-    }
+
+    print_buffer [ print_position ++ ] = c;
 }
 
-/*
- * simple replacement for C's print supporting only %s and %%.
- * outputs directly using putchar without building a large intermediate buffer.
- * limitations: only %s (string) and %% (literal percent) are specially handled.
- */
+/* simple replacement for C's print supporting only %s and %% */
+
 int print ( const char * fmt, ... )
 {
     va_list ap;
@@ -1651,15 +1637,14 @@ void print_content ( struct en_word * t )
     }
 }
 
-void print_newline ( struct en_word * t )
+void print_newline ( void )
 {
-    assert ( ! t );
     print ( FMT_NEWLINE );
 
     print_buffer_flush ( );
 }
 
-void print ( struct en_word * t )
+void render ( struct en_word * t )
 {
-    t ? print_content ( t ) : print_newline ( t );
+    t ? print_content ( t ) : print_newline ( );
 }
