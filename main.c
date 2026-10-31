@@ -1531,7 +1531,7 @@ void print_buffer_flush ( void )
 
 void print_buffer_putchar ( char c )
 {
-    if ( print_position + 1 >= PRINT_BUFFER_SIZE )
+    if ( print_position + 1 == PRINT_BUFFER_SIZE )
         print_buffer_flush ( );
 
     print_buffer [ print_position ++ ] = c;
