@@ -67,8 +67,8 @@
 
 /* data structure area */
 
-#define PRINT_BUFFER_SIZE       32
-#define EN_CHAR_NUM             16
+#define PRINT_BUFFER_SIZE       32          /* must be greater than 1 */
+#define EN_CHAR_NUM             16          /* must be greater than 0 */
 
 struct en_content;
 
@@ -86,8 +86,8 @@ struct en_word
 struct en_content
 {
     struct en_word * segments;
-    struct en_word * starting_point;
-    int outer_starting;
+    struct en_word * start;
+    int outer_start;
 };
 
 /* kernel function area */
@@ -103,10 +103,10 @@ void jump ( int depth, struct en_content * sen )
         r = sen -> segments;
         if ( r )
         {
-            q = sen -> starting_point;
+            q = sen -> start;
             if ( q )
             {
-                if ( ! sen -> outer_starting )
+                if ( ! sen -> outer_start )
                 {
                     t = q;
                     do
@@ -210,10 +210,10 @@ void link_lines ( int len, struct en_word * list, ... )
     va_end ( ap );
 }
 
-struct en_word * init_word ( struct en_word * t, int no_sel, struct en_content * sen )
+struct en_word * init_word ( struct en_word * t, int neg, struct en_content * sen )
 {
     assert ( t );
-    t -> negative = no_sel;
+    t -> negative = neg;
     t -> sen_content = sen;
     t -> prior = NULL;
     t -> next = NULL;
@@ -238,12 +238,12 @@ struct en_word * new_null_word ( struct en_word * t, struct en_content * sen )
 
 typedef void ( * jump_t ) ( int, struct en_content * );
 
-void new_sentence ( struct en_content * sen, struct en_word * segs, struct en_word * starting, int outer_starting, jump_t jmp_func )
+void new_sentence ( struct en_content * sen, struct en_word * segs, struct en_word * start, int outer_start, jump_t jmp_func )
 {
     assert ( sen );
     sen -> segments = segs;
-    sen -> starting_point = starting;
-    sen -> outer_starting = outer_starting;
+    sen -> start = start;
+    sen -> outer_start = outer_start;
 
     if ( jmp_func )
         jmp_func ( 0, sen );
@@ -251,7 +251,7 @@ void new_sentence ( struct en_content * sen, struct en_word * segs, struct en_wo
 
 /* verb-object phrases */
 
-struct en_word word_0 [ ] = { { "(...)" }, { "(...)" } };
+struct en_word word_0 [ ] = { { "?*" }, { "?*" } };
 
 struct en_word word_11 [ ] = { { "play" } };
 struct en_word word_12 [ ] = { { "what" } };
@@ -1579,6 +1579,7 @@ int print ( const char * fmt, ... )
             else
             {
                 /* unsupported specifier: print percent and the specifier literally */
+
                 print_buffer_putchar ( '%' );
                 n ++;
                 if ( * p )
