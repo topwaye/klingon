@@ -255,8 +255,6 @@ void new_sentence ( struct en_content * sen, struct en_word * segs, struct en_wo
 
 /* verb-object phrases */
 
-struct en_word word_0 [ ] = { { "?*" }, { "?*" } };
-
 struct en_word word_11 [ ] = { { "play" } };
 struct en_word word_12 [ ] = { { "what" } };
 
@@ -1391,7 +1389,7 @@ void insert_29 ( void )
         segment_2                           /* conjunction zone */
     );
 
-    * word_0 = { "(tall)" };
+    struct en_word word_0 [ ] = { { "(tall)" } };
 
     link_words
     (
@@ -1436,8 +1434,7 @@ void insert_30 ( void )
         segment_2                           /* conjunction zone */
     );
 
-    * word_0 = { "(work)" };
-    * ( word_0 + 1 ) = { "(hard)" };
+    struct en_word word_0 [ ] = { { "(work)" }, { "(hard)" } };
 
     link_words
     (
