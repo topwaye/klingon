@@ -18,15 +18,15 @@
  * another example: 'do' is overlaid onto a subject to change pronunciation, helping to clearly locate the subject in a sentence.
  *
  * 'not' is a judgment concept in logic. it's a matter of 'true' or 'false'. for example, 'not him' means he is false, that is,
- * he is negated. ( placed in a context of choice, it means a negative choice against him. ) 'don't' is overlaid onto a subject
- * to express negation, that is, the meaning expressed by the subject-predicate unit is false, and the opposite meaning is true.
- * for example, if 'red' is false, then the opposite meaning 'not red' is true.
+ * he is negated. ( placed in a context of choice, it means a negative choice against him. )
  *
+ * 'don't' is overlaid onto a subject-predicate unit to express negation, that is, the meaning expressed by the subject-predicate
+ * unit is false, and the opposite meaning is true. for example, if 'red' is false, then the opposite meaning 'not red' is true.
  * note that a subject-predicate unit is an atomic, indivisible unit. so you can't just negate a predicate alone. essentially,
  * this is a matter of granularity.
  *
  * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need
- * to add a subject to these verb-object phrases.
+ * to add a subject to these verb-object phrases, that is, insert a subject to form a subject-predicate unit.
  *
  * the language formula for English is as follows:
  *
@@ -55,6 +55,9 @@
  *
  * 1. no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.
  * 2. insert a subject among the break syllables of the verb.
+ *
+ * know that the focus of thinking is unconditionally on the subject-predicate unit right next to a break syllable, rather than
+ * on the break syllable itself which is usually in the first position.
  *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
@@ -218,6 +221,7 @@ struct en_word * init_word ( struct en_word * t, int neg, struct en_content * se
     t -> prior = NULL;
     t -> next = NULL;
     t -> down = NULL;
+
     return t;
 }
 
@@ -1234,6 +1238,27 @@ void insert_24 ( void )
 {
     /* forming a verb-object segment */
 
+    struct en_word * segment_1 = new_word ( word_102 );
+
+    link_words
+    (
+        3,
+        segment_1,                          /* break zone */
+        new_word ( word_41 ),               /* verb zone */
+        new_word ( word_42 )                /* object zone */
+    );
+
+    /* forming a sentence */
+
+    link_lines ( 1, segment_1 );
+
+    new_sentence ( sentence, segment_1, word_42, 0, jump );
+}
+
+void insert_25 ( void )
+{
+    /* forming a verb-object segment */
+
     struct en_word * segment_1 = new_word ( word_104 );
 
     link_words
@@ -1255,7 +1280,7 @@ void insert_24 ( void )
     new_sentence ( sentence, segment_1, word_42, 0, jump );
 }
 
-void insert_25 ( void )
+void insert_26 ( void )
 {
     /* forming a verb-object segment */
 
@@ -1279,7 +1304,7 @@ void insert_25 ( void )
     new_sentence ( sentence, segment_1, word_42, 0, jump );
 }
 
-void insert_26 ( void )
+void insert_27 ( void )
 {
     /* forming verb-object segments */
 
@@ -1311,7 +1336,7 @@ void insert_26 ( void )
     new_sentence ( sentence, segment_1, word_42, 0, jump );
 }
 
-void insert_27 ( void )
+void insert_28 ( void )
 {
     /* forming verb-object segments */
 
@@ -1344,7 +1369,7 @@ void insert_27 ( void )
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
-void insert_28 ( void )
+void insert_29 ( void )
 {
     /* forming verb-object segments */
 
@@ -1388,7 +1413,7 @@ void insert_28 ( void )
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
-void insert_29 ( void )
+void insert_30 ( void )
 {
     /* forming verb-object segments */
 
@@ -1469,7 +1494,8 @@ const insert_t insert_func [ ] =
     insert_26,
     insert_27,
     insert_28,
-    insert_29
+    insert_29,
+    insert_30
 };
 
 const int insert_count = sizeof ( insert_func ) / sizeof ( insert_func [ 0 ] );
