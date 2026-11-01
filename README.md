@@ -35,6 +35,7 @@ does he love everything for him that you do
 does he love everything that you do for him  
 does he love that you do everything for him  
 does he love what you do for him  
+where to go  
 where do you go  
 where are you  
 where do you play cards  
