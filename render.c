@@ -1,5 +1,5 @@
 /*
- * main.c
+ * render.c
  *
  * Copyright (C) 1976.12.27 TOP WAYE topwaye@hotmail.com
  *

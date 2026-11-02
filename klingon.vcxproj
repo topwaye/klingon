@@ -146,6 +146,7 @@
     <ClCompile Include="reg.c" />
     <ClCompile Include="render.c" />
     <ClCompile Include="user.c" />
+    <ClCompile Include="usr2.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dict.h" />

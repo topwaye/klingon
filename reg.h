@@ -1,5 +1,5 @@
 /*
- * main.c
+ * reg.h
  *
  * Copyright (C) 1976.12.27 TOP WAYE topwaye@hotmail.com
  *
@@ -67,6 +67,7 @@
 #ifndef REG_H
 #define REG_H
 
-extern void run ( void );
+extern int get_func_group_count ( void );
+extern void run ( int group );
 
 #endif

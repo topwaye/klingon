@@ -1,5 +1,5 @@
 /*
- * main.c
+ * reg.c
  *
  * Copyright (C) 1976.12.27 TOP WAYE topwaye@hotmail.com
  *
@@ -64,50 +64,45 @@
  * https://github.com/topwaye/klingon
  */
 
+#include <assert.h>
+
 #include "user.h"
+
+#define FUNCS_PER_ROW           32
 
 typedef void ( * insert_t ) ( void );
 
-const insert_t insert_func [ ] =
+const insert_t insert_func [ ] [ FUNCS_PER_ROW ] =
 {
-    insert_1,
-    insert_2,
-    insert_3,
-    insert_4,
-    insert_5,
-    insert_6,
-    insert_7,
-    insert_8,
-    insert_9,
-    insert_10,
-    insert_11,
-    insert_12,
-    insert_13,
-    insert_14,
-    insert_15,
-    insert_16,
-    insert_17,
-    insert_18,
-    insert_19,
-    insert_20,
-    insert_21,
-    insert_22,
-    insert_23,
-    insert_24,
-    insert_25,
-    insert_26,
-    insert_27,
-    insert_28,
-    insert_29,
-    insert_30
+    {
+        insert_1, insert_2, insert_3, insert_4, insert_5, insert_6, insert_7, insert_8, insert_9, insert_10,
+        insert_11, insert_12, insert_13, insert_14, insert_15, insert_16, insert_17, insert_18, insert_19, insert_20,
+        insert_21, insert_22, insert_23, insert_24, insert_25, insert_26, insert_27, insert_28, insert_29, insert_30
+    },
+    {
+        insert_31, insert_32, insert_33, insert_34, insert_35, insert_36, insert_37, insert_38, insert_39, insert_40
+    },
+    {
+        insert_41, insert_42, insert_43, insert_44, insert_45, insert_46, insert_47, insert_48, insert_49, insert_50
+    },
+    {
+        insert_51, insert_52, insert_53, insert_54, insert_55, insert_56, insert_57, insert_58, insert_59, insert_60
+    }
 };
 
-const int insert_count = sizeof ( insert_func ) / sizeof ( insert_func [ 0 ] );
+const int row_count = sizeof ( insert_func ) / sizeof ( insert_func [ 0 ] );
 
-void run ( void )
+int get_func_group_count ( void )
 {
-    int i;
+    return row_count;
+}
 
-    for ( i = 0; i < insert_count; i ++ )
-        insert_func [ i ] ( );
+void run ( int group )
+{
+    const insert_t * pp;
+
+    assert ( group < row_count );
+    pp = * ( insert_func + group );
+    while ( * pp )
+        ( * pp ++ ) ( );
 }

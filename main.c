@@ -65,11 +65,28 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "reg.h"
 
-int main ( void )
+int main ( int argc, char * argv [ ] )
 {
+    int group;
+
+    group = 0;
+    if ( argc == 2 )
+    {
+        group = atoi ( argv [ 1 ] );
+        if ( group < 0 || group >= get_func_group_count ( ) )
+            group = 0;
+    }
+
+    /* echo the command the current user typed */
+
+    printf ( "klingon %d\n", group );
+
+    /* echo the copyright information of the Klingon program */
+
     printf ( "***********************************************************************************************************************\n" );
     printf ( "an English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
@@ -96,7 +113,9 @@ int main ( void )
     printf ( "copyright (C) 2026.10.30 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "***********************************************************************************************************************\n" );
 
-    run ( );
+    /* echo the results of the selected function group */
+
+    run ( group );
 
     return 0;
 }

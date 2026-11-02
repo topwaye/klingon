@@ -1,5 +1,5 @@
 /*
- * main.c
+ * user.h
  *
  * Copyright (C) 1976.12.27 TOP WAYE topwaye@hotmail.com
  *
@@ -64,8 +64,8 @@
  * https://github.com/topwaye/klingon
  */
 
-#ifndef AREA_H
-#define AREA_H
+#ifndef USER_H
+#define USER_H
 
 extern void insert_1 ( void );
 extern void insert_2 ( void );
@@ -102,5 +102,41 @@ extern void insert_27 ( void );
 extern void insert_28 ( void );
 extern void insert_29 ( void );
 extern void insert_30 ( void );
+
+extern void insert_31 ( void );
+extern void insert_32 ( void );
+extern void insert_33 ( void );
+extern void insert_34 ( void );
+extern void insert_35 ( void );
+
+extern void insert_36 ( void );
+extern void insert_37 ( void );
+extern void insert_38 ( void );
+extern void insert_39 ( void );
+extern void insert_40 ( void );
+
+extern void insert_41 ( void );
+extern void insert_42 ( void );
+extern void insert_43 ( void );
+extern void insert_44 ( void );
+extern void insert_45 ( void );
+
+extern void insert_46 ( void );
+extern void insert_47 ( void );
+extern void insert_48 ( void );
+extern void insert_49 ( void );
+extern void insert_50 ( void );
+
+extern void insert_51 ( void );
+extern void insert_52 ( void );
+extern void insert_53 ( void );
+extern void insert_54 ( void );
+extern void insert_55 ( void );
+
+extern void insert_56 ( void );
+extern void insert_57 ( void );
+extern void insert_58 ( void );
+extern void insert_59 ( void );
+extern void insert_60 ( void );
 
 #endif
