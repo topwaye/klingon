@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="klingon.vcxproj" Id="ba5e55a6-9f82-4f6a-80d4-ead308cee41e" />
+</Solution>
