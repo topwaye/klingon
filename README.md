@@ -47,4 +47,3 @@ klingon shows how our brains actually think to form sentences
 
 all the thinking in our brains is just mathematical permutations and combinations
 
-gcc main.c -o main
