@@ -124,12 +124,47 @@ struct en_word word_44 [ ] = { { "tall" } };
 struct en_word word_45 [ ] = { { "work" } };
 struct en_word word_46 [ ] = { { "hard" } };
 
+struct en_word word_47 [ ] = { { "gonna" } };
+
+struct en_word word_48 [ ] = { { "going" } };
+struct en_word word_49 [ ] = { { "off" } };
+
+struct en_word word_50 [ ] = { { "feel" } };
+struct en_word word_51 [ ] = { { "how" } };
+
+struct en_word word_52 [ ] = { { "eat" } };
+struct en_word word_53 [ ] = { { "a" } };
+struct en_word word_54 [ ] = { { "piece" } };
+struct en_word word_55 [ ] = { { "of" } };
+struct en_word word_56 [ ] = { { "cake" } };
+
+struct en_word word_57 [ ] = { { "the" } };
+struct en_word word_58 [ ] = { { "enemy" }, { "enemy" } };
+
+struct en_word word_59 [ ] = { { "friend" } };
+
+struct en_word word_60 [ ] = { { "often" } };
+
+struct en_word word_61 [ ] = { { "since" } };
+struct en_word word_62 [ ] = { { "when" } };
+
+struct en_word word_63 [ ] = { { "have" } };
+
+struct en_word word_64 [ ] = { { "there" } };
+
+struct en_word word_65 [ ] = { { "about" } };
+
+struct en_word word_66 [ ] = { { "plus" } };
+
+struct en_word word_67 [ ] = { { "equals" } };
+struct en_word word_68 [ ] = { { "two" } };
+
 /* break syllables */
 
 struct en_word word_100 [ ] = { { "are", 2 }, { "are", 2 } };
 struct en_word word_101 [ ] = { { "is", 2 } };
-struct en_word word_102 [ ] = { { "to", 1 } };
-struct en_word word_103 [ ] = { { "be", 1 } };
+struct en_word word_102 [ ] = { { "to", 1 }, { "to", 1 } };
+struct en_word word_103 [ ] = { { "be", 1 }, { "be", 1 } };
 
 struct en_word word_104 [ ] = { { "do", 2 } };
 struct en_word word_105 [ ] = { { "does", 2 } };
@@ -140,7 +175,9 @@ struct en_word word_107 [ ] = { { "would", 2 } };
 struct en_word word_108 [ ] = { { "have", 1 } };
 struct en_word word_109 [ ] = { { "been", 1 } };
 
-struct en_word word_110 [ ] = { { "can", 6 } };
+struct en_word word_110 [ ] = { { "have", 2 } };
+
+struct en_word word_111 [ ] = { { "can", 6 } };
 
 /* subjects */
 

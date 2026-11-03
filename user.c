@@ -1046,7 +1046,7 @@ void insert_27 ( void )
     link_words
     (
         1,
-        segment_2                           /* object zone */
+        segment_2                           /* adverbial zone */
     );
 
     /* inserting a subject */
@@ -1143,15 +1143,15 @@ void insert_30 ( void )
 
     struct en_word * segment_1 = new_word_with_negation ( word_104 );
     struct en_word * segment_2 = new_word ( word_43 + 1 );
-    struct en_word * segment_3 = new_word ( word_110 );
+    struct en_word * segment_3 = new_word ( word_111 );
 
     link_words
     (
         4,
         segment_1,                          /* break zone */
         new_word ( word_45 ),               /* verb zone */
-        new_word ( word_43 ),               /* object zone */
-        new_word ( word_46 )                /* object zone */
+        new_word ( word_43 ),               /* adverbial zone */
+        new_word ( word_46 )                /* adverbial zone */
     );
 
     link_words
@@ -1167,7 +1167,7 @@ void insert_30 ( void )
         3,
         segment_3,                          /* break zone */
         word_0,                             /* verb zone */
-        word_0 + 1                          /* object zone */
+        word_0 + 1                          /* adverbial zone */
     );
 
     /* inserting subjects */

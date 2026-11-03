@@ -73,7 +73,7 @@ int main ( int argc, char * argv [ ] )
 {
     int group;
 
-    group = 0;
+    group = 3;
     if ( argc == 2 )
     {
         group = atoi ( argv [ 1 ] );

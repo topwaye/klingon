@@ -125,6 +125,41 @@ extern struct en_word word_44 [ ];
 extern struct en_word word_45 [ ];
 extern struct en_word word_46 [ ];
 
+extern struct en_word word_47 [ ];
+
+extern struct en_word word_48 [ ];
+extern struct en_word word_49 [ ];
+
+extern struct en_word word_50 [ ];
+extern struct en_word word_51 [ ];
+
+extern struct en_word word_52 [ ];
+extern struct en_word word_53 [ ];
+extern struct en_word word_54 [ ];
+extern struct en_word word_55 [ ];
+extern struct en_word word_56 [ ];
+
+extern struct en_word word_57 [ ];
+extern struct en_word word_58 [ ];
+
+extern struct en_word word_59 [ ];
+
+extern struct en_word word_60 [ ];
+
+extern struct en_word word_61 [ ];
+extern struct en_word word_62 [ ];
+
+extern struct en_word word_63 [ ];
+
+extern struct en_word word_64 [ ];
+
+extern struct en_word word_65 [ ];
+
+extern struct en_word word_66 [ ];
+
+extern struct en_word word_67 [ ];
+extern struct en_word word_68 [ ];
+
 /* break syllables */
 
 extern struct en_word word_100 [ ];
@@ -142,6 +177,8 @@ extern struct en_word word_108 [ ];
 extern struct en_word word_109 [ ];
 
 extern struct en_word word_110 [ ];
+
+extern struct en_word word_111 [ ];
 
 /* subjects */
 
