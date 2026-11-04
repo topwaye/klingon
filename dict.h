@@ -160,6 +160,17 @@ extern struct en_word word_66 [ ];
 extern struct en_word word_67 [ ];
 extern struct en_word word_68 [ ];
 
+extern struct en_word word_69 [ ];
+
+extern struct en_word word_70 [ ];
+
+extern struct en_word word_71 [ ];
+
+extern struct en_word word_72 [ ];
+
+extern struct en_word word_73 [ ];
+extern struct en_word word_74 [ ];
+
 /* break syllables */
 
 extern struct en_word word_100 [ ];

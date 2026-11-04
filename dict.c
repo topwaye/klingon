@@ -69,7 +69,7 @@
 /* verb-object phrases */
 
 struct en_word word_11 [ ] = { { "play" } };
-struct en_word word_12 [ ] = { { "what" } };
+struct en_word word_12 [ ] = { { "what" }, { "what" } };
 
 struct en_word word_13 [ ] = { { "at" } };
 struct en_word word_14 [ ] = { { "home" } };
@@ -158,6 +158,17 @@ struct en_word word_66 [ ] = { { "plus" } };
 
 struct en_word word_67 [ ] = { { "equals" } };
 struct en_word word_68 [ ] = { { "two" } };
+
+struct en_word word_69 [ ] = { { "let" } };
+
+struct en_word word_70 [ ] = { { "look" } };
+
+struct en_word word_71 [ ] = { { "like" } };
+
+struct en_word word_72 [ ] = { { "neither" } };
+
+struct en_word word_73 [ ] = { { "only" } };
+struct en_word word_74 [ ] = { { "if" } };
 
 /* break syllables */
 

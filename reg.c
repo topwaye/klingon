@@ -87,6 +87,9 @@ const insert_t insert_func [ ] [ FUNCS_PER_ROW ] =
     },
     {
         insert_51, insert_52, insert_53, insert_54, insert_55, insert_56, insert_57, insert_58, insert_59, insert_60
+    },
+    {
+        insert_61
     }
 };
 

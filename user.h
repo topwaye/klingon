@@ -139,4 +139,6 @@ extern void insert_58 ( void );
 extern void insert_59 ( void );
 extern void insert_60 ( void );
 
+extern void insert_61 ( void );
+
 #endif

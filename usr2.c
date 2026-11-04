@@ -687,7 +687,7 @@ void insert_52 ( void )
 
 void insert_53 ( void )
 {
-    /* forming verb-object segment 1, 2 */
+    /* forming verb-object segment 1 */
 
     struct en_word * segment_1 = new_word ( word_11 );
 
@@ -738,80 +738,71 @@ void insert_53 ( void )
 
 void insert_54 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word ( word_102 );
+    struct en_word * segment_1 = new_word ( word_69 );
+    struct en_word * segment_2 = new_word ( word_11 );
 
     link_words
     (
-        3,
-        segment_1,                                  /* break zone */
-        new_word ( word_41 ),                       /* verb zone */
-        new_word ( word_42 )                        /* object zone */
+        2,
+        segment_1,                                  /* verb zone */
+        new_word ( word_35 )                        /* object zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_2,                                  /* verb zone */
+        new_word ( word_18 )                        /* object zone */
     );
 
     /* forming a sentence */
 
-    link_lines ( 1, segment_1 );
+    link_lines ( 2, segment_1, segment_2 );
 
-    new_sentence ( sentence, segment_1, word_42, 0, jump );
+    new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
 void insert_55 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word ( word_104 );
-
-    link_words
-    (
-        3,
-        segment_1,                                  /* break zone */
-        new_word ( word_41 ),                       /* verb zone */
-        new_word ( word_42 )                        /* object zone */
-    );
-
-    /* inserting a subject */
-
-    link_words ( 2, segment_1, new_word ( word_b ) );
-
-    /* forming a sentence */
-
-    link_lines ( 1, segment_1 );
-
-    new_sentence ( sentence, segment_1, word_42, 0, jump );
-}
-
-void insert_56 ( void )
-{
-    /* forming a verb-object segment */
-
-    struct en_word * segment_1 = new_word ( word_100 );
+    struct en_word * segment_1 = new_word ( word_105 );
+    struct en_word * segment_2 = new_word ( word_71 );
 
     link_words
     (
         2,
         segment_1,                                  /* break zone */
-        new_word ( word_42 )                        /* verb zone */
+        new_word ( word_70 )                        /* verb zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_2,                                  /* verb zone */
+        new_word ( word_12 )                        /* object zone */
     );
 
     /* inserting a subject */
 
-    link_words ( 2, segment_1, new_word ( word_b ) );
+    link_words ( 2, segment_1, new_word ( word_12 + 1 ) );
 
     /* forming a sentence */
 
-    link_lines ( 1, segment_1 );
+    link_lines ( 2, segment_1, segment_2 );
 
-    new_sentence ( sentence, segment_1, word_42, 0, jump );
+    new_sentence ( sentence, segment_1, word_12, 0, jump );
 }
 
-void insert_57 ( void )
+void insert_56 ( void )
 {
     /* forming verb-object segments */
 
-    struct en_word * segment_1 = new_word ( word_104 );
-    struct en_word * segment_2 = new_word ( word_42 );
+    struct en_word * segment_1 = new_word_with_negation ( word_105 );
+    struct en_word * segment_2 = new_word ( word_72 );
+    struct en_word * segment_3 = new_word ( word_104 );
 
     link_words
     (
@@ -824,121 +815,10 @@ void insert_57 ( void )
     link_words
     (
         1,
-        segment_2                                   /* object zone */
-    );
-
-    /* inserting a subject */
-
-    link_words ( 2, segment_1, new_word ( word_b ) );
-
-    /* forming a sentence */
-
-    link_lines ( 2, segment_1, segment_2 );
-
-    new_sentence ( sentence, segment_1, word_42, 0, jump );
-}
-
-void insert_58 ( void )
-{
-    /* forming verb-object segments */
-
-    struct en_word * segment_1 = new_word_with_negation ( word_100 );
-    struct en_word * segment_3 = new_word ( word_43 + 1 );
-
-    link_words
-    (
-        3,
-        segment_1,                                  /* break zone */
-        new_word ( word_43 ),                       /* verb zone */
-        new_word ( word_44 )                        /* verb zone */
-    );
-
-    link_words
-    (
-        2,
-        segment_3,                                  /* verb zone */
-        new_word ( word_35 )                        /* object zone */
-    );
-
-    /* inserting a subject */
-
-    link_words ( 2, segment_1, new_word ( word_b ) );
-
-    /* forming a sentence */
-
-    link_lines ( 2, segment_1, segment_3 );
-
-    new_sentence ( sentence, segment_1, NULL, 0, jump );
-}
-
-void insert_59 ( void )
-{
-    /* forming verb-object segments */
-
-    struct en_word * segment_1 = new_word_with_negation ( word_100 );
-    struct en_word * segment_2 = new_word ( word_43 + 1 );
-    struct en_word * segment_3 = new_word ( word_101 );
-
-    link_words
-    (
-        3,
-        segment_1,                                  /* break zone */
-        new_word ( word_43 ),                       /* verb zone */
-        new_word ( word_44 )                        /* verb zone */
-    );
-
-    link_words
-    (
-        1,
         segment_2                                   /* conjunction zone */
     );
 
-    struct en_word word_0 [ ] = { { "(tall)" } };
-
-    link_words
-    (
-        2,
-        segment_3,                                  /* break zone */
-        word_0                                      /* verb zone */
-    );
-
-    /* inserting subjects */
-
-    link_words ( 2, segment_1, new_word ( word_b ) );
-    link_words_ahead ( 2, segment_3, new_word ( word_c ) );
-    segment_3 = word_c;
-
-    /* forming a sentence */
-
-    link_lines ( 3, segment_1, segment_2, segment_3 );
-
-    new_sentence ( sentence, segment_1, NULL, 0, jump );
-}
-
-void insert_60 ( void )
-{
-    /* forming verb-object segments */
-
-    struct en_word * segment_1 = new_word_with_negation ( word_104 );
-    struct en_word * segment_2 = new_word ( word_43 + 1 );
-    struct en_word * segment_3 = new_word ( word_110 );
-
-    link_words
-    (
-        4,
-        segment_1,                                  /* break zone */
-        new_word ( word_45 ),                       /* verb zone */
-        new_word ( word_43 ),                       /* object zone */
-        new_word ( word_46 )                        /* object zone */
-    );
-
-    link_words
-    (
-        1,
-        segment_2                                   /* conjunction zone */
-    );
-
-    struct en_word word_0 [ ] = { { "(work)" }, { "(hard)" } };
+    struct en_word word_0 [ ] = { { "(play)" }, { "(cards)" } };
 
     link_words
     (
@@ -950,13 +830,233 @@ void insert_60 ( void )
 
     /* inserting subjects */
 
-    link_words ( 2, segment_1, new_word ( word_b ) );
-    link_words_ahead ( 2, segment_3, new_word ( word_b + 1 ) );
-    segment_3 = word_b + 1;
+    link_words_ahead ( 2, segment_1, new_word ( word_c ) );
+    segment_1 = word_c;
+    link_words ( 2, segment_3, new_word ( word_b ) );
+
 
     /* forming a sentence */
 
     link_lines ( 3, segment_1, segment_2, segment_3 );
 
     new_sentence ( sentence, segment_1, NULL, 0, jump );
+}
+
+void insert_57 ( void )
+{
+    /* forming verb-object segments */
+
+    struct en_word * segment_1 = new_word ( word_73 );
+    struct en_word * segment_2 = new_word ( word_11 );
+    struct en_word * segment_3 = new_word ( word_104 );
+
+    link_words
+    (
+        2,
+        segment_1,                                  /* conjunction zone */
+        new_word ( word_74 )                        /* conjunction zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_2,                                  /* verb zone */
+        new_word ( word_18 )                        /* object zone */
+    );
+
+    link_words
+    (
+        3,
+        segment_3,                                  /* break zone */
+        new_word ( word_50 ),                       /* verb zone */
+        new_word_with_negation ( word_19 )          /* object zone */
+    );
+
+    /* inserting subjects */
+
+    link_words_ahead ( 2, segment_2, new_word ( word_b ) );
+    segment_2 = word_b;
+    link_words ( 2, segment_3, new_word ( word_b + 1 ) );
+
+
+    /* forming a sentence */
+
+    link_lines ( 3, segment_1, segment_2, segment_3 );
+
+    new_sentence ( sentence, segment_1, NULL, 0, jump );
+}
+
+void insert_58 ( void )
+{
+    /* forming verb-object segments */
+
+    struct en_word * segment_1 = new_word ( word_73 );
+    struct en_word * segment_2 = new_word ( word_11 );
+    struct en_word * segment_3 = new_word ( word_50 );
+
+    link_words
+    (
+        2,
+        segment_1,                                  /* conjunction zone */
+        new_word ( word_74 )                        /* conjunction zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_2,                                  /* verb zone */
+        new_word ( word_18 )                        /* object zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_3,                                  /* verb zone */
+        new_word_with_negation ( word_19 )          /* object zone */
+    );
+
+    /* inserting subjects */
+
+    link_words_ahead ( 2, segment_2, new_word ( word_b ) );
+    segment_2 = word_b;
+    link_words_ahead ( 2, segment_3, new_word ( word_b + 1 ) );
+    segment_3 = word_b + 1;
+
+    /* forming a sentence */
+
+    link_lines ( 3, segment_3, segment_1, segment_2 );
+
+    new_sentence ( sentence, segment_3, NULL, 0, jump );
+}
+
+void insert_59 ( void )
+{
+    /* forming verb-object segment 1, 2 */
+
+    struct en_word * segment_1 = new_word ( word_11 );
+    struct en_word * segment_2 = new_word ( word_62 );
+
+    link_words
+    (
+        2,
+        segment_1,                                  /* verb zone */
+        new_word ( word_18 )                        /* object zone */
+    );
+
+    link_words
+    (
+        1,
+        segment_2                                   /* adverbial zone */
+    );
+
+    /* inserting subject 1 */
+
+    link_words_ahead ( 2, segment_1, new_word ( word_b ) );
+    segment_1 = word_b;
+
+    /* forming sentence 1 */
+
+    link_lines ( 2, segment_1, segment_2 );
+
+    new_sentence ( sentence, segment_1, word_62, 0, NULL );
+
+    /* filling word_null */
+
+    new_null_word ( word_null, sentence );
+
+    /* forming verb-object segment 3, 4 */
+
+    struct en_word * segment_3 = new_word ( word_104 );
+    struct en_word * segment_4 = new_word ( word_73 );
+
+    link_words
+    (
+        3,
+        segment_3,                                  /* break zone */
+        new_word ( word_50 ),                       /* verb zone */
+        new_word_with_negation ( word_19 )          /* object zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_4,                                  /* adverbial zone */
+        word_null                                   /* adverbial zone */
+    );
+
+    /* inserting subject 2 */
+
+    link_words ( 2, segment_3, new_word ( word_b + 1 ) );
+
+    /* forming sentence 2 */
+
+    link_lines ( 2, segment_3, segment_4 );
+
+    new_sentence ( sentence + 1, segment_3, word_73, 0, jump );
+}
+
+void insert_60 ( void )
+{
+    /* forming verb-object segment 1, 2 */
+
+    struct en_word * segment_1 = new_word ( word_11 );
+    struct en_word * segment_2 = new_word ( word_62 );
+
+    link_words
+    (
+        2,
+        segment_1,                                  /* verb zone */
+        new_word ( word_18 )                        /* object zone */
+    );
+
+    link_words
+    (
+        1,
+        segment_2                                   /* adverbial zone */
+    );
+
+    /* inserting subject 1 */
+
+    link_words_ahead ( 2, segment_1, new_word ( word_b ) );
+    segment_1 = word_b;
+
+    /* forming sentence 1 */
+
+    link_lines ( 2, segment_1, segment_2 );
+
+    new_sentence ( sentence, segment_1, word_62, 0, NULL );
+
+    /* filling word_null */
+
+    new_null_word ( word_null, sentence );
+
+    /* forming verb-object segment 3, 4 */
+
+    struct en_word * segment_3 = new_word ( word_50 );
+    struct en_word * segment_4 = new_word ( word_73 );
+
+    link_words
+    (
+        2,
+        segment_3,                                  /* verb zone */
+        new_word_with_negation ( word_19 )          /* object zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_4,                                  /* adverbial zone */
+        word_null                                   /* adverbial zone */
+    );
+
+    /* inserting subject 2 */
+
+    link_words_ahead ( 2, segment_3, new_word ( word_b + 1 ) );
+    segment_3 = word_b + 1;
+
+    /* forming sentence 2 */
+
+    link_lines ( 2, segment_3, segment_4 );
+
+    new_sentence ( sentence + 1, segment_3, NULL, 0, jump );
 }
