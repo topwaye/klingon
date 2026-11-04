@@ -72,4 +72,39 @@
 
 void insert_61 ( void )
 {
+    /* forming verb-object segments */
+
+    struct en_word * segment_1 = new_word ( word_74 );
+    struct en_word * segment_2 = new_word ( word_11 );
+    struct en_word * segment_3 = new_word ( word_12 );
+
+    link_words
+    (
+        1,
+        segment_1                                   /* conjunction zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_2,                                  /* verb zone */
+        new_word ( word_18 )                        /* object zone */
+    );
+
+    link_words
+    (
+        1,
+        segment_3                                   /* object zone */
+    );
+
+    /* inserting a subject */
+
+    link_words_ahead ( 2, segment_2, new_word ( word_b ) );
+    segment_2 = word_b;
+
+    /* forming a sentence */
+
+    link_lines ( 3, segment_3, segment_1, segment_2 );
+
+    new_sentence ( sentence, segment_3, NULL, 0, jump );
 }

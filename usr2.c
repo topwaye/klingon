@@ -834,7 +834,6 @@ void insert_56 ( void )
     segment_1 = word_c;
     link_words ( 2, segment_3, new_word ( word_b ) );
 
-
     /* forming a sentence */
 
     link_lines ( 3, segment_1, segment_2, segment_3 );
@@ -877,7 +876,6 @@ void insert_57 ( void )
     link_words_ahead ( 2, segment_2, new_word ( word_b ) );
     segment_2 = word_b;
     link_words ( 2, segment_3, new_word ( word_b + 1 ) );
-
 
     /* forming a sentence */
 
