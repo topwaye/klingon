@@ -30,7 +30,7 @@
  *
  * the language formula for English is as follows:
  *
- * '''V / O => 'S''V / O
+ * ^^^V / O => ^S^^V / O
  *
  *  S  represents a subject.
  *  V  represents a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.
@@ -40,16 +40,16 @@
  * here are example sentences applying the above formula:
  *
  * 1. who are you ?
- *    'who => 'you who
+ *    ^who => ^you who
  *
  * 2. what do you think you play ?
- *    'think; play / what => 'you think; you play / what
+ *    ^think; play / what => ^you think; you play / what
  *
  * 3. don't you want me to play with him ?
- *    'want / me; 'play; with / him => 'you want / me; 'play; with / him
+ *    ^want / me; ^play; with / him => ^you want / me; ^play; with / him
  *
  * 4. my love shall in my verse ever live young.
- *    in / my verse; ever 'live / young; => 'my love [ in / my verse ] ever live / young
+ *    in / my verse; ever ^live / young; => ^my love [ in / my verse ] ever live / young
  *
  * in summary, how our brains construct English sentences:
  *
@@ -90,7 +90,7 @@ int main ( int argc, char * argv [ ] )
     printf ( "***********************************************************************************************************************\n" );
     printf ( "an English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( " '''V      'S''V\n" );
+    printf ( " ^^^V      ^S^^V\n" );
     printf ( "------ => -------\n" );
     printf ( "   O         O\n" );
     printf ( "\n" );
