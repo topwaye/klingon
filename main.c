@@ -30,11 +30,11 @@
  *
  * the language formula for English is as follows:
  *
- * ^( ^^V ) / O => ^( S^^V ) / O
+ *     ^          ^
+ *     V O   =>   S V O
  *
  *  S  represents a subject.
  *  V  represents a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.
- *  /  represents a division slash in mathematics.
  *  O  represents an object.
  *
  * here are example sentences applying the above formula:
@@ -43,21 +43,21 @@
  *    ^who => ^( you who )
  *
  * 2. what do you think you play ?
- *    ^think; play / what => ^( you think ); you play / what
+ *    ^think; play what => ^( you think ); ( you play ) what
  *
  * 3. don't you want me to play with him ?
- *    ^want / me; ^play; with / him => ^( you want ) / me; ^play; with / him
+ *    ^want me; ^play; with him => ^( you want ) me; ^play; with him
  *
  * 4. my love shall in my verse ever live young.
- *    in / my verse; ever ^live / young; => ^( my love [ in / my verse ] ever live ) / young
+ *    in my verse; ever ^live young; => ^( my love [ in my verse ] ever live ) young
+ *
+ * 5. would you have been playing cards ?
+ *    ^^^playing cards => ^( you ^^playing ) cards
  *
  * in summary, how our brains construct English sentences:
  *
  * 1. no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.
- * 2. insert a subject among the break syllables of the verb.
- *
- * know that the focus of thinking is unconditionally on the subject-predicate unit right next to a break syllable, rather than
- * on the break syllable itself which is usually in the first position.
+ * 2. insert a subject among the break syllables of the verb to form a subject-predicate unit.
  *
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
@@ -90,17 +90,15 @@ int main ( int argc, char * argv [ ] )
     printf ( "***********************************************************************************************************************\n" );
     printf ( "an English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( " ^( ^^V )      ^( S^^V )\n" );
-    printf ( "---------- => -----------\n" );
-    printf ( "     O             O\n" );
+    printf ( "    ^          ^\n" );
+    printf ( "    V O   =>   S V O\n" );
     printf ( "\n" );
     printf ( " S  represents a subject.\n" );
     printf ( " V  represents a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.\n" );
-    printf ( " /  represents a division slash in mathematics.\n" );
     printf ( " O  represents an object.\n" );
     printf ( "\n" );
     printf ( "# no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't';\n" );
-    printf ( "# insert a subject among the break syllables of the verb:\n" );
+    printf ( "# insert a subject among the break syllables of the verb to form a subject-predicate unit.\n" );
     printf ( "\n" );
     printf ( "copyright (C) 2026.11.12 TOP WAYE topwaye@hotmail.com\n" );
     printf ( "***********************************************************************************************************************\n" );
