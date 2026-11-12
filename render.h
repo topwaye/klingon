@@ -30,7 +30,7 @@
  *
  * the language formula for English is as follows:
  *
- *     ^          ^
+ *     ^           ^
  *     V O   =>   S V O
  *
  *  S  represents a subject.

@@ -30,7 +30,7 @@
  *
  * the language formula for English is as follows:
  *
- *     ^          ^
+ *     ^           ^
  *     V O   =>   S V O
  *
  *  S  represents a subject.
@@ -90,7 +90,7 @@ int main ( int argc, char * argv [ ] )
     printf ( "***********************************************************************************************************************\n" );
     printf ( "an English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( "    ^          ^\n" );
+    printf ( "    ^           ^\n" );
     printf ( "    V O   =>   S V O\n" );
     printf ( "\n" );
     printf ( " S  represents a subject.\n" );
