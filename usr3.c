@@ -59,6 +59,7 @@
  * 1. no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.
  * 2. insert a subject among the break syllables of the verb to form a subject-predicate unit.
  *
+ * know that all the thinking is anchored on a subject-predicate unit, not on a subject or a predicate alone.
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
  * https://github.com/topwaye/klingon
