@@ -6,9 +6,11 @@
  * basic human brain language logic shown by a recursive algorithm running on a basic CPU architecture.
  * give a few words to the algorithm, and it gives you an English sentence. this algorithm is called Klingon.
  *
- * the fish bubbling language model for English is as follows:
- *
- * a verb is a fish blowing bubbles. a bubble is a break syllable. a subject is inserted among bubbles.
+ * the fleet navigation language model for English is as follows:
+ * 
+ * 1. a verb is on a lead ship, and an object is on a following ship.
+ * 2. the lead ship has stars in the sky, called break syllables, for navigation.
+ * 3. a subject is inserted onto the lead ship.
  *
  * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's
  * why it was necessary to change the pronunciation of certain words by adding break syllables. for example, 'play' is changed
@@ -53,11 +55,6 @@
  *
  * 5. would you have been playing cards ?
  *    ^^^playing cards => ^( you ^^playing ) cards
- *
- * in summary, how our brains construct English sentences:
- *
- * 1. no subjects, there are only verb-object phrases, where a verb is overlaid with break syllables, like 'do/don't'.
- * 2. insert a subject among the break syllables of the verb to form a subject-predicate unit.
  *
  * know that all the thinking is anchored on a subject-predicate unit, not on a subject or a predicate alone.
  * know that all the thinking in our brains is just mathematical permutations and combinations.
