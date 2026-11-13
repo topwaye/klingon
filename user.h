@@ -26,8 +26,10 @@
  *
  * the language formula for English is as follows:
  *
- *     ^           ^
- *     V O   =>   S V O
+ *            @
+ *     @      S
+ *     V  =>  V
+ *     O      O
  *
  *  S  represents a subject.
  *  V  represents a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.
@@ -36,19 +38,19 @@
  * here are example sentences applying the above formula:
  *
  * 1. who are you ?
- *    ^who => ^( you who )
+ *    @who => @( you who )
  *
  * 2. what do you think you play ?
- *    ^think; play what => ^( you think ); ( you play ) what
+ *    @think; play what => @( you think ); ( you play ) what
  *
  * 3. don't you want me to play with him ?
- *    ^want me; ^play; with him => ^( you want ) me; ^play; with him
+ *    @want me; @play; with him => @( you want ) me; @play; with him
  *
  * 4. my love shall in my verse ever live young.
- *    in my verse; ever ^live young; => ^( my love [ in my verse ] ever live ) young
+ *    in my verse; ever @live young; => @( my love [ in my verse ] ever live ) young
  *
  * 5. would you have been playing cards ?
- *    ^^^playing cards => ^( you ^^playing ) cards
+ *    @@@playing cards => @( you @@playing ) cards
  *
  * know that all the thinking is anchored on a subject-predicate unit, not on a subject or a predicate alone.
  * know that all the thinking in our brains is just mathematical permutations and combinations.
