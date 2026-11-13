@@ -6,12 +6,6 @@
  * basic human brain language logic shown by a recursive algorithm running on a basic CPU architecture.
  * give a few words to the algorithm, and it gives you an English sentence. this algorithm is called Klingon.
  *
- * the fleet navigation language model for English is as follows:
- * 
- * 1. a verb is on a lead ship, and an object is on a following ship.
- * 2. the lead ship has stars in the sky, called break syllables, for navigation.
- * 3. a subject is inserted onto the lead ship.
- *
  * being able to be clearly spoken and clearly heard was the top priority when English was invented in ancient times. that's
  * why it was necessary to change the pronunciation of certain words by adding break syllables. for example, 'play' is changed
  * to 'to play', and 'be' is changed to 'to be', that is, insert a break syllable as a breakpoint to make the target word sound
