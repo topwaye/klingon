@@ -99,10 +99,8 @@ int main ( int argc, char * argv [ ] )
     printf ( "***********************************************************************************************************************\n" );
     printf ( "an English formula about how our brains construct sentences, called Klingon, is shown below:\n" );
     printf ( "\n" );
-    printf ( "           @\n" );
-    printf ( "    @      S      @\n" );
-    printf ( "    C  =>  C  =>  S  C  O\n" );
-    printf ( "    O      O\n" );
+    printf ( "    @\n" );
+    printf ( "    S  C  O\n" );
     printf ( "\n" );
     printf ( " S: a subject.\n" );
     printf ( " C: a complement which can be a verb, preposition, adjective, or noun overlaid with break syllables, like 'do/don't'.\n" );
