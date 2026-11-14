@@ -16,43 +16,58 @@
  * 'not' is a judgment concept in logic. it's a matter of 'true' or 'false'. for example, 'not him' means he is false, that is,
  * he is negated. ( placed in a context of choice, it means a negative choice against him. )
  *
- * 'don't' is overlaid onto a subject-predicate unit to express negation, that is, the meaning expressed by the subject-predicate
- * unit is false, and the opposite meaning is true. for example, if 'red' is false, then the opposite meaning 'not red' is true.
- * note that a subject-predicate unit is an atomic, indivisible unit. so you can't just negate a predicate alone. essentially,
- * this is a matter of granularity.
+ * 'don't' is a predicate that has degenerated into a break syllable, expressing negation, and is overlaid onto a subject. that is,
+ * the meaning expressed by the subject-predicate unit is false, and the opposite meaning is true. for example, if 'red' is false,
+ * then the opposite meaning 'not red' is true.
  *
- * in ancient times, there were no subjects, only verb-object phrases. in modern times, when constructing sentences, we need
- * to add a subject to these verb-object phrases, that is, insert a subject to form a subject-predicate unit.
+ * note: a predicate can express a complete meaning on its own without the help of other words.
+ * note: in English, there are only two predicates, 'be' and 'do', which have already degenerated into break syllables, so we
+ * no longer use the concept of predicates. instead, we use the concept of complements.
+ *
+ * in ancient times, there were no subjects, only complement-object phrases. in modern times, when constructing sentences, we need
+ * to insert a subject into these complement-object phrases.
  *
  * the language formula for English is as follows:
  *
  *            @
- *     @      S
- *     V  =>  V
+ *     @      S      @
+ *     C  =>  C  =>  S  C  O
  *     O      O
  *
- *  S  represents a subject.
- *  V  represents a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.
- *  O  represents an object.
+ * the language formula extension for English is as follows:
+ *
+ *            @
+ *     @      S
+ *     @      @         @
+ *     @      @      @  @
+ *     C  =>  C  =>  S  C  O
+ *     O      O
+ *
+ *  S: a subject.
+ *  C: a complement which can be a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.
+ *  O: an object.
+ *
+ * note: whether a word is a subject, complement, or object is unconditionally determined by its position in the sentence formula.
+ * note: the difference between a complement and an object is that a subject and a complement are in the same group, while an object
+ * is in another group.
  *
  * here are example sentences applying the above formula:
  *
  * 1. who are you ?
- *    @who => @( you who )
+ *    @who => @you who
  *
  * 2. what do you think you play ?
- *    @think; play what => @( you think ); ( you play ) what
+ *    @think; play what => @you think; you play what
  *
  * 3. don't you want me to play with him ?
- *    @want me; @play; with him => @( you want ) me; @play; with him
+ *    @want me; @play; with him => @you want me; @play; with him
  *
  * 4. my love shall in my verse ever live young.
- *    in my verse; ever @live young; => @( my love [ in my verse ] ever live ) young
+ *    in my verse; ever @live young; => @my love [ in my verse ] ever live young
  *
  * 5. would you have been playing cards ?
- *    @@@playing cards => @( you @@playing ) cards
+ *    @@@playing cards => @you @@playing cards
  *
- * know that all the thinking is anchored on a subject-predicate unit, not on a subject or a predicate alone.
  * know that all the thinking in our brains is just mathematical permutations and combinations.
  *
  * https://github.com/topwaye/klingon
@@ -66,7 +81,7 @@
 
 void insert_31 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word_with_negation ( word_100 );
     struct en_word * segment_2 = new_word ( word_11 );
@@ -75,13 +90,13 @@ void insert_31 ( void )
     (
         2,
         segment_1,                                  /* break zone */
-        new_word ( word_47 )                        /* verb zone */
+        new_word ( word_47 )                        /* complement zone */
     );
 
     link_words
     (
         2,
-        segment_2,                                  /* verb zone */
+        segment_2,                                  /* complement zone */
         new_word ( word_12 )                        /* object zone */
     );
 
@@ -98,7 +113,7 @@ void insert_31 ( void )
 
 void insert_32 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word_with_negation ( word_100 );
     struct en_word * segment_2 = new_word ( word_103 );
@@ -107,14 +122,14 @@ void insert_32 ( void )
     (
         2,
         segment_1,                                  /* break zone */
-        new_word ( word_47 )                        /* verb zone */
+        new_word ( word_47 )                        /* complement zone */
     );
 
     link_words
     (
         2,
         segment_2,                                  /* break zone */
-        new_word ( word_12 )                        /* verb zone */
+        new_word ( word_12 )                        /* complement zone */
     );
 
     /* inserting a subject */
@@ -130,7 +145,7 @@ void insert_32 ( void )
 
 void insert_33 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word_with_negation ( word_100 );
     struct en_word * segment_2 = new_word ( word_102 );
@@ -139,14 +154,14 @@ void insert_33 ( void )
     (
         2,
         segment_1,                                  /* break zone */
-        new_word ( word_48 )                        /* verb zone */
+        new_word ( word_48 )                        /* complement zone */
     );
 
     link_words
     (
         3,
         segment_2,                                  /* break zone */
-        new_word ( word_11 ),                       /* verb zone */
+        new_word ( word_11 ),                       /* complement zone */
         new_word ( word_12 )                        /* object zone */
     );
 
@@ -163,7 +178,7 @@ void insert_33 ( void )
 
 void insert_34 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word_with_negation ( word_100 );
     struct en_word * segment_2 = new_word ( word_102 );
@@ -172,7 +187,7 @@ void insert_34 ( void )
     (
         2,
         segment_1,                                  /* break zone */
-        new_word ( word_48 )                        /* verb zone */
+        new_word ( word_48 )                        /* complement zone */
     );
 
     link_words
@@ -180,7 +195,7 @@ void insert_34 ( void )
         3,
         segment_2,                                  /* break zone */
         new_word ( word_103 ),                      /* break zone */
-        new_word ( word_12 )                        /* verb zone */
+        new_word ( word_12 )                        /* complement zone */
     );
 
     /* inserting a subject */
@@ -196,7 +211,7 @@ void insert_34 ( void )
 
 void insert_35 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word_with_negation ( word_100 );
 
@@ -204,7 +219,7 @@ void insert_35 ( void )
     (
         3,
         segment_1,                                  /* break zone */
-        new_word ( word_48 ),                       /* verb zone */
+        new_word ( word_48 ),                       /* complement zone */
         new_word ( word_42 )                        /* object zone */
     );
 
@@ -221,14 +236,14 @@ void insert_35 ( void )
 
 void insert_36 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word ( word_41 );
 
     link_words
     (
         2,
-        segment_1,                                  /* verb zone */
+        segment_1,                                  /* complement zone */
         new_word ( word_49 )                        /* adverbial zone */
     );
 
@@ -246,7 +261,7 @@ void insert_36 ( void )
 
 void insert_37 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word ( word_104 );
 
@@ -254,7 +269,7 @@ void insert_37 ( void )
     (
         3,
         segment_1,                                  /* break zone */
-        new_word ( word_50 ),                       /* verb zone */
+        new_word ( word_50 ),                       /* complement zone */
         new_word ( word_51 )                        /* object zone */
     );
 
@@ -271,7 +286,7 @@ void insert_37 ( void )
 
 void insert_38 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word ( word_100 );
 
@@ -279,7 +294,7 @@ void insert_38 ( void )
     (
         2,
         segment_1,                                  /* break zone */
-        new_word ( word_51 )                        /* verb zone */
+        new_word ( word_51 )                        /* complement zone */
     );
 
     /* inserting a subject */
@@ -295,7 +310,7 @@ void insert_38 ( void )
 
 void insert_39 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word ( word_104 );
 
@@ -303,7 +318,7 @@ void insert_39 ( void )
     (
         6,
         segment_1,                                  /* break zone */
-        new_word ( word_52 ),                       /* verb zone */
+        new_word ( word_52 ),                       /* complement zone */
         new_word ( word_53 ),                       /* object zone */
         new_word ( word_54 ),                       /* object zone */
         new_word ( word_55 ),                       /* object zone */
@@ -323,7 +338,7 @@ void insert_39 ( void )
 
 void insert_40 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word ( word_101 );
 
@@ -331,8 +346,8 @@ void insert_40 ( void )
     (
         3,
         segment_1,                                  /* break zone */
-        new_word ( word_53 ),                       /* verb zone */
-        new_word ( word_59 )                        /* verb zone */
+        new_word ( word_53 ),                       /* complement zone */
+        new_word ( word_59 )                        /* complement zone */
     );
 
     /* inserting a subject */
@@ -350,7 +365,7 @@ void insert_40 ( void )
 
 void insert_41 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word_with_negation ( word_104 );
 
@@ -359,7 +374,7 @@ void insert_41 ( void )
         4,
         segment_1,                                  /* break zone */
         new_word ( word_60 ),                       /* adverbial zone */
-        new_word ( word_11 ),                       /* verb zone */
+        new_word ( word_11 ),                       /* complement zone */
         new_word ( word_12 )                        /* object zone */
     );
 
@@ -376,7 +391,7 @@ void insert_41 ( void )
 
 void insert_42 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word_with_negation ( word_104 );
     struct en_word * segment_2 = new_word ( word_60 );
@@ -385,7 +400,7 @@ void insert_42 ( void )
     (
         3,
         segment_1,                                  /* break zone */
-        new_word ( word_11 ),                       /* verb zone */
+        new_word ( word_11 ),                       /* complement zone */
         new_word ( word_12 )                        /* object zone */
     );
 
@@ -408,7 +423,7 @@ void insert_42 ( void )
 
 void insert_43 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word ( word_110 );
     struct en_word * segment_2 = new_word ( word_61 );
@@ -418,14 +433,14 @@ void insert_43 ( void )
         4,
         segment_1,                                  /* break zone */
         new_word ( word_109 ),                      /* break zone */
-        new_word ( word_17 ),                       /* verb zone */
+        new_word ( word_17 ),                       /* complement zone */
         new_word ( word_18 )                        /* object zone */
     );
 
     link_words
     (
         2,
-        segment_2,                                  /* verb zone */
+        segment_2,                                  /* complement zone */
         new_word ( word_62 )                        /* object zone */
     );
 
@@ -442,7 +457,7 @@ void insert_43 ( void )
 
 void insert_with_starting_point_2 ( struct en_word * starting )
 {
-    /* forming verb-object segment 1, 2 */
+    /* forming complement-object segment 1, 2 */
 
     struct en_word * segment_1 = new_word ( word_17 );
     struct en_word * segment_2 = new_word ( word_62 );
@@ -450,7 +465,7 @@ void insert_with_starting_point_2 ( struct en_word * starting )
     link_words
     (
         2,
-        segment_1,                                  /* verb zone */
+        segment_1,                                  /* complement zone */
         new_word ( word_18 )                        /* object zone */
     );
 
@@ -470,7 +485,7 @@ void insert_with_starting_point_2 ( struct en_word * starting )
 
     new_null_word ( word_null, sentence );
 
-    /* forming verb-object segment 3, 4 */
+    /* forming complement-object segment 3, 4 */
 
     struct en_word * segment_3 = new_word ( word_104 );
     struct en_word * segment_4 = word_null;
@@ -479,7 +494,7 @@ void insert_with_starting_point_2 ( struct en_word * starting )
     (
         3,
         segment_3,                                  /* break zone */
-        new_word ( word_50 ),                       /* verb zone */
+        new_word ( word_50 ),                       /* complement zone */
         new_word_with_negation ( word_19 )          /* object zone */
     );
 
@@ -512,14 +527,14 @@ void insert_45 ( void )
 
 void insert_46 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word ( word_45 );
 
     link_words
     (
         3,
-        segment_1,                                  /* verb zone */
+        segment_1,                                  /* complement zone */
         new_word ( word_51 ),                       /* adverbial zone */
         new_word ( word_46 )                        /* adverbial zone */
     );
@@ -538,14 +553,14 @@ void insert_46 ( void )
 
 void insert_47 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word ( word_63 );
 
     link_words
     (
         4,
-        segment_1,                                  /* verb zone */
+        segment_1,                                  /* complement zone */
         new_word ( word_12 ),                       /* object zone */
         new_word ( word_53 ),                       /* object zone */
         new_word ( word_59 )                        /* object zone */
@@ -565,7 +580,7 @@ void insert_47 ( void )
 
 void insert_48 ( void )
 {
-    /* forming a verb-object segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word ( word_102 );
 
@@ -588,7 +603,7 @@ void insert_48 ( void )
 
 void insert_with_starting_point_3 ( struct en_word * starting )
 {
-    /* forming a verb-object segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word ( word_101 );
 
@@ -596,7 +611,7 @@ void insert_with_starting_point_3 ( struct en_word * starting )
     (
         2,
         segment_1,                                  /* break zone */
-        new_word ( word_64 )                        /* verb zone */
+        new_word ( word_64 )                        /* complement zone */
     );
 
     /* inserting a subject */
@@ -623,7 +638,7 @@ void insert_50 ( void )
 
 void insert_51 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word ( word_100 );
     struct en_word * segment_2 = new_word ( word_102 );
@@ -632,14 +647,14 @@ void insert_51 ( void )
     (
         2,
         segment_1,                                  /* break zone */
-        new_word ( word_65 )                        /* verb zone */
+        new_word ( word_65 )                        /* complement zone */
     );
 
     link_words
     (
         3,
         segment_2,                                  /* break zone */
-        new_word ( word_41 ),                       /* verb zone */
+        new_word ( word_41 ),                       /* complement zone */
         new_word ( word_49 )                        /* adverbial zone */
     );
 
@@ -656,14 +671,14 @@ void insert_51 ( void )
 
 void insert_52 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word ( word_67 );
 
     link_words
     (
         2,
-        segment_1,                                  /* verb zone */
+        segment_1,                                  /* complement zone */
         new_word ( word_68 )                        /* object zone */
     );
 
@@ -681,14 +696,14 @@ void insert_52 ( void )
 
 void insert_53 ( void )
 {
-    /* forming verb-object segment 1 */
+    /* forming complement-object segment 1 */
 
     struct en_word * segment_1 = new_word ( word_11 );
 
     link_words
     (
         2,
-        segment_1,                                  /* verb zone */
+        segment_1,                                  /* complement zone */
         new_word ( word_12 )                        /* object zone */
     );
 
@@ -707,7 +722,7 @@ void insert_53 ( void )
 
     new_null_word ( word_null, sentence );
 
-    /* forming verb-object segment 3 */
+    /* forming complement-object segment 3 */
 
     struct en_word * segment_3 = new_word ( word_101 );
 
@@ -715,7 +730,7 @@ void insert_53 ( void )
     (
         2,
         segment_3,                                  /* break zone */
-        new_word_with_negation ( word_19 )          /* verb zone */
+        new_word_with_negation ( word_19 )          /* complement zone */
     );
 
     /* inserting subject 2 */
@@ -732,7 +747,7 @@ void insert_53 ( void )
 
 void insert_54 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word ( word_69 );
     struct en_word * segment_2 = new_word ( word_11 );
@@ -740,14 +755,14 @@ void insert_54 ( void )
     link_words
     (
         2,
-        segment_1,                                  /* verb zone */
+        segment_1,                                  /* complement zone */
         new_word ( word_35 )                        /* object zone */
     );
 
     link_words
     (
         2,
-        segment_2,                                  /* verb zone */
+        segment_2,                                  /* complement zone */
         new_word ( word_18 )                        /* object zone */
     );
 
@@ -760,7 +775,7 @@ void insert_54 ( void )
 
 void insert_55 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word ( word_105 );
     struct en_word * segment_2 = new_word ( word_71 );
@@ -769,13 +784,13 @@ void insert_55 ( void )
     (
         2,
         segment_1,                                  /* break zone */
-        new_word ( word_70 )                        /* verb zone */
+        new_word ( word_70 )                        /* complement zone */
     );
 
     link_words
     (
         2,
-        segment_2,                                  /* verb zone */
+        segment_2,                                  /* complement zone */
         new_word ( word_12 )                        /* object zone */
     );
 
@@ -792,7 +807,7 @@ void insert_55 ( void )
 
 void insert_56 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word_with_negation ( word_105 );
     struct en_word * segment_2 = new_word ( word_72 );
@@ -802,7 +817,7 @@ void insert_56 ( void )
     (
         3,
         segment_1,                                  /* break zone */
-        new_word ( word_11 ),                       /* verb zone */
+        new_word ( word_11 ),                       /* complement zone */
         new_word ( word_18 )                        /* object zone */
     );
 
@@ -818,7 +833,7 @@ void insert_56 ( void )
     (
         3,
         segment_3,                                  /* break zone */
-        word_0,                                     /* verb zone */
+        word_0,                                     /* complement zone */
         word_0 + 1                                  /* object zone */
     );
 
@@ -837,7 +852,7 @@ void insert_56 ( void )
 
 void insert_57 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word ( word_73 );
     struct en_word * segment_2 = new_word ( word_11 );
@@ -853,7 +868,7 @@ void insert_57 ( void )
     link_words
     (
         2,
-        segment_2,                                  /* verb zone */
+        segment_2,                                  /* complement zone */
         new_word ( word_18 )                        /* object zone */
     );
 
@@ -861,7 +876,7 @@ void insert_57 ( void )
     (
         3,
         segment_3,                                  /* break zone */
-        new_word ( word_50 ),                       /* verb zone */
+        new_word ( word_50 ),                       /* complement zone */
         new_word_with_negation ( word_19 )          /* object zone */
     );
 
@@ -880,7 +895,7 @@ void insert_57 ( void )
 
 void insert_58 ( void )
 {
-    /* forming verb-object segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word ( word_73 );
     struct en_word * segment_2 = new_word ( word_11 );
@@ -896,14 +911,14 @@ void insert_58 ( void )
     link_words
     (
         2,
-        segment_2,                                  /* verb zone */
+        segment_2,                                  /* complement zone */
         new_word ( word_18 )                        /* object zone */
     );
 
     link_words
     (
         2,
-        segment_3,                                  /* verb zone */
+        segment_3,                                  /* complement zone */
         new_word_with_negation ( word_19 )          /* object zone */
     );
 
@@ -923,7 +938,7 @@ void insert_58 ( void )
 
 void insert_59 ( void )
 {
-    /* forming verb-object segment 1, 2 */
+    /* forming complement-object segment 1, 2 */
 
     struct en_word * segment_1 = new_word ( word_11 );
     struct en_word * segment_2 = new_word ( word_62 );
@@ -931,7 +946,7 @@ void insert_59 ( void )
     link_words
     (
         2,
-        segment_1,                                  /* verb zone */
+        segment_1,                                  /* complement zone */
         new_word ( word_18 )                        /* object zone */
     );
 
@@ -956,7 +971,7 @@ void insert_59 ( void )
 
     new_null_word ( word_null, sentence );
 
-    /* forming verb-object segment 3, 4 */
+    /* forming complement-object segment 3, 4 */
 
     struct en_word * segment_3 = new_word ( word_104 );
     struct en_word * segment_4 = new_word ( word_73 );
@@ -965,7 +980,7 @@ void insert_59 ( void )
     (
         3,
         segment_3,                                  /* break zone */
-        new_word ( word_50 ),                       /* verb zone */
+        new_word ( word_50 ),                       /* complement zone */
         new_word_with_negation ( word_19 )          /* object zone */
     );
 
@@ -989,7 +1004,7 @@ void insert_59 ( void )
 
 void insert_60 ( void )
 {
-    /* forming verb-object segment 1, 2 */
+    /* forming complement-object segment 1, 2 */
 
     struct en_word * segment_1 = new_word ( word_11 );
     struct en_word * segment_2 = new_word ( word_62 );
@@ -997,7 +1012,7 @@ void insert_60 ( void )
     link_words
     (
         2,
-        segment_1,                                  /* verb zone */
+        segment_1,                                  /* complement zone */
         new_word ( word_18 )                        /* object zone */
     );
 
@@ -1022,7 +1037,7 @@ void insert_60 ( void )
 
     new_null_word ( word_null, sentence );
 
-    /* forming verb-object segment 3, 4 */
+    /* forming complement-object segment 3, 4 */
 
     struct en_word * segment_3 = new_word ( word_50 );
     struct en_word * segment_4 = new_word ( word_73 );
@@ -1030,7 +1045,7 @@ void insert_60 ( void )
     link_words
     (
         2,
-        segment_3,                                  /* verb zone */
+        segment_3,                                  /* complement zone */
         new_word_with_negation ( word_19 )          /* object zone */
     );
 
