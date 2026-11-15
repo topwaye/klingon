@@ -79,6 +79,20 @@
 #include "render.h"
 #include "dict.h"
 
+/*
+ * here are 6 segment structures used by the following functions:
+ *
+ * +------------+  +------------+  +------------+
+ * | breakpoint |  | breakpoint |  | breakpoint |
+ * +------------+  +------------+  +------------+
+ * | complement |  | complement |  | complement |
+ * +------------+  +------------+  +------------+  +------------+  +-----------+  +-------------+
+ *                 |   object   |  |  adverbial |  |   object   |  | adverbial |  | conjunction |
+ *                 +------------+  +------------+  +------------+  +-----------+  +-------------+
+ *
+ * note: only complements are allowed to be overlaid with break syllables.
+ */
+
 void insert_61 ( void )
 {
     /* forming complement-object segments */

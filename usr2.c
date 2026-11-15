@@ -79,6 +79,20 @@
 #include "render.h"
 #include "dict.h"
 
+/*
+ * here are 6 segment structures used by the following functions:
+ *
+ * +------------+  +------------+  +------------+
+ * | breakpoint |  | breakpoint |  | breakpoint |
+ * +------------+  +------------+  +------------+
+ * | complement |  | complement |  | complement |
+ * +------------+  +------------+  +------------+  +------------+  +-----------+  +-------------+
+ *                 |   object   |  |  adverbial |  |   object   |  | adverbial |  | conjunction |
+ *                 +------------+  +------------+  +------------+  +-----------+  +-------------+
+ *
+ * note: only complements are allowed to be overlaid with break syllables.
+ */
+
 void insert_31 ( void )
 {
     /* forming complement-object segments */
@@ -236,7 +250,7 @@ void insert_35 ( void )
 
 void insert_36 ( void )
 {
-    /* forming a complement-object segment */
+    /* forming a complement-adverbial segment */
 
     struct en_word * segment_1 = new_word ( word_41 );
 
@@ -527,7 +541,7 @@ void insert_45 ( void )
 
 void insert_46 ( void )
 {
-    /* forming a complement-object segment */
+    /* forming a complement-adverbial segment */
 
     struct en_word * segment_1 = new_word ( word_45 );
 
@@ -638,7 +652,7 @@ void insert_50 ( void )
 
 void insert_51 ( void )
 {
-    /* forming complement-object segments */
+    /* forming complement-adverbial segments */
 
     struct en_word * segment_1 = new_word ( word_100 );
     struct en_word * segment_2 = new_word ( word_102 );

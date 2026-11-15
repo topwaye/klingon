@@ -76,6 +76,20 @@
 #ifndef USER_H
 #define USER_H
 
+/*
+ * here are 6 segment structures used by the following functions:
+ *
+ * +------------+  +------------+  +------------+
+ * | breakpoint |  | breakpoint |  | breakpoint |
+ * +------------+  +------------+  +------------+
+ * | complement |  | complement |  | complement |
+ * +------------+  +------------+  +------------+  +------------+  +-----------+  +-------------+
+ *                 |   object   |  |  adverbial |  |   object   |  | adverbial |  | conjunction |
+ *                 +------------+  +------------+  +------------+  +-----------+  +-------------+
+ *
+ * note: only complements are allowed to be overlaid with break syllables.
+ */
+
 extern void insert_1 ( void );
 extern void insert_2 ( void );
 extern void insert_3 ( void );
