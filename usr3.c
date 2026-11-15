@@ -90,7 +90,7 @@
  *                 |   object   |  |  adverbial |  |   object   |  | adverbial |  | conjunction |
  *                 +------------+  +------------+  +------------+  +-----------+  +-------------+
  *
- * note: only complements are allowed to be overlaid with break syllables.
+ * note: only complements are overlaid with break syllables.
  */
 
 void insert_61 ( void )
