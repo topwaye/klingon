@@ -77,5 +77,6 @@
 #define RENDER_H
 
 extern void jump ( int depth, struct en_content * sen );
+extern void debug_jump ( int depth, struct en_content * sen );
 
 #endif

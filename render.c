@@ -78,15 +78,21 @@
 #include "kernel.h"
 #include "io.h"
 
-const char * FMT_NEWLINE    = "\n";
-const char * FMT_STR_SPACE  = "%s ";
-const char * FMT_STR_NT     = "%sn't ";
-const char * FMT_AI_NT      = "ain't ";
-const char * FMT_WO_NT      = "won't ";
-const char * FMT_SHA_NT     = "shan't ";
-const char * FMT_CA_NT      = "can't ";
-const char * FMT_NOT_S      = "not %s ";
-const char * FMT_NOT        = "not ";
+const char * FMT_NEWLINE            = "\n";
+const char * FMT_STR_SPACE          = "%s ";
+const char * FMT_STR_NT             = "%sn't ";
+const char * FMT_AI_NT              = "ain't ";
+const char * FMT_WO_NT              = "won't ";
+const char * FMT_SHA_NT             = "shan't ";
+const char * FMT_CA_NT              = "can't ";
+const char * FMT_NOT_S              = "not %s ";
+const char * FMT_NOT                = "not ";
+
+const char * DBG_FMT_STR_NT         = "\"--%s\"\n";
+const char * DBG_FMT_STR            = "\"%s\"\n";
+const char * DBG_FMT_BRACE_OPEN     = "{\n";
+const char * DBG_FMT_BRACE_CLOSE    = "}\n";
+const char * DBG_FMT_INDENT         = "        ";
 
 void print_content ( struct en_word * t )
 {
@@ -113,16 +119,78 @@ void print_content ( struct en_word * t )
     }
 }
 
-void print_newline ( void )
+void print_node ( struct en_word * t )
 {
-    print ( FMT_NEWLINE );
+    assert ( t );
+    t -> negative ? print ( DBG_FMT_STR_NT, t -> content ) : print ( DBG_FMT_STR, t -> content );
+}
+
+void print_indent ( int depth )
+{
+    int i;
+
+    for ( i = 0; i < depth; i ++ )
+        print ( DBG_FMT_INDENT );
+}
+
+void print_newline ( int newline )
+{
+    if ( newline )
+        print ( FMT_NEWLINE );
 
     print_buffer_flush ( );
 }
 
+void debug_render_frame ( int depth, int eof )
+{
+    print_indent ( depth );
+    print ( eof ? DBG_FMT_BRACE_CLOSE : DBG_FMT_BRACE_OPEN );
+}
+
+void debug_render ( int depth, struct en_word * t )
+{
+    if ( t )
+    {
+        print_indent ( depth );
+        print_node ( t );
+    }
+    else
+        print_newline ( depth );
+}
+
 void render ( struct en_word * t )
 {
-    t ? print_content ( t ) : print_newline ( );
+    t ? print_content ( t ) : print_newline ( 1 );
+}
+
+void debug_jump ( int depth, struct en_content * sen )
+{
+    struct en_word * r, * p, * t;
+
+    if ( sen )
+    {
+        r = sen -> segments;
+        if ( r )
+        {
+            p = r;
+            do
+            {
+                t = p;
+                debug_render_frame ( depth, 0 );
+                do
+                {
+                    debug_render ( depth + 1, t );
+                    debug_jump ( depth + 1, t -> sen_content );
+                    t = t -> next;
+                } while ( t );
+                debug_render_frame ( depth, 1 );
+                p = p -> down;
+            } while ( p );
+        }
+    }
+
+    if ( ! depth )
+        debug_render ( 0, NULL );
 }
 
 void jump ( int depth, struct en_content * sen )
