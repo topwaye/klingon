@@ -90,7 +90,7 @@
  *     O  |   object   |
  *        +------------+
  *
- * note: the maximum length of a segment is 2 groups: group C ( where complements and breakpoints belong ) and group O.
+ * note: a segment contains up to 2 groups: group one where complements and breakpoints belong, and group two where objects belong.
  * note: only complements are overlaid with breakpoints.
  */
 
