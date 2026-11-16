@@ -44,7 +44,7 @@
  *     O      O
  *
  *  S: a subject.
- *  C: a complement which can be a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.
+ *  C: a complement, which can be a verb, preposition, adjective, or noun, which is overlaid with break syllables, like 'do/don't'.
  *  O: an object.
  *
  * note: whether a word is a subject, complement, or object is unconditionally determined by its position in the sentence formula.
@@ -80,17 +80,18 @@
 #include "dict.h"
 
 /*
- * here are 6 segment structures used by the following functions:
+ * here is the segment structure used by the following functions:
  *
- * +------------+  +------------+  +------------+
- * | breakpoint |  | breakpoint |  | breakpoint |
- * +------------+  +------------+  +------------+
- * | complement |  | complement |  | complement |
- * +------------+  +------------+  +------------+  +------------+  +-----------+  +-------------+
- *                 |   object   |  |  adverbial |  |   object   |  | adverbial |  | conjunction |
- *                 +------------+  +------------+  +------------+  +-----------+  +-------------+
+ *        +------------+
+ *     @  | breakpoint |
+ *        +------------+
+ *     C  | complement |
+ *        +------------+
+ *     O  |   object   |
+ *        +------------+
  *
- * note: only complements are overlaid with break syllables.
+ * note: the maximum length of a segment is 2 groups: group C ( where complements and breakpoints belong ) and group O.
+ * note: only complements are overlaid with breakpoints.
  */
 
 void insert_31 ( void )
@@ -250,15 +251,21 @@ void insert_35 ( void )
 
 void insert_36 ( void )
 {
-    /* forming a complement-adverbial segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word ( word_41 );
+    struct en_word * segment_2 = new_word ( word_49 );
 
     link_words
     (
-        2,
-        segment_1,                                  /* complement zone */
-        new_word ( word_49 )                        /* adverbial zone */
+        1,
+        segment_1                                   /* complement zone */
+    );
+
+    link_words
+    (
+        1,
+        segment_2                                   /* complement zone */
     );
 
     /* inserting a subject */
@@ -268,7 +275,7 @@ void insert_36 ( void )
 
     /* forming a sentence */
 
-    link_lines ( 1, segment_1 );
+    link_lines ( 2, segment_1, segment_2 );
 
     new_sentence ( sentence, segment_1, word_49, 0, jump );
 }
@@ -387,7 +394,7 @@ void insert_41 ( void )
     (
         4,
         segment_1,                                  /* break zone */
-        new_word ( word_60 ),                       /* adverbial zone */
+        new_word ( word_60 ),                       /* complement zone */
         new_word ( word_11 ),                       /* complement zone */
         new_word ( word_12 )                        /* object zone */
     );
@@ -421,7 +428,7 @@ void insert_42 ( void )
     link_words
     (
         1,
-        segment_2                                   /* adverbial zone */
+        segment_2                                   /* complement zone */
     );
 
     /* inserting a subject */
@@ -486,7 +493,7 @@ void insert_with_starting_point_2 ( struct en_word * starting )
     link_words
     (
         1,
-        segment_2                                   /* adverbial zone */
+        segment_2                                   /* object zone */
     );
 
     /* forming sentence 1 */
@@ -515,7 +522,7 @@ void insert_with_starting_point_2 ( struct en_word * starting )
     link_words
     (
         1,
-        segment_4                                   /* adverbial zone */
+        segment_4                                   /* object zone */
     );
 
     /* inserting subject 1 */
@@ -541,16 +548,22 @@ void insert_45 ( void )
 
 void insert_46 ( void )
 {
-    /* forming a complement-adverbial segment */
+    /* forming a complement-object segment */
 
     struct en_word * segment_1 = new_word ( word_45 );
+    struct en_word * segment_2 = new_word ( word_51 );
 
     link_words
     (
-        3,
-        segment_1,                                  /* complement zone */
-        new_word ( word_51 ),                       /* adverbial zone */
-        new_word ( word_46 )                        /* adverbial zone */
+        1,
+        segment_1                                   /* complement zone */
+    );
+
+    link_words
+    (
+        2,
+        segment_2,                                  /* complement zone */
+        new_word ( word_46 )                        /* complement zone */
     );
 
     /* inserting a subject */
@@ -560,7 +573,7 @@ void insert_46 ( void )
 
     /* forming a sentence */
 
-    link_lines ( 1, segment_1 );
+    link_lines ( 2, segment_1, segment_2 );
 
     new_sentence ( sentence, segment_1, word_51, 0, jump );
 }
@@ -652,10 +665,11 @@ void insert_50 ( void )
 
 void insert_51 ( void )
 {
-    /* forming complement-adverbial segments */
+    /* forming complement-object segments */
 
     struct en_word * segment_1 = new_word ( word_100 );
     struct en_word * segment_2 = new_word ( word_102 );
+    struct en_word * segment_3 = new_word ( word_49 );
 
     link_words
     (
@@ -666,10 +680,15 @@ void insert_51 ( void )
 
     link_words
     (
-        3,
+        2,
         segment_2,                                  /* break zone */
-        new_word ( word_41 ),                       /* complement zone */
-        new_word ( word_49 )                        /* adverbial zone */
+        new_word ( word_41 )                        /* complement zone */
+    );
+
+    link_words
+    (
+        1,
+        segment_3                                   /* complement zone */
     );
 
     /* inserting a subject */
@@ -678,7 +697,7 @@ void insert_51 ( void )
 
     /* forming a sentence */
 
-    link_lines ( 2, segment_1, segment_2 );
+    link_lines ( 3, segment_1, segment_2, segment_3 );
 
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
@@ -838,7 +857,7 @@ void insert_56 ( void )
     link_words
     (
         1,
-        segment_2                                   /* conjunction zone */
+        segment_2                                   /* sentence zone */
     );
 
     struct en_word word_0 [ ] = { { "(play)" }, { "(cards)" } };
@@ -875,8 +894,8 @@ void insert_57 ( void )
     link_words
     (
         2,
-        segment_1,                                  /* conjunction zone */
-        new_word ( word_74 )                        /* conjunction zone */
+        segment_1,                                  /* sentence zone */
+        new_word ( word_74 )                        /* sentence zone */
     );
 
     link_words
@@ -918,8 +937,8 @@ void insert_58 ( void )
     link_words
     (
         2,
-        segment_1,                                  /* conjunction zone */
-        new_word ( word_74 )                        /* conjunction zone */
+        segment_1,                                  /* sentence zone */
+        new_word ( word_74 )                        /* sentence zone */
     );
 
     link_words
@@ -967,7 +986,7 @@ void insert_59 ( void )
     link_words
     (
         1,
-        segment_2                                   /* adverbial zone */
+        segment_2                                   /* object zone */
     );
 
     /* inserting subject 1 */
@@ -1001,8 +1020,8 @@ void insert_59 ( void )
     link_words
     (
         2,
-        segment_4,                                  /* adverbial zone */
-        word_null                                   /* adverbial zone */
+        segment_4,                                  /* object zone */
+        word_null                                   /* object zone */
     );
 
     /* inserting subject 2 */
@@ -1033,7 +1052,7 @@ void insert_60 ( void )
     link_words
     (
         1,
-        segment_2                                   /* adverbial zone */
+        segment_2                                   /* object zone */
     );
 
     /* inserting subject 1 */
@@ -1066,8 +1085,8 @@ void insert_60 ( void )
     link_words
     (
         2,
-        segment_4,                                  /* adverbial zone */
-        word_null                                   /* adverbial zone */
+        segment_4,                                  /* object zone */
+        word_null                                   /* object zone */
     );
 
     /* inserting subject 2 */

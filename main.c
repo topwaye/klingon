@@ -44,7 +44,7 @@
  *     O      O
  *
  *  S: a subject.
- *  C: a complement which can be a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.
+ *  C: a complement, which can be a verb, preposition, adjective, or noun, which is overlaid with break syllables, like 'do/don't'.
  *  O: an object.
  *
  * note: whether a word is a subject, complement, or object is unconditionally determined by its position in the sentence formula.
@@ -103,7 +103,7 @@ int main ( int argc, char * argv [ ] )
     printf ( "    S  C  O\n" );
     printf ( "\n" );
     printf ( " S: a subject.\n" );
-    printf ( " C: a complement which can be a verb, preposition, adjective, or noun overlaid with break syllables, like 'do/don't'.\n" );
+    printf ( " C: a complement, which can be a verb, preposition, adjective, or noun, overlaid with break syllables, like 'do/don't'.\n" );
     printf ( " O: an object.\n" );
     printf ( "\n" );
     printf ( "copyright (C) 2026.11.14 TOP WAYE topwaye@hotmail.com\n" );

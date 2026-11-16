@@ -44,7 +44,7 @@
  *     O      O
  *
  *  S: a subject.
- *  C: a complement which can be a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.
+ *  C: a complement, which can be a verb, preposition, adjective, or noun, which is overlaid with break syllables, like 'do/don't'.
  *  O: an object.
  *
  * note: whether a word is a subject, complement, or object is unconditionally determined by its position in the sentence formula.
@@ -80,17 +80,18 @@
 #include "dict.h"
 
 /*
- * here are 6 segment structures used by the following functions:
+ * here is the segment structure used by the following functions:
  *
- * +------------+  +------------+  +------------+
- * | breakpoint |  | breakpoint |  | breakpoint |
- * +------------+  +------------+  +------------+
- * | complement |  | complement |  | complement |
- * +------------+  +------------+  +------------+  +------------+  +-----------+  +-------------+
- *                 |   object   |  |  adverbial |  |   object   |  | adverbial |  | conjunction |
- *                 +------------+  +------------+  +------------+  +-----------+  +-------------+
+ *        +------------+
+ *     @  | breakpoint |
+ *        +------------+
+ *     C  | complement |
+ *        +------------+
+ *     O  |   object   |
+ *        +------------+
  *
- * note: only complements are overlaid with break syllables.
+ * note: the maximum length of a segment is 2 groups: group C ( where complements and breakpoints belong ) and group O.
+ * note: only complements are overlaid with breakpoints.
  */
 
 void insert_61 ( void )
@@ -104,7 +105,7 @@ void insert_61 ( void )
     link_words
     (
         1,
-        segment_1                                   /* conjunction zone */
+        segment_1                                   /* sentence zone */
     );
 
     link_words

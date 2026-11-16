@@ -44,7 +44,7 @@
  *     O      O
  *
  *  S: a subject.
- *  C: a complement which can be a verb, preposition, adjective, or noun that is overlaid with break syllables, like 'do/don't'.
+ *  C: a complement, which can be a verb, preposition, adjective, or noun, which is overlaid with break syllables, like 'do/don't'.
  *  O: an object.
  *
  * note: whether a word is a subject, complement, or object is unconditionally determined by its position in the sentence formula.
