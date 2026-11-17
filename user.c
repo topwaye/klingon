@@ -621,6 +621,7 @@ void insert_16 ( void )
 
     link_lines ( 2, segment_1, segment_2 );
 
+    new_sentence ( sentence, segment_1, NULL, 0, debug_jump );
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }
 
@@ -1218,5 +1219,6 @@ void insert_30 ( void )
 
     link_lines ( 5, segment_1, segment_4, segment_2, segment_3, segment_5 );
 
+    new_sentence ( sentence, segment_1, NULL, 0, debug_jump );
     new_sentence ( sentence, segment_1, NULL, 0, jump );
 }

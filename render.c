@@ -88,10 +88,10 @@ const char * FMT_CA_NT              = "can't ";
 const char * FMT_NOT_S              = "not %s ";
 const char * FMT_NOT                = "not ";
 
-const char * DBG_FMT_STR_NT         = "\"--%s\"\n";
+const char * DBG_FMT_STR_NEG        = "\"--%s\"\n";
 const char * DBG_FMT_STR            = "\"%s\"\n";
-const char * DBG_FMT_BRACE_OPEN     = "{\n";
-const char * DBG_FMT_BRACE_CLOSE    = "}\n";
+const char * DBG_FMT_FRAME_BEGIN    = "{\n";
+const char * DBG_FMT_FRAME_END      = "}\n";
 const char * DBG_FMT_INDENT         = "        ";
 
 void print_content ( struct en_word * t )
@@ -122,7 +122,7 @@ void print_content ( struct en_word * t )
 void print_node ( struct en_word * t )
 {
     assert ( t );
-    t -> negative ? print ( DBG_FMT_STR_NT, t -> content ) : print ( DBG_FMT_STR, t -> content );
+    print ( t -> negative ? DBG_FMT_STR_NEG : DBG_FMT_STR, t -> content );
 }
 
 void print_indent ( int depth )
@@ -144,18 +144,13 @@ void print_newline ( int newline )
 void debug_render_frame ( int depth, int eof )
 {
     print_indent ( depth );
-    print ( eof ? DBG_FMT_BRACE_CLOSE : DBG_FMT_BRACE_OPEN );
+    print ( eof ? DBG_FMT_FRAME_END : DBG_FMT_FRAME_BEGIN );
 }
 
 void debug_render ( int depth, struct en_word * t )
 {
-    if ( t )
-    {
-        print_indent ( depth );
-        print_node ( t );
-    }
-    else
-        print_newline ( depth );
+    print_indent ( depth );
+    t ? print_node ( t ) : print_newline ( 0 );
 }
 
 void render ( struct en_word * t )
@@ -165,42 +160,38 @@ void render ( struct en_word * t )
 
 void debug_jump ( int depth, struct en_content * sen )
 {
-    struct en_word * r, * p, * t;
+    struct en_word * p, * t;
 
     if ( sen )
     {
-        r = sen -> segments;
-        if ( r )
+        p = sen -> segments;
+        while ( p )
         {
-            p = r;
+            t = p;
+            debug_render_frame ( depth, 0 );
             do
             {
-                t = p;
-                debug_render_frame ( depth, 0 );
-                do
-                {
-                    debug_render ( depth + 1, t );
-                    debug_jump ( depth + 1, t -> sen_content );
-                    t = t -> next;
-                } while ( t );
-                debug_render_frame ( depth, 1 );
-                p = p -> down;
-            } while ( p );
+                debug_render ( depth + 1, t );
+                debug_jump ( depth + 1, t -> sen_content );
+                t = t -> next;
+            } while ( t );
+            debug_render_frame ( depth, 1 );
+            p = p -> down;
         }
     }
 
     if ( ! depth )
-        debug_render ( 0, NULL );
+        debug_render ( depth, NULL );
 }
 
 void jump ( int depth, struct en_content * sen )
 {
-    struct en_word * r, * p, * q, * t;
+    struct en_word * p, * q, * t;
 
     if ( sen )
     {
-        r = sen -> segments;
-        if ( r )
+        p = sen -> segments;
+        if ( p )
         {
             q = sen -> start;
             if ( q )
@@ -217,7 +208,6 @@ void jump ( int depth, struct en_content * sen )
                 }
             }
 
-            p = r;
             do
             {
                 t = p;
